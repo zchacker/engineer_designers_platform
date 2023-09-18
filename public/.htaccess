@@ -1,0 +1,28 @@
+<<<<<<< HEAD
+# https://support.cloudways.com/en/articles/5129574-how-to-enable-http-strict-transport-security-hsts-policy
+# Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+<IfModule mod_rewrite.c>
+    RewriteBase /eng
+=======
+<IfModule mod_rewrite.c>
+>>>>>>> 445843eaba9c43693e8ff808e202fa0458d407e5
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
