@@ -1,4 +1,4 @@
-@include('clients.header')
+@include('engineer.header')
 <div class="content">
 
     <div class="py-6">
@@ -39,9 +39,45 @@
                                     </p>
                                     <hr>
                                     <section class="my-4 space-y-2">
-                                        <p><strong>{{__('order_status')}}:</strong> {{ __($order->status) }}</p>
+                                        @if(Session::has('status_update_error'))
+                                            <div class="my-3 w-auto p-4 bg-orange-500 text-white rounded-md">
+                                                {!! session('status_update_error')->first('error') !!}
+                                            </div>
+                                        @endif
+
+                                        @if(Session::has('status_update_success'))
+                                            <div class="my-3 w-auto p-4 bg-green-700 text-white rounded-md">
+                                                {!! session('status_update_success') !!}
+                                            </div>
+                                        @endif
+                                        <div class="flex flex-col gap-5">
+                                            
+                                            <div class="my-2">
+                                                <strong>{{__('order_status')}}:</strong> {{ __($order->status) }}
+                                            </div>
+
+                                            <div>
+                                                <form action="{{ route('engineer.order.status.update', $order->id) }}" class="flex items-center justify-start space-x-4" method="post">
+                                                    @csrf
+                                                    <div class="mb-4 flex space-x-1 gap-2 items-center">
+                                                        <!-- <label for="update_status" class="!font-bold !w-3/4">{{ __('update_status') }} </label> -->
+                                                        <select name="update_status" id="update_status" class="form_input !w-full !p-0 !py-2">
+                                                            <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>{{ __('pending') }}</option>
+                                                            <option value="under_review" {{ $order->status == 'under_review' ? 'selected' : '' }}>{{ __('under_review') }}</option>
+                                                            <option value="rejected" {{ $order->status == 'rejected' ? 'selected' : '' }}>{{ __('rejected') }}</option>
+                                                            <option value="completed" {{ $order->status == 'completed' ? 'selected' : '' }}>{{ __('completed') }}</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="mb-4">
+                                                        <input id="submitButton" type="submit" value="{{ __('update_status') }}" class="action_btn !p-2 !px-4" />
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
                                         <p class="flex gap-2">
-                                            <strong>{{__('enineer_name')}}:</strong> {{ $order->engineer_data->name }}
+                                            <strong>{{__('client_name')}}:</strong> {{ $order->user_data->name }}
                                             <a href="#" class="flex text-blue-600 hover:underline">
                                                 {{__('start_chat')}}
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-blue-400 fill-blue-700"  viewBox="0 0 24 24" id="chat">
@@ -66,7 +102,7 @@
                                         </div>
                                         @endif
 
-                                        <form action="{{ route('client.order.add_comment', $order->id) }}" method="post">
+                                        <form action="{{ route('engineer.order.add_comment', $order->id) }}" method="post">
                                             @csrf
                                             <div class="mb-4  space-x-4 gap-2 items-center">
                                                 <label for="comment" class="lable_form">{{ __('write_comment') }} </label>
@@ -95,10 +131,13 @@
                         <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             @foreach($comments as $comment)
                             <div class="my-3 pb-2">
-                                <div class="mb-2">
+                                <div class="mb-0">
                                     <span>
                                         <strong>{{ $comment->user_data->name }}</strong>                                        
                                     </span>
+                                </div>
+                                <div class="mb-3">
+                                    <span class="text-gray-500">{{ $comment->created_at }}</span>
                                 </div>
                                 <p class="bg-blue-200 p-4 rounded-lg">{{ $comment->comment }}</p>
                             </div>
@@ -113,4 +152,4 @@
     </div>
 
 </div>
-@include('clients.footer')
+@include('engineer.footer')

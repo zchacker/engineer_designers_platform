@@ -11,7 +11,7 @@
                         <div class="grid place-items-center">
                             <h3 class="font-bold text-xl">{{ $engineer->name }}</h3>
                             <div class="my-2">
-                                <a href="{{ route('client.engineers.details' , $engineer->id ) }}" class="text-blue-600">{{__('work_details')}}</a>
+                                <a href="{{ route('client.engineers.details' , $engineer->id ) }}" class="text-blue-600">{{__('works_details')}}</a>
                             </div>
                             <div class="my-2">
                                 <a href="{{ route('client.order.create' , $engineer->id ) }}" class="normal_button">{{__('create_order')}}</a>

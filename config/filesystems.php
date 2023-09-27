@@ -53,7 +53,6 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
-<<<<<<< HEAD
             'throw' => true,
         ],
 
@@ -68,11 +67,6 @@ return [
             'use_path_style_endpoint' => env('CONTABO_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => true,
         ],
-=======
-            'throw' => false,
-        ],
-
->>>>>>> 445843eaba9c43693e8ff808e202fa0458d407e5
     ],
 
     /*
@@ -90,8 +84,5 @@ return [
         public_path('storage') => storage_path('app/public'),
     ],
 
-<<<<<<< HEAD
-    'scheme' => 'http',
-=======
->>>>>>> 445843eaba9c43693e8ff808e202fa0458d407e5
+    'scheme' => 'https',
 ];

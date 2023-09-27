@@ -40,7 +40,6 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-<<<<<<< HEAD
         'client' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -53,8 +52,6 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-=======
->>>>>>> 445843eaba9c43693e8ff808e202fa0458d407e5
     ],
 
     /*
@@ -77,11 +74,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-<<<<<<< HEAD
             'model' => App\Models\UsersModel::class,
-=======
-            'model' => App\Models\User::class,
->>>>>>> 445843eaba9c43693e8ff808e202fa0458d407e5
         ],
 
         // 'users' => [

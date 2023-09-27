@@ -1,11 +1,7 @@
-<<<<<<< HEAD
 # https://support.cloudways.com/en/articles/5129574-how-to-enable-http-strict-transport-security-hsts-policy
 # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
 <IfModule mod_rewrite.c>
     RewriteBase /eng
-=======
-<IfModule mod_rewrite.c>
->>>>>>> 445843eaba9c43693e8ff808e202fa0458d407e5
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
     </IfModule>
