@@ -1,10 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
 use Illuminate\Support\Facades\App;
-=======
->>>>>>> 445843eaba9c43693e8ff808e202fa0458d407e5
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +14,6 @@ use Illuminate\Support\Facades\App;
 |
 */
 
-<<<<<<< HEAD
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -75,8 +71,3 @@ Route::group(['middleware' => ['auth:admin'] , 'prefix' => 'admin'], function ()
     Route::get('/logout',[\App\Http\Controllers\AuthController::class , 'admin_logout'])->name('admin.logout');    
 
 });
-=======
-Route::get('/', function () {
-    return view('welcome');
-});
->>>>>>> 445843eaba9c43693e8ff808e202fa0458d407e5
