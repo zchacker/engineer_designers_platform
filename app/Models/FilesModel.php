@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class FilesModel extends Model
 {
@@ -43,7 +44,12 @@ class FilesModel extends Model
     }
 
     protected function cloudUrl($path) : String 
-    {        
-        return config('filesystems.disks.contabo.url') . $path;        
+    {            
+        if($this->storage_driver == 'contabo'){
+            return config('filesystems.disks.contabo.url') . $path;
+        }else{
+            return Storage::disk($this->storage_driver)->url($path);
+            // return config('filesystems.disks.public.url') . $path;
+        }
     }
 }

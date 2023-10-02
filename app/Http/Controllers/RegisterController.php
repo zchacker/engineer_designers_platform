@@ -52,7 +52,7 @@ class RegisterController extends Controller
 
             // set login cookies
             if (Auth::guard('client')->attempt(['email' => $request->email, 'password' => $password], true)) {
-                return redirect()->intended(route('engineers.list'));
+                return redirect()->intended(route('client.engineers.list'));
             }
 
             return redirect()->intended(route('register.user'));

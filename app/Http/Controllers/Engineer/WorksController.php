@@ -80,7 +80,7 @@ class WorksController extends Controller
     
                             $url = $file->storePublicly(
                                 "works/images",
-                                "contabo"
+                                $this->basicStorage
                             );
     
                             if ($url != false) // file stored successfully
@@ -88,7 +88,8 @@ class WorksController extends Controller
     
                                 $file_added = FilesModel::create([
                                     'fileName' => $url,
-                                    'hash' => $file_hash
+                                    'hash' => $file_hash,
+                                    'storage_driver' => $this->basicStorage
                                 ]);
     
                                 // save it to database
@@ -113,7 +114,7 @@ class WorksController extends Controller
     
                     foreach ($request->file('files') as $file) {
     
-                        $file_hash = hash_file('sha256', $request->image->getRealPath());
+                        $file_hash = hash_file('sha256', $file->getRealPath());
                         $fileDB    = FilesModel::where(['hash' => $file_hash])->first();
     
                         // create work file object
@@ -127,7 +128,7 @@ class WorksController extends Controller
     
                             $url = $file->storePublicly(
                                 "works/files",
-                                "contabo"
+                                $this->basicStorage
                             );
     
                             if ($url != false) // file stored successfully
@@ -135,7 +136,8 @@ class WorksController extends Controller
     
                                 $file_added = FilesModel::create([
                                     'fileName' => $url,
-                                    'hash' => $file_hash
+                                    'hash' => $file_hash,
+                                    'storage_driver' => $this->basicStorage
                                 ]);
     
                                 // save it to database

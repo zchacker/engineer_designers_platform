@@ -30,6 +30,8 @@ class ContractsModel extends Model
     protected $fillable = [
         'file_id',
         'user_id',
+        'engineer_id',
+        'order_id',
         'status',        
     ];
     

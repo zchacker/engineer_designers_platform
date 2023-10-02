@@ -82,7 +82,7 @@ class OrdersController extends Controller
 
                     $url = $request->file('image')->storePublicly(
                         "orders/images",
-                        "contabo"
+                        $this->basicStorage
                     );
 
 
@@ -90,7 +90,8 @@ class OrdersController extends Controller
                     {
                         $file_added = FilesModel::create([
                             'fileName' => $url,
-                            'hash' => $file_hash
+                            'hash' => $file_hash,
+                            'storage_driver' => $this->basicStorage
                         ]);
 
                         // save it to database
@@ -115,7 +116,7 @@ class OrdersController extends Controller
                     if ($fileDB == null) {
 
                         // save it in cloud storage
-                        $uploaded = Storage::disk('contabo')
+                        $uploaded = Storage::disk($this->basicStorage)
                             ->put(
                                 'orders/images/' . $imageName,
                                 $imageData,
@@ -129,7 +130,8 @@ class OrdersController extends Controller
 
                             $file_added = FilesModel::create([
                                 'fileName' => $url,
-                                'hash' => $file_hash
+                                'hash' => $file_hash,
+                                'storage_driver' => $this->basicStorage
                             ]);
 
                             // save it to database
