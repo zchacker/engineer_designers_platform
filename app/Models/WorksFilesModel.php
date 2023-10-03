@@ -29,8 +29,11 @@ class WorksFilesModel extends Model
      */
     protected $fillable = [
         'work_id',
-        'file_id'
+        'file_id',
+        'file_type'
     ];
+    
+    protected $enumFileType = ['image','document']; // Define ENUM values
 
     public function file()
     {

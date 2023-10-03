@@ -37,4 +37,9 @@ class WorksModel extends Model
     {
         return $this->hasOne(UsersModel::class, 'id', 'engineer_id');
     }
+
+    public function worksFiles()
+    {
+        return $this->hasMany(WorksFilesModel::class , 'work_id', 'id');
+    }
 }

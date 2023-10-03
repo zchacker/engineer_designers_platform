@@ -4,7 +4,7 @@
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <h1 class="text-2xl font-bold mb-16"> {{__('create_contract')}}</h1>
+                <h1 class="text-2xl font-bold mb-8"> {{__('update_password')}}</h1>
 
                 <div class="relative rounded-tl-md  rounded-tr-md overflow-auto">
                     <div class="overflow-x-auto relative p-2">                        
@@ -21,18 +21,21 @@
                         </div>
                         @endif
 
-                        <form method="POST" enctype="multipart/form-data" action="{{ route('engineer.contract.create.action' , $order_id) }}" id="file-upload-form">
+                        <form action="{{ route('engineer.password.action') }}" method="post" class="w-full" enctype="multipart/form-data">
                             @csrf
-                           
-                            <div class="mb-4  items-center">
-                                <label for="file-input" class="block mt-4 mb-2">{{__('choose_files')}}</label>
-                                <input type="file" name="file" id="file-input" class="border py-2 px-3 w-full" accept=".pdf" />
+                            
+                            <div class="mb-4  space-x-4 gap-2 items-center">
+                                <label for="current-password" class="lable_form">{{ __('current-password') }} </label>
+                                <input type="password" name="current-password" id="current-password" class="form_input !w-full" />
                             </div>
                             
+                            <div class="mb-4  space-x-4 gap-2 items-center">
+                                <label for="new-password" class="lable_form">{{ __('new-password') }} </label>
+                                <input type="password" name="new-password" id="new-password" class="form_input !w-full"  />
+                            </div>                                                                                  
 
-                            <hr>
-                            <div class="my-4  items-center">
-                                <button type="submit" id="submit_btn" class="normal_button">{{__('create')}}</button>
+                            <div class="mb-4">
+                                <input id="submitButton" type="submit" value="{{ __('save') }}" class="action_btn" />
                             </div>
 
                         </form>

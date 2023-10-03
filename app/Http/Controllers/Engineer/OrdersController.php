@@ -107,7 +107,7 @@ class OrdersController extends Controller
             if($order->update())
             {
                 
-                return back()->with(['status_update_success' => __('added_successfuly')]);
+                return back()->with(['status_update_success' => __('updated_successfuly')]);
 
             }else{
 

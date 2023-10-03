@@ -35,4 +35,26 @@ class ContractsModel extends Model
         'status',        
     ];
     
+    protected $enumStatus = ['accepted','rejected','canceled','pending']; // Define ENUM values
+
+    public function user_data()
+    {
+        return $this->hasOne(UsersModel::class, 'id' , 'user_id');
+    }
+
+    public function engineer_data()
+    {
+        return $this->hasOne(UsersModel::class, 'id' , 'engineer_id');
+    }
+
+    public function order_data()
+    {
+        return $this->hasOne(OrdersModel::class, 'id' , 'order_id');
+    }
+
+    public function contractDoc()
+    {
+        return $this->hasOne(FilesModel::class, 'id' , 'file_id');
+    }
+
 }

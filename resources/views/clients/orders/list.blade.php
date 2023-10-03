@@ -40,6 +40,10 @@
                                                     <th scope="col" class="py-3.5 px-3 text-right text-sm font-semibold text-gray-900">
                                                         {{__('enineer_name')}}
                                                     </th>
+
+                                                    <th scope="col" class="py-3.5 px-3 text-right text-sm font-semibold text-gray-900">
+                                                        {{__('order_status')}}
+                                                    </th>  
                                                     
                                                     <th scope="col" class="py-3.5 px-3 text-right text-sm font-semibold text-gray-900">
                                                         {{__('created_at')}}
@@ -61,6 +65,10 @@
                                                         
                                                         <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
                                                             {{ $order->engineer_data->name }}
+                                                        </td>
+
+                                                        <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500 {{ $order->status }}">
+                                                            {{ __($order->status) }}
                                                         </td>
 
                                                         <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">

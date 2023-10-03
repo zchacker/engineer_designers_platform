@@ -35,10 +35,13 @@ Route::post('/register/action', [\App\Http\Controllers\RegisterController::class
 
 Route::group(['middleware' => ['auth:client'] , 'prefix' => 'client'], function () {
 
+    // engineers data
     Route::get('/engineers/list',[\App\Http\Controllers\Clients\EngineersController::class, 'list_engineers'])->name('client.engineers.list');
     Route::get('/engineers/details/{engineer_id}',[\App\Http\Controllers\Clients\EngineersController::class, 'details'])->name('client.engineers.details');
+    Route::get('/engineers/work/details/{engineer_id}/{work_id}',[\App\Http\Controllers\Clients\EngineersController::class, 'work_details'])->name('client.engineers.work.details');
     
     
+    // orders data
     Route::get('/orders/list',[\App\Http\Controllers\Clients\OrdersController::class, 'list'])->name('client.order.list');
     Route::get('/orders/create/{engineer_id}',[\App\Http\Controllers\Clients\OrdersController::class, 'create'])->name('client.order.create');
     Route::post('/orders/create/{engineer_id}/action',[\App\Http\Controllers\Clients\OrdersController::class, 'create_action'])->name('client.order.create.action');
@@ -69,6 +72,23 @@ Route::group(['middleware' => ['auth:engineer'] , 'prefix' => 'engineer'], funct
     Route::get('/work/edit/{work_id}',[\App\Http\Controllers\Engineer\WorksController::class, 'edit'])->name('engineer.work.edit');    
     Route::post('/work/edit/{work_id}/action',[\App\Http\Controllers\Engineer\WorksController::class, 'edit_action'])->name('engineer.work.edit.action');    
     Route::delete('/work/delete/{work_id}',[\App\Http\Controllers\Engineer\WorksController::class, 'delete'])->name('engineer.work.delete');    
+
+    // contract
+    Route::get('/contract/list',[\App\Http\Controllers\Engineer\ContractsController::class, 'list'])->name('engineer.contract.list');    
+    Route::get('/contract/details/{contract_id}',[\App\Http\Controllers\Engineer\ContractsController::class, 'details'])->name('engineer.contract.details');    
+    Route::get('/contract/create/{order_id}',[\App\Http\Controllers\Engineer\ContractsController::class, 'create'])->name('engineer.contract.create');    
+    Route::post('/contract/create/{order_id}/action',[\App\Http\Controllers\Engineer\ContractsController::class, 'create_action'])->name('engineer.contract.create.action');    
+    Route::delete('/contract/cancel/{contract}',[\App\Http\Controllers\Engineer\ContractsController::class, 'update_status'])->name('engineer.contract.status.update');
+    
+
+    // update settings
+    Route::get('/settings',[\App\Http\Controllers\Shared\SettingsController::class, 'update_data'])->name('engineer.settings');    
+    Route::post('/settings/action',[\App\Http\Controllers\Shared\SettingsController::class, 'update_data_action'])->name('engineer.settings.action');    
+
+    // update password
+    Route::get('/password',[\App\Http\Controllers\Shared\SettingsController::class, 'update_passwords'])->name('engineer.password');    
+    Route::post('/password/action',[\App\Http\Controllers\Shared\SettingsController::class, 'update_passwords_action'])->name('engineer.password.action');    
+
 
     Route::get('/logout',[\App\Http\Controllers\AuthController::class , 'engineer_logout'])->name('engineer.logout');    
 

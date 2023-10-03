@@ -34,4 +34,13 @@ class ContractFeedbackModel extends Model
         'user_id',        
     ];
     
+    public function user_data()
+    {
+        return $this->hasOne(UsersModel::class, 'id' , 'user_id');
+    }   
+
+    public function contractDoc()
+    {
+        return $this->hasOne(FilesModel::class, 'id' , 'file_id');
+    }
 }

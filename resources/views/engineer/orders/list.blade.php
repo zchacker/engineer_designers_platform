@@ -72,7 +72,7 @@
                                                             {{ $order->user_data->name }}
                                                         </td>
 
-                                                        <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
+                                                        <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500 {{ $order->status }}">
                                                             {{ __($order->status) }}
                                                         </td>
 

@@ -72,6 +72,7 @@ class WorksController extends Controller
                         // create work file object
                         $workFile = new WorksFilesModel();
                         $workFile->work_id = $work_id;
+                        $workFile->file_type = 'image';
     
                         if ($fileDB == null) {
     
@@ -120,6 +121,7 @@ class WorksController extends Controller
                         // create work file object
                         $workFile = new WorksFilesModel();
                         $workFile->work_id = $work_id;
+                        $workFile->file_type = 'document';
     
                         if ($fileDB == null) {
     

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
 use App\Models\UsersModel;
+use App\Models\WorksModel;
 use Illuminate\Http\Request;
 
 class EngineersController extends Controller
@@ -17,14 +18,41 @@ class EngineersController extends Controller
 
         $sum        = $query->count("id");
         $engineers  = $query->paginate(100);
-        //dd($engineers->first()->avater());
+        
         return view('clients.engineers.list', compact('engineers','sum'));        
     }
 
     public function details(Request $request, $engineer_id)
     {
-        dd("ID: $engineer_id");
-        return;
+
+        $engineer = UsersModel::with("avatar")              
+        ->where('id', $engineer_id)
+        ->first();
+
+        $query = WorksModel::with('worksFiles')
+        ->where('engineer_id', $engineer_id);
+
+        $sum        = $query->count("id");
+        $works      = $query->paginate(100);
+
+        return view('clients.engineers.details', compact('engineer','works', 'sum') );
+
+    }
+
+    public function work_details(Request $request, $engineer_id, $work_id)
+    {
+
+        $engineer = UsersModel::with("avatar")              
+        ->where('id', $engineer_id)
+        ->first();
+
+        $work = WorksModel::with('worksFiles')
+        ->where('id', $work_id)
+        ->first();
+        
+
+        return view('clients.engineers.work_details', compact('engineer','work') );
+
     }
     
 }
