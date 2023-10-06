@@ -22,9 +22,21 @@ class SettingsController extends Controller
         return view('engineer.settings.data', compact('user'));
     }
 
+    public function client_update_data(Request $request)
+    {
+
+        $user = UsersModel::with('avatar')->find($request->user()->id);
+        return view('clients.settings.data', compact('user'));
+    }    
+
     public function update_passwords(Request $request)
     {
         return view('engineer.settings.password');
+    }
+
+    public function client_update_passwords(Request $request)
+    {
+        return view('clients.settings.password');
     }
 
     public function update_data_action(Request $request)

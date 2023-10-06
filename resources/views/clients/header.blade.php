@@ -57,12 +57,12 @@
 
                 <div class="navbar_item">
                     <i class="las la-cog la-2x"></i>
-                    <a href="" class="navbar_item_text"> الإعدادات </a>
+                    <a href="{{ route('client.settings') }}" class="navbar_item_text"> الإعدادات </a>
                 </div>
 
                 <div class="navbar_item">
                     <i class="las la-cog la-2x"></i>
-                    <a href="" class="navbar_item_text"> تغيير كلمة المرور </a>
+                    <a href="{{ route('client.password') }}" class="navbar_item_text"> تغيير كلمة المرور </a>
                 </div>
 
                 <div class="navbar_item navbar_logout">
