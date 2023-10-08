@@ -5,8 +5,8 @@
 
         <h2 class="text-3xl font-bold text-black text-right">{{ __('login') }}</h2>
         @if(Session::has('errors'))
-        <div class="my-3 w-2/4 p-4 bg-orange-500 text-white rounded-md">
-            {!! session('errors')->first('register_error') !!}
+        <div class="my-3 w-full p-4 bg-orange-500 text-white rounded-md">
+            {!! session('errors')->first('login_error') !!}
         </div>
         @endif
 

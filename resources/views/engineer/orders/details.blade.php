@@ -86,12 +86,24 @@
                                         </div>
                                         <p class="flex gap-2">
                                             <strong>{{__('client_name')}}:</strong> {{ $order->user_data->name }}
-                                            <a href="#" class="flex text-blue-600 hover:underline">
-                                                {{__('start_chat')}}
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-blue-400 fill-blue-700" viewBox="0 0 24 24" id="chat">
-                                                    <path d="M20.61,19.19A7,7,0,0,0,17.87,8.62,8,8,0,1,0,3.68,14.91L2.29,16.29a1,1,0,0,0-.21,1.09A1,1,0,0,0,3,18H8.69A7,7,0,0,0,15,22h6a1,1,0,0,0,.92-.62,1,1,0,0,0-.21-1.09ZM8,15a6.63,6.63,0,0,0,.08,1H5.41l.35-.34a1,1,0,0,0,0-1.42A5.93,5.93,0,0,1,4,10a6,6,0,0,1,6-6,5.94,5.94,0,0,1,5.65,4c-.22,0-.43,0-.65,0A7,7,0,0,0,8,15ZM18.54,20l.05.05H15a5,5,0,1,1,3.54-1.46,1,1,0,0,0-.3.7A1,1,0,0,0,18.54,20Z"></path>
-                                                </svg>
-                                            </a>
+                                            
+                                            <form action="{{ route('engineer.conversation.create', $order->id) }}" method="post" class="flex">
+                                                @csrf
+                                                <input type="hidden" name="other_user_id" value="{{ $order->user_data->id }}">
+                                                <button type="submit" class="flex text-blue-600 hover:underline">
+                                                    {{__('start_chat')}}
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-blue-400 fill-blue-700" viewBox="0 0 24 24" id="chat">
+                                                        <path d="M20.61,19.19A7,7,0,0,0,17.87,8.62,8,8,0,1,0,3.68,14.91L2.29,16.29a1,1,0,0,0-.21,1.09A1,1,0,0,0,3,18H8.69A7,7,0,0,0,15,22h6a1,1,0,0,0,.92-.62,1,1,0,0,0-.21-1.09ZM8,15a6.63,6.63,0,0,0,.08,1H5.41l.35-.34a1,1,0,0,0,0-1.42A5.93,5.93,0,0,1,4,10a6,6,0,0,1,6-6,5.94,5.94,0,0,1,5.65,4c-.22,0-.43,0-.65,0A7,7,0,0,0,8,15ZM18.54,20l.05.05H15a5,5,0,1,1,3.54-1.46,1,1,0,0,0-.3.7A1,1,0,0,0,18.54,20Z"></path>
+                                                    </svg>
+                                                </button>
+
+                                                <!-- <a href="#" class="flex text-blue-600 hover:underline">
+                                                    {{__('start_chat')}}
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-blue-400 fill-blue-700" viewBox="0 0 24 24" id="chat">
+                                                        <path d="M20.61,19.19A7,7,0,0,0,17.87,8.62,8,8,0,1,0,3.68,14.91L2.29,16.29a1,1,0,0,0-.21,1.09A1,1,0,0,0,3,18H8.69A7,7,0,0,0,15,22h6a1,1,0,0,0,.92-.62,1,1,0,0,0-.21-1.09ZM8,15a6.63,6.63,0,0,0,.08,1H5.41l.35-.34a1,1,0,0,0,0-1.42A5.93,5.93,0,0,1,4,10a6,6,0,0,1,6-6,5.94,5.94,0,0,1,5.65,4c-.22,0-.43,0-.65,0A7,7,0,0,0,8,15ZM18.54,20l.05.05H15a5,5,0,1,1,3.54-1.46,1,1,0,0,0-.3.7A1,1,0,0,0,18.54,20Z"></path>
+                                                    </svg>
+                                                </a> -->
+                                            </form>
                                         </p>
                                         <p><strong>{{__('created_at')}}:</strong> {{ $order->created_at }}</p>
                                     </section>

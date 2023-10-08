@@ -33,13 +33,14 @@ Route::get('/register', [\App\Http\Controllers\RegisterController::class, 'regis
 Route::post('/register/action', [\App\Http\Controllers\RegisterController::class, 'register_action'])->name('register.user.action');
 
 
+
+
 Route::group(['middleware' => ['auth:client'], 'prefix' => 'client'], function () {
 
     // engineers data
     Route::get('/engineers/list', [\App\Http\Controllers\Clients\EngineersController::class, 'list_engineers'])->name('client.engineers.list');
     Route::get('/engineers/details/{engineer_id}', [\App\Http\Controllers\Clients\EngineersController::class, 'details'])->name('client.engineers.details');
     Route::get('/engineers/work/details/{engineer_id}/{work_id}', [\App\Http\Controllers\Clients\EngineersController::class, 'work_details'])->name('client.engineers.work.details');
-
 
     // orders data
     Route::get('/orders/list', [\App\Http\Controllers\Clients\OrdersController::class, 'list'])->name('client.order.list');
@@ -50,6 +51,12 @@ Route::group(['middleware' => ['auth:client'], 'prefix' => 'client'], function (
     Route::post('/orders/add_comment/{order_id}', [\App\Http\Controllers\Clients\OrdersController::class, 'add_comment'])->name('client.order.add_comment');
 
     Route::delete('/orders/destroy/{order}', [\App\Http\Controllers\Clients\OrdersController::class, 'destroy'])->name('client.order.destroy');
+
+    // contract
+    Route::get('/contract/list', [\App\Http\Controllers\Clients\ContractsController::class, 'list'])->name('client.contract.list');
+    Route::get('/contract/details/{contract_id}', [\App\Http\Controllers\Clients\ContractsController::class, 'details'])->name('client.contract.details');
+    Route::post('/contract/update/{contract_id}/action', [\App\Http\Controllers\Clients\ContractsController::class, 'update_action'])->name('client.contract.update.action');
+   
 
 
     // update settings
@@ -88,6 +95,12 @@ Route::group(['middleware' => ['auth:engineer'], 'prefix' => 'engineer'], functi
     Route::get('/contract/create/{order_id}', [\App\Http\Controllers\Engineer\ContractsController::class, 'create'])->name('engineer.contract.create');
     Route::post('/contract/create/{order_id}/action', [\App\Http\Controllers\Engineer\ContractsController::class, 'create_action'])->name('engineer.contract.create.action');
     Route::delete('/contract/cancel/{contract}', [\App\Http\Controllers\Engineer\ContractsController::class, 'update_status'])->name('engineer.contract.status.update');
+    
+    // messages
+    Route::post('/conversation/create', [\App\Http\Controllers\Engineer\ConversationController::class, 'initiateConversation'])->name('engineer.conversation.create');
+    Route::get('/conversation/list', [\App\Http\Controllers\Engineer\ConversationController::class, 'listConversations'])->name('engineer.conversation.list');
+    Route::get('/conversation/view/{conversationId}', [\App\Http\Controllers\Engineer\ConversationController::class, 'viewConversation'])->name('engineer.conversation.view');
+    Route::post('/conversation/message/create/{conversationId}', [\App\Http\Controllers\Engineer\ConversationController::class, 'sendMessage'])->name('engineer.conversation.message.send');
 
 
     // update settings

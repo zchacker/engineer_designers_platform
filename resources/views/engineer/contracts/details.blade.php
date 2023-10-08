@@ -37,7 +37,11 @@
                                         @if($contract_feedback != null)
                                         <h3 class="block mt-4 mb-2 font-bold">{{__('comments')}}</h3>
                                         <p>{{ $contract_feedback->comment }}</p>
-                                        <a href="{{ $contract_feedback->contractDoc->fileName ?? '#' }}" target="_blank" class="action_btn">{{__('download')}}</a>
+                                        
+                                        @if($contract_feedback->contractDoc != null)
+                                        <a href="{{ $contract_feedback->contractDoc->fileName ?? '#' }}" target="_blank" class="action_btn my-8">{{__('download')}}</a>
+                                        @endif
+                                        
                                         @endif
                                     </div>
 

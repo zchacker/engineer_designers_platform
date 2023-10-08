@@ -47,7 +47,7 @@
 
                 <div class="navbar_item">
                     <i class="las la-blog la-2x"></i>
-                    <a href="" class="navbar_item_text"> العقود </a>
+                    <a href="{{ route('client.contract.list') }}" class="navbar_item_text"> العقود </a>
                 </div>
 
                 <div class="navbar_item">

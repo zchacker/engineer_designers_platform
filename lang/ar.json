@@ -61,8 +61,10 @@
     "pending":"تحت الانتظار",
     "under_review":"تحت المراجعة",
     "rejected":"مرفوض",
+    "reject":"أرفض",
     "completed":"مكتمل",
     "accepted":"تمت الموافقة",
+    "accept":"الموافقة",
     "canceled":"ملغي",
     "write_comment":"اكتب تعليق",
     "add_comment":"أضف تعليق",
@@ -107,5 +109,8 @@
     "current-password":"كلمة المرور الحالية",
     "new-password":"كلمة المرور الجديدة",
     "wrong-password":"كلمة المرور الحالية خطأ",
-    "same-password":"كلمة المرور الجديدة مطابقة للحالية"
+    "same-password":"كلمة المرور الجديدة مطابقة للحالية",
+    "upload_signed_contract":"أرفق العقد بعد التوقيع عليه، حال الموافقة عليه",
+    "attach_signed_contract":"الرجاء إرفاق العقد بعد التوقيع",
+    "add_reject_comment":"الرجاء كتابة سبب الرفض"
 }

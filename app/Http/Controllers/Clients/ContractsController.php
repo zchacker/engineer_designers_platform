@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Engineer;
+namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
 use App\Models\ContractFeedbackModel;
@@ -12,17 +12,17 @@ use Illuminate\Support\Facades\Validator;
 
 class ContractsController extends Controller
 {
-
+    
     public function list(Request $request)
     {
-        $query = ContractsModel::with(['engineer_data', 'order_data', 'contractDoc'])
-            ->where('engineer_id', $request->user()->id)
-            ->orderByDesc('created_at');
+        $query = ContractsModel::with(['user_data', 'order_data', 'contractDoc'])
+        ->where('user_id', $request->user()->id)
+        ->orderByDesc('created_at');
 
         $sum        = $query->count("id");
         $contracts     = $query->paginate(100);
 
-        return view('engineer.contracts.list', compact('contracts', 'sum'));
+        return view('clients.contracts.list', compact('contracts', 'sum'));
     }
 
     public function details(Request $request)
@@ -35,27 +35,21 @@ class ContractsController extends Controller
         ->where('contract_id' , $request->contract_id)
         ->first();
 
-        return view('engineer.contracts.details' , compact('contract' , 'contract_feedback'));
+        return view('clients.contracts.details' , compact('contract' , 'contract_feedback'));
     }
 
-    public function create(Request $request)
-    {
-        $order_id = $request->order_id;
-        return view('engineer.contracts.create', compact('order_id'));
-    }
-
-    public function create_action(Request $request)
+    public function update_action(Request $request)
     {
         
         $rules = array(
-            "file" =>  'required|mimes:pdf|file|max:50000',
+            "file" =>  'nullable|mimes:pdf|file|max:50000',
         );
 
         $messages = [
             "file.max" =>  __('files_max', ["size" => "50"]),
             "file.file" =>  __('files_file'),
             "file.required" =>  __('files_required'),
-            "file.mimes" =>  __('files_mimes'),
+            "file.mimes" =>  __('files_mimes', ['file_type' => 'PDF']),
         ];
 
 
@@ -63,17 +57,15 @@ class ContractsController extends Controller
 
         if ($validator->fails() == false) {
 
-            $order = OrdersModel::where('id', $request->order_id)
-            ->first();
-
             // create order object to save it
-            $contract = new ContractsModel();
-            $contract->user_id      = $order->user_id;
-            $contract->engineer_id  = $order->to_user_id;
-            $contract->order_id     = $request->order_id;
+            $contract_feedback = new ContractFeedbackModel();
+            $contract_feedback->contract_id  = $request->contract_id;
+            $contract_feedback->status       = $request->status;
+            $contract_feedback->comment      = $request->comment;
+            $contract_feedback->user_id      = $request->user()->id;
 
             // upload all images
-            if ($request->hasFile('file')) {
+            if ($request->hasFile('file') && $request->status == 'accepted') {
 
                 $file_hash = hash_file('sha256', $request->file('file')->getRealPath());
                 $fileDB    = FilesModel::where(['hash' => $file_hash])->first();
@@ -98,23 +90,50 @@ class ContractsController extends Controller
                         ]);
 
                         // save it to database
-                        $contract->file_id = $file_added->id;
+                        $contract_feedback->file_id = $file_added->id;
                     }
 
                 } else {
 
                     // save it to database
-                    $contract->file_id = $fileDB->id;
+                    $contract_feedback->file_id = $fileDB->id;
 
                 }
+
+            }else if($request->status == 'accepted' && $request->hasFile('file') == false){
+
+                return back()
+                ->withErrors(['error' => __('attach_signed_contract')])
+                ->withInput($request->all());
+
+            }else if($request->status == 'rejected' && $request->filled('comment') == false){
+
+                return back()
+                ->withErrors(['error' => __('add_reject_comment')])
+                ->withInput($request->all());
+
             }
 
-            if($contract->save())
-            {
-                
-                return redirect()->route('engineer.contract.list')->with(['success' => __('added_successfuly')]);
-                //return back()->with(['success' => __('added_successfuly')]);
+            // dd($request->filled('comment'));
 
+            if($contract_feedback->save())
+            {
+                $contract = ContractsModel::find($request->contract_id);
+                $contract->status = $request->status;
+
+                if($contract->update())
+                {
+                    
+                    return back()->with(['success' => __('updated_successfuly')]);
+
+                }else{
+
+                    return back()
+                    ->withErrors(['error' => __('unknown_error')])
+                    ->withInput($request->all());
+
+                }
+                
             }else{
 
                 return back()
@@ -139,17 +158,5 @@ class ContractsController extends Controller
         }
     }
 
-    public function update_status(ContractsModel $contract)
-    {
-        
-        // dd($contract->id);
 
-        // $contract_data = ContractsModel::find($contract->id);
-        // $contract_data->status = 'canceled';
-        $contract->status = 'canceled';
-        $contract->update();
-        
-        return redirect()->route('engineer.contract.list');
-
-    }
 }

@@ -30,10 +30,14 @@ class ContractFeedbackModel extends Model
     protected $fillable = [
         'file_id',
         'contract_id',
-        'comment',        
-        'user_id',        
+        'status',
+        'comment',
+        'user_id',
     ];
     
+    protected $enumStatus = ['accepted','rejected']; // Define ENUM values
+    
+
     public function user_data()
     {
         return $this->hasOne(UsersModel::class, 'id' , 'user_id');
