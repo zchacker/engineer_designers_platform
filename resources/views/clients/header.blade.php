@@ -21,7 +21,7 @@
             <span class="absolute shadow-none p-2 border-gray-500 border-solid border-2 rounded-md text-black text-4xl top-5  right-4 cursor-pointer" onclick="openSidebar()">
                 <i class="las la-bars la-3xl"></i>
             </span>
-            <div class="sidebar z-50 transition duration-150 ease-in-out  hidden lg:block fixed top-0 bottom-0 lg:right-0 p-2 w-[250px] overflow-y-auto text-center bg-[#1b2133]">
+            <div class="sidebar z-50 transition duration-150 ease-in-out  hidden lg:block fixed top-0 bottom-0 lg:right-0 p-2 w-[250px] overflow-y-auto text-center bg-[#151616]">
                 <div class="text-gray-100 text-xl">
                     <div class="p-2.5 mt-1 flex items-center">
                         <a href="{{route('home')}}">
@@ -36,22 +36,22 @@
                 </div>
 
                 <div class="navbar_item">
-                    <i class="las la-users la-2x"></i>
+                    <i class="las la-user-friends la-2x"></i>
                     <a href="{{ route('client.engineers.list') }}" class="navbar_item_text"> المهندسين </a>
                 </div>
 
                 <div class="navbar_item">
-                    <i class="las la-file-invoice-dollar la-2x"></i>
+                    <i class="las la-box la-2x"></i>
                     <a href="{{route('client.order.list')}}" class="navbar_item_text"> الطلبات </a>
                 </div>
 
                 <div class="navbar_item">
-                    <i class="las la-blog la-2x"></i>
+                    <i class="las la-file-alt la-2x"></i>
                     <a href="{{ route('client.contract.list') }}" class="navbar_item_text"> العقود </a>
                 </div>
 
                 <div class="navbar_item">
-                    <i class="las la-cog la-2x"></i>
+                    <i class="las la-envelope la-2x"></i>
                     <a href="" class="navbar_item_text"> المحادثات </a>
                 </div>
 
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="navbar_item">
-                    <i class="las la-cog la-2x"></i>
+                    <i class="las la-lock la-2x"></i>
                     <a href="{{ route('client.password') }}" class="navbar_item_text"> تغيير كلمة المرور </a>
                 </div>
 

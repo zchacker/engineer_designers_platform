@@ -40,8 +40,8 @@
     <form action="{{ route('engineer.conversation.message.send', ['conversationId' => $conversation->id]) }}" method="POST" class="p-4">
         @csrf
         <div class="flex items-center">
-            <input type="text" autocomplete="off" name="content" placeholder="Type your message..." class="flex-grow p-3 rounded-full border border-gray-300 focus:outline-none focus:ring focus:border-blue-500">
-            <button type="submit" class="bg-blue-500 text-white p-3 ml-2 rounded-full hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500">Send</button>
+            <input type="text" autocomplete="off" name="content" placeholder="{{__('write_message')}}" class="flex-grow p-3 rounded-full border border-gray-300 focus:outline-none focus:ring focus:border-blue-500">
+            <button type="submit" class="bg-blue-500 text-white p-3 ml-2 rounded-full hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500">{{__('send_message')}}</button>
         </div>
     </form>
 </div>

@@ -1,8 +1,7 @@
-@include('guest.header')
+@include('public.header')
 
-<div class="bg-white rounded-lg p-8 shadow-lg w-[500px]">
-    <section title="page header" class="w-full mt-[20px] px-[10%] py-[2%] bg-white" id="form-cover">
-
+<section class="bg-white mb-20 md:mb-52 xl:mb-8">
+    <div class="container max-w-screen-sm mx-auto px-4 ">
         <h2 class="text-3xl font-bold text-black text-right">{{ __('login') }}</h2>
         @if(Session::has('errors'))
         <div class="my-3 w-full p-4 bg-orange-500 text-white rounded-md">
@@ -38,7 +37,7 @@
 
         </div>
 
-    </section>
-</div>
+    </div>
+</section>
 
-@include('guest.footer')
+@include('public.footer')

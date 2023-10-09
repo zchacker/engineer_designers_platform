@@ -20,11 +20,13 @@ use Illuminate\Support\Facades\App;
 
 App::setLocale('ar');
 
-Route::get('/', function () {
-    return view('guest.home');
-})->name('home');
+// Route::get('/', function () {
+//     return view('public.index');
+// })->name('home');
 
 // Route::get('/', [\App\Http\Controllers\RegisterController::class, 'register'])->name('home');
+
+Route::get('/', [\App\Http\Controllers\public\PagesController::class, 'home'])->name('home');
 
 Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
 Route::post('/login/action', [\App\Http\Controllers\AuthController::class, 'login_action'])->name('login.action');
@@ -118,12 +120,29 @@ Route::group(['middleware' => ['auth:engineer'], 'prefix' => 'engineer'], functi
 
 Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () {
 
+    // engineers
     Route::get('/engineers/list', [\App\Http\Controllers\Admin\EngineersController::class, 'list'])->name('admin.engineers.list');
     Route::get('/engineers/create', [\App\Http\Controllers\Admin\EngineersController::class, 'create'])->name('admin.engineers.create');
     Route::post('/engineers/create/action', [\App\Http\Controllers\Admin\EngineersController::class, 'create_action'])->name('admin.engineers.create.action');
 
+    Route::get('/engineers/details/{engineer_id}', [\App\Http\Controllers\Admin\EngineersController::class, 'details'])->name('admin.engineers.details');
+    Route::get('/engineers/work/details/{engineer_id}/{work_id}', [\App\Http\Controllers\Admin\EngineersController::class, 'work_details'])->name('admin.engineers.work.details');
+
+    // clients
     Route::get('/clients/list', [\App\Http\Controllers\Admin\ClientsController::class, 'list'])->name('admin.clients.list');
+
+    Route::get('/contract/list', [\App\Http\Controllers\Admin\ContractsController::class, 'list'])->name('admin.contract.list');
+    Route::get('/contract/details/{contract_id}', [\App\Http\Controllers\Admin\ContractsController::class, 'details'])->name('admin.contract.details');
+
+    // update settings
+    Route::get('/settings', [\App\Http\Controllers\Shared\SettingsController::class, 'admin_update_data'])->name('admin.settings');
+    Route::post('/settings/action', [\App\Http\Controllers\Shared\SettingsController::class, 'update_data_action'])->name('admin.settings.action');
+
+    // update password
+    Route::get('/password', [\App\Http\Controllers\Shared\SettingsController::class, 'admin_update_passwords'])->name('admin.password');
+    Route::post('/password/action', [\App\Http\Controllers\Shared\SettingsController::class, 'update_passwords_action'])->name('admin.password.action');
 
 
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'admin_logout'])->name('admin.logout');
+
 });
