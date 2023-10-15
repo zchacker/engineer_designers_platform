@@ -14,7 +14,10 @@ class WorksController extends Controller
 {
     public function list(Request $request)
     {
-
+        $query      = WorksModel::orderByDesc('created_at')->where('engineer_id', $request->user()->id);
+        $sum        = $query->count('id');
+        $works      = $query->paginate(100);
+        return view('engineer.works.list', compact('works','sum'));
     }
 
     public function create(Request $request)
@@ -218,6 +221,16 @@ class WorksController extends Controller
 
     }
 
+    public function details(Request $request)
+    {
+        $work = WorksModel::with('worksFiles')
+        ->where('id', $request->work_id)
+        ->where('engineer_id', $request->user()->id)
+        ->first();        
+
+        return view('engineer.works.details', compact('work') );
+    }
+
     public function edit(Request $request)
     {
 
@@ -232,7 +245,7 @@ class WorksController extends Controller
     {
         $work->delete();
 
-        return redirect()->route('client.order.list');
+        return redirect()->route('engineer.work.list');
     }
 
 }

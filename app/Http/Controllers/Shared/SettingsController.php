@@ -88,9 +88,7 @@ class SettingsController extends Controller
 
             // check if there a file and this user is engineer
             if($profile_data->user_type == 'engineer') 
-            {
-                
-
+            {                
                 if($request->hasFile('file'))
                 {
                     $file_hash = hash_file('sha256', $request->file->getRealPath());

@@ -47,7 +47,7 @@
                                     <tbody class="table_body">
                                         @foreach($engineers as $engineer)
                                         <tr data-href="" class="clickable-row cursor-pointer hover:bg-gray-200">
-                                            <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{$engineer->id}} </td>
+                                            <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $engineer->id }} </td>
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $engineer->name }} </td>
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $engineer->email }} </td>
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $engineer->phone }} </td>
@@ -59,14 +59,13 @@
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                                     </svg>
                                                 </a>
-
-                                                <a href="" class="text-blue-600 hover:text-blue-900" title="Edit">
+                                                <a href="{{ route('admin.engineers.edit' , $engineer->id) }}" class="text-blue-600 hover:text-blue-900" title="Edit">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                                     </svg>
                                                 </a>
 
-                                                <form action="{{ route('client.order.destroy', 1) }}" method="POST">
+                                                <form action="{{ route('admin.engineers.delete', $engineer->id) }}" method="POST">
                                                     @method('DELETE')
                                                     @csrf
 
@@ -90,13 +89,11 @@
             </div>
         </div>
 
-
         <div class="text-left mt-10" dir="rtl">
             {{ $engineers->onEachSide(5)->links('pagination::tailwind') }}
         </div>
 
     </div>
-
 
     <script>
         $(document).ready(function($) {
@@ -105,4 +102,13 @@
             });
         });
     </script>
+
+<script>
+    function confirmDelete() {
+        if (confirm(" {{__('delete_engineer_confirmation')}} ")) {
+            // If the user confirms, submit the form
+            document.forms[0].submit(); // You may need to adjust the form index if you have multiple forms on the page
+        }
+    }
+</script>
     @include('admin.footer')

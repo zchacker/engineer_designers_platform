@@ -52,7 +52,7 @@
 
                 <div class="navbar_item">
                     <i class="las la-envelope la-2x"></i>
-                    <a href="" class="navbar_item_text"> المحادثات </a>
+                    <a href="{{ route('client.conversation.list') }}" class="navbar_item_text"> المحادثات </a>
                 </div>
 
                 <div class="navbar_item">

@@ -1,11 +1,11 @@
 @include('public.header')
 
-<link rel="stylesheet" itemprop="url" href="{{asset('css/intlTelInput.min.css')}}" />
+<!-- <link rel="stylesheet" itemprop="url" href="{{asset('css/intlTelInput.min.css')}}" /> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
 
-<section class="bg-white mb-20 md:mb-52 xl:mb-8">
+<section class="bg-gray-50 mb-20 py-8 md:mb-52 xl:mb-8">
     <div class="container max-w-screen-xl mx-auto px-4">
-        
-        <section title="page header" class="w-3/4 mx-auto px-[10%] py-[0%] bg-white" id="form-cover">
+        <section title="page header" class="md:w-1/2 mx-auto p-8 rounded-lg bg-white" id="form-cover">
             <h2 class="text-3xl font-bold text-black text-right">{{ __('register') }}</h2>
             @if(Session::has('errors'))
             <div class="my-3 w-2/4 p-4 bg-orange-500 text-white rounded-md">
@@ -52,17 +52,30 @@
 </section>
 
 <!-- https://github.com/jackocnr/intl-tel-input  -->
-<script src="{{asset('js/intlTelInput-jquery.min.js')}}"></script>
-<script src="{{asset('js/intlTelInput.min.js')}}"></script>
+<!-- <script src="{{asset('js/intlTelInput-jquery.min.js')}}"></script>
+<script src="{{asset('js/intlTelInput.min.js')}}"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
 <script>
-    $('#phone').intlTelInput({
 
+</script>
+<script>
+    // $('#phone').intlTelInput({
+
+    //     initialCountry: 'sa',
+    //     separateDialCode: true,
+    //     preferredCountries: ["sa", "ae", 'uk', 'us'],
+    //     utilsScript: "{{asset('js/utils.js')}}",
+    //     dropdownContainer: document.getElementById("form-cover")
+
+    // });
+
+    const input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+        dropdownContainer: document.getElementById("form-cover"),
         initialCountry: 'sa',
         separateDialCode: true,
         preferredCountries: ["sa", "ae", 'uk', 'us'],
-        utilsScript: "{{asset('js/utils.js')}}",
-        dropdownContainer: document.getElementById("form-cover")
-
     });
 
     function form_submit(e) {

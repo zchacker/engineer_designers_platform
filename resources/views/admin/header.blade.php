@@ -45,7 +45,7 @@
                 
                 <div class="navbar_item">                    
                     <i class="las la-project-diagram la-2x"></i>
-                    <a href="" class="navbar_item_text"> الأعمال المرفوعة </a>
+                    <a href="{{ route('admin.work.list') }}" class="navbar_item_text"> الأعمال المرفوعة </a>
                 </div> 
 
                 <div class="navbar_item">                    
@@ -54,7 +54,7 @@
                 </div> 
                 
                 <div class="navbar_item">                    
-                    <i class="las la-cog la-2x"></i>
+                    <i class="las la-file-contract la-2x"></i>
                     <a href="{{ route('admin.contract.list') }}" class="navbar_item_text"> العقود </a>
                 </div>     
 

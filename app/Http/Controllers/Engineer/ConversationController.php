@@ -85,9 +85,10 @@ class ConversationController extends Controller
         
         // Retrieve the other user's information
         $otherUser = UsersModel::find($otherUserId); // Replace with your logic
+        $myUser = UsersModel::find(auth()->user()->id); // Replace with your logic
 
         // Your logic for displaying the conversation view (e.g., a blade view)
-        return view('engineer.conversations.view', compact('conversation', 'messages', 'otherUser'));
+        return view('engineer.conversations.view', compact('conversation', 'messages', 'otherUser', 'myUser'));
     }
 
     public function sendMessage(Request $request, $conversationId)

@@ -16,7 +16,7 @@ class ContractsController extends Controller
         ->orderByDesc('created_at');
 
         $sum        = $query->count("id");
-        $contracts     = $query->paginate(100);
+        $contracts  = $query->paginate(100);
 
         return view('admin.contracts.list', compact('contracts', 'sum'));
     }

@@ -28,8 +28,7 @@
                                     <h2 class="text-3xl font-semibold text-black mb-4">
                                         {{ $order->title }}
                                     </h2>
-                                    <hr>   
-                                    {{ $order->image->fileName ?? null}}
+                                    <hr>                                    
                                     @if($order->image != null) 
                                         <img src="{{ $order->image->fileName ?? null}}" class="max-h-[600px] shadow-md my-4 rounded-md border" alt="">
                                     @endif
