@@ -25,8 +25,11 @@ class WorksController extends Controller
         return view('admin.works.details', compact('work') );
     }
 
-    public function publish_unpublish_work(Request $request)
+    public function publish_unpublish_work(WorksModel $work)
     {
+        $work->publish = !$work->publish;
+        $work->update();
 
+        return redirect()->route('admin.work.list');
     }
 }

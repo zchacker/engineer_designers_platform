@@ -30,7 +30,8 @@ class WorksModel extends Model
     protected $fillable = [
         'engineer_id',
         'title',
-        'description'
+        'description',
+        'publish'
     ];
 
     public function engineer()

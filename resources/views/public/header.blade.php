@@ -61,13 +61,32 @@
 
                 </ul>
 
-
+                @if (!auth('client')->check() && !auth('engineer')->check() && !auth('admin')->check())
                 <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
                     <a href="{{ route('login') }}" class="lg:block font-semibold text-gray-900" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">{{ __('public')['sigin'] }}</a>
                     <a href="{{ route('register.user') }}" class="px-5 py-3 lg:block border-2 border-green-700 rounded-none font-semibold text-green-700 text-lg hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
                         {{__('public')['signup']}}
                     </a>
                 </div>
+                @elseif(auth('engineer')->check())
+                <div class="md:flex grid gap-4 space-y-4 justify-start items-center">                    
+                    <a href="{{ route('engineer.orders.list') }}" class="px-5 py-3 lg:block border-2 border-green-700 rounded-none font-semibold text-green-700 text-lg hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                        {{__('public')['controll_panel']}}
+                    </a>
+                </div>
+                @elseif(auth('client')->check())
+                <div class="md:flex grid gap-4 space-y-4 justify-start items-center">                    
+                    <a href="{{ route('client.engineers.list') }}" class="px-5 py-3 lg:block border-2 border-green-700 rounded-none font-semibold text-green-700 text-lg hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                        {{__('public')['controll_panel']}}
+                    </a>
+                </div>
+                @elseif(auth('admin')->check())              
+                <div class="md:flex grid gap-4 space-y-4 justify-start items-center">                    
+                    <a href="{{ route('admin.engineers.list') }}" class="px-5 py-3 lg:block border-2 border-green-700 rounded-none font-semibold text-green-700 text-lg hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                        {{__('public')['controll_panel']}}
+                    </a>
+                </div>
+                @endif
 
             </nav>
         </div>

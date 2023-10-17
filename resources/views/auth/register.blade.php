@@ -3,7 +3,7 @@
 <!-- <link rel="stylesheet" itemprop="url" href="{{asset('css/intlTelInput.min.css')}}" /> -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
 
-<section class="bg-gray-50 mb-20 py-8 md:mb-52 xl:mb-8">
+<section class="bg-gray-50 mb-20 py-8 md:mb-52 xl:mb-8 min-h-screen">
     <div class="container max-w-screen-xl mx-auto px-4">
         <section title="page header" class="md:w-1/2 mx-auto p-8 rounded-lg bg-white" id="form-cover">
             <h2 class="text-3xl font-bold text-black text-right">{{ __('register') }}</h2>

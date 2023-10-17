@@ -1,8 +1,8 @@
 {{-- Include header --}}
 @include('clients.header')
 
-<div class="content flex flex-col h-screen">
-    <div class="py-6 flex-grow">
+<div class="content flex flex-col h-[200px] ">
+    <div class="py-6 flex-grow ">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 h-full flex flex-col">
             <div class="bg-white overflow-hidden shadow-md sm:rounded-lg flex-grow">
                 {{-- Conversation Header --}}
@@ -17,7 +17,7 @@
                 </div>
                 
                 {{-- Conversation Messages --}}
-                <div class="flex-grow p-4 overflow-y-auto">
+                <div class="flex-grow p-4 overflow-y-auto ">
                     @foreach($messages as $message)
                         @if($message->user_id != $otherUser->id)
                             <div class="flex items-start justify-start mb-4">
@@ -56,8 +56,8 @@
     <form action="{{ route('client.conversation.message.send', ['conversationId' => $conversation->id]) }}" method="POST" class="p-4">
         @csrf
         <div class="flex items-center">
-            <input type="text" autocomplete="off" name="content" placeholder="{{__('write_message')}}" class="flex-grow p-3 rounded-full border border-gray-300 focus:outline-none focus:ring focus:border-blue-500">
-            <button type="submit" class="bg-blue-500 text-white p-3 ml-2 rounded-full hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500">{{__('send_message')}}</button>
+            <input type="text" autocomplete="off" name="content" placeholder="{{__('write_message')}}" class="flex-grow p-3 rounded-md border border-gray-300 focus:outline-none focus:ring focus:border-blue-500">
+            <button type="submit" class="bg-blue-500 text-white p-3 ml-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500">{{__('send_message')}}</button>
         </div>
     </form>
 </div>
