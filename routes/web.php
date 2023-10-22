@@ -20,9 +20,9 @@ use Illuminate\Support\Facades\App;
 
 App::setLocale('ar');
 
-// Route::get('/', function () {
-//     return view('public.index');
-// })->name('home');
+Route::get('/test', function () {
+    return view('public.test');
+})->name('test');
 
 // Route::get('/', [\App\Http\Controllers\RegisterController::class, 'register'])->name('home');
 
@@ -162,6 +162,9 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::get('/work/details/{work_id}', [\App\Http\Controllers\Admin\WorksController::class, 'details'])->name('admin.work.details');
     Route::put('/work/update/{work}', [\App\Http\Controllers\Admin\WorksController::class, 'publish_unpublish_work'])->name('admin.work.update');
 
+    // messages
+    Route::get('/conversation/list', [\App\Http\Controllers\Admin\ConversationController::class, 'listConversations'])->name('admin.conversation.list');
+    Route::get('/conversation/view/{conversationId}', [\App\Http\Controllers\Admin\ConversationController::class, 'viewConversation'])->name('admin.conversation.view');
 
     // contracts
     Route::get('/contract/list', [\App\Http\Controllers\Admin\ContractsController::class, 'list'])->name('admin.contract.list');

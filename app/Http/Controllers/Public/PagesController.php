@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Models\WorksModel;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -15,22 +16,32 @@ class PagesController extends Controller
 
     public function services(Request $request)
     {
-        return view('public.services');
+        $active = 'services';
+        return view('public.services' ,compact('active'));
     }
     
     public function about(Request $request)
     {
-        return view('public.about');
+        $active = 'about';
+        return view('public.about',compact('active'));
     }
 
     public function projects(Request $request)
     {
-        return view('public.projects');
+        $works = WorksModel::with('worksFiles')
+        ->orderByDesc('created_at')
+        ->where('publish' , 1)
+        ->limit(100)
+        ->get();
+        
+        $active = 'projects';
+        return view('public.projects' ,compact('works' , 'active'));
     }
 
     public function contact(Request $request)
     {
-        return view('public.contact');
+        $active = 'projects';
+        return view('public.contact' ,compact( 'active'));
     }
 
 }

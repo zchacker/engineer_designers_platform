@@ -12,6 +12,10 @@
     /* width:100%; */
 }
 
+.active_page{
+    @apply text-yellow-300
+}
+
 /* home page */
 .card{
     @apply grid place-items-center text-center p-6 max-w-xs bg-secondary rounded-3xl border-2 border-secondary hover:opacity-95

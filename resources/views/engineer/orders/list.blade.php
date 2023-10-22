@@ -94,7 +94,7 @@
                                         </table>
                                     @else
                                         <p>
-                                            {!! __('empty_order_list' , ['order_btn' => "<a href='" . route('client.engineers.list') . "'  class='font-sans text-blue-600 hover:text-blue-500'>" . __('create_order') . "</a>" ] ) !!}
+                                            {!! __('empty_engineer_order_list') !!}
                                         </p>
                                     @endif
                                 </div>

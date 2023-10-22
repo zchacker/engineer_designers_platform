@@ -42,7 +42,7 @@
                                         @if($file->file_type != 'image')
                                             <div class="shadow-none rounded-sm border-0 border-gray-300 p-4 mx-2 my-1 justify-center grid">
                                                 <a href="{{ $file->file->fileName ?? '#' }}" download class="w-full h-full">
-                                                    <img src="{{ asset('imgs/file.png') }}" alt="" class="w-20" />                                            
+                                                    <img src="{{ asset('imgs/file.png') }}" alt="" class="w-full" />                                            
                                                 </a>
                                             </div> 
                                         @endif                                   

@@ -60,7 +60,7 @@
                                             {!! session('success') !!}
                                         </div>
                                         @endif
-                                        <form action="{{ route('client.contract.update.action', $contract->id) }}" method="POST">
+                                        <form action="{{ route('client.contract.update.action', $contract->id) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="mb-4  space-x-1 gap-2 items-center">
                                                 <label for="file-input" class="block mt-4 mb-2">{{__('upload_signed_contract')}}</label>

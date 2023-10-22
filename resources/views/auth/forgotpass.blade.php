@@ -1,5 +1,5 @@
 @include('public.header')
-<section class="bg-gray-50 mb-20 py-8 md:mb-52 xl:mb-8 md:min-h-screen">
+<section class="bg-gray-100 pb-20 py-8 md:pb-52 xl:pb-8 md:min-h-screen">
     <div class="container max-w-screen-xl mx-auto px-4 ">
         <section class="md:w-1/2 mx-auto p-8 rounded-lg bg-white">
             <h2 class="text-3xl font-bold text-black text-right">{{ __('reset_password') }}</h2>
@@ -24,7 +24,7 @@
                         <input type="submit" value="{{ __('submit') }}" class="bg-blue-600 text-white rounded-lg py-2 px-4" />
                     </div>
                     <div class="mb-4">
-                        <a href="{{ route('confirm.email.resend.action') }}" class="link">{{__('submit')}}</a>                    
+                    <a href="{{ route( 'login' ) }}" title="{{__('login')}}" class="link">{{__('login')}}</a>
                     </div>
                 </form>
             </div>

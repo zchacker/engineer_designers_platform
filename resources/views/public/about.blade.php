@@ -88,41 +88,56 @@
             <img src="{{asset('imgs/image/testimoni-2.png')}}" alt="Image">
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-32 md:items-center justify-center md:space-x-8 lg:space-x-12 mb-10 md:mb-20">
-
-            <div class="bg-gray-100 rounded-lg mb-10 md:mb-0">
-                <img src="{{asset('imgs/image/testimoni-3.png')}}" alt="Image" class="mx-8 my-8">
-
-                <div class="flex items-center gap-5 mx-8">
-                    <i data-feather="star" class="text-yellow-500"></i>
-                    <i data-feather="star" class="text-yellow-500"></i>
-                    <i data-feather="star" class="text-yellow-500"></i>
-                    <i data-feather="star" class="text-yellow-500"></i>
-                    <!-- <i data-feather="star" class="text-yellow-500"></i> -->
+        <div id="default-test-carousel" class="relative my-8 bg-white rounded-xl mx-auto md:w-[600px] h-[300px]" data-carousel="slide">
+        <!-- Carousel wrapper -->
+        <div class="relative overflow-hidden h-[300px]">
+            <!-- item 1  -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <div class="flex flex-col justify-center items-center">
+                    <img src="{{asset('imgs/image/testimoni-1.png')}}" alt="Image" class="mx-8 my-8 h-20 w-20">
+                    <h3 class="font-semibold text-gray-900 text-xl md:text-2xl lg:text-3xl mx-8 mb-2">{{__('public')['testimonial1_name']}}</h3>
+                    <p class="font-normal text-sm lg:text-md text-gray-700 mx-8 my-2">{{__('public')['testimonial1']}}</p>
                 </div>
-
-                <p class="font-normal text-sm lg:text-md text-gray-700 mx-8 my-8">{{__('public')['testimonial1']}}</p>
-
-                <h3 class="font-semibold text-gray-900 text-xl md:text-2xl lg:text-3xl mx-8 mb-8">{{__('public')['testimonial1_name']}}</h3>
             </div>
-
-            <div class="bg-gray-100 rounded-lg">
-                <img src="{{asset('imgs/image/testimoni-4.png')}}" alt="Image" class="mx-8 my-8">
-
-                <div class="flex items-center gap-5 mx-8">
-                    <i data-feather="star" class="text-yellow-500"></i>
-                    <i data-feather="star" class="text-yellow-500"></i>
-                    <i data-feather="star" class="text-yellow-500"></i>
-                    <i data-feather="star" class="text-yellow-500"></i>
-                    <i data-feather="star" class="text-yellow-500"></i>
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <div class="flex flex-col justify-center items-center">
+                    <img src="{{asset('imgs/image/testimoni-1.png')}}" alt="Image" class="mx-8 my-8 h-20 w-20">
+                    <h3 class="font-semibold text-gray-900 text-xl md:text-2xl lg:text-3xl mx-8 mb-2">{{__('public')['testimonial2_name']}}</h3>
+                    <p class="font-normal text-sm lg:text-md text-gray-700 mx-8 my-2">{{__('public')['testimonial2']}}</p>
                 </div>
-
-                <p class="font-normal text-sm lg:text-md text-gray-700 mx-8 my-8">{{__('public')['testimonial2']}}</p>
-
-                <h3 class="font-semibold text-gray-900 text-xl md:text-2xl lg:text-3xl mx-8 mb-8">{{__('public')['testimonial1_name']}}</h3>
             </div>
-
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <div class="flex flex-col justify-center items-center">
+                    <img src="{{asset('imgs/image/testimoni-1.png')}}" alt="Image" class="mx-8 my-8 h-20 w-20">
+                    <h3 class="font-semibold text-gray-900 text-xl md:text-2xl lg:text-3xl mx-8 mb-2">{{__('public')['testimonial3_name']}}</h3>
+                    <p class="font-normal text-sm lg:text-md text-gray-700 mx-8 my-2">{{__('public')['testimonial3']}}</p>
+                </div>
+            </div>
         </div>
+        <!-- Slider indicators -->
+        <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+        </div>
+        <!-- Slider controls -->
+        <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-black/30 group-hover:bg-black/50  group-focus:ring-white group-focus:outline-none">
+                <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
+                </svg>
+                <span class="sr-only">Next</span>
+            </span>
+        </button>
+        <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-black/30 group-hover:bg-black/50  group-focus:ring-white group-focus:outline-none">
+                <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                </svg>
+                <span class="sr-only">Previous</span>
+            </span>
+        </button>
+    </div>
 
     </div> <!-- container.// -->
 

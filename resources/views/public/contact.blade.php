@@ -9,11 +9,15 @@
             <h2 class="text-2xl font-semibold text-gray-800 mb-14">تفاصيل الاتصال</h2>
             <div class="mb-4">
                 <p class="text-xl font-semibold text-gray-700">هاتف:</p>
-                <p class="text-gray-800">+1 (123) 456-7890</p>
+                <a href="tel:+966540000847">
+                    <p class="text-gray-800 text-right" dir="ltr">+966 54 0000 847</p>
+                </a>
             </div>
             <div class="mb-4">
                 <p class="text-xl font-semibold text-gray-700">إيميل:</p>
-                <p class="text-gray-800">contact@example.com</p>
+                <a href="mailto:info@alojian.com">
+                    <p class="text-gray-800">info@alojian.com</p>
+                </a>
             </div>
             <div class="flex items-center justify-center">
             <img src="{{asset('imgs/image/mission.jpg')}}" alt="Image 1" class="rounded-none w-full">
@@ -28,15 +32,15 @@
             <form action="process_contact_form.php" method="POST">
                 <div class="mb-4">
                     <label for="name" class="text-gray-800 text-lg">اسمك</label>
-                    <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-400">
+                    <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-800 rounded-lg focus:ring focus:ring-indigo-400">
                 </div>
                 <div class="mb-4">
                     <label for="email" class="text-gray-800 text-lg">البريد الالكتروني</label>
-                    <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-400">
+                    <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-800 rounded-lg focus:ring focus:ring-indigo-400">
                 </div>
                 <div class="mb-4">
                     <label for="message" class="text-gray-800 text-lg">الرسالة</label>
-                    <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-400"></textarea>
+                    <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 border border-gray-800 rounded-lg focus:ring focus:ring-indigo-400"></textarea>
                 </div>
                 <button type="submit" class="bg-green-600 text-white rounded-none px-6 py-3 hover:bg-green-700 transition duration-300">أرسل الان</button>
             </form>

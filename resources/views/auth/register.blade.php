@@ -14,7 +14,7 @@
             @endif
             <div class="block lg:flex m-2 lg:full overflow-x-auto my-2 md:my-5">
 
-                <form action="{{ route('register.user.action') }}" method="post" onsubmit="return form_submit(this);" class="w-full">
+                <form action="{{ route('register.user.action') }}" method="post" class="w-full">
                     @csrf
                     <div class="mb-4">
                         <label for="name" class="lable_form">{{ __('name') }}</label>
@@ -27,8 +27,9 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="phone" class="lable_form">{{ __('phone') }}</label>
-                        <input type="text" name="phone" id="phone" placeholder="512345678" class="form_input !w-full !border-blue-500 text-left" dir="ltr" value="{{ old('phone') }}" />
+                        <label for="phone_no" class="lable_form">{{ __('phone') }}</label>
+                        <input type="text" name="phone_no" id="phone_no" placeholder="512345678" class="form_input !w-full !border-blue-500 text-left" dir="ltr" value="{{ old('phone') }}" />
+                        <input type="hidden" name="phone_no[phone]" />
                     </div>
 
                     <div class="mb-4">
@@ -52,54 +53,21 @@
 </section>
 
 <!-- https://github.com/jackocnr/intl-tel-input  -->
-<!-- <script src="{{asset('js/intlTelInput-jquery.min.js')}}"></script>
-<script src="{{asset('js/intlTelInput.min.js')}}"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+<!-- <script src="{{asset('js/intlTelInput-jquery.min.js')}}"></script> -->
+<!-- <script src="{{asset('js/intlTelInput.min.js')}}"></script> -->
+<script  src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
 <script>
 
-</script>
-<script>
-    // $('#phone').intlTelInput({
-
-    //     initialCountry: 'sa',
-    //     separateDialCode: true,
-    //     preferredCountries: ["sa", "ae", 'uk', 'us'],
-    //     utilsScript: "{{asset('js/utils.js')}}",
-    //     dropdownContainer: document.getElementById("form-cover")
-
-    // });
-
-    const input = document.querySelector("#phone");
+    const input = document.querySelector("#phone_no");
     window.intlTelInput(input, {
         utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
         dropdownContainer: document.getElementById("form-cover"),
         initialCountry: 'sa',
         separateDialCode: true,
         preferredCountries: ["sa", "ae", 'uk', 'us'],
+        hiddenInput: "phone"
     });
 
-    function form_submit(e) {
-
-        if ($('#phone').intlTelInput("getNumber")) {
-            if ($('#phone').val().charAt(0) == 0) {
-                $('#phone').val($('#phone').val().substring(1));
-            }
-
-            if ($('#phone').val().length == 9) {
-                $('#phone').val($('#phone').intlTelInput("getNumber"));
-                return true;
-            } else {
-                e.preventDefault();
-                alert('الرجاء ادخال رقم هاتف صحيح');
-                return false;
-            }
-        } else {
-            e.preventDefault();
-            alert('الرجاء ادخال رقم هاتف صحيح');
-            return false;
-        }
-
-    }
 </script>
 
 @include('public.footer')
