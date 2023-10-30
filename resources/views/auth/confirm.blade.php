@@ -1,6 +1,9 @@
 @include('public.header')
 <section class="bg-gray-50 mb-20 py-8 md:mb-52 xl:mb-8 md:min-h-screen">
-    <div class="container max-w-screen-xl mx-auto px-4 ">
+    <div class="container max-w-screen-xl mx-auto px-4 flex flex-col-reverse md:flex-row  items-center">
+        <section>
+            <img src="{{ asset('imgs/image/working-desk.png') }}" alt="" class="w-[500px]">
+        </section>
         <section class="md:w-1/2 mx-auto p-8 rounded-lg bg-white">
             <h2 class="text-3xl font-bold text-black text-right">{{ __('confirm_your_account') }}</h2>
             @if(Session::has('errors'))

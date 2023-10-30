@@ -6,16 +6,19 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 h-full flex flex-col">
             <div class="bg-white overflow-hidden shadow-md sm:rounded-lg flex-grow">
                 {{-- Conversation Header --}}
-                <div class="p-4 bg-blue-500 text-white">
+                <div class="flex items-center justify-between p-4 bg-blue-500 text-white">
                     {{-- Add conversation title or other header content here --}}
                     <h2 class="text-xl font-semibold">{{ $otherUser->name }}</h2>
-                    {{-- Assuming you have a $user object with a 'name' property --}}
-                    @php
-                    $firstCharOther = (substr($otherUser->name, 0, 1));
-                    $firstCharMy = (substr($myUser->name, 0, 1));
-                    @endphp
+                    <a href="{{ route('engineer.meeting.create' , $otherUser->id ) }}">
+                        <i class="las la-video la-2x"></i>
+                    </a>
+                    {{-- Assuming you have a $user object with a 'name' property --}}                    
                 </div>
 
+                @php
+                $firstCharOther = (substr($otherUser->name, 0, 1));
+                $firstCharMy = (substr($myUser->name, 0, 1));
+                @endphp
                 {{-- Conversation Messages --}}
                 <div class="flex-grow p-4 overflow-y-auto">
                     @foreach($messages as $message)

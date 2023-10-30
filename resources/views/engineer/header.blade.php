@@ -49,6 +49,11 @@
                     <i class="las la-project-diagram la-2x"></i>
                     <a href="{{ route('engineer.work.list') }}" class="navbar_item_text"> الأعمال </a>
                 </div>
+                
+                <div class="navbar_item">
+                    <i class="las la-handshake la-2x"></i>
+                    <a href="{{ route('engineer.meeting.list') }}" class="navbar_item_text"> الاجتماعات </a>
+                </div>
 
                 <div class="navbar_item">
                     <i class="las la-envelope la-2x"></i>

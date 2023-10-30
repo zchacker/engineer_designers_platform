@@ -28,7 +28,8 @@ class UsersModel extends Authenticatable
         'user_type',
         'email_verified_at',
         'verified',
-        'confirm_code'
+        'confirm_code',
+        'googleRefreshToken'
     ];
 
     /**

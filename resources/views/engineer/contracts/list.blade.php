@@ -113,7 +113,7 @@
                                     </table>
                                     @else
                                     <p>
-                                        {!! __('empty_contract_list' , ['contract_btn' => "<a href='" . route(' engineer.orders.list') . "'  class='font-sans text-blue-600 hover:text-blue-500'>" . __('create_contract') . "</a>" ] ) !!} </p>
+                                        {!! __('empty_contract_list' , ['contract_btn' => "<a href='" . route('engineer.orders.list') . "'  class='font-sans text-blue-600 hover:text-blue-500'>" . __('create_contract') . "</a>" ] ) !!} </p>
                                             @endif
                                 </div>
                             </div>

@@ -9,8 +9,8 @@
             <h2 class="text-2xl font-semibold text-gray-800 mb-14">تفاصيل الاتصال</h2>
             <div class="mb-4">
                 <p class="text-xl font-semibold text-gray-700">هاتف:</p>
-                <a href="tel:+966540000847">
-                    <p class="text-gray-800 text-right" dir="ltr">+966 54 0000 847</p>
+                <a href="tel:+966536385896">
+                    <p class="text-gray-800 text-right" dir="ltr">+966 53 638 5896</p>
                 </a>
             </div>
             <div class="mb-4">
@@ -27,7 +27,7 @@
         </div>
 
         <!-- Left Column: Contact Form -->
-        <div class="bg-white shadow-none rounded-none p-6">
+        <div class="bg-white shadow-lg shadow-gray-500 rounded-xl p-6">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">لا تتردد بإرسال رسالة إلينا</h2>
             <form action="process_contact_form.php" method="POST">
                 <div class="mb-4">

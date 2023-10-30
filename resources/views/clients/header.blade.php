@@ -51,6 +51,11 @@
                 </div>
 
                 <div class="navbar_item">
+                    <i class="las la-handshake la-2x"></i>
+                    <a href="{{ route('client.meeting.list') }}" class="navbar_item_text"> الاجتماعات </a>
+                </div>
+
+                <div class="navbar_item">
                     <i class="las la-envelope la-2x"></i>
                     <a href="{{ route('client.conversation.list') }}" class="navbar_item_text"> المحادثات </a>
                 </div>

@@ -30,7 +30,12 @@ Route::get('/', [\App\Http\Controllers\Public\PagesController::class, 'home'])->
 Route::get('/services', [\App\Http\Controllers\Public\PagesController::class, 'services'])->name('services');
 Route::get('/about', [\App\Http\Controllers\Public\PagesController::class, 'about'])->name('about');
 Route::get('/projects', [\App\Http\Controllers\Public\PagesController::class, 'projects'])->name('projects');
+Route::get('/engineers', [\App\Http\Controllers\Public\PagesController::class, 'engineers'])->name('engineers');
 Route::get('/contact-us', [\App\Http\Controllers\Public\PagesController::class, 'contact'])->name('contact-us');
+
+// engineer works details
+Route::get('/engineers/details/{engineer_id}', [\App\Http\Controllers\Public\PagesController::class, 'details'])->name('engineers.details');
+Route::get('/engineers/work/details/{engineer_id}/{work_id}', [\App\Http\Controllers\Public\PagesController::class, 'work_details'])->name('engineers.work.details');
 
 Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
 Route::post('/login/action', [\App\Http\Controllers\AuthController::class, 'login_action'])->name('login.action');
@@ -45,6 +50,13 @@ Route::post('/forgotpassword/action', [\App\Http\Controllers\AuthController::cla
 Route::get('/resetpassword/{id}/{token}', [\App\Http\Controllers\AuthController::class, 'reset_password'])->name('reset.password.link');
 Route::post('/set_password', [\App\Http\Controllers\AuthController::class, 'rest_password_new'])->name('set.new.password');
 
+Route::get('/privacy', function () {
+    return view('public.privacy');
+})->name('privacy');
+
+Route::get('/terms', function () {
+    return view('public.terms');
+})->name('terms');
 
 Route::group(['middleware' => ['auth:client,engineer']], function (){
     
@@ -75,6 +87,9 @@ Route::group(['middleware' => ['auth:client' , 'account'], 'prefix' => 'client']
     Route::get('/contract/list', [\App\Http\Controllers\Clients\ContractsController::class, 'list'])->name('client.contract.list');
     Route::get('/contract/details/{contract_id}', [\App\Http\Controllers\Clients\ContractsController::class, 'details'])->name('client.contract.details');
     Route::post('/contract/update/{contract_id}/action', [\App\Http\Controllers\Clients\ContractsController::class, 'update_action'])->name('client.contract.update.action');
+
+    // meetings
+    Route::get('/meetings/list', [\App\Http\Controllers\Clients\MeetingsController::class, 'list'])->name('client.meeting.list');
 
     // messages
     Route::post('/conversation/create', [\App\Http\Controllers\Clients\ConversationController::class, 'initiateConversation'])->name('client.conversation.create');
@@ -135,6 +150,17 @@ Route::group(['middleware' => ['auth:engineer', 'account'], 'prefix' => 'enginee
     // update password
     Route::get('/password', [\App\Http\Controllers\Shared\SettingsController::class, 'update_passwords'])->name('engineer.password');
     Route::post('/password/action', [\App\Http\Controllers\Shared\SettingsController::class, 'update_passwords_action'])->name('engineer.password.action');
+    
+    // meetings
+    Route::get('/meetings/list', [\App\Http\Controllers\Engineer\MeetingsController::class, 'list'])->name('engineer.meeting.list');
+    Route::get('/meetings/details/{meeting_id}', [\App\Http\Controllers\Engineer\MeetingsController::class, 'show'])->name('engineer.meeting.show');
+    Route::get('/google/create/{client_id}', [\App\Http\Controllers\Engineer\MeetingsController::class, 'create'])->name('engineer.meeting.create');
+    Route::post('/google/create/{client_id}', [\App\Http\Controllers\Engineer\MeetingsController::class, 'create_action'])->name('engineer.meeting.create.action');
+    
+    Route::get('/meetings/cancel/{meeting_id}', [\App\Http\Controllers\Engineer\MeetingsController::class, 'cancel_meeting'])->name('engineer.meeting.cancel');
+
+    Route::get('/google/request/token', [\App\Http\Controllers\Engineer\MeetingsController::class, 'redirectToGoogle'])->name('engineer.google.request.token');
+    Route::get('/google/get/token', [\App\Http\Controllers\Engineer\MeetingsController::class, 'handleGoogleCallback'])->name('engineer.google.get.token');
 
 
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'engineer_logout'])->name('engineer.logout');

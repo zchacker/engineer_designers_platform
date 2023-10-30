@@ -30,7 +30,7 @@
             <!-- <nav class="flex-wrap lg:flex items-center py-14 pb-16 xl:relative z-50 h-40" x-data="{navbarOpen:false}" :class="{'h-20':!navbarOpen,'h-[470px]':navbarOpen}"> -->
             <nav class="flex-wrap md:flex items-center justify-between py-4 z-50" x-data="{navbarOpen:false}" :class="{'block':navbarOpen}">
 
-                <div class="flex items-center justify-between mb-10 lg:mb-0">
+                <div class="flex items-center justify-between mb-0 lg:mb-0">
                     <button class="lg:hidden w-10 h-10 ml-auto flex items-center justify-center stroke-white text-white border border-white rounded-md" @click="navbarOpen = !navbarOpen">
                         <i data-feather="menu"></i>
                     </button>
@@ -40,8 +40,12 @@
                     </a>
                 </div>
 
-                <ul class="md:flex flex-col md:flex-row justify-between md:gap-16" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                <ul class="hidden md:flex flex-col md:flex-row justify-between md:gap-8" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
                     <!-- <ul class="md:flex flex-col-reverse lg:flex-row text-right lg:items-center lg:mx-auto gap-6 justify-around" :class="{'hidden':!navbarOpen,'flex':navbarOpen}"> -->
+
+                    <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'home') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">
+                        <a href="{{ route('home') }}">{{ __('public')['home'] }}</a>
+                    </li>
 
                     <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'about') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">
                         <a href="{{ route('about') }}">{{ __('public')['about'] }}</a>
@@ -55,6 +59,17 @@
                         <a href="{{ route('projects') }}">{{ __('public')['projects'] }}</a>
                     </li>
 
+                    <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'engineers') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">
+                        <a href="{{ route('engineers') }}">{{ __('public')['engineers'] }}</a>
+                    </li>
+
+                    {{-- 
+                    <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'projects') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">
+                        <a href="{{ route('projects') }}">{{ __('public')['ads'] }}</a>
+                    </li>
+                    --}}
+
+
                     <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'contact') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">
                         <a href="{{ route('contact-us') }}">{{ __('public')['contact'] }}</a>
                     </li>
@@ -64,7 +79,7 @@
                 @if (!auth('client')->check() && !auth('engineer')->check() && !auth('admin')->check())
                 <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
                     <!-- <a href="{{ route('login') }}" class="font-semibold bg-yellow-300 p-4 rounded-md text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">{{ __('public')['sigin'] }}</a> -->
-                    <a href="{{ route('register.user') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                    <a href="{{ route('login') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
                         {{ __('public')['sigin'] }}
                     </a>
                 </div>

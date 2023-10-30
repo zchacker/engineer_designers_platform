@@ -1,8 +1,8 @@
 @include('public.header')
-<section class="flex h-72 justify-center items-center flex-col">
-    <div class="w-full h-screen bg-cover bg-center" style="background-image: url('{{asset('imgs/image/project.jpg')}}');">
-        <div class="w-full h-full flex  justify-center items-center bg-black/50 backdrop-brightness-100">
-            <h2 class="text-white text-3xl font-bold mb-4">{{__('public')['projects']}}</h2>
+<section class="flex h-40 justify-center items-center flex-col">
+    <div class="w-full h-screen bg-cover bg-no-repeat md:bg-cover md:bg-center" style="background-image: url('{{asset('imgs/image/head-pages.jpg')}}');">
+        <div class="w-full h-full px-8 py-8 flex  justify-start items-end bg-black/5 backdrop-brightness-100">
+            <h1 class="text-white text-3xl font-bold mb-4">{{__('public')['projects']}}</h1>
         </div>
     </div>
 </section>
@@ -14,7 +14,7 @@
             <div class="flex flex-col items-center p-8 hover:shadow-sm border">
                 <a href="#" class="">
                     <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" alt="" class="w-40" />
-                    <h2 class="text-black text-xl mt-4 font-bold">عنوان العمل</h2>
+                    <h2 class="text-black text-xl mt-4 font-bold"> {{$work->title}} </h2>
                 </a>
             </div>
         @endforeach

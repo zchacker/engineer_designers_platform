@@ -18,7 +18,7 @@ class ConversationController extends Controller
         $userId = auth()->user()->id;
 
         // Get the user ID of the other user (replace this with your logic to get the other user ID)
-        $otherUserId = $request->input('other_user_id');
+        $otherUserId = $request->input('other_user_id');        
 
         // Check if a conversation between the two users already exists
         $existingConversation = DB::table('conversation_user')
@@ -30,7 +30,7 @@ class ConversationController extends Controller
 
         if ($existingConversation) {
             // If an existing conversation is found, redirect to the conversation view
-            return redirect()->route('client.conversation.view', ['conversationId' => $existingConversation]);
+            return redirect()->route('conversation.view', ['conversationId' => $existingConversation]);
         }
 
         // If no existing conversation is found, create a new conversation
@@ -118,7 +118,7 @@ class ConversationController extends Controller
         // Replace this with your logic to determine the other user's ID
         // For example, if the conversation has two users, you can query the conversation's users and exclude the current user
         $conversation = ConversationModel::findOrFail($conversationId);
-        $currentUserId = auth()->user()->id;
+        $currentUserId = auth()->user()->id;        
         $otherUserId = $conversation->users()->where('user_id', '!=', $currentUserId)->first();
         
         return $otherUserId->id; // This assumes that you have a 'users' relationship defined in your Conversation model
