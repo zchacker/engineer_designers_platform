@@ -28,13 +28,19 @@
                             @php
                             // Retrieve the latest message for this conversation
                             $latestMessage = $conversation->messages->last();
+                            $last_message = NULL;
+                            if($latestMessage){
+                                if (strlen($latestMessage->content) > 140) {
+                                    $last_message = substr($latestMessage->content, 0, 137) . "...";
+                                }
+                            }
                             @endphp
                             @if ($latestMessage)
                             <p class="text-sm text-gray-600">{{ $latestMessage->created_at->format('M d, Y H:i A') }}</p>
                             @endif
                         </div>
                         @if ($latestMessage)
-                        <p class="text-gray-800 mt-2">{{ $latestMessage->content }}</p>
+                        <p class="text-gray-800 mt-2">{{ $last_message }}</p>
                         @endif
                     </a>
                     @empty

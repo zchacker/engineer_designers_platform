@@ -26,47 +26,49 @@ Route::get('/test', function () {
 
 // Route::get('/', [\App\Http\Controllers\RegisterController::class, 'register'])->name('home');
 
-Route::get('/', [\App\Http\Controllers\Public\PagesController::class, 'home'])->name('home');
-Route::get('/services', [\App\Http\Controllers\Public\PagesController::class, 'services'])->name('services');
-Route::get('/about', [\App\Http\Controllers\Public\PagesController::class, 'about'])->name('about');
-Route::get('/projects', [\App\Http\Controllers\Public\PagesController::class, 'projects'])->name('projects');
-Route::get('/engineers', [\App\Http\Controllers\Public\PagesController::class, 'engineers'])->name('engineers');
-Route::get('/contact-us', [\App\Http\Controllers\Public\PagesController::class, 'contact'])->name('contact-us');
+// Route::group(['prefix' => '{locale?}'], function () {
 
-// engineer works details
-Route::get('/engineers/details/{engineer_id}', [\App\Http\Controllers\Public\PagesController::class, 'details'])->name('engineers.details');
-Route::get('/engineers/work/details/{engineer_id}/{work_id}', [\App\Http\Controllers\Public\PagesController::class, 'work_details'])->name('engineers.work.details');
+    Route::get('/', [\App\Http\Controllers\Public\PagesController::class, 'home'])->name('home');
+    Route::get('/services', [\App\Http\Controllers\Public\PagesController::class, 'services'])->name('services');
+    Route::get('/about', [\App\Http\Controllers\Public\PagesController::class, 'about'])->name('about');
+    Route::get('/projects', [\App\Http\Controllers\Public\PagesController::class, 'projects'])->name('projects');
+    Route::get('/engineers', [\App\Http\Controllers\Public\PagesController::class, 'engineers'])->name('engineers');
+    Route::get('/contact-us', [\App\Http\Controllers\Public\PagesController::class, 'contact'])->name('contact-us');
 
-Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
-Route::post('/login/action', [\App\Http\Controllers\AuthController::class, 'login_action'])->name('login.action');
+    // engineer works details
+    Route::get('/engineers/details/{engineer_id}', [\App\Http\Controllers\Public\PagesController::class, 'details'])->name('engineers.details');
+    Route::get('/engineers/work/details/{engineer_id}/{work_id}', [\App\Http\Controllers\Public\PagesController::class, 'work_details'])->name('engineers.work.details');
 
-Route::get('/register', [\App\Http\Controllers\RegisterController::class, 'register'])->name('register.user');
-Route::post('/register/action', [\App\Http\Controllers\RegisterController::class, 'register_action'])->name('register.user.action');
+    Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
+    Route::post('/login/action', [\App\Http\Controllers\AuthController::class, 'login_action'])->name('login.action');
+
+    Route::get('/register', [\App\Http\Controllers\RegisterController::class, 'register'])->name('register.user');
+    Route::post('/register/action', [\App\Http\Controllers\RegisterController::class, 'register_action'])->name('register.user.action');
 
 
-Route::get('/forgotpassword', [\App\Http\Controllers\AuthController::class, 'forgot_password'])->name('password.forgot');
-Route::post('/forgotpassword/action', [\App\Http\Controllers\AuthController::class, 'forgot_password_action'])->name('password.forgot.action');
+    Route::get('/forgotpassword', [\App\Http\Controllers\AuthController::class, 'forgot_password'])->name('password.forgot');
+    Route::post('/forgotpassword/action', [\App\Http\Controllers\AuthController::class, 'forgot_password_action'])->name('password.forgot.action');
 
-Route::get('/resetpassword/{id}/{token}', [\App\Http\Controllers\AuthController::class, 'reset_password'])->name('reset.password.link');
-Route::post('/set_password', [\App\Http\Controllers\AuthController::class, 'rest_password_new'])->name('set.new.password');
+    Route::get('/resetpassword/{id}/{token}', [\App\Http\Controllers\AuthController::class, 'reset_password'])->name('reset.password.link');
+    Route::post('/set_password', [\App\Http\Controllers\AuthController::class, 'rest_password_new'])->name('set.new.password');
 
-Route::get('/privacy', function () {
-    return view('public.privacy');
-})->name('privacy');
+    Route::get('/privacy', function () {
+        return view('public.privacy');
+    })->name('privacy');
 
-Route::get('/terms', function () {
-    return view('public.terms');
-})->name('terms');
+    Route::get('/terms', function () {
+        return view('public.terms');
+    })->name('terms');
 
-Route::group(['middleware' => ['auth:client,engineer']], function (){
-    
-    Route::get('/confirm_email', [\App\Http\Controllers\AuthController::class, 'confirm_email'])->name('confirm.email');
-    Route::post('/confirm_email/action', [\App\Http\Controllers\AuthController::class, 'confirm_email_action'])->name('confirm.email.action');
-    Route::get('/confirm_email/resend', [\App\Http\Controllers\AuthController::class, 'confirm_email_resend'])->name('confirm.email.resend.action');
+    Route::group(['middleware' => ['auth:client,engineer']], function () {
 
-});
+        Route::get('/confirm_email', [\App\Http\Controllers\AuthController::class, 'confirm_email'])->name('confirm.email');
+        Route::post('/confirm_email/action', [\App\Http\Controllers\AuthController::class, 'confirm_email_action'])->name('confirm.email.action');
+        Route::get('/confirm_email/resend', [\App\Http\Controllers\AuthController::class, 'confirm_email_resend'])->name('confirm.email.resend.action');
+    });
+// });
 
-Route::group(['middleware' => ['auth:client' , 'account'], 'prefix' => 'client'], function () {
+Route::group(['middleware' => ['auth:client', 'account'], 'prefix' => 'client'], function () {
 
     // engineers data
     Route::get('/engineers/list', [\App\Http\Controllers\Clients\EngineersController::class, 'list_engineers'])->name('client.engineers.list');
@@ -137,8 +139,8 @@ Route::group(['middleware' => ['auth:engineer', 'account'], 'prefix' => 'enginee
     Route::delete('/contract/cancel/{contract}', [\App\Http\Controllers\Engineer\ContractsController::class, 'update_status'])->name('engineer.contract.status.update');
 
     // messages
-    Route::post('/conversation/create', [\App\Http\Controllers\Engineer\ConversationController::class, 'initiateConversation'])->name('engineer.conversation.create');
     Route::get('/conversation/list', [\App\Http\Controllers\Engineer\ConversationController::class, 'listConversations'])->name('engineer.conversation.list');
+    Route::post('/conversation/create', [\App\Http\Controllers\Engineer\ConversationController::class, 'initiateConversation'])->name('engineer.conversation.create');
     Route::get('/conversation/view/{conversationId}', [\App\Http\Controllers\Engineer\ConversationController::class, 'viewConversation'])->name('engineer.conversation.view');
     Route::post('/conversation/message/create/{conversationId}', [\App\Http\Controllers\Engineer\ConversationController::class, 'sendMessage'])->name('engineer.conversation.message.send');
 
@@ -150,13 +152,13 @@ Route::group(['middleware' => ['auth:engineer', 'account'], 'prefix' => 'enginee
     // update password
     Route::get('/password', [\App\Http\Controllers\Shared\SettingsController::class, 'update_passwords'])->name('engineer.password');
     Route::post('/password/action', [\App\Http\Controllers\Shared\SettingsController::class, 'update_passwords_action'])->name('engineer.password.action');
-    
+
     // meetings
     Route::get('/meetings/list', [\App\Http\Controllers\Engineer\MeetingsController::class, 'list'])->name('engineer.meeting.list');
     Route::get('/meetings/details/{meeting_id}', [\App\Http\Controllers\Engineer\MeetingsController::class, 'show'])->name('engineer.meeting.show');
     Route::get('/google/create/{client_id}', [\App\Http\Controllers\Engineer\MeetingsController::class, 'create'])->name('engineer.meeting.create');
     Route::post('/google/create/{client_id}', [\App\Http\Controllers\Engineer\MeetingsController::class, 'create_action'])->name('engineer.meeting.create.action');
-    
+
     Route::get('/meetings/cancel/{meeting_id}', [\App\Http\Controllers\Engineer\MeetingsController::class, 'cancel_meeting'])->name('engineer.meeting.cancel');
 
     Route::get('/google/request/token', [\App\Http\Controllers\Engineer\MeetingsController::class, 'redirectToGoogle'])->name('engineer.google.request.token');
@@ -187,6 +189,9 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::get('/work/list', [\App\Http\Controllers\Admin\WorksController::class, 'list'])->name('admin.work.list');
     Route::get('/work/details/{work_id}', [\App\Http\Controllers\Admin\WorksController::class, 'details'])->name('admin.work.details');
     Route::put('/work/update/{work}', [\App\Http\Controllers\Admin\WorksController::class, 'publish_unpublish_work'])->name('admin.work.update');
+
+    // meetings
+    Route::get('/meetings/list', [\App\Http\Controllers\Admin\MeetingsController::class, 'list'])->name('admin.meeting.list');
 
     // messages
     Route::get('/conversation/list', [\App\Http\Controllers\Admin\ConversationController::class, 'listConversations'])->name('admin.conversation.list');

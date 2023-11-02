@@ -1,8 +1,8 @@
 {{-- Include header --}}
 @include('admin.header')
 
-<div class="content flex flex-col h-[200px] ">
-    <div class="py-6 flex-grow ">
+<div class="content2 py-6 flex flex-col h-[100vh] bg-gray-300">
+    <div class="py-0 flex-grow ">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 h-full flex flex-col">
             <div class="bg-white overflow-hidden shadow-md sm:rounded-lg flex-grow">
                 {{-- Conversation Header --}}
@@ -17,36 +17,38 @@
                 </div>
                 
                 {{-- Conversation Messages --}}
-                <div class="flex-grow p-4 overflow-y-auto ">
-                    @foreach($messages as $message)
-                        @if($message->user_id != $otherUser->id)
-                            <div class="flex items-start justify-start mb-4">
-                                <div class="rounded-full w-10 h-10 bg-blue-500 flex items-center justify-center text-white">
-                                    {{$firstCharMy}}
-                                </div>
-                                <div class="ml-2">
-                                    <div class="bg-gray-100 p-3 rounded-md shadow-md">
-                                        {{-- Display message content here --}}
-                                        <p class="text-gray-800">{{ $message->content }}</p>
+                <div class="flex flex-col overflow-y-auto h-[70vh] ">
+                    <div class="flex-grow p-4">
+                        @foreach($messages as $message)
+                            @if($message->user_id != $otherUser->id)
+                                <div class="flex items-start justify-start mb-4">
+                                    <div class="rounded-full w-10 h-10 bg-blue-500 flex items-center justify-center text-white">
+                                        {{$firstCharMy}}
                                     </div>
-                                    <p class="text-xs text-gray-600 mt-1">{{ $message->created_at }}</p>
-                                </div>
-                            </div>
-                        @else
-                            <div class="flex items-start justify-end mb-4">                                
-                                <div class="ml-2">
-                                    <div class="bg-gray-100 p-3 rounded-md shadow-md">
-                                        {{-- Display message content here --}}
-                                        <p class="text-gray-800">{{ $message->content }}</p>
+                                    <div class="ml-2">
+                                        <div class="bg-gray-100 p-3 rounded-md shadow-md">
+                                            {{-- Display message content here --}}
+                                            <p class="text-gray-800">{{ $message->content }}</p>
+                                        </div>
+                                        <p class="text-xs text-gray-600 mt-1">{{ $message->created_at }}</p>
                                     </div>
-                                    <p class="text-xs text-gray-600 mt-1">{{ $message->created_at }}</p>
                                 </div>
-                                <div class="rounded-full w-10 h-10 bg-gray-500 flex items-center justify-center text-white">
-                                    {{$firstCharOther}}
+                            @else
+                                <div class="flex items-start justify-end mb-4">                                
+                                    <div class="ml-2">
+                                        <div class="bg-gray-100 p-3 rounded-md shadow-md">
+                                            {{-- Display message content here --}}
+                                            <p class="text-gray-800">{{ $message->content }}</p>
+                                        </div>
+                                        <p class="text-xs text-gray-600 mt-1">{{ $message->created_at }}</p>
+                                    </div>
+                                    <div class="rounded-full w-10 h-10 bg-gray-500 flex items-center justify-center text-white">
+                                        {{$firstCharOther}}
+                                    </div>
                                 </div>
-                            </div>
-                        @endif
-                    @endforeach
+                            @endif
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>

@@ -50,6 +50,12 @@
                     <a href="{{ route('admin.work.list') }}" class="navbar_item_text"> الأعمال المرفوعة </a>
                 </div> 
 
+                
+                <div class="navbar_item">                    
+                    <i class="las la-handshake la-2x"></i>
+                    <a href="{{ route('admin.meeting.list') }}" class="navbar_item_text"> الاجتماعات </a>
+                </div> 
+
                 <div class="navbar_item">                    
                     <i class="las la-envelope la-2x"></i>
                     <a href="{{ route('admin.conversation.list') }}" class="navbar_item_text"> المحادثات </a>
