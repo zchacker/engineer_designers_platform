@@ -43,6 +43,14 @@
                                                     {{__('meeting_title')}}
                                                 </th>
 
+                                                <th scope="col" class="py-3.5 pl-4 pr-3 text-right text-sm font-semibold text-gray-900 sm:pl-6 md:pl-0">
+                                                    {{__('client_name')}}
+                                                </th>
+
+                                                <th scope="col" class="py-3.5 pl-4 pr-3 text-right text-sm font-semibold text-gray-900 sm:pl-6 md:pl-0">
+                                                    {{__('engineer_name')}}
+                                                </th>
+
                                                 <th scope="col" class="py-3.5 px-3 text-right text-sm font-semibold text-gray-900">
                                                     {{__('meeting_link')}}
                                                 </th>
@@ -73,8 +81,16 @@
                                                     {{ $meet->title }}
                                                 </td>
 
+                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 md:pl-0">
+                                                    {{ $meet->user_data->name }}
+                                                </td>
+
+                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 md:pl-0">
+                                                    {{ $meet->engineer_data->name }}
+                                                </td>
+
                                                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                                                    <a href="{{$meet->meeting_link}}" target="_blank" class="text-blue-500 hover:text-red-700">{{$meet->meeting_link}}</a>
+                                                    <a href="{{$meet->meeting_link}}" target="_blank" class="text-blue-500 hover:text-red-700">{{__('meeting_open_link')}}</a>
                                                 </td>
 
                                                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500 {{ $meet->status }} text-right" dir="ltr">

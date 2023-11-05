@@ -36,7 +36,7 @@ class OrdersModel extends Model
         'status'
     ];
 
-    protected $enumStatus = ['pending','under_review','rejected','completed']; // Define ENUM values
+    protected $enumStatus = ['pending','under_review', 'supervisor_review','rejected','completed']; // Define ENUM values
 
     public function image()
     {

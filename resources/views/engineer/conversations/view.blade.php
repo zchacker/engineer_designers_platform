@@ -1,7 +1,7 @@
 {{-- Include header --}}
 @include('engineer.header')
 
-<div class="content2 py-6 flex flex-col h-[100vh] bg-gray-300">
+<div class="content2 w-full py-6 flex flex-col h-[100vh] bg-gray-300">
     <div class="py-0 flex-grow ">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6 h-full flex flex-col">
             <div class="bg-white overflow-hidden shadow-md sm:rounded-lg flex-grow">

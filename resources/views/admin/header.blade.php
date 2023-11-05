@@ -67,8 +67,8 @@
                 </div>     
 
                 <div class="navbar_item">                    
-                    <i class="las la-cog la-2x"></i>
-                    <a href="" class="navbar_item_text"> المشرفين </a>
+                    <i class="las la-user-tie la-2x"></i>
+                    <a href="{{ route('admin.supervisors.list') }}" class="navbar_item_text"> المشرفين </a>
                 </div>     
 
                 <div class="navbar_item">                    

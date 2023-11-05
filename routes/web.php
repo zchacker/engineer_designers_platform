@@ -205,6 +205,15 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::get('/settings', [\App\Http\Controllers\Shared\SettingsController::class, 'admin_update_data'])->name('admin.settings');
     Route::post('/settings/action', [\App\Http\Controllers\Shared\SettingsController::class, 'update_data_action'])->name('admin.settings.action');
 
+    // supervisors    
+    Route::get('/supervisors/list', [\App\Http\Controllers\Admin\SupervisorController::class, 'list'])->name('admin.supervisors.list');
+    Route::get('/supervisors/create', [\App\Http\Controllers\Admin\SupervisorController::class, 'create'])->name('admin.supervisors.create');
+    Route::post('/supervisors/create/action', [\App\Http\Controllers\Admin\SupervisorController::class, 'create_action'])->name('admin.supervisors.create.action');
+    Route::get('/supervisors/edit/{id}', [\App\Http\Controllers\Admin\SupervisorController::class, 'edit'])->name('admin.supervisors.edit');
+    Route::post('/supervisors/edit/action', [\App\Http\Controllers\Admin\SupervisorController::class, 'edit_action'])->name('admin.supervisors.edit.action');
+    Route::delete('/supervisors/delete/{user}', [\App\Http\Controllers\Admin\SupervisorController::class, 'delete'])->name('admin.supervisors.delete');
+
+
     // update password
     Route::get('/password', [\App\Http\Controllers\Shared\SettingsController::class, 'admin_update_passwords'])->name('admin.password');
     Route::post('/password/action', [\App\Http\Controllers\Shared\SettingsController::class, 'update_passwords_action'])->name('admin.password.action');

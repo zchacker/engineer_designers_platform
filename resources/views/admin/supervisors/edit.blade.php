@@ -3,12 +3,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
 
 <div class="content">
-
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="relative rounded-tl-md  rounded-tr-md overflow-auto p-8">
-                <h2 class="text-2xl font-bold mb-4"> تعديل مهندس </h2>
+                <h2 class="text-2xl font-bold mb-4"> {{__('edit_supervisor')}}  </h2>
                     <div class="overflow-x-auto relative">
 
                         @if(Session::has('errors'))
@@ -23,7 +22,7 @@
                         </div>
                         @endif
 
-                        <form action="{{ route('admin.engineers.edit.action') }}" method="post" onsubmit="return form_submit(this);" class="w-full">
+                        <form action="{{ route('admin.supervisors.edit.action') }}" method="post" onsubmit="return form_submit(this);" class="w-full">
                             @csrf
                             <input type="hiddin" value="{{  $user->id }}" name="user_id" />
                             
@@ -35,11 +34,11 @@
                             <div class="mb-4">
                                 <label for="email" class="lable_form">{{ __('email') }}</label>
                                 <input type="text" name="email" class="form_input" value="{{ $user->email }}" />
-                            </div>
+                            </div>                            
 
                             <div class="mb-4">
                                 <label for="phone_no" class="lable_form">{{ __('phone') }}</label>
-                                <input type="text" name="phone_no" id="phone_no" placeholder="512345678" class="form_input !w-full !border-blue-500 text-left" dir="ltr" value="{{ $user->phone }}" />
+                                <input type="text" name="phone_no" id="phone_no" placeholder="512345678" class="form_input !w-full !border-blue-500 text-left" dir="ltr" value="{{ $user->phone }}"  />
                                 <input type="hidden" name="phone_no[phone]" />
                             </div>
 
@@ -73,4 +72,5 @@
             hiddenInput: "phone"
         });
     </script>
+
     @include('admin.footer')
