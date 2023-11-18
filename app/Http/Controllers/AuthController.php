@@ -50,12 +50,15 @@ class AuthController extends Controller
                     if (Auth::guard($user->user_type)->attempt(['email' => $request->email, 'password' => $request->password], true)) {
 
                         //Auth::guard('user')->logoutOtherDevices( $request->password );
-
+                        
                         switch ($user->user_type) {
-
-                            case "admin":
+                            
+                            case "admin":                                
                                 // return redirect()->intended(route('admin.engineers.list'));
                                 return redirect()->route('admin.engineers.list');
+                                break;
+                            case "supervisor":
+                                return redirect()->route('supervisor.engineers.list');
                                 break;
                             case "client":
                                 // return redirect()->intended(route('client.engineers.list'));
@@ -70,6 +73,7 @@ class AuthController extends Controller
                                 return redirect()->route('home');
                         }
 
+                        
                         // return redirect()->intended(route('home'));
                         return redirect()->route('home');
                     } else {
@@ -87,7 +91,7 @@ class AuthController extends Controller
             } catch (Exception $ex) {
                 // dd($ex , $debug);
                 return back()
-                    ->withErrors(['login_error' => __('worng_password')])
+                    ->withErrors(['login_error' => __('unknown_error')])
                     ->withInput($request->all());
             }
         } else {

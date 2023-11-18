@@ -185,6 +185,13 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     // clients
     Route::get('/clients/list', [\App\Http\Controllers\Admin\ClientsController::class, 'list'])->name('admin.clients.list');
 
+    // orders
+    Route::get('/orders/list', [\App\Http\Controllers\Admin\OrdersController::class, 'orders_list'])->name('admin.orders.list');
+    Route::get('/orders/details/{order_id}', [\App\Http\Controllers\Admin\OrdersController::class, 'details'])->name('admin.order.details');
+    Route::post('/orders/add_comment/{order_id}', [\App\Http\Controllers\Admin\OrdersController::class, 'add_comment'])->name('admin.order.add_comment');
+    Route::post('/orders/update_status/{order_id}', [\App\Http\Controllers\Admin\OrdersController::class, 'update_status'])->name('admin.order.status.update');
+
+
     // works
     Route::get('/work/list', [\App\Http\Controllers\Admin\WorksController::class, 'list'])->name('admin.work.list');
     Route::get('/work/details/{work_id}', [\App\Http\Controllers\Admin\WorksController::class, 'details'])->name('admin.work.details');
@@ -218,6 +225,21 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::get('/password', [\App\Http\Controllers\Shared\SettingsController::class, 'admin_update_passwords'])->name('admin.password');
     Route::post('/password/action', [\App\Http\Controllers\Shared\SettingsController::class, 'update_passwords_action'])->name('admin.password.action');
 
-
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'admin_logout'])->name('admin.logout');
+
+});
+
+
+Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], function () {
+
+    // engineers list
+    Route::get('/engineers/list', [\App\Http\Controllers\Supervisor\EngineersController::class, 'list'])->name('supervisor.engineers.list');
+    Route::get('/engineers/details/{engineer_id}', [\App\Http\Controllers\Supervisor\EngineersController::class, 'list'])->name('supervisor.engineers.details');
+    
+    Route::get('/orders/list', [\App\Http\Controllers\Supervisor\OrdersController::class, 'orders_list'])->name('supervisor.orders.list');
+    Route::get('/orders/details/{order_id}', [\App\Http\Controllers\Supervisor\OrdersController::class, 'details'])->name('supervisor.order.details');
+    Route::post('/orders/add_comment/{order_id}', [\App\Http\Controllers\Supervisor\OrdersController::class, 'add_comment'])->name('supervisor.order.add_comment');
+    Route::post('/orders/update_status/{order_id}', [\App\Http\Controllers\Supervisor\OrdersController::class, 'update_status'])->name('supervisor.order.status.update');
+
+
 });

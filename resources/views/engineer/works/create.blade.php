@@ -305,7 +305,7 @@
                                     // Display "still uploading" message
                                     const uploadingBox = document.getElementById('uploading');
                                     const uploadMessage = document.createElement('div');
-                                    uploadMessage.textContent = 'Uploading...';
+                                    uploadMessage.textContent = `{{__('uploading')}}`;
                                     uploadingBox.appendChild(uploadMessage);
 
                                     // Make a POST request to the server

@@ -17,7 +17,7 @@ export default {
         'dark-purble' : '#3B3C87',
         'light-purble': '#9C9DF4',
         'happy-green' : '#79D45D',
-        'dash-bg' : '#EFF0F1',
+        'dash-bg' : '#EEEEEE',
         'data-dash' : '#E3F2FC',
         'data-dash-items': '#F3D864',
         'normal-btn' : '#49E3D6'      

@@ -31,7 +31,7 @@ class WorksController extends Controller
             'title' => 'required', 
             'work_details' => 'required', 
             // 'images.*' => 'mimes:jpeg,png,jpg,gif,svg,webp|image|max:8000',    
-            "files.*" =>  'file|max:8000',       
+            "files.*" =>  'file|max:8000',
         );
 
         $messages = [

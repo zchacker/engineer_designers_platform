@@ -144,7 +144,9 @@ class SettingsController extends Controller
                             $create_avtar->save();
                         }else{
                             $avtar->file_id = $fileDB->id;
-                            $avtar->update();
+                            $avtar->update([
+                                'file_id' => $fileDB->id,
+                            ]);
                         }
 
                     }

@@ -57,7 +57,7 @@ class OrdersController extends Controller
             $order->details = $request->order_details;
             $order->user_id = $request->user()->id;
             $order->to_user_id = $request->engineer_id;
-            $order->status  = "pending";
+            $order->status  = "pending"; // when add order
 
             // look if there an image
 
@@ -180,17 +180,19 @@ class OrdersController extends Controller
             ->where('id', $request->order_id)
             ->first();
 
-        $comments = OrderFeedbackModel::with('user_data')
+        $feedbacks = OrderFeedbackModel::with('user_data')
             ->where('order_id', $request->order_id)
+            ->where('show_to_client', 1)
+            ->orderByDesc('created_at')
             ->get();
 
-        return view('clients.orders.details', compact('order', 'comments'));
+        return view('clients.orders.details', compact('order', 'feedbacks'));
     }
 
     public function add_comment(Request $request)
     {
         $rules = array(
-            'comment' => 'required',
+            // 'comment' => 'required',
         );
 
         $messages = [
@@ -201,20 +203,56 @@ class OrdersController extends Controller
 
         if ($validator->fails() == false) {
 
-            $order = new OrderFeedbackModel();
-            $order->comment = $request->comment;
-            $order->order_id = $request->order_id;
-            $order->user_id = $request->user()->id;
+            $order_feedback           = new OrderFeedbackModel();
+            $order_feedback->comment  = $request->comment;
+            $order_feedback->type     = $request->type;
+            $order_feedback->order_id = $request->order_id;
+            $order_feedback->user_id  = $request->user()->id;
+            
+            $order = OrdersModel::find($request->order_id);
+            if($request->submit == __('accept'))
+            {
+                switch($request->type)
+                {
+                    case 'replay_on_quote':
+                        $order_feedback->comment  = __('accept');
+                        $order->status = 'progress';
+                    break;
+                    default:
+                        $order->status = 'progress';
+                        $order_feedback->comment  = __('accept');
+                }
 
-            if ($order->save()) {
+            }else{
 
+                switch($request->type)
+                {
+                    case 'replay_on_quote':
+                        $order_feedback->comment  = __('client_reject_qoute');
+                        $order->status = 'client_reject_qoute';
+                    break;
+                    default:
+                        $order->status = 'client_reject_qoute';
+                        $order_feedback->comment  = __('client_reject_qoute');
+                }
+                
+            }
+
+            $order->update();
+            
+
+            if ($order_feedback->save()) {                
+                
                 return back()->with(['success' => __('added_successfuly')]);
+
             } else {
 
                 return back()
-                    ->withErrors(['error' => __('unable_to_add')])
-                    ->withInput($request->all());
+                ->withErrors(['error' => __('unable_to_add')])
+                ->withInput($request->all());
+
             }
+
         } else {
 
             $error     = $validator->errors();

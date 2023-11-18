@@ -30,6 +30,9 @@ class OrderFeedbackModel extends Model
     protected $fillable = [
         'order_id',
         'user_id',
+        'type',
+        'show_to_client',
+        'show_to_engineer',
         'comment',        
     ];
 
@@ -41,6 +44,11 @@ class OrderFeedbackModel extends Model
     public function user_data()
     {
         return $this->hasOne(UsersModel::class , 'id', 'user_id');
+    }
+
+    public function feedback_files()
+    {
+        return $this->hasMany(OrderFeedbackFilesModel::class , 'feedback_id', 'id');
     }
 
 }

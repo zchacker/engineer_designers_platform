@@ -30,13 +30,25 @@ class OrdersModel extends Model
     protected $fillable = [
         'title',
         'details',
+        'price_quote',
         'file_id',
         'user_id',
         'to_user_id',
         'status'
     ];
 
-    protected $enumStatus = ['pending','under_review', 'supervisor_review','rejected','completed']; // Define ENUM values
+    protected $enumStatus = [
+        'pending',
+        'add_quote',
+        'client_reject_qoute',
+        'progress',
+        'client_review',
+        'admin_review',
+        'client_accept',
+        'client_reject',
+        'completed',
+        'supervisor_review'
+    ]; // Define ENUM values
 
     public function image()
     {

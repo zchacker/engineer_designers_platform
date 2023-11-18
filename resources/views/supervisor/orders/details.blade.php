@@ -1,4 +1,4 @@
-@include('clients.header')
+@include('supervisor.header')
 <div class="content">
 
     <div class="py-6">
@@ -7,15 +7,15 @@
                 {{-- Content--}}
                 <div class="p-6 bg-white border-b shadow-sm rounded-3xl border-gray-200">
 
-                    <div class="px-0 sm:px-6 lg:px-8">
+                    <div class="px-4 sm:px-6 lg:px-8">
 
-                        <div class="sm:flex sm:items-center mb-8">
+                        <div class="sm:flex sm:items-center">
                             <div class="sm:flex-auto">
                                 <h1 class="text-xl font-semibold text-gray-900">
                                     {{__('order_details_data')}}
                                 </h1>
 
-                                <p class="mt-2 text-sm text-gray-400">
+                                <p class="mt-2 text-sm text-gray-600">
                                     {{__('order_details_data_message')}}
                                 </p>
                             </div>
@@ -23,7 +23,7 @@
                         </div>
 
                         <!-- order data card  -->
-                        <div class="rounded-2xl shadow-md shadow-gray-300 p-6">
+                        <div class="rounded-2xl shadow-sm shadow-gray-600 p-6">
                             <div class="flex flex-col-reverse md:flex-row justify-between">
                                 <div>
                                     <div class="text-sm font-semibold text-black mb-4">
@@ -46,7 +46,7 @@
                                         <span class="text-black text-md">{{ \Carbon\Carbon::parse($order->created_at)->isoFormat('YYYY-MM-DD ddd HH:mm A')}}</span>
                                     </h2>
 
-                                    <form action="{{ route('client.conversation.create', $order->id) }}" method="post" class="flex">
+                                    <form action="{{ route('engineer.conversation.create', $order->id) }}" method="post" class="flex">
                                         @csrf
                                         <input type="hidden" name="other_user_id" value="{{ $order->engineer_data->id }}">
                                         <button type="submit" class="flex text-yellow-400 hover:underline">
@@ -70,14 +70,52 @@
                             </div>
                         </div>
 
-                        <!-- this is controllers  -->
                         <div class="mt-8 flex flex-col">
                             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                                    {{--<section class="my-4 space-y-2">
+                                        @if(Session::has('status_update_error'))
+                                        <div class="my-3 w-auto p-4 bg-orange-500 text-white rounded-md">
+                                            {!! session('status_update_error')->first('error') !!}
+                                        </div>
+                                        @endif
+
+                                        @if(Session::has('status_update_success'))
+                                        <div class="my-3 w-auto p-4 bg-green-700 text-white rounded-md">
+                                            {!! session('status_update_success') !!}
+                                        </div>
+                                        @endif
+                                        <div class="flex flex-col gap-5">
+
+                                            @if( $order->status != 'completed')
+                                            <div>
+                                                <form action="{{ route('supervisor.order.status.update', $order->id) }}" class="flex items-center justify-start space-x-4" method="post">
+                                                    @csrf
+                                                    <div class="mb-4 flex space-x-1 gap-2 items-center">
+                                                        <select name="update_status" id="update_status" class="form_input !w-full !py-2">
+                                                            <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>{{ __('pending') }}</option>
+                                                            <option value="supervisor_review" {{ $order->status == 'supervisor_review' ? 'selected' : '' }}>{{ __('supervisor_review') }}</option>
+                                                            <option value="under_review" {{ $order->status == 'under_review' ? 'selected' : '' }}>{{ __('under_review') }}</option>
+                                                            <option value="rejected_by_admin" {{ $order->status == 'rejected_by_admin' ? 'selected' : '' }}>{{ __('rejected_by_admin') }}</option>
+                                                            <option value="completed" {{ $order->status == 'completed' ? 'selected' : '' }}>{{ __('completed') }}</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="mb-4">
+                                                        <input id="submitButton" type="submit" value="{{ __('update_status') }}" class="action_btn !p-2 !px-4" />
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            @endif
+
+                                        </div>
+                                        
+                                    </section>--}}
+
                                     <section class="my-2">
 
                                         @if(Session::has('errors'))
-                                        <div class="my-3 w-auto p-4 bg-red-600 text-white rounded-md">
+                                        <div class="my-3 w-auto p-4 bg-orange-500 text-white rounded-md">
                                             {!! session('errors')->first('error') !!}
                                         </div>
                                         @endif
@@ -88,51 +126,54 @@
                                         </div>
                                         @endif
 
-                                        @if($order->status == 'add_quote')
-                                        <form action="{{ route('client.order.add_comment', $order->id) }}" method="post">
+                                        @if($order->status == 'supervisor_review')
+                                        <form action="{{ route('supervisor.order.add_comment', $order->id) }}" method="post">
                                             @csrf
+
+                                            
+                                            <input type="hidden" name="last_feedback_id" value="{{ $feedbacks->first()->id }}">
                                             <input type="hidden" name="comment" value="">
-                                            <input type="hidden" name="type" value="replay_on_quote" />
+                                            <input type="hidden" name="type" value="supervisor_design_review" />
 
                                             <div class="mb-4">
-                                                <label for="comment" class="lable_form mb-2"> هل أنت موافق على عرض السعر؟ {{ $order->price_quote }} ريال سعودي</label>
-                                                <p class="mb-4">عند الضغط على موافق أنت توافق على
-                                                    <a href="#" class="text-blue-800">الشروط والأحكام</a>
-                                                </p>
-                                                <input id="submitButton" type="submit" name="submit" value="{{ __('accept') }}" class="action_btn" />
-                                                <input id="submitButton" type="submit" name="submit" value="{{ __('reject') }}" class="send_btn" />
+                                                <div class="mb-8">                                                
+                                                    <label for="comment" class="lable_form">
+                                                        الرجاء مراجعة ملفات تصمميم المهندس وإعتمادها
+                                                        <br/>
+                                                        هل تم إعتماد التصميم؟
+                                                    </label>           
+                                                </div>                                                                                     
+                                                <input id="submitButton" type="submit" name="submit" value="{{ __('accept') }}" class="confirm_button" />
+                                                <input id="submitButton" type="submit" name="submit" value="{{ __('reject') }}" class="reject_button" />
                                             </div>
                                         </form>
                                         @else
-                                        {{--<form action="{{ route('client.order.add_comment', $order->id) }}" method="post">
-                                        @csrf
-                                        <div class="mb-4  space-x-4 gap-2 items-center">
-                                            <label for="comment" class="lable_form">{{ __('write_comment') }} </label>
-                                            <textarea name="comment" id="comment" class="form_input !w-full" rows="5">{{ old('comment') }}</textarea>
-                                        </div>
+                                        <form action="{{ route('engineer.order.add_comment', $order->id) }}" method="post">
+                                            @csrf
+                                            <div class="mb-4  space-x-4 gap-2 items-center">
+                                                <label for="comment" class="lable_form">{{ __('write_comment') }} </label>
+                                                <textarea name="comment" id="comment" class="form_input !w-full" rows="5">{{ old('comment') }}</textarea>
+                                            </div>
 
-                                        <div class="mb-4">
-                                            <input id="submitButton" type="submit" value="{{ __('add_comment') }}" class="normal_button" />
-                                        </div>
-                                        </form>--}}
+                                            <div class="mb-4">
+                                                <input id="submitButton" type="submit" value="{{ __('add_comment') }}" class="normal_button" />
+                                            </div>
+                                        </form>
                                         @endif
 
                                     </section>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
 
                 @if($feedbacks->isNotEmpty())
-                <h2 class="mt-10 font-bold">{{ __('feedback_log') }}</h2>
+                <h2 class="mt-5 font-bold">{{ __('feedback_log') }}</h2>
 
-                <div class="mt-5 p-0 bg-transparent shadow-sm rounded-md">
+                <div class="mt-10 p-0 bg-transparent shadow-sm rounded-md">
                     <div class="px-4 sm:px-6 lg:px-8">
                         <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-
                             @foreach($feedbacks as $feedback)
                             <div class="my-3 pb-2 border-r-2 border-gray-400 px-4 py-2 bg-white rounded-3xl">
                                 <div class="mb-0 flex flex-col md:flex-row gap-2 justify-between">
@@ -161,7 +202,6 @@
                                 </div>
                             </div>
                             @endforeach
-
                         </div>
                     </div>
                 </div>
@@ -172,4 +212,4 @@
     </div>
 
 </div>
-@include('clients.footer')
+@include('supervisor.footer')
