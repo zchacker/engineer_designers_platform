@@ -52,12 +52,17 @@
 
                 <div class="navbar_item">                    
                     <i class="las la-project-diagram la-2x"></i>
-                    <a href="{{ route('admin.work.list') }}" class="navbar_item_text"> الأعمال المرفوعة </a>
+                    <a href="#" class="navbar_item_text"> الفواتير </a>
+                </div>
+
+                <div class="navbar_item">                    
+                    <i class="las la-file-contract la-2x"></i>
+                    <a href="#" class="navbar_item_text"> العقود </a>
                 </div>
                 
                 <div class="navbar_item">                    
                     <i class="las la-handshake la-2x"></i>
-                    <a href="{{ route('admin.meeting.list') }}" class="navbar_item_text"> الاجتماعات </a>
+                    <a href="#" class="navbar_item_text"> الاجتماعات </a>
                 </div> 
 
                 <div class="navbar_item">                    
@@ -65,24 +70,20 @@
                     <a href="{{ route('admin.conversation.list') }}" class="navbar_item_text"> المحادثات </a>
                 </div> 
                 
-                <div class="navbar_item">                    
-                    <i class="las la-file-contract la-2x"></i>
-                    <a href="{{ route('admin.contract.list') }}" class="navbar_item_text"> العقود </a>
-                </div>                        
-
+                
                 <div class="navbar_item">                    
                     <i class="las la-cog la-2x"></i>
-                    <a href="{{ route('admin.settings') }}" class="navbar_item_text"> الإعدادات </a>
+                    <a href="#" class="navbar_item_text"> الإعدادات </a>
                 </div>     
                 
                 <div class="navbar_item">                    
                     <i class="las la-lock la-2x"></i>
-                    <a href="{{ route('admin.password') }}" class="navbar_item_text"> تغيير كلمة المرور </a>
+                    <a href="#" class="navbar_item_text"> تغيير كلمة المرور </a>
                 </div>  
 
                 <div class="navbar_item navbar_logout">
                     <i class="las la-power-off la-2x"></i>
-                    <a href="{{ route('admin.logout') }}" class="navbar_item_text navbar_logout">تسجيل الخروج</a>
+                    <a href="{{ route('supervisor.logout') }}" class="navbar_item_text navbar_logout">تسجيل الخروج</a>
                 </div>
 
             </div>

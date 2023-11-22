@@ -25,7 +25,7 @@
 
                         <form action="{{ route('admin.engineers.edit.action') }}" method="post" onsubmit="return form_submit(this);" class="w-full">
                             @csrf
-                            <input type="hiddin" value="{{  $user->id }}" name="user_id" />
+                            <input type="hidden" value="{{  $user->id }}" name="user_id" />
                             
                             <div class="mb-4">
                                 <label for="name" class="lable_form">{{ __('name') }}</label>

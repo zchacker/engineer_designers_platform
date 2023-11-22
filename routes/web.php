@@ -236,10 +236,20 @@ Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], fu
     Route::get('/engineers/list', [\App\Http\Controllers\Supervisor\EngineersController::class, 'list'])->name('supervisor.engineers.list');
     Route::get('/engineers/details/{engineer_id}', [\App\Http\Controllers\Supervisor\EngineersController::class, 'list'])->name('supervisor.engineers.details');
     
+    // orders list
     Route::get('/orders/list', [\App\Http\Controllers\Supervisor\OrdersController::class, 'orders_list'])->name('supervisor.orders.list');
     Route::get('/orders/details/{order_id}', [\App\Http\Controllers\Supervisor\OrdersController::class, 'details'])->name('supervisor.order.details');
     Route::post('/orders/add_comment/{order_id}', [\App\Http\Controllers\Supervisor\OrdersController::class, 'add_comment'])->name('supervisor.order.add_comment');
     Route::post('/orders/update_status/{order_id}', [\App\Http\Controllers\Supervisor\OrdersController::class, 'update_status'])->name('supervisor.order.status.update');
 
+    // invoices
+    Route::get('/invoices/list', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'list'])->name('supervisor.invoices.list');
+    Route::get('/invoices/show/{invoice_id}', [\App\Http\Controllers\Shared\InvoicesController::class, 'show'])->name('invoices.show');
+    Route::get('/invoices/create/{order_id}', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'create'])->name('supervisor.invoices.create');
+    Route::post('/invoices/create/{order_id}', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'create_action'])->name('supervisor.invoices.create');
+
+
+
+    Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'supervisor_logout'])->name('supervisor.logout');
 
 });

@@ -46,7 +46,7 @@
                                         <span class="text-black text-md">{{ \Carbon\Carbon::parse($order->created_at)->isoFormat('YYYY-MM-DD ddd HH:mm A')}}</span>
                                     </h2>
 
-                                    <form action="{{ route('client.conversation.create', $order->id) }}" method="post" class="flex">
+                                    <form action="{{ route('client.conversation.create') }}" method="post" class="flex">
                                         @csrf
                                         <input type="hidden" name="other_user_id" value="{{ $order->engineer_data->id }}">
                                         <button type="submit" class="flex text-yellow-400 hover:underline">

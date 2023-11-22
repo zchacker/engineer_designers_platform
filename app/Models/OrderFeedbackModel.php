@@ -34,6 +34,8 @@ class OrderFeedbackModel extends Model
         'show_to_client',
         'show_to_engineer',
         'comment',        
+        'invoice',
+        'contract',
     ];
 
     protected function order_data()

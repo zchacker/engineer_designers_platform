@@ -7,7 +7,9 @@ use App\Models\UsersModel;
 use App\Models\WorksModel;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use PhpParser\Node\Expr\FuncCall;
@@ -153,6 +155,7 @@ class EngineersController extends Controller
             $profile_data->name  = $request->name;
             $profile_data->email = $request->email;
             $profile_data->phone = $request->phone; 
+            $profile_data->logout = true; 
 
             // dd($request->filled('name'));        
             // dd($request->has('password'));
@@ -163,8 +166,30 @@ class EngineersController extends Controller
             }
             
             
-            if ($profile_data->update()) {
+            if ($profile_data->update())
+            {
                 
+                if($request->filled('password'))
+                {
+                    //log out all other sessions
+                    $user = Auth::user();
+                    // dd($user);
+                    // Auth::guard('engineer')->login($profile_data);                    
+                    // Auth::guard('engineer')->logout($profile_data);
+                    // Auth::guard('engineer')->logoutOtherDevices($request->password); //add this line                    
+                }
+
+                // $user = Auth::user();
+                
+                // $userToLogout = UsersModel::find($user_id);                
+                // // Auth::setUser($userToLogout);
+                // Auth::login($userToLogout);
+                // Auth::setUser($userToLogout);
+                // Auth::logout($userToLogout);
+
+                // Auth::setUser($user);
+                // Auth::login($user);
+
                 return back()->with(['success' => __('updated_successfuly')]);
 
             } else {

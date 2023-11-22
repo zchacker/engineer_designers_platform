@@ -68,7 +68,7 @@
 }
 
 .form_input{
-    @apply block w-full md:w-1/2 border-gray-400 border ring-yellow-300 ring-inset focus:border-yellow-300 focus:ring-yellow-300 focus:outline-yellow-300 focus:outline-1 shadow-lg rounded-md p-2
+    @apply block w-full md:w-1/2 border-gray-400 border ring-yellow-300 ring-inset focus:border-yellow-300 focus:ring-yellow-300 focus:outline-yellow-300 focus:outline-0 shadow-sm rounded-md p-2
 }
 
 .form_dash_input{

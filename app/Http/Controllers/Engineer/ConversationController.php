@@ -30,7 +30,7 @@ class ConversationController extends Controller
 
         if ($existingConversation) {
             // If an existing conversation is found, redirect to the conversation view
-            return redirect()->route('conversation.view', ['conversationId' => $existingConversation]);
+            return redirect()->route('engineer.conversation.view', ['conversationId' => $existingConversation]);
         }
 
         // If no existing conversation is found, create a new conversation

@@ -31,12 +31,13 @@
         </div>
     </div>
     <div class="flex flex-col items-center justify-center mt-4">
-        <div class="flex items-center justify-center">
+        <div class="flex items-center justify-center mb-4">
             <a href="{{ route('privacy') }}" class=" text-gray-400 hover:text-white transition duration-300 mx-2"> {{__('public')['privacy']}} </a>
             <span class="text-gray-400"> | </span>
             <a href="{{route('terms')}}" class="text-gray-400 hover:text-white transition duration-300 mx-2"> {{__('public')['terms']}}</a>
         </div>
-        <p class="text-center my-4">جميع الحقوق محفوظة &copy; 2023 شركة رشيد العجيان للاستشارات الهندسية المحدودة</p>
+        <p class="text-center mb-2">جميع الحقوق محفوظة &copy; 2023 شركة رشيد العجيان للدراسات و الاستشارات الهندسية شركة مهنية</p>
+        <p class="text-center mb-12"> سجل تجاري رقم : 1010877829</p>
         <p class="mb-4 text-sm text-gray-600 " dir="ltr">Designed by
             <a href="https://browndiamondstech.com" class="hover:text-gray-300" target="_blank">Brown Diamond Tech Ltd.</a>
         </p>

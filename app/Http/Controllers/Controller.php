@@ -15,7 +15,7 @@ class Controller extends BaseController
     public function __construct()
     {
         // Initialize the protected variable in the constructor
-        $this->basicStorage = 'public'; // this is shared for all file dirvers
+        $this->basicStorage = 'public';// 'public , contabo'; // this is shared for all file dirvers
     }
 
 }

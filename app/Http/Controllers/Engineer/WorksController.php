@@ -30,8 +30,8 @@ class WorksController extends Controller
         $rules = array(
             'title' => 'required', 
             'work_details' => 'required', 
-            // 'images.*' => 'mimes:jpeg,png,jpg,gif,svg,webp|image|max:8000',    
-            "files.*" =>  'file|max:8000',
+            'images.*' => 'mimes:jpeg,png,jpg,gif,svg,webp|image|max:20000',    
+            "files.*" =>  'file|max:20000',
         );
 
         $messages = [
@@ -40,8 +40,8 @@ class WorksController extends Controller
             'images.max' => __('images_max'),
             'images.mimies' => __('images_mimies'),
             'images.image' => __('images_image'),
-            'images.max' => __('images_max' , ["size" => "8"]),            
-            "files.max" =>  __('files_max' , ["size" => "8"]), 
+            'images.max' => __('images_max' , ["size" => "20"]),            
+            "files.max" =>  __('files_max' , ["size" => "20"]), 
             "files.max" =>  __('files_file'), 
         ];
 
@@ -60,9 +60,6 @@ class WorksController extends Controller
             {
                                 
                 $work_id = $work->id;
-    
-                // dd($request->hasFile('images'));
-                // dd($request->images);
                 
                 // upload all images
                 if ($request->hasFile('images')) {

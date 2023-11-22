@@ -47,7 +47,12 @@ class AuthController extends Controller
 
                 if ($user) {
 
-                    if (Auth::guard($user->user_type)->attempt(['email' => $request->email, 'password' => $request->password], true)) {
+                    if (Auth::guard($user->user_type)->attempt(['email' => $request->email, 'password' => $request->password], false)) {
+                        
+                        // mark this to logged in
+                        $logged_user = Auth::guard($user->user_type)->user();
+                        $logged_user->logout = false;
+                        $logged_user->save();
 
                         //Auth::guard('user')->logoutOtherDevices( $request->password );
                         
@@ -331,6 +336,22 @@ class AuthController extends Controller
         if (Auth::guard('admin')->check()) // this means that the admins was logged in.
         {
             Auth::guard('admin')->logout();
+            return redirect()->route('home');
+        }
+
+        // any way logged out
+
+        // $this->guard()->logout();
+        // $request->session()->invalidate();
+
+        // return $this->loggedOut($request) ?: redirect('/');
+    }
+
+    public function supervisor_logout(Request $request)
+    {
+        if (Auth::guard('supervisor')->check()) // this means that the admins was logged in.
+        {
+            Auth::guard('supervisor')->logout();
             return redirect()->route('home');
         }
 

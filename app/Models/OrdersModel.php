@@ -42,12 +42,12 @@ class OrdersModel extends Model
         'add_quote',
         'client_reject_qoute',
         'progress',
+        'supervisor_review',
         'client_review',
-        'admin_review',
         'client_accept',
         'client_reject',
+        'admin_review',
         'completed',
-        'supervisor_review'
     ]; // Define ENUM values
 
     public function image()

@@ -191,7 +191,13 @@ class SettingsController extends Controller
 
         if ($profile_data->update()) {
                             
-            Auth::login( $profile_data );
+            // Auth::guard("engineer")->login( $profile_data );
+            //auth()->login($request->user());
+            //auth()->logoutOtherDevices($request->get('current-password'));
+
+            Auth::logoutOtherDevices($request->get('current-password'));
+            // Auth::login($request->user());
+
             return back()->with(['success' => __('updated_successfuly')]);
 
         } else {

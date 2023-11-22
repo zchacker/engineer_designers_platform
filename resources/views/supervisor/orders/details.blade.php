@@ -147,6 +147,14 @@
                                                 <input id="submitButton" type="submit" name="submit" value="{{ __('reject') }}" class="reject_button" />
                                             </div>
                                         </form>
+                                        @elseif($order->status == 'client_review' ||
+                                        $order->status == 'client_review' ||
+                                        $order->status == 'client_accept' ||
+                                        $order->status == 'client_reject' ||
+                                        $order->status == 'admin_review' )
+                                        
+                                        <a href="{{ route('supervisor.invoices.create' , $order->id ) }}" class="normal_button">إنشاء مسودة فاتورة</a>
+                                        
                                         @else
                                         <form action="{{ route('engineer.order.add_comment', $order->id) }}" method="post">
                                             @csrf

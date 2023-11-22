@@ -35,6 +35,7 @@ class OrdersController extends Controller
 
         $feedbacks = OrderFeedbackModel::with(['user_data', 'feedback_files'])
             ->where('order_id', $request->order_id)
+            ->where('show_to_engineer', 1)
             ->orderByDesc('created_at')
             ->get();
 
