@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class ConversationController extends Controller
 {
-    
+
     public function listConversations()
     {
         // Get the user ID of the currently authenticated user (assuming you have authentication)
@@ -35,14 +35,16 @@ class ConversationController extends Controller
 
         // Assuming you have a way to determine the other user's ID in the context of your application
         $otherUserId = $this->getOtherUserId($conversationId); // Replace with your logic
-        
+
         // Retrieve the participant user IDs
         $participantUserIds = $this->getParticipantUserIds($conversationId);
+
+        //dd($participantUserIds);
 
         // Retrieve the other user's information
         $otherUser = UsersModel::find($participantUserIds[0]); // Replace with your logic
         $myUser    = UsersModel::find($participantUserIds[1]); // Replace with your logic
-                
+
         // dd($myUser->name);
 
         // Your logic for displaying the conversation view (e.g., a blade view)
@@ -57,23 +59,22 @@ class ConversationController extends Controller
         $conversation = ConversationModel::findOrFail($conversationId);
         $currentUserId = auth()->user()->id;
         $otherUserId = $conversation->users()->where('user_id', '!=', $currentUserId)->first();
-        
+
         return $otherUserId->id; // This assumes that you have a 'users' relationship defined in your Conversation model
     }
-    
+
     // Function to get the participant user IDs
     private function getParticipantUserIds($conversationId)
     {
         // Retrieve the conversation participants' user IDs excluding the current user
         $currentUserId = auth()->user()->id;
-        
+
         $participantUserIds = ConversationModel::find($conversationId)
             ->users()
-            ->where('user_id', '!=', $currentUserId)
+            // ->where('user_id', '!=', $currentUserId)
             ->pluck('user_id')
             ->toArray();
 
         return $participantUserIds;
     }
-
 }

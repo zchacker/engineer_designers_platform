@@ -64,6 +64,11 @@
                     <i class="las la-envelope la-2x"></i>
                     <a href="{{ route('admin.conversation.list') }}" class="navbar_item_text"> المحادثات </a>
                 </div> 
+
+                <div class="navbar_item">                    
+                    <i class="las la-envelope la-2x"></i>
+                    <a href="{{ route('admin.my.conversation.list') }}" class="navbar_item_text"> محادثاتي </a>
+                </div> 
                 
                 <div class="navbar_item">                    
                     <i class="las la-file-contract la-2x"></i>

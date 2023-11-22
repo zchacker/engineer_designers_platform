@@ -12,6 +12,7 @@
     "balance": "رصيدك",
     "email": "البريد الالكتروني",
     "phone": "رقم الهاتف",
+    "account_type":"نوع الحساب",
     "password": "كلمة السر",
     "re-password": "تأكيد كلمة السر",
     "create_account": "إنشاء حساب جديد",

@@ -184,6 +184,9 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
 
     // clients
     Route::get('/clients/list', [\App\Http\Controllers\Admin\ClientsController::class, 'list'])->name('admin.clients.list');
+    Route::get('/clients/edit/{id}', [\App\Http\Controllers\Admin\ClientsController::class, 'edit'])->name('admin.clients.edit');
+    Route::post('/clients/edit/action', [\App\Http\Controllers\Admin\ClientsController::class, 'edit_action'])->name('admin.clients.edit.action');
+    Route::delete('/clients/delete/{user}', [\App\Http\Controllers\Admin\ClientsController::class, 'delete'])->name('admin.clients.delete');
 
     // orders
     Route::get('/orders/list', [\App\Http\Controllers\Admin\OrdersController::class, 'orders_list'])->name('admin.orders.list');
@@ -203,6 +206,13 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     // messages
     Route::get('/conversation/list', [\App\Http\Controllers\Admin\ConversationController::class, 'listConversations'])->name('admin.conversation.list');
     Route::get('/conversation/view/{conversationId}', [\App\Http\Controllers\Admin\ConversationController::class, 'viewConversation'])->name('admin.conversation.view');
+
+    // My messages
+    Route::post('/my/conversation/create', [\App\Http\Controllers\Admin\MyConversationController::class, 'initiateConversation'])->name('admin.my.conversation.create');
+    Route::get('/my/conversation/list', [\App\Http\Controllers\Admin\MyConversationController::class, 'listConversations'])->name('admin.my.conversation.list');
+    Route::get('/my/conversation/view/{conversationId}', [\App\Http\Controllers\Admin\MyConversationController::class, 'viewConversation'])->name('admin.my.conversation.view');
+    Route::post('/my/conversation/message/create/{conversationId}', [\App\Http\Controllers\Admin\MyConversationController::class, 'sendMessage'])->name('admin.my.conversation.message.send');
+
 
     // contracts
     Route::get('/contract/list', [\App\Http\Controllers\Admin\ContractsController::class, 'list'])->name('admin.contract.list');

@@ -38,6 +38,14 @@
                             </div>
 
                             <div class="mb-4">
+                                <label for="user_type" class="lable_form">{{ __('account_type') }}</label>
+                                <Select class="form_input" name="user_type">
+                                    <option value="engineer" @if($user->user_type == 'engineer') selected @endif>{{__('engineer')}}</option>
+                                    <option value="client" @if($user->user_type == 'client')  selected @endif >{{__('client')}}</option>
+                                </Select>                                
+                            </div>
+
+                            <div class="mb-4">
                                 <label for="phone_no" class="lable_form">{{ __('phone') }}</label>
                                 <input type="text" name="phone_no" id="phone_no" placeholder="512345678" class="form_input !w-full !border-blue-500 text-left" dir="ltr" value="{{ $user->phone }}" />
                                 <input type="hidden" name="phone_no[phone]" />

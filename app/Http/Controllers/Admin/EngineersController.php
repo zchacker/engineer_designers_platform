@@ -155,40 +155,29 @@ class EngineersController extends Controller
             $profile_data->name  = $request->name;
             $profile_data->email = $request->email;
             $profile_data->phone = $request->phone; 
-            $profile_data->logout = true; 
-
-            // dd($request->filled('name'));        
-            // dd($request->has('password'));
-
+                    
             if($request->filled('password'))
             {
                 $profile_data->password = Hash::make($request->password);                
             }
             
+            if($profile_data->user_type != $request->user_type)
+            {
+                $profile_data->logout = true; 
+            }
             
             if ($profile_data->update())
             {
                 
                 if($request->filled('password'))
                 {
-                    //log out all other sessions
-                    $user = Auth::user();
+                    // log out all other sessions
+                    // $user = Auth::user();
                     // dd($user);
                     // Auth::guard('engineer')->login($profile_data);                    
                     // Auth::guard('engineer')->logout($profile_data);
                     // Auth::guard('engineer')->logoutOtherDevices($request->password); //add this line                    
-                }
-
-                // $user = Auth::user();
-                
-                // $userToLogout = UsersModel::find($user_id);                
-                // // Auth::setUser($userToLogout);
-                // Auth::login($userToLogout);
-                // Auth::setUser($userToLogout);
-                // Auth::logout($userToLogout);
-
-                // Auth::setUser($user);
-                // Auth::login($user);
+                }               
 
                 return back()->with(['success' => __('updated_successfuly')]);
 

@@ -52,13 +52,23 @@
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $engineer->email }} </td>
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $engineer->phone }} </td>
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $engineer->created_at }} </td>
-                                            <td class="relative flex justify-between whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 md:pr-0">
+                                            <td class="relative flex gap-4 justify-between whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 md:pr-0">
                                                 <a href="{{ route('admin.engineers.details' , $engineer->id ) }}" class="text-gray-600 hover:text-gray-900" title="View">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                                     </svg>
                                                 </a>
+
+                                                <form action="{{ route('admin.my.conversation.create') }}" method="post" class="flex">
+                                                    @csrf
+                                                    <input type="hidden" name="other_user_id" value="{{ $engineer->id }}">
+                                                    <button type="submit" class="flex text-yellow-400 hover:underline w-6 h-4">
+                                                        {{-- {{__('start_chat')}} --}}
+                                                        <img src="{{ asset('imgs/messenger.png') }}" alt="{{__('start_chat')}}" title="{{__('start_chat')}}" class="w-6 h-6" />
+                                                    </button>
+                                                </form>
+
                                                 <a href="{{ route('admin.engineers.edit' , $engineer->id) }}" class="text-blue-600 hover:text-blue-900" title="Edit">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
