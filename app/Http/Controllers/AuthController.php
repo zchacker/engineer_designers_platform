@@ -59,23 +59,24 @@ class AuthController extends Controller
                         switch ($user->user_type) {
                             
                             case "admin":                                
-                                // return redirect()->intended(route('admin.engineers.list'));
-                                return redirect()->route('admin.engineers.list');
+                                return redirect()->intended(route('admin.engineers.list'));
+                                // return redirect()->route('admin.engineers.list');
                                 break;
                             case "supervisor":
-                                return redirect()->route('supervisor.engineers.list');
+                                return redirect()->intended(route('supervisor.engineers.list'));
+                                // return redirect()->route('supervisor.engineers.list');
                                 break;
                             case "client":
-                                // return redirect()->intended(route('client.engineers.list'));
-                                return redirect()->route('client.engineers.list');
+                                return redirect()->intended(route('client.engineers.list'));
+                                // return redirect()->route('client.engineers.list');
                                 break;
                             case "engineer":
-                                // return redirect()->intended(route('engineer.orders.list'));
-                                return redirect()->route('engineer.orders.list');
+                                return redirect()->intended(route('engineer.orders.list'));
+                                // return redirect()->route('engineer.orders.list');
                                 break;
                             default:
-                                // return redirect()->intended(route('home'));
-                                return redirect()->route('home');
+                                return redirect()->intended(route('home'));
+                                // return redirect()->route('home');
                         }
 
                         

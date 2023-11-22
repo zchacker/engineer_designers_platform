@@ -24,7 +24,7 @@
                         <input type="email" name="email" class="form_input !w-full" value="{{ old('email') }}" />
                     </div>
                     <div class="mb-4">
-                        <input type="submit" value="{{ __('submit') }}" class="bg-blue-600 text-white rounded-lg py-2 px-4" />
+                        <input type="submit" value="{{ __('submit') }}" class="normal_button" />
                     </div>
                     <div class="mb-4">
                     <a href="{{ route( 'login' ) }}" title="{{__('login')}}" class="link">{{__('login')}}</a>

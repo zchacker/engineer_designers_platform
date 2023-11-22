@@ -30,7 +30,7 @@
                         <input type="password" name="re-password" class="form_input !w-full" value="{{ old('re-password') }}" />
                     </div>
                     <div class="mb-4">
-                        <input type="submit" value="{{ __('submit') }}" class="bg-blue-600 text-white rounded-lg py-2 px-4" />
+                        <input type="submit" value="{{ __('submit') }}" class="normal_button" />
                     </div>                    
                 </form>
             </div>

@@ -31,7 +31,8 @@ class AccountConfirm
                     $random_number = rand(100000, 999999);
                     $profile_data = UsersModel::where(['id' => $request->user()->id])->first();
                     $profile_data->confirm_code = $random_number;
-
+                    $profile_data->save();
+                    
                     Mail::send('emails.confirm_email', ['code' => $random_number], function ($message) use ($request , $random_number) {
                         $message->to($request->user()->email);
                         $message->subject(' رمز التحقق الخاص بحسابك: ' .$random_number);

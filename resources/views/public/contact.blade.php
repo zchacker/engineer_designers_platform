@@ -42,7 +42,7 @@
                     <label for="message" class="text-gray-800 text-lg">الرسالة</label>
                     <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 border border-gray-800 rounded-lg focus:ring focus:ring-indigo-400"></textarea>
                 </div>
-                <button type="submit" class="bg-green-600 text-white rounded-none px-6 py-3 hover:bg-green-700 transition duration-300">أرسل الان</button>
+                <button type="submit" class="normal_button">أرسل الان</button>
             </form>
         </div>
     </div>

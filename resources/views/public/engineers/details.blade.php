@@ -11,6 +11,7 @@
 
 <section>
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        @if($works->isNotEmpty())
         <div class="bg-white2 overflow-hidden shadow-none sm:rounded-lg">
             {{-- Content--}}
             <div class="p-6 bg-white border-b shadow-sm rounded-md border-gray-200">
@@ -53,8 +54,13 @@
                 </div>
 
             </div>
-
         </div>
+        @else 
+        <div class="flex flex-col  h-[70vh] items-center justify-center mx-8">
+            <img src="{{ asset('imgs/empty.png') }}" alt="" class="w-40">
+            <h2 class="font-bold text-gray-700 text-xl mt-8">{{ __('public')['no_works_profile'] }}</h2>
+        </div>
+        @endif
     </div>
 </section>
 @include('public.footer')

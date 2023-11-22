@@ -5,7 +5,7 @@
         <section>
             <img src="{{ asset('imgs/image/working-desk.png') }}" alt="" class="w-[500px]">
         </section>
-        <section class="md:w-1/2 mx-auto p-8 rounded-lg bg-white">
+        <section class="md:w-1/2 mx-auto p-8 rounded-xl shadow-lg shadow-gray-400 bg-white">
             <h2 class="text-3xl font-bold text-black text-right">{{ __('login') }}</h2>
             @if(Session::has('errors'))
             <div class="my-3 w-full p-4 bg-orange-500 text-white rounded-md">
@@ -32,12 +32,12 @@
                     </div>
 
                     <div class="mb-4">
-                        <input type="submit" value="{{ __('login_btn') }}" class="bg-blue-600 text-white rounded-lg py-2 px-4" />
+                        <input type="submit" value="{{ __('login_btn') }}" class="normal_button" />
                     </div>
 
                     <div class="md:flex mb-4 justify-start gap-3 w-full">
                         <a href="{{ route('register.user') }}" title="{{__('register')}}" class="link">{{__('register')}}</a>
-                        <span> . </span>
+                        <span> | </span>
                         <a href="{{ route('password.forgot') }}" title="{{__('forgot_password')}}" class="link">{{__('forgot_password')}}</a>
                     </div>
 

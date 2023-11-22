@@ -19,7 +19,7 @@
                         <input type="text" name="confirm_code" class="form_input !w-full" value="{{ old('confirm_code') }}" />
                     </div>
                     <div class="mb-4">
-                        <input type="submit" value="{{ __('submit') }}" class="bg-blue-600 text-white rounded-lg py-2 px-4" />
+                        <input type="submit" value="{{ __('submit') }}" class="normal_button" />
                     </div>
                     <div class="mb-4">
                         <a href="{{ route('confirm.email.resend.action') }}" class="link">{{__('resend_code')}}</a>                    
