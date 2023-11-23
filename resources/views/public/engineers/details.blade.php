@@ -1,7 +1,7 @@
 @include('public.header')
 
 <section class="flex h-40 justify-center items-center flex-col">
-    <div class="w-full h-screen bg-cover bg-no-repeat md:bg-cover md:bg-center" style="background-image: url('{{asset('imgs/image/head-pages.jpg')}}');">
+    <div class="w-full h-full bg-cover bg-no-repeat md:bg-cover md:bg-center" style="background-image: url('{{asset('imgs/image/head-pages.jpg')}}');">
         <div class="w-full h-full px-8 py-8 flex  justify-start items-end bg-black/5 backdrop-brightness-100">
             <h1 class="text-white text-3xl font-bold mb-4">{{__('works')}}</h1>
         </div>
