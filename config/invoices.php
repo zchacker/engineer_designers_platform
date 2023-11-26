@@ -32,7 +32,7 @@ return [
     ],
 
     'currency' => [
-        'code' => 'eur',
+        'code' => 'SAR',
 
         /*
          * Usually cents
@@ -40,8 +40,8 @@ return [
          *
          * Example: Amount in words: Eight hundred fifty thousand sixty-eight EUR and fifteen ct.
          */
-        'fraction' => 'ct.',
-        'symbol'   => '€',
+        'fraction' => 'هللة.',
+        'symbol'   => 'ريال',
 
         /*
          * Example: 19.00

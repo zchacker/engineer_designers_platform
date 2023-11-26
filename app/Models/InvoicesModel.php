@@ -38,6 +38,11 @@ class InvoicesModel extends Model
         'status',
     ];
     
+    public function items()
+    {
+        return $this->hasMany(InvoiceItemsModel::class, 'invoice_id' , 'id');
+    }
+
     public function order_data()
     {
         return $this->hasOne(OrdersModel::class, 'id' , 'order_id');

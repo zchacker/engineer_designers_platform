@@ -6,17 +6,17 @@
 
         <style type="text/css" media="screen">
             html {
-                font-family: sans-serif;
+                font-family: sans-serif; 
                 line-height: 1.15;
                 margin: 0;
             }
 
             body {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; 
                 font-weight: 400;
                 line-height: 1.5;
                 color: #212529;
-                text-align: left;
+                text-align: right;
                 background-color: #fff;
                 font-size: 10px;
                 margin: 36pt;
@@ -86,12 +86,12 @@
 
             .pr-0,
             .px-0 {
-                padding-right: 0 !important;
+                padding-left: 0 !important;
             }
 
             .pl-0,
             .px-0 {
-                padding-left: 0 !important;
+                padding-right: 0 !important;
             }
 
             .text-right {
@@ -107,6 +107,8 @@
             }
             * {
                 font-family: "DejaVu Sans, sans-serif";
+                direction:rtl;
+                text-align: right !important;
             }
             body, h1, h2, h3, h4, h5, h6, table, th, tr, td, p, div {
                 line-height: 1.1;
@@ -128,20 +130,16 @@
         </style>
     </head>
 
-    <body>
+    <body dir="rtl">
         {{-- Header --}}
         @if($invoice->logo)
             <img src="{{ $invoice->getLogo() }}" alt="logo" height="100">
         @endif
 
-        <table class="table mt-5">
+        <table class="table mt-5" dir="rtl">
             <tbody>
                 <tr>
-                    <td class="border-0 pl-0" width="70%">
-                        <h4 class="text-uppercase">
-                            <strong>{{ $invoice->name }}</strong>
-                        </h4>
-                    </td>
+                    
                     <td class="border-0 pl-0">
                         @if($invoice->status)
                             <h4 class="text-uppercase cool-gray">
@@ -150,6 +148,11 @@
                         @endif
                         <p>{{ __('invoice.serial') }} <strong>{{ $invoice->getSerialNumber() }}</strong></p>
                         <p>{{ __('invoice.date') }}: <strong>{{ $invoice->getDate() }}</strong></p>
+                    </td>
+                    <td class="border-0 pl-0" width="70%">
+                        <h4 class="text-uppercase">
+                            <strong>{{ $invoice->name }}</strong>
+                        </h4>
                     </td>
                 </tr>
             </tbody>
@@ -298,7 +301,7 @@
                     @endif
 
                     <td class="text-right pr-0">
-                        {{ $invoice->formatCurrency($item->sub_total_price) }}
+                    {{-- {{ $invoice->formatCurrency($item->sub_total_price) }} --}}
                     </td>
                 </tr>
                 @endforeach
@@ -352,7 +355,7 @@
                         <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
                         <td class="text-right pl-0">{{ __('invoice.total_amount') }}</td>
                         <td class="text-right pr-0 total-amount">
-                            {{ $invoice->formatCurrency($invoice->total_amount) }}
+                            {{--{{ $invoice->formatCurrency($invoice->total_amount) }}--}}
                         </td>
                     </tr>
             </tbody>
@@ -365,7 +368,7 @@
         @endif
 
         <p>
-            {{ trans('invoice.amount_in_words') }}: {{ $invoice->getTotalAmountInWords() }}
+            {{-- {{ trans('invoice.amount_in_words') }}: {{ $invoice->getTotalAmountInWords() }} --}}
         </p>
         <p>
             {{ trans('invoice.pay_until') }}: {{ $invoice->getPayUntilDate() }}

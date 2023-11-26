@@ -66,9 +66,10 @@ class ClientsController extends Controller
             {
                 $profile_data->password = Hash::make($request->password);                
             }
-            
+                        
             if($profile_data->user_type != $request->user_type)
             {
+                $profile_data->user_type = $request->user_type;
                 $profile_data->logout = true; 
             }
             

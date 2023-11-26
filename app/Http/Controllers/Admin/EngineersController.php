@@ -163,6 +163,7 @@ class EngineersController extends Controller
             
             if($profile_data->user_type != $request->user_type)
             {
+                $profile_data->user_type = $request->user_type;
                 $profile_data->logout = true; 
             }
             
