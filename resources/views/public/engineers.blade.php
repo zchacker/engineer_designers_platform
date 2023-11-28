@@ -28,9 +28,8 @@
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">        
         @foreach($engineers as $engineer)
-        <div class="p-4 shadow-md shadow-gray-400 rounded-2xl">
+        <div class="p-4 shadow-md shadow-gray-400 rounded-2xl h-[285px]">
             <div class="flex justify-end">
-
                 <form action="{{ route('client.conversation.create') }}" method="post" class="flex">
                     @csrf
                     <input type="hidden" name="other_user_id" value="{{ $engineer->id }}">
@@ -40,9 +39,9 @@
                     </button>
                 </form>
             </div>
-            <img src="{{ $engineer->avatar->image->fileName ?? asset('imgs/user.png') }}" class="w-[100px] mx-auto p-2 rounded-lg border-0 border-blue-300 object-cover" alt="">
-            <div class="grid place-items-center">
-                <h3 class="font-bold text-xl">{{ $engineer->name }}</h3>
+            <img src="{{ $engineer->avatar->image->fileName ?? asset('imgs/user.png') }}" class="w-[100px] h-[100px] mx-auto p-2 rounded-full object-cover border-0 border-blue-300 object-cover" alt="">
+            <div class="grid place-items-center ">
+                <h3 class="font-bold text-lg">{{ $engineer->name }}</h3>
                 <div class="my-2">
                     <a href="{{ route('engineers.details', $engineer->id) }}" class="link">{{__('works_details')}}</a>
                 </div>

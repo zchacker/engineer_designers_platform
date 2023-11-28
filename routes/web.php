@@ -68,6 +68,10 @@ Route::get('/test', function () {
     });
 // });
 
+
+// public invoice
+Route::get('/invoices/show/{invoice_id}', [\App\Http\Controllers\Shared\InvoicesController::class, 'show'])->name('invoices.show');
+
 Route::group(['middleware' => ['auth:client', 'account'], 'prefix' => 'client'], function () {
 
     // engineers data
@@ -254,7 +258,7 @@ Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], fu
 
     // invoices
     Route::get('/invoices/list', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'list'])->name('supervisor.invoices.list');
-    Route::get('/invoices/show/{invoice_id}', [\App\Http\Controllers\Shared\InvoicesController::class, 'show'])->name('invoices.show');
+    
     Route::get('/invoices/create/{order_id}', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'create'])->name('supervisor.invoices.create');
     Route::post('/invoices/create/{order_id}', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'create_action'])->name('supervisor.invoices.create');
 

@@ -47,7 +47,7 @@ class AuthController extends Controller
 
                 if ($user) {
 
-                    if (Auth::guard($user->user_type)->attempt(['email' => $request->email, 'password' => $request->password], false)) {
+                    if (Auth::guard($user->user_type)->attempt(['email' => $request->email, 'password' => $request->password], true)) {
                         
                         // mark this to logged in
                         $logged_user = Auth::guard($user->user_type)->user();

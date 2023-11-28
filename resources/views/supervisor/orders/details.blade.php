@@ -199,6 +199,16 @@
                                 <p class="bg-gray-50 p-4 rounded-full">{{ $feedback->comment }}</p>
                                 @endif
 
+                                @if($feedback->type == 'add_invoice')
+                                <div class="flex flex-wrap min-w-full py-2 ">                                    
+                                    <div class="shadow-none rounded-sm border-0 border-gray-300 p-4 mx-2 my-1 justify-center grid">
+                                        <a href="{{ route('invoices.show' , $feedback->invoice) }}" target="_blank" class="w-full h-full">
+                                            <img src="{{ asset('imgs/file.png') }}" alt="" class="w-14" />
+                                        </a>
+                                    </div>                                    
+                                </div>
+                                @endif 
+
                                 <div class="flex flex-wrap min-w-full py-2 ">
                                     @foreach($feedback->feedback_files as $file)
                                     <div class="shadow-none rounded-sm border-0 border-gray-300 p-4 mx-2 my-1 justify-center grid">

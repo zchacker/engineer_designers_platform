@@ -28,7 +28,7 @@ class WorksController extends Controller
     public function create_action(Request $request) 
     {
         $rules = array(
-            'title' => 'required', 
+            'title' => 'required|max:255', 
             'work_details' => 'required', 
             'images.*' => 'mimes:jpeg,png,jpg,gif,svg,webp|image|max:20000',    
             "files.*" =>  'file|max:20000',
@@ -36,6 +36,7 @@ class WorksController extends Controller
 
         $messages = [
             'title.required' => __('title_required'),
+            'title.max' => __('title_max' , ['max' => 25]),
             'work_details.required' => __('work_details_required'), 
             'images.max' => __('images_max'),
             'images.mimies' => __('images_mimies'),

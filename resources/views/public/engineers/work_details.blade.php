@@ -1,4 +1,48 @@
 @include('public.header')
+
+<script>
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault(); // Prevent the default right-click context menu
+    });
+</script>
+
+<section class="flex md:h-40 h-52 justify-center items-center flex-col">
+    <div class="w-full h-full bg-cover bg-no-repeat md:bg-cover md:bg-center" style="background-image: url('{{asset('imgs/image/head-pages.jpg')}}');">
+        <!-- <div class="w-full h-full px-8 py-8 flex justify-center items-end bg-black/5 backdrop-brightness-100"> -->
+        <div class="w-full h-full px-8 py-8 flex justify-start items-start md:items-center bg-black/5 ">
+            <h1 class="text-white text-3xl font-bold mb-4">{{__('work_details')}}</h1>
+        </div>
+    </div>
+</section>
+
+<section class="flex -mt-20 mx-4 md:mr-20 z-50">
+    <div class="flex gap-8 justify-around items-end p-4 bg-transparent">
+        <div>
+            <img src="{{ $engineer->avatar->image->fileName ?? asset('imgs/user.png') }}" class="w-[100px] h-[100px] mx-auto p-2 rounded-full object-cover border-0 border-blue-300 object-cover" alt="">
+            <div class="grid place-items-center ">
+                <h3 class="font-bold text-lg">{{ $engineer->name }}</h3>
+            </div>
+            <!-- <section class="flex items-center gap-4">
+                <div class="my-2">
+                    <a href="{{ route('client.order.create' , $engineer->id ) }}" class="normal_button">{{__('create_order')}}</a>
+                </div>
+            </section> -->
+        </div>
+        <div class="flex gap-6 justify-end items-end">
+            <form action="{{ route('client.conversation.create') }}" method="post" class="flex">
+                @csrf
+                <input type="hidden" name="other_user_id" value="{{ $engineer->id }}">
+                <button type="submit" class="flex text-yellow-400 hover:underline">
+                    {{-- {{__('start_chat')}} --}}
+                    <img src="{{ asset('imgs/messenger.png') }}" alt="{{__('start_chat')}}" title="{{__('start_chat')}}" class="w-[30px]" />
+                </button>
+            </form>
+            <a href="{{ route('client.order.create' , $engineer->id ) }}" class="normal_button">{{__('create_order')}}</a>
+        </div>
+
+    </div>
+</section>
+
 <section>
 
     <div class="py-6">
@@ -11,18 +55,9 @@
 
                         <div class="sm:flex sm:items-center">
                             <div class="sm:flex-auto">
-                                <h1 class="text-md mb-5 font-normal text-gray-600">
-                                    {{__('work_details')}}
-                                </h1>
                                 <h2 class="text-2xl font-bold">{{ $work->title }}</h2>
                             </div>
                         </div>
-
-                        <section class="flex items-center gap-4 py-8 px-8">
-                            <div class="my-2">
-                                <a href="{{ route('client.order.create' , $engineer->id ) }}" class="normal_button">{{__('create_order')}}</a>
-                            </div>
-                        </section>
 
                         <div class="mt-8 flex flex-col">
                             <div class=" overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -31,8 +66,9 @@
                                     @foreach($work->worksFiles as $file)
 
                                     @if($file->file_type == 'image')
-                                    <div class="shadow-none rounded-sm border-none border-gray-300 p-4 mx-2 my-1 justify-center grid">
+                                    <div class="relative shadow-none rounded-sm border-none border-gray-300 p-4 mx-2 my-1 justify-center grid">
                                         <img src="{{ $file->file->fileName ?? asset('imgs/packaging.png') }}" alt="" class="w-full object-cover" />
+                                        <div class="absolute top-0 bottom-0 left-0 right-0 w-full h-full bg-transparent"></div>
                                     </div>
                                     @endif
 

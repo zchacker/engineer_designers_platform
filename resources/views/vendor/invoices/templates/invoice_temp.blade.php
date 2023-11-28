@@ -117,11 +117,11 @@
             <div>
                 <div  class="invoice-details-item">
                     <p><strong>رقم الفاتورة:</strong> </p>
-                    <p>INV-123</p>
+                    <p>{{$invoice->name}}</p>
                 </div>
                 <div  class="invoice-details-item">
                     <p><strong>التاريخ:</strong></p>
-                    <p>20 November 2023</p>
+                    <p>{{$invoice->date}}</p>
                 </div>
                 <div  class="invoice-details-item">
                     <p><strong>الحالة:</strong></p>
@@ -140,7 +140,8 @@
                         <div>
                             <p><strong>المشتري:</strong></p>    
                             <p>{{$invoice->buyer->name}}</p>            
-                            <p>الرياض - المملكة العربية السعودية</p>                            
+                            <p>{{$invoice->buyer->custom_fields['email']}}</p>
+                            <p>{{$invoice->buyer->custom_fields['phone']}}</p>                      
                         </div>            
                     </div>
                 </td>

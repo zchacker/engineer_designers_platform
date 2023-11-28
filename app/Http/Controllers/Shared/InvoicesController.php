@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Shared;
 
 use App\Http\Controllers\Controller;
 use App\Models\InvoicesModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use LaravelDaily\Invoices\Classes\Buyer;
@@ -31,7 +32,7 @@ class InvoicesController extends Controller
 
         $customer_data = $invoice_data->order_data->user_data;        
 
-        $customer = new Buyer([
+        $customer = new Party([
             'name'          => $invoice_data->client_name,
             'custom_fields' => [
                 'email' => $customer_data->email,
@@ -60,12 +61,15 @@ class InvoicesController extends Controller
 
             array_push($items, $item_data );
         }
-          
-        // dd($items);
+         
+        
+        $date = Carbon::parse($invoice_data->invoice_date);
 
-        $invoice = Invoice::make()
+        $invoice = Invoice::make('receipt')
             ->template('invoice_temp')
-            ->name("عنوان الفاتورة")
+            ->name($invoice_data->invoice_number)
+            ->date($date)
+            ->dateFormat('m/d/Y')   
             ->buyer($customer)
             ->seller($seller)
             ->status($invoice_data->status)            
