@@ -8,7 +8,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="relative rounded-tl-md  rounded-tr-md overflow-auto p-8">
-                <h2 class="text-2xl font-bold mb-4"> إضافة مهندس </h2>
+                <h2 class="text-2xl font-bold mb-4"> {{__('service_create')}} </h2>
                     <div class="overflow-x-auto relative">
 
                         @if(Session::has('errors'))
@@ -23,31 +23,34 @@
                         </div>
                         @endif
 
-                        <form action="{{ route('admin.engineers.create.action') }}" method="post" onsubmit="return form_submit(this);" class="w-full">
+                        <form action="{{ route('admin.services.create.action') }}" method="post" onsubmit="return form_submit(this);" class="w-full">
                             @csrf
                             <div class="mb-4">
-                                <label for="name" class="lable_form">{{ __('name') }}</label>
+                                <label for="name" class="lable_form">{{ __('name') }} <span class="text-red-500">*</span> </label>
                                 <input type="text" name="name" class="form_input" value="{{ old('name') }}" />
                             </div>
 
                             <div class="mb-4">
-                                <label for="email" class="lable_form">{{ __('email') }}</label>
-                                <input type="text" name="email" class="form_input" value="{{ old('email') }}" />
+                                <label for="description" class="lable_form">{{ __('description') }} <span class="text-red-500">*</span></label>
+                                <textarea name="description" id="description" class="form_input" cols="30" rows="10">{{ old('description') }}</textarea>                                
                             </div>
 
                             <div class="mb-4">
-                                <label for="phone_no" class="lable_form">{{ __('phone') }}</label>
-                                <input type="text" name="phone_no" id="phone_no" placeholder="512345678" class="form_input !w-full !border-blue-500 text-left" dir="ltr" value="{{ old('phone') }}" />
-                                <input type="hidden" name="phone_no[phone]" />
+                                <label for="type" class="lable_form">{{ __('type') }} <span class="text-red-500">*</span></label>
+                                <select name="type" id="type" class="form_input">
+                                    <option value="internal" @if(old('type') == 'internal') selected @endif >{{__('internal')}}</option>
+                                    <option value="external" @if(old('type') == 'external') selected @endif >{{__('external')}}</option>
+                                </select>
                             </div>
 
                             <div class="mb-4">
-                                <label for="password" class="lable_form">{{ __('password') }}</label>
-                                <input type="password" name="password" class="form_input" />
+                                <label for="url" class="lable_form">{{ __('url') }}</label>
+                                <input type="url" name="url" id="url" placeholder="http://...." class="form_input" dir="ltr" value="{{ old('url') }}" />                                
                             </div>
 
-                            <div class="mb-4">
-                                <input type="submit" value="{{ __('create_account') }}" class="bg-green-700 text-white rounded-md py-2 px-4" />
+                        
+                            <div class="mb-4 mt-8">
+                                <input type="submit" value="{{ __('save') }}" class="normal_button" />
                             </div>
 
                         </form>

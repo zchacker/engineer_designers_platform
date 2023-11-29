@@ -22,44 +22,33 @@ class ServicesController extends Controller
 
     public function create(Request $request)
     {
-        return view('admin.engineers.create');
+        return view('admin.services.create');
     }
 
     public function create_action(Request $request)
     {
         $rules = array(
-            'name' => 'required',
-            'email' => 'required|unique:users,email',
-            'phone' => 'required|unique:users,phone',
-            'password' => 'required',
+            'name' => 'required',            
         );
 
         $messages = [
             'name.required' => __('name_required'),
-            'email.required' => __('email_required'),
-            'email.unique' => __('email_unique'),
-            'phone.required' => __('phone_required'),
-            'phone.unique' => __('phone_unique'),
-            'password.required' => __('password_required'),
         ];
-
         
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails() == false) {
-
-            $password = $request->password;
-
-            // update password set it as hashed one
-            $request['password'] = Hash::make($request->password);
-            $request['user_type'] = "engineer";
-            
-            // create user account
-            $user = ServicesModel::create($request->all());
+                                                    
+            // create services
+           $services = ServicesModel::create($request->all());
 
             // send email for verification
 
-            return back()->with(['success' => __('added_successfuly')]);            
+            if($services){
+                return back()->with(['success' => __('added_successfuly')]);
+            }else{
+                return back() ->withErrors(['error' => __('unknown_error')]);
+            }
 
         } else {
 
@@ -169,10 +158,10 @@ class ServicesController extends Controller
     }
 
 
-    public function delete(UsersModel $user)
-    {
-        $user->delete();
-        return redirect()->route('admin.engineers.list');
+    public function delete(ServicesModel $service)
+    {        
+        $service->delete();
+        return redirect()->route('admin.services.list');
     }
     
 }

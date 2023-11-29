@@ -7,8 +7,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 {{-- Content--}}
                 <div class="p-6 bg-white border-b border-gray-200">
-
-                    <div class="px-4 sm:px-6 lg:px-8">
+                    <div class="px-4 sm:px-0 lg:px-0">
                         <div class="sm:flex sm:items-center">
                             <div class="sm:flex-auto">
                                 <h1 class="text-xl font-semibold text-gray-900">
@@ -18,8 +17,14 @@
                                 <p class="mt-2 text-sm text-gray-700">
                                     {{ __('total').' : '.$sum}}
                                 </p>
+                                
                             </div>
 
+                            <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+                                <a href="{{ route('admin.services.create') }}" class="normal_button">
+                                    {{__('service_create')}}
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -50,24 +55,15 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                                 </svg>
-                                                </a>--}}
+                                                </a>--}}                                                
 
-                                                <form action="{{ route('admin.my.conversation.create') }}" method="post" class="flex">
-                                                    @csrf
-                                                    <input type="hidden" name="other_user_id" value="{{ $client->id }}">
-                                                    <button type="submit" class="flex text-yellow-400 hover:underline w-6 h-4">
-                                                        {{-- {{__('start_chat')}} --}}
-                                                        <img src="{{ asset('imgs/messenger.png') }}" alt="{{__('start_chat')}}" title="{{__('start_chat')}}" class="w-6 h-6" />
-                                                    </button>
-                                                </form>
-
-                                                <a href="{{ route('admin.clients.edit' , $client->id) }}" class="text-blue-600 hover:text-blue-900" title="Edit">
+                                                <a href="{{ route('admin.services.edit' , $service->id) }}" class="text-blue-600 hover:text-blue-900" title="Edit">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                                     </svg>
                                                 </a>
 
-                                                <form action="{{ route('admin.clients.delete', $client->id) }}" method="POST">
+                                                <form action="{{ route('admin.services.delete', $service->id) }}" method="POST">
                                                     @method('DELETE')
                                                     @csrf
 
@@ -110,7 +106,7 @@
 
 <script>
     function confirmDelete() {
-        if (confirm(" {{__('delete_engineer_confirmation')}} ")) {
+        if (confirm(" {{__('service_delete_confirmation')}} ")) {
             // If the user confirms, submit the form
             document.forms[0].submit(); // You may need to adjust the form index if you have multiple forms on the page
         }

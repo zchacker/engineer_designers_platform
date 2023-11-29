@@ -212,6 +212,8 @@
     "type":"النوع",
     "services_list":"قائمة الخدمات",
     "service_create":"إنشاء خدمة",
+    "service_edit":"تعديل خدمة",
+    "service_delete_confirmation":"هل أنت متأكد من رغبتك بحذف الخدمة؟",
     "internal":"داخلي",
     "external":"خارجي",
     "url":"عنوان ويب",
