@@ -1,6 +1,6 @@
-@include('admin.header')
+@include('supervisor.header')
+
 <div class="content">
-    
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -81,7 +81,7 @@
                                                         </td>
 
                                                         <td class="relative flex justify-between whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 md:pr-0">
-                                                            <a href="{{  route('admin.contract.details' , $contract->id)  }}" class="text-gray-600 hover:text-gray-900" title="Download File">
+                                                            <a href="{{  route('supervisor.contract.details' , $contract->id)  }}" class="text-gray-600 hover:text-gray-900" title="Download File">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -111,7 +111,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 <script>
@@ -123,4 +122,4 @@
     }
 </script>
 
-@include('admin.footer')
+@include('supervisor.footer')

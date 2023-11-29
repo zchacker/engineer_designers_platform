@@ -17,7 +17,7 @@ class WorksController extends Controller
         $query      = WorksModel::orderByDesc('created_at')->where('engineer_id', $request->user()->id);
         $sum        = $query->count('id');
         $works      = $query->paginate(100);
-        return view('engineer.works.list', compact('works','sum'));
+        return view('engineer.works.list', compact('works', 'sum'));
     }
 
     public function create(Request $request)
@@ -25,28 +25,28 @@ class WorksController extends Controller
         return view('engineer.works.create');
     }
 
-    public function create_action(Request $request) 
+    public function create_action(Request $request)
     {
         $rules = array(
-            'title' => 'required|max:255', 
-            'work_details' => 'required', 
-            'images.*' => 'mimes:jpeg,png,jpg,gif,svg,webp|image|max:20000',    
+            'title' => 'required|max:255',
+            'work_details' => 'required',
+            'images.*' => 'mimes:jpeg,png,jpg,gif,svg,webp|image|max:20000',
             "files.*" =>  'file|max:20000',
         );
 
         $messages = [
             'title.required' => __('title_required'),
-            'title.max' => __('title_max' , ['max' => 25]),
-            'work_details.required' => __('work_details_required'), 
+            'title.max' => __('title_max', ['max' => 25]),
+            'work_details.required' => __('work_details_required'),
             'images.max' => __('images_max'),
             'images.mimies' => __('images_mimies'),
             'images.image' => __('images_image'),
-            'images.max' => __('images_max' , ["size" => "20"]),            
-            "files.max" =>  __('files_max' , ["size" => "20"]), 
-            "files.max" =>  __('files_file'), 
+            'images.max' => __('images_max', ["size" => "20"]),
+            "files.max" =>  __('files_max', ["size" => "20"]),
+            "files.max" =>  __('files_file'),
         ];
 
-        
+
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails() == false) {
@@ -55,144 +55,152 @@ class WorksController extends Controller
             $work = new WorksModel();
             $work->engineer_id = $request->user()->id;
             $work->title       = $request->title;
-            $work->description = $request->work_details;                        
+            $work->description = $request->work_details;
 
-            if($work->save())
-            {
-                                
-                $work_id = $work->id;
-                
-                // upload all images
-                if ($request->hasFile('images')) {
-    
-                    foreach ($request->file('images') as $file) {
-    
-                        $file_hash = hash_file('sha256', $file->getRealPath());
-                        $fileDB    = FilesModel::where(['hash' => $file_hash])->first();
-    
-                        // create work file object
-                        $workFile = new WorksFilesModel();
-                        $workFile->work_id = $work_id;
-                        $workFile->file_type = 'image';
-    
-                        if ($fileDB == null) {
-    
-                            // store it in datebae
-                            $fileName = $file->getClientOriginalName() . '_' . time() . '.' . $file->extension();
-    
-                            $url = $file->storePublicly(
-                                "works/images",
-                                $this->basicStorage
-                            );
-    
-                            if ($url != false) // file stored successfully
-                            {
-    
-                                $file_added = FilesModel::create([
-                                    'fileName' => $url,
-                                    'hash' => $file_hash,
-                                    'storage_driver' => $this->basicStorage
-                                ]);
-    
+            try {
+
+                if ($work->save()) {
+
+                    $work_id = $work->id;
+
+                    // upload all images
+                    if ($request->hasFile('images')) {
+
+                        foreach ($request->file('images') as $file) {
+
+                            $file_hash = hash_file('sha256', $file->getRealPath());
+                            $fileDB    = FilesModel::where(['hash' => $file_hash])->first();
+
+                            // create work file object
+                            $workFile = new WorksFilesModel();
+                            $workFile->work_id = $work_id;
+                            $workFile->file_type = 'image';
+
+                            if ($fileDB == null) {
+
+                                // store it in datebae
+                                $fileName = $file->getClientOriginalName() . '_' . time() . '.' . $file->extension();
+
+                                $url = $file->storePublicly(
+                                    "works/images",
+                                    $this->basicStorage
+                                );
+
+                                if ($url != false) // file stored successfully
+                                {
+
+                                    $file_added = FilesModel::create([
+                                        'fileName' => $url,
+                                        'hash' => $file_hash,
+                                        'storage_driver' => $this->basicStorage
+                                    ]);
+
+                                    // save it to database
+                                    $workFile->file_id = $file_added->id;
+                                }
+                            } else {
                                 // save it to database
-                                $workFile->file_id = $file_added->id;
-                                
+                                $workFile->file_id = $fileDB->id;
                             }
-    
-                        } else {
-                            // save it to database
-                            $workFile->file_id = $fileDB->id;
+
+                            // just save the file to database
+                            $workFile->save();
                         }
-    
-                        // just save the file to database
-                        $workFile->save();
-    
                     }
-    
-                }
-    
-                // upload all files to database
-                if ($request->hasFile('files')) {
-    
-                    foreach ($request->file('files') as $file) {
-    
-                        $file_hash = hash_file('sha256', $file->getRealPath());
-                        $fileDB    = FilesModel::where(['hash' => $file_hash])->first();
-    
-                        // create work file object
-                        $workFile = new WorksFilesModel();
-                        $workFile->work_id = $work_id;
-                        $workFile->file_type = 'document';
-    
-                        if ($fileDB == null) {
-    
-                            // store it in datebae
-                            $fileName = $file->getClientOriginalName() . '_' . time() . '.' . $file->extension();
-    
-                            $url = $file->storePublicly(
-                                "works/files",
-                                $this->basicStorage
-                            );
-    
-                            if ($url != false) // file stored successfully
-                            {
-    
-                                $file_added = FilesModel::create([
-                                    'fileName' => $url,
-                                    'hash' => $file_hash,
-                                    'storage_driver' => $this->basicStorage
-                                ]);
-    
+
+                    // upload all files to database
+                    if ($request->hasFile('files')) {
+
+                        foreach ($request->file('files') as $file) {
+
+                            $file_hash = hash_file('sha256', $file->getRealPath());
+                            $fileDB    = FilesModel::where(['hash' => $file_hash])->first();
+
+                            // create work file object
+                            $workFile = new WorksFilesModel();
+                            $workFile->work_id = $work_id;
+                            $workFile->file_type = 'document';
+
+                            if ($fileDB == null) {
+
+                                // store it in datebae
+                                $fileName = $file->getClientOriginalName() . '_' . time() . '.' . $file->extension();
+
+                                $url = $file->storePublicly(
+                                    "works/files",
+                                    $this->basicStorage
+                                );
+
+                                if ($url != false) // file stored successfully
+                                {
+
+                                    $file_added = FilesModel::create([
+                                        'fileName' => $url,
+                                        'hash' => $file_hash,
+                                        'storage_driver' => $this->basicStorage
+                                    ]);
+
+                                    // save it to database
+                                    $workFile->file_id = $file_added->id;
+                                }
+                            } else {
                                 // save it to database
-                                $workFile->file_id = $file_added->id;
-                                
+                                $workFile->file_id = $fileDB->id;
                             }
-    
-                        } else {
-                            // save it to database
-                            $workFile->file_id = $fileDB->id;
+
+                            // just save the file to database
+                            $workFile->save();
                         }
-    
-                        // just save the file to database
-                        $workFile->save();
-    
                     }
-    
+
+                    $status = Response::HTTP_OK;
+                    $myObj = new \stdClass();
+                    $myObj->success = true;
+                    $myObj->status  =  $status;
+                    $myObj->data    = __('added_successfuly');
+
+                    $json = json_encode($myObj, JSON_PRETTY_PRINT);
+                    $response = response($json, $status);
+
+                    return $response;
+                    // return back()->with(['success' => __('added_successfuly')]);
+
+                } else {
+
+                    $status         = Response::HTTP_OK;
+                    $myObj          = new \stdClass();
+                    $myObj->success = false;
+                    $myObj->status  =  $status;
+                    $myObj->data    = __('unkowen_error');
+
+                    $json       = json_encode($myObj, JSON_PRETTY_PRINT);
+                    $response   = response($json, $status);
+
+                    return $response;
+
+                    // return back()
+                    // ->withErrors(['error' => __('unkowen_error')])
+                    // ->withInput($request->all());
+
                 }
 
-                $status = Response::HTTP_OK;
-                $myObj = new \stdClass();
-                $myObj->success = true;
-                $myObj->status  =  $status;                
-                $myObj->data    = __('added_successfuly');
-        
-                $json = json_encode($myObj, JSON_PRETTY_PRINT);
-                $response = response($json, $status);
-
-                return $response;
-                // return back()->with(['success' => __('added_successfuly')]);
-
-            }else{
+            } catch (\Exception $e) {
                 
                 $status         = Response::HTTP_OK;
                 $myObj          = new \stdClass();
                 $myObj->success = false;
-                $myObj->status  =  $status;                
-                $myObj->data    = __('unkowen_error');
-        
+                $myObj->status  = $status;
+                $myObj->data    = $e->getMessage();
+
                 $json       = json_encode($myObj, JSON_PRETTY_PRINT);
                 $response   = response($json, $status);
 
                 return $response;
-
-                // return back()
-                // ->withErrors(['error' => __('unkowen_error')])
-                // ->withInput($request->all());
-
+                
             }
-            
-        }else{
-            
+
+        } else {
+
             $error     = $validator->errors();
             $allErrors = "";
 
@@ -203,40 +211,37 @@ class WorksController extends Controller
             $status         = Response::HTTP_OK;
             $myObj          = new \stdClass();
             $myObj->success = false;
-            $myObj->status  =  $status;                
+            $myObj->status  =  $status;
             $myObj->data    = $allErrors;
-    
+
             $json       = json_encode($myObj, JSON_PRETTY_PRINT);
             $response   = response($json, $status);
 
-            return $response;            
+            return $response;
 
             // return back()
             //     ->withErrors(['error' => $allErrors])
             //     ->withInput($request->all());
 
         }
-
     }
 
     public function details(Request $request)
     {
         $work = WorksModel::with('worksFiles')
-        ->where('id', $request->work_id)
-        ->where('engineer_id', $request->user()->id)
-        ->first();        
+            ->where('id', $request->work_id)
+            ->where('engineer_id', $request->user()->id)
+            ->first();
 
-        return view('engineer.works.details', compact('work') );
+        return view('engineer.works.details', compact('work'));
     }
 
     public function edit(Request $request)
     {
-
     }
 
     public function edit_action(Request $request)
     {
-
     }
 
     public function delete(WorksModel $work)
@@ -245,5 +250,4 @@ class WorksController extends Controller
 
         return redirect()->route('engineer.work.list');
     }
-
 }

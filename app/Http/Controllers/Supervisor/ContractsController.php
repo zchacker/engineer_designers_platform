@@ -18,7 +18,7 @@ class ContractsController extends Controller
         $sum        = $query->count("id");
         $contracts  = $query->paginate(100);
 
-        return view('admin.contracts.list', compact('contracts', 'sum'));
+        return view('supervisor.contracts.list', compact('contracts', 'sum'));
     }
 
     public function details(Request $request)
@@ -31,6 +31,6 @@ class ContractsController extends Controller
             ->where('contract_id', $request->contract_id)
             ->first();
 
-        return view('admin.contracts.details', compact('contract', 'contract_feedback'));
+        return view('supervisor.contracts.details', compact('contract', 'contract_feedback'));
     }
 }

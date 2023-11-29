@@ -16,10 +16,13 @@ class InvoicesController extends Controller
 {
     public function list(Request $requests)
     {
-        $query      = UsersModel::orderByDesc('created_at')->where('user_type', 'engineer');
+
+        $query      = InvoicesModel::orderByDesc('created_at');
         $sum        = $query->count('id');
-        $engineers  = $query->paginate(100);
-        return view('supervisor.engineers.list', compact('engineers','sum'));
+        $invoices   = $query->paginate(100);
+
+        return view('supervisor.invoices.list', compact('invoices','sum'));
+
     }
 
     public function create(Request $requests)
@@ -66,7 +69,7 @@ class InvoicesController extends Controller
             $invoice->client_name       = $request->client_name;
             $invoice->order_id          = $request->order_id;
             // $invoice->invoice_number    = 'INV-' . Str::random(8);
-            $invoice->invoice_number    = 'INV-' . Carbon::now()->format('YmdHis');
+            $invoice->invoice_number    = 'INV-' . Carbon::now()->format('YmdHi');
             $invoice->invoice_date      = $request->invoice_date;
             $invoice->due_date          = $request->due_date;
             $invoice->tax               = ($total * ($taxRate / 100));

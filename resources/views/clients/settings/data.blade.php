@@ -1,6 +1,8 @@
 @include('clients.header')
-<div class="content">
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+
+<div class="content">
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
@@ -35,7 +37,8 @@
                             
                             <div class="mb-4  space-x-4 gap-2 items-center">
                                 <label for="phone" class="lable_form">{{ __('phone') }} </label>
-                                <input type="tel" name="phone" id="phone" class="form_input !w-full" value="{{ $user->phone }}" />
+                                <input type="text" name="phone_no" id="phone_no" placeholder="512345678" class="form_input !w-full !border-blue-500 text-left" dir="ltr" value="{{ $user->phone }}" />
+                                <input type="hidden" name="phone_no[phone]" />
                             </div>                             
 
                             <div class="mb-4">
@@ -52,5 +55,17 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+<script>
+    const input = document.querySelector("#phone_no");
+    window.intlTelInput(input, {
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+        dropdownContainer: document.getElementById("form-cover"),
+        initialCountry: 'sa',
+        separateDialCode: true,
+        preferredCountries: ["sa", "ae", 'uk', 'us'],
+        hiddenInput: "phone"
+    });
+</script>
 
 @include('clients.footer')

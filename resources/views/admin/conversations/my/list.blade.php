@@ -6,7 +6,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
                 {{-- Conversation List Header --}}
-                <div class="p-4 bg-blue-500 text-white">
+                <div class="p-4 bg-gray-500 text-white">
                     {{-- Title for the conversation list --}}
                     <h2 class="text-xl font-semibold">{{__('conversation_list')}}</h2>
                 </div>
@@ -44,7 +44,7 @@
                         @endif
                     </a>
                     @empty
-                    <p class="p-4 text-gray-600">No conversations found.</p>
+                    <p class="p-4 text-gray-600">{{__('conversation_empty')}}.</p>
                     @endforelse
                 </div>
 

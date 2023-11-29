@@ -34,7 +34,13 @@ class SettingsController extends Controller
 
         $user = UsersModel::with('avatar')->find($request->user()->id);
         return view('admin.settings.data', compact('user'));
-    }    
+    }  
+    
+    public function supervisor_update_data(Request $request)
+    {
+        $user = UsersModel::with('avatar')->find($request->user()->id);
+        return view('supervisor.settings.data', compact('user'));
+    }   
 
     
     public function update_passwords(Request $request)
@@ -50,6 +56,11 @@ class SettingsController extends Controller
     public function admin_update_passwords(Request $request)
     {
         return view('admin.settings.password');
+    }
+
+    public function supervisor_update_passwords(Request $request)
+    {
+        return view('supervisor.settings.password');
     }
 
     public function update_data_action(Request $request)

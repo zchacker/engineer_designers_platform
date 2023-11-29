@@ -12,7 +12,8 @@ class ClientsController extends Controller
     {
         $query      = UsersModel::orderByDesc('created_at')->where('user_type', 'client');
         $sum        = $query->count('id');
-        $engineers  = $query->paginate(100);
-        return view('admin.clients.list', compact('engineers','sum'));
+        $clients  = $query->paginate(100);
+        
+        return view('supervisor.clients.list', compact('clients','sum'));
     }
 }

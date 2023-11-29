@@ -164,15 +164,19 @@
     @apply text-orange-700 font-bold
 }
 
-.accepted , .completed{
+.accepted , .completed, .paid{
     @apply text-green-700 font-bold
+}
+
+.draft{
+    @apply text-gray-700 font-bold
 }
 
 .uncomplete{
     @apply bg-slate-500 text-white text-sm px-5 py-1 rounded-md font-bold
 }
 
-.canceled , .rejected{
+.canceled , .rejected, .sent{
     @apply text-red-700 font-bold
 }
 

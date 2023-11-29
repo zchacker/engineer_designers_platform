@@ -42,7 +42,7 @@
                 
                 <div class="navbar_item">                    
                     <i class="las la-users la-2x"></i>
-                    <a href="{{ route('admin.clients.list') }}" class="navbar_item_text"> العملاء </a>
+                    <a href="{{ route('supervisor.clients.list') }}" class="navbar_item_text"> العملاء </a>
                 </div>
                 
                 <div class="navbar_item">                    
@@ -52,33 +52,33 @@
 
                 <div class="navbar_item">                    
                     <i class="las la-project-diagram la-2x"></i>
-                    <a href="#" class="navbar_item_text"> الفواتير </a>
+                    <a href="{{ route('supervisor.invoices.list') }}" class="navbar_item_text"> الفواتير </a>
                 </div>
 
                 <div class="navbar_item">                    
                     <i class="las la-file-contract la-2x"></i>
-                    <a href="#" class="navbar_item_text"> العقود </a>
+                    <a href="{{ route('supervisor.contract.list') }}" class="navbar_item_text"> العقود </a>
                 </div>
                 
                 <div class="navbar_item">                    
                     <i class="las la-handshake la-2x"></i>
-                    <a href="#" class="navbar_item_text"> الاجتماعات </a>
+                    <a href="{{ route('supervisor.meeting.list') }}" class="navbar_item_text"> الاجتماعات </a>
                 </div> 
 
                 <div class="navbar_item">                    
                     <i class="las la-envelope la-2x"></i>
-                    <a href="{{ route('admin.conversation.list') }}" class="navbar_item_text"> المحادثات </a>
+                    <a href="{{ route('supervisor.my.conversation.list') }}" class="navbar_item_text"> المحادثات </a>
                 </div> 
                 
                 
                 <div class="navbar_item">                    
                     <i class="las la-cog la-2x"></i>
-                    <a href="#" class="navbar_item_text"> الإعدادات </a>
+                    <a href="{{ route('supervisor.settings') }}" class="navbar_item_text"> الإعدادات </a>
                 </div>     
                 
                 <div class="navbar_item">                    
                     <i class="las la-lock la-2x"></i>
-                    <a href="#" class="navbar_item_text"> تغيير كلمة المرور </a>
+                    <a href="{{ route('supervisor.password') }}" class="navbar_item_text"> تغيير كلمة المرور </a>
                 </div>  
 
                 <div class="navbar_item navbar_logout">

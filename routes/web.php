@@ -198,7 +198,6 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::post('/orders/add_comment/{order_id}', [\App\Http\Controllers\Admin\OrdersController::class, 'add_comment'])->name('admin.order.add_comment');
     Route::post('/orders/update_status/{order_id}', [\App\Http\Controllers\Admin\OrdersController::class, 'update_status'])->name('admin.order.status.update');
 
-
     // works
     Route::get('/work/list', [\App\Http\Controllers\Admin\WorksController::class, 'list'])->name('admin.work.list');
     Route::get('/work/details/{work_id}', [\App\Http\Controllers\Admin\WorksController::class, 'details'])->name('admin.work.details');
@@ -217,7 +216,6 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::get('/my/conversation/view/{conversationId}', [\App\Http\Controllers\Admin\MyConversationController::class, 'viewConversation'])->name('admin.my.conversation.view');
     Route::post('/my/conversation/message/create/{conversationId}', [\App\Http\Controllers\Admin\MyConversationController::class, 'sendMessage'])->name('admin.my.conversation.message.send');
 
-
     // contracts
     Route::get('/contract/list', [\App\Http\Controllers\Admin\ContractsController::class, 'list'])->name('admin.contract.list');
     Route::get('/contract/details/{contract_id}', [\App\Http\Controllers\Admin\ContractsController::class, 'details'])->name('admin.contract.details');
@@ -234,7 +232,6 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::post('/supervisors/edit/action', [\App\Http\Controllers\Admin\SupervisorController::class, 'edit_action'])->name('admin.supervisors.edit.action');
     Route::delete('/supervisors/delete/{user}', [\App\Http\Controllers\Admin\SupervisorController::class, 'delete'])->name('admin.supervisors.delete');
 
-
     // update password
     Route::get('/password', [\App\Http\Controllers\Shared\SettingsController::class, 'admin_update_passwords'])->name('admin.password');
     Route::post('/password/action', [\App\Http\Controllers\Shared\SettingsController::class, 'update_passwords_action'])->name('admin.password.action');
@@ -248,7 +245,9 @@ Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], fu
 
     // engineers list
     Route::get('/engineers/list', [\App\Http\Controllers\Supervisor\EngineersController::class, 'list'])->name('supervisor.engineers.list');
-    Route::get('/engineers/details/{engineer_id}', [\App\Http\Controllers\Supervisor\EngineersController::class, 'list'])->name('supervisor.engineers.details');
+  
+    // clients  
+    Route::get('/clients/list', [\App\Http\Controllers\Supervisor\ClientsController::class, 'list'])->name('supervisor.clients.list');
     
     // orders list
     Route::get('/orders/list', [\App\Http\Controllers\Supervisor\OrdersController::class, 'orders_list'])->name('supervisor.orders.list');
@@ -257,11 +256,30 @@ Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], fu
     Route::post('/orders/update_status/{order_id}', [\App\Http\Controllers\Supervisor\OrdersController::class, 'update_status'])->name('supervisor.order.status.update');
 
     // invoices
-    Route::get('/invoices/list', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'list'])->name('supervisor.invoices.list');
-    
+    Route::get('/invoices/list', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'list'])->name('supervisor.invoices.list');    
     Route::get('/invoices/create/{order_id}', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'create'])->name('supervisor.invoices.create');
     Route::post('/invoices/create/{order_id}', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'create_action'])->name('supervisor.invoices.create');
 
+    // contracts
+    Route::get('/contract/list', [\App\Http\Controllers\Supervisor\ContractsController::class, 'list'])->name('supervisor.contract.list');
+    Route::get('/contract/details/{contract_id}', [\App\Http\Controllers\Supervisor\ContractsController::class, 'details'])->name('supervisor.contract.details');
+
+    // meetings
+    Route::get('/meetings/list', [\App\Http\Controllers\Supervisor\MeetingsController::class, 'list'])->name('supervisor.meeting.list');
+
+    // My messages
+    Route::post('/my/conversation/create', [\App\Http\Controllers\Supervisor\MyConversationController::class, 'initiateConversation'])->name('supervisor.my.conversation.create');
+    Route::get('/my/conversation/list', [\App\Http\Controllers\Supervisor\MyConversationController::class, 'listConversations'])->name('supervisor.my.conversation.list');
+    Route::get('/my/conversation/view/{conversationId}', [\App\Http\Controllers\Supervisor\MyConversationController::class, 'viewConversation'])->name('supervisor.my.conversation.view');
+    Route::post('/my/conversation/message/create/{conversationId}', [\App\Http\Controllers\Supervisor\MyConversationController::class, 'sendMessage'])->name('supervisor.my.conversation.message.send');
+
+    // settings
+    Route::get('/settings', [\App\Http\Controllers\Shared\SettingsController::class, 'supervisor_update_data'])->name('supervisor.settings');
+    Route::post('/settings/action', [\App\Http\Controllers\Shared\SettingsController::class, 'update_data_action'])->name('supervisor.settings.action');
+
+    // password
+    Route::get('/password', [\App\Http\Controllers\Shared\SettingsController::class, 'supervisor_update_passwords'])->name('supervisor.password');
+    Route::post('/password/action', [\App\Http\Controllers\Shared\SettingsController::class, 'update_passwords_action'])->name('supervisor.password.action');
 
 
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'supervisor_logout'])->name('supervisor.logout');

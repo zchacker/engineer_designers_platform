@@ -33,7 +33,7 @@
                             @csrf
                             <div class="mb-4 items-center">
                                 <label for="order_title" class="lable_form">{{ __('work_title') }} <span class="text-red-500">*</span> </label>
-                                <input type="text" name="title" id="work_title" class="form_input !w-full" value="{{ old('title') }}" />
+                                <input type="text" name="title" id="work_title" class="form_input !w-full" maxlength="25" value="{{ old('title') }}" />
                             </div>
 
                             <div class="mb-4 items-center">
