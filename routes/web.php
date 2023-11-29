@@ -221,6 +221,15 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::get('/contract/details/{contract_id}', [\App\Http\Controllers\Admin\ContractsController::class, 'details'])->name('admin.contract.details');
 
     // update settings
+    Route::get('/services/list', [\App\Http\Controllers\Admin\ServicesController::class, 'list'])->name('admin.services.list');
+    Route::get('/services/create', [\App\Http\Controllers\Admin\ServicesController::class, 'create'])->name('admin.services.create');
+    Route::post('/services/create', [\App\Http\Controllers\Admin\ServicesController::class, 'create_action'])->name('admin.services.create.action');
+    Route::get('/services/edit/{service_id}', [\App\Http\Controllers\Admin\ServicesController::class, 'edit'])->name('admin.services.edit');
+    Route::post('/services/edit/{service_id}', [\App\Http\Controllers\Admin\ServicesController::class, 'edit_action'])->name('admin.services.edit');
+    Route::delete('/services/delete/{service_id}', [\App\Http\Controllers\Admin\ServicesController::class, 'delete'])->name('admin.delete.action');
+
+
+    // update settings
     Route::get('/settings', [\App\Http\Controllers\Shared\SettingsController::class, 'admin_update_data'])->name('admin.settings');
     Route::post('/settings/action', [\App\Http\Controllers\Shared\SettingsController::class, 'update_data_action'])->name('admin.settings.action');
 

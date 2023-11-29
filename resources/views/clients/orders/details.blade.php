@@ -103,6 +103,37 @@
                                                 <input id="submitButton" type="submit" name="submit" value="{{ __('reject') }}" class="send_btn" />
                                             </div>
                                         </form>
+                                        @elseif($order->status == 'client_review')
+
+                                        <form action="{{ route('client.order.add_comment', $order->id) }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="comment" value="">
+                                            <input type="hidden" name="type" value="replay_on_design" />
+
+                                            <div class="mb-4">
+                                                <label for="comment" class="lable_form mb-2"> لقد قام المهندس بإرفاق تصميم هندسي لطلبك، يرجى التكرم بتحميله والاطلاع عليه </label>
+
+                                                @if($design != null)
+                                                <div class="flex flex-wrap min-w-full py-2 ">
+                                                    @foreach($design->feedback_files as $file)
+                                                    <div class="shadow-none rounded-sm border-0 border-gray-300 p-4 mx-2 my-1 justify-center grid">
+                                                        <a href="{{ $file->file->fileName ?? '#' }}" download class="w-full h-full">
+                                                            <img src="{{ asset('imgs/file.png') }}" alt="" class="w-14" />
+                                                        </a>
+                                                    </div>
+                                                    @endforeach
+                                                </div>
+                                                @endif
+
+                                                <p class="mb-4">
+                                                    بعد إطلاعك على التصميم، هل أنت موافق عليه؟ تطبق
+                                                    <a href="#" class="text-blue-800">الشروط والأحكام</a>
+                                                </p>
+                                                <input id="submitButton" type="submit" name="submit" value="{{ __('accept') }}" class="action_btn" />
+                                                <input id="submitButton" type="submit" name="submit" value="{{ __('reject') }}" class="send_btn" />
+                                            </div>
+                                        </form>
+
                                         @else
                                         {{--<form action="{{ route('client.order.add_comment', $order->id) }}" method="post">
                                         @csrf
@@ -148,6 +179,16 @@
 
                                 @if($feedback->comment != null)
                                 <p class="bg-gray-50 p-4 rounded-full">{{ $feedback->comment }}</p>
+                                @endif
+
+                                @if($feedback->type == 'add_invoice')
+                                <div class="flex flex-wrap min-w-full py-2 ">                                    
+                                    <div class="shadow-none rounded-sm border-0 border-gray-300 p-4 mx-2 my-1 justify-center grid">
+                                        <a href="{{ route('invoices.show' , $feedback->invoice) }}" target="_blank" class="w-full h-full">
+                                            <img src="{{ asset('imgs/invoice.png') }}" alt="" class="w-14" />
+                                        </a>
+                                    </div>                                    
+                                </div>
                                 @endif
 
                                 <div class="flex flex-wrap min-w-full py-2 ">

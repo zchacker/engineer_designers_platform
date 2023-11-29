@@ -186,7 +186,15 @@ class OrdersController extends Controller
             ->orderByDesc('created_at')
             ->get();
 
-        return view('clients.orders.details', compact('order', 'feedbacks'));
+        $design = OrderFeedbackModel::with(['user_data' , 'feedback_files'])
+            ->where('order_id', $request->order_id)
+            ->where('type', 'upload_design')
+            ->where('show_to_client', 1)
+            ->latest()
+            ->first();
+
+        // dd($design->feedback_files);
+        return view('clients.orders.details', compact('order', 'design', 'feedbacks'));
     }
 
     public function add_comment(Request $request)
@@ -208,6 +216,8 @@ class OrdersController extends Controller
             $order_feedback->type     = $request->type;
             $order_feedback->order_id = $request->order_id;
             $order_feedback->user_id  = $request->user()->id;
+            $order_feedback->show_to_client   = 1;
+            $order_feedback->show_to_engineer = 1;
             
             $order = OrdersModel::find($request->order_id);
             if($request->submit == __('accept'))
@@ -218,6 +228,10 @@ class OrdersController extends Controller
                         $order_feedback->comment  = __('accept');
                         $order->status = 'progress';
                     break;
+                    case 'replay_on_design':
+                        $order_feedback->comment  = __('accept');
+                        $order->status = 'client_accept';
+                        break;
                     default:
                         $order->status = 'progress';
                         $order_feedback->comment  = __('accept');
@@ -230,6 +244,10 @@ class OrdersController extends Controller
                     case 'replay_on_quote':
                         $order_feedback->comment  = __('client_reject_qoute');
                         $order->status = 'client_reject_qoute';
+                    break;
+                    case 'replay_on_design':
+                        $order_feedback->comment  = __('accept');
+                        $order->status = 'client_reject';
                     break;
                     default:
                         $order->status = 'client_reject_qoute';

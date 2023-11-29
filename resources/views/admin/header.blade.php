@@ -9,7 +9,7 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <title>لوحة تحكم المدير</title>
+    <title>المدير</title>
 </head>
 
 <body class="bg-dash-bg">
@@ -48,7 +48,7 @@
                 <div class="navbar_item">                    
                     <i class="las la-box la-2x"></i>
                     <a href="{{ route('admin.orders.list') }}" class="navbar_item_text"> الطلبات </a>
-                </div>
+                </div>                
 
                 <div class="navbar_item">                    
                     <i class="las la-project-diagram la-2x"></i>
@@ -73,8 +73,13 @@
                 <div class="navbar_item">                    
                     <i class="las la-file-contract la-2x"></i>
                     <a href="{{ route('admin.contract.list') }}" class="navbar_item_text"> العقود </a>
-                </div>     
-
+                </div>   
+                
+                <div class="navbar_item">                    
+                    <i class="las la-file-contract la-2x"></i>
+                    <a href="{{ route('admin.services.list') }}" class="navbar_item_text"> الخدمات </a>
+                </div>
+                
                 <div class="navbar_item">                    
                     <i class="las la-user-tie la-2x"></i>
                     <a href="{{ route('admin.supervisors.list') }}" class="navbar_item_text"> المشرفين </a>

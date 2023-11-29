@@ -1,5 +1,11 @@
 @include('public.header')
 
+<script>
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault(); // Prevent the default right-click context menu
+    });
+</script>
+
 <section class="flex md:h-40 h-52 justify-center items-center flex-col">
     <div class="w-full h-full bg-cover bg-no-repeat md:bg-cover md:bg-center" style="background-image: url('{{asset('imgs/image/head-pages.jpg')}}');">
         <!-- <div class="w-full h-full px-8 py-8 flex justify-center items-end bg-black/5 backdrop-brightness-100"> -->
@@ -56,7 +62,18 @@
                             <div class="grid grid-cols-1 md:grid-cols-3  min-w-full py-2 ">
                                 @foreach($works as $work)
                                 <div class="flex flex-col items-center justify-center gap-2 shadow-md rounded-md shadow-gray-400 p-4 mx-2">
-                                    <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" alt="" class="h-[300px] object-cover" />
+                                    <div class="relative">                                         
+                                        @if($work->worksFiles[0]->file_type == 'image')                              
+                                            <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}"
+                                            data-src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" loading="lazy"
+                                            alt="" class="h-[300px] object-cover" />
+                                        @else 
+                                            <img src="{{ asset('imgs/packaging.png') }}"
+                                            data-src="{{ asset('imgs/packaging.png') }}" loading="lazy"
+                                            alt="" class="h-[300px] object-cover" />
+                                        @endif
+                                        <div class="absolute top-0 bottom-0 left-0 right-0 w-full h-full bg-transparent"></div>
+                                    </div>
                                     <h2 class="text-center font-bold">{{ $work->title }}</h2>
                                     <a href="{{ route('engineers.work.details' , [$engineer->id , $work->id ]) }}" class="normal_button !w-auto">{{__('work_details')}}</a>
                                 </div>

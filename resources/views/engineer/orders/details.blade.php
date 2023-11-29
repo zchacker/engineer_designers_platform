@@ -165,9 +165,13 @@
 
                                     </div>
                                 </form>
-                                @elseif($order->status == 'progress')
+                                @elseif($order->status == 'progress' || $order->status == 'client_reject')
                                 <form action="{{ route('engineer.order.add_comment', $order->id) }}" method="post" id="file-upload-form">
                                     @csrf
+
+                                    <div class="mb-4">
+                                        <p>يرجى رفع ملفات التصميم الجديد من هنا</p>
+                                    </div>
 
                                     <input type="hidden" name="status" value="supervisor_review" />
                                     <input type="hidden" name="type" value="upload_design" />

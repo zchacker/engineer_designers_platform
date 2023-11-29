@@ -70,6 +70,7 @@ class OrdersController extends Controller
                         // get last feedback id to udpate the feedback
                         $feedback = OrderFeedbackModel::where('order_id', $request->order_id)->get()->last();
                         $feedback->show_to_client = 1;
+                        $feedback->show_to_engineer = 0;
                         $feedback->save();
                         
                         $invoice = InvoicesModel::where('id' , $feedback->invoice)->first();                        
@@ -92,6 +93,7 @@ class OrdersController extends Controller
                         // get last feedback id to udpate the feedback
                         $feedback = OrderFeedbackModel::where('order_id', $request->order_id)->get()->last();
                         $feedback->show_to_client = 0;
+                        $feedback->show_to_engineer = 0;
                         $feedback->save();                        
 
                         $order_feedback->comment  = __('reject');                                       
