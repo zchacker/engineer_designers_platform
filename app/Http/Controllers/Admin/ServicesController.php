@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\FilesModel;
 use App\Models\ServicesModel;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -38,11 +39,47 @@ class ServicesController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails() == false) {
-                                                    
-            // create services
-           $services = ServicesModel::create($request->all());
 
-            // send email for verification
+            if($request->hasFile('file'))
+            {
+                $file_hash = hash_file('sha256', $request->file->getRealPath());
+                $fileDB    = FilesModel::where(['hash' => $file_hash])->first();                    
+
+                if ($fileDB == null) 
+                {
+                    
+                    $fileName = $request->file('file')->getClientOriginalName() . '_' . time() . '.' . $request->file('file')->extension();
+
+                    // store it in disk
+                    $url = $request->file('file')->storePublicly(
+                        "services/images",
+                        $this->basicStorage
+                    );
+
+                    if ($url != false) // file stored successfully
+                    {
+
+                        // save file data in batabase
+                        $file_added = FilesModel::create([
+                            'fileName'       => $url,
+                            'hash'           => $file_hash,
+                            'storage_driver' => $this->basicStorage
+                        ]);
+                        
+                        $request['image_file'] = $file_added->id;
+
+                    }
+
+                } else {
+
+                    // save it to database
+                    $request['image_file'] = $fileDB->id;
+
+                }
+            }                                       
+
+            // create services
+            $services = ServicesModel::create($request->all());            
 
             if($services){
                 return back()->with(['success' => __('added_successfuly')]);
@@ -67,14 +104,14 @@ class ServicesController extends Controller
 
     public function edit(Request $request)
     {
-        $user = ServicesModel::find($request->id);
+        $service = ServicesModel::find($request->service_id);
 
-        if($user == null)
+        if($service == null)
         {
             return abort(Response::HTTP_NOT_FOUND);
         }
 
-        return view('admin.engineers.edit', compact('user'));
+        return view('admin.services.edit', compact('service'));
     }
 
     public function edit_action(Request $request)
@@ -82,61 +119,65 @@ class ServicesController extends Controller
         $user_id = $request->user_id;
 
         $rules = array(
-            'name' => 'required',            
-            'email' => ['required',Rule::unique('users')->ignore($user_id)],
-            'phone' => ['required',Rule::unique('users')->ignore($user_id)],
-            // 'password' => 'required',
+            'name' => 'required',
         );
 
         $messages = [
             'name.required' => __('name_required'),
-            'email.required' => __('email_required'),
-            'email.unique' => __('email_unique'),
-            'phone.required' => __('phone_required'),
-            'phone.unique' => __('phone_unique'),
-            'password.required' => __('password_required'),
         ];
         
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails() == false) {
 
-            $profile_data = UsersModel::where(['id' => $user_id])->first();            
+            if($request->hasFile('file'))
+            {
+                $file_hash = hash_file('sha256', $request->file->getRealPath());
+                $fileDB    = FilesModel::where(['hash' => $file_hash])->first();                    
 
-            $profile_data->name  = $request->name;
-            $profile_data->email = $request->email;
-            $profile_data->phone = $request->phone; 
-                    
-            if($request->filled('password'))
-            {
-                $profile_data->password = Hash::make($request->password);                
-            }
-            
-            if($profile_data->user_type != $request->user_type)
-            {
-                $profile_data->user_type = $request->user_type;
-                $profile_data->logout = true; 
-            }
-            
-            if ($profile_data->update())
-            {
-                
-                if($request->filled('password'))
+                if ($fileDB == null) 
                 {
-                    // log out all other sessions
-                    // $user = Auth::user();
-                    // dd($user);
-                    // Auth::guard('engineer')->login($profile_data);                    
-                    // Auth::guard('engineer')->logout($profile_data);
-                    // Auth::guard('engineer')->logoutOtherDevices($request->password); //add this line                    
-                }               
+                    
+                    $fileName = $request->file('file')->getClientOriginalName() . '_' . time() . '.' . $request->file('file')->extension();
 
+                    // store it in disk
+                    $url = $request->file('file')->storePublicly(
+                        "services/images",
+                        $this->basicStorage
+                    );
+
+                    if ($url != false) // file stored successfully
+                    {
+
+                        // save file data in batabase
+                        $file_added = FilesModel::create([
+                            'fileName'       => $url,
+                            'hash'           => $file_hash,
+                            'storage_driver' => $this->basicStorage
+                        ]);
+                        
+                        $request['image_file'] = $file_added->id;
+
+                    }
+
+                } else {
+
+                    // save it to database
+                    $request['image_file'] = $fileDB->id;
+
+                }
+            }
+
+            // dd($request->all());
+
+            $service = ServicesModel::find($request->service_id);
+            $service->update($request->all());
+            
+            if ($service)
+            {                            
                 return back()->with(['success' => __('updated_successfuly')]);
-
-            } else {
-                
+            } else {            
                 return back()->withErrors(['error' => __('unknown_error')]);
-
             }            
 
             // send email for verification

@@ -43,6 +43,7 @@ class WorksController extends Controller
             'images.image' => __('images_image'),
             'images.max' => __('images_max', ["size" => "20"]),
             "files.max" =>  __('files_max', ["size" => "20"]),
+            "file.max" =>  __('files_max', ["size" => "20"]),
             "files.max" =>  __('files_file'),
         ];
 

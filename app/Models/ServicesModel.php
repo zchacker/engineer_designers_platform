@@ -32,10 +32,17 @@ class ServicesModel extends Model
         'description',
         'type',
         'url',
+        'image_file',
     ];
 
     protected $enumStatus = [
         'internal',
         'external',        
     ]; // Define ENUM values
+
+    public function file()
+    {
+        return $this->hasOne(FilesModel::class, 'id', 'image_file');
+    }
+
 }

@@ -23,24 +23,29 @@
                         </div>
                         @endif
 
-                        <form action="{{ route('admin.services.create.action') }}" method="post" onsubmit="return form_submit(this);" class="w-full">
+                        <form action="{{ route('admin.services.create.action') }}" method="post" enctype="multipart/form-data" onsubmit="return form_submit(this);" class="w-full">
                             @csrf
                             <div class="mb-4">
                                 <label for="name" class="lable_form">{{ __('name') }} <span class="text-red-500">*</span> </label>
-                                <input type="text" name="name" class="form_input" value="{{ old('name') }}" />
+                                <input type="text" name="name" class="form_input" value="{{ old('name') }}" required />
                             </div>
 
                             <div class="mb-4">
                                 <label for="description" class="lable_form">{{ __('description') }} <span class="text-red-500">*</span></label>
-                                <textarea name="description" id="description" class="form_input" cols="30" rows="10">{{ old('description') }}</textarea>                                
+                                <textarea name="description" id="description" class="form_input" cols="30" rows="10" required>{{ old('description') }}</textarea>                                
                             </div>
 
                             <div class="mb-4">
                                 <label for="type" class="lable_form">{{ __('type') }} <span class="text-red-500">*</span></label>
-                                <select name="type" id="type" class="form_input">
+                                <select name="type" id="type" class="form_input" required>
                                     <option value="internal" @if(old('type') == 'internal') selected @endif >{{__('internal')}}</option>
                                     <option value="external" @if(old('type') == 'external') selected @endif >{{__('external')}}</option>
                                 </select>
+                            </div>
+
+                            <div class="mb-4">                            
+                                <label for="name" class="lable_form">{{ __('image') }} <span class="text-red-500">*</span> </label>
+                                <input type="file" name="file" class="form_input"  />
                             </div>
 
                             <div class="mb-4">

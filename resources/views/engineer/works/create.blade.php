@@ -43,6 +43,7 @@
 
                             <div class="mb-4  items-center">
                                 <label for="image-input" class="block mb-2">{{__('select_images')}}</label>
+                                <p class="text-red-600">حجم الصور لا يزيد عن 20 ميجا</p>
                                 <input type="file" id="image-input" accept="image/*" multiple onchange="previewImages(event)" class="border py-2 px-3 w-full">
                             </div>
 
@@ -55,6 +56,7 @@
 
                             <div class="mb-4  items-center">
                                 <label for="file-input" class="block mt-4 mb-2">{{__('choose_files')}}</label>
+                                <p class="text-red-600">حجم الملفات لا يزيد عن 20 ميجا</p>
                                 <input type="file" id="file-input" multiple onchange="previewFiles(event)" class="border py-2 px-3 w-full">
                             </div>
 

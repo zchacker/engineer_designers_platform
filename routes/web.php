@@ -225,7 +225,7 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::get('/services/create', [\App\Http\Controllers\Admin\ServicesController::class, 'create'])->name('admin.services.create');
     Route::post('/services/create', [\App\Http\Controllers\Admin\ServicesController::class, 'create_action'])->name('admin.services.create.action');
     Route::get('/services/edit/{service_id}', [\App\Http\Controllers\Admin\ServicesController::class, 'edit'])->name('admin.services.edit');
-    Route::post('/services/edit/{service_id}', [\App\Http\Controllers\Admin\ServicesController::class, 'edit_action'])->name('admin.services.edit');
+    Route::post('/services/edit/{service_id}', [\App\Http\Controllers\Admin\ServicesController::class, 'edit_action'])->name('admin.services.edit.action');
     Route::delete('/services/delete/{service}', [\App\Http\Controllers\Admin\ServicesController::class, 'delete'])->name('admin.services.delete');
 
 
