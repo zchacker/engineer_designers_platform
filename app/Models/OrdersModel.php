@@ -44,9 +44,10 @@ class OrdersModel extends Model
         'progress',
         'supervisor_review',
         'client_review',
+        'admin_review',
         'client_accept',
         'client_reject',
-        'admin_review',
+        'followup_project',
         'completed',
     ]; // Define ENUM values
 

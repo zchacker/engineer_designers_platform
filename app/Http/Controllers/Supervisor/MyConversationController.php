@@ -8,6 +8,7 @@ use App\Models\MessageModel;
 use App\Models\UsersModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class MyConversationController extends Controller
 {
@@ -107,6 +108,24 @@ class MyConversationController extends Controller
             'content' => $request->input('content'), // Replace 'content' with your message input field name
             'type' => 'text', // or 'image' if applicable
         ]);
+
+        $otherUserId = $this->getOtherUserId($conversationId);
+        $otherUser   = UsersModel::find($otherUserId);        
+
+        if($otherUser != null){
+
+            $otherUserData = $otherUser;            
+
+            $title     = "إشعار رسالة جديدة";
+            $sub_title = "قام ".auth()->user()->name." بإرسال رسالة إليك";
+            $content   = $request->input('content');
+
+            Mail::send('emails.notification', compact('title' , 'sub_title' , 'content' ), function ($message) use ($request , $otherUserData) {
+                $message->to($otherUserData->email);
+                $message->subject('لديك رسالة جديدة - منصة رشيد العجيان');
+            });
+
+        }
 
         // Redirect back to the conversation view after sending the message
         return redirect()->route('supervisor.my.conversation.view', ['conversationId' => $conversationId]);

@@ -8,6 +8,7 @@ use App\Models\MessageModel;
 use App\Models\UsersModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class ConversationController extends Controller
 {
@@ -108,6 +109,24 @@ class ConversationController extends Controller
             'type' => 'text', // or 'image' if applicable
         ]);
 
+        $otherUserId = $this->getOtherUserId($conversationId);
+        $otherUser   = UsersModel::find($otherUserId);        
+
+        if($otherUser != null){
+
+            $otherUserData = $otherUser;            
+
+            $title     = "إشعار رسالة جديدة";
+            $sub_title = "قام ".auth()->user()->name." بإرسال رسالة إليك";
+            $content   = $request->input('content');
+
+            Mail::send('emails.notification', compact('title' , 'sub_title' , 'content' ), function ($message) use ($request , $otherUserData) {
+                $message->to($otherUserData->email);
+                $message->subject('لديك رسالة جديدة - منصة رشيد العجيان');
+            });
+
+        }
+
         // Redirect back to the conversation view after sending the message
         return redirect()->route('client.conversation.view', ['conversationId' => $conversationId]);
     }
@@ -117,10 +136,11 @@ class ConversationController extends Controller
     {
         // Replace this with your logic to determine the other user's ID
         // For example, if the conversation has two users, you can query the conversation's users and exclude the current user
-        $conversation = ConversationModel::findOrFail($conversationId);
+        $conversation  = ConversationModel::findOrFail($conversationId);
         $currentUserId = auth()->user()->id;        
-        $otherUserId = $conversation->users()->where('user_id', '!=', $currentUserId)->first();
+        $otherUserId   = $conversation->users()->where('user_id', '!=', $currentUserId)->first();
         
+
         return $otherUserId->id; // This assumes that you have a 'users' relationship defined in your Conversation model
     }
     

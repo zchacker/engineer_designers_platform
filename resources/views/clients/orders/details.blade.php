@@ -134,6 +134,52 @@
                                             </div>
                                         </form>
 
+                                        @elseif($order->status == 'client_accept')
+
+                                        <form action="{{ route('client.order.add_comment', $order->id) }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="comment" value="">
+                                            <input type="hidden" name="type" value="update_status" />
+
+                                            <div class="mb-4">
+                                                <label for="comment" class="lable_form mb-2"> لقد تم إتمام التصميم والموافقة عليه، هل تود طلب خدمة متابعة المشروع؟ أو إنهاء العمل ووضع علامة مكتمل؟</label>                                                
+
+                                                <p class="mb-4">
+                                                    تطبق
+                                                    <a href="#" class="text-blue-800">الشروط والأحكام</a>
+                                                </p>
+
+                                                <div class="mb-4">
+                                                    <select name="followup" id="" class="form_input">
+                                                        <option value="followup_project">{{__('followup_project')}}</option>
+                                                        <option value="completed">{{__('completed')}}</option>
+                                                    </select>
+                                                </div>
+
+                                                <input id="submitButton" type="submit" name="submit" value="{{ __('submit') }}" class="normal_button" />
+                                                
+                                            </div>
+                                        </form>
+
+                                        @elseif($order->status == 'followup_project')
+
+                                        <form action="{{ route('client.order.add_comment', $order->id) }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="comment" value="">
+                                            <input type="hidden" name="type" value="request_visit" />
+
+                                            <div class="mb-4">
+                                                <label for="comment" class="lable_form mb-2 !text-green-500"> لرفع طلب زيارة موقع، يرجى الضغط على الزر أدناه لرفع تنبيه طلب زيارة إلى المكتب الهندسي </label>                                                
+
+                                                <p class="mb-4">
+                                                    تطبق
+                                                    <a href="#" class="text-blue-600 hover:underline">الشروط والأحكام</a>
+                                                </p>                                                
+
+                                                <input id="submitButton" type="submit" name="submit" value="{{ __('request_visit') }}" class="normal_button" />                                                
+                                            </div>
+                                        </form>
+
                                         @else
                                         {{--<form action="{{ route('client.order.add_comment', $order->id) }}" method="post">
                                         @csrf
