@@ -20,8 +20,8 @@ use Illuminate\Support\Facades\App;
 
 App::setLocale('ar');
 
-Route::get('/test2', function () {
-    return view('emails.notification');
+Route::get('/test', function () {
+    return view('errors.404');
 })->name('test');
 
 // Route::get('/', [\App\Http\Controllers\RegisterController::class, 'register'])->name('home');
