@@ -67,7 +67,7 @@
                                                         </td>
 
                                                         <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                                                            {{ $order->engineer_data->name }}
+                                                            {{ $order->engineer_data->name ?? "غير معروف" }}
                                                         </td>
 
                                                         <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500 {{ $order->status }}">

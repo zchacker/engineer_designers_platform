@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
-class EngineerAvatarModel extends Model
+class TicketsRepliesModel extends Model
 {
     use HasFactory, SoftDeletes, Notifiable;
 
-    protected $table = 'engineer_avatar';
-        
+    protected $table = 'ticket_replies';
+    
+    
     /**
      * The primary key associated with the table.
      *
@@ -27,23 +28,19 @@ class EngineerAvatarModel extends Model
      * @var array<string, string>
      */
     protected $fillable = [
+        'ticket_id',
+        'reply',        
         'user_id',
-        'file_id',              
-    ];
+    ];    
 
     public function user()
     {
-        return $this->belongsTo(UsersModel::class , 'id', 'user_id')->withTrashed();
+        return $this->hasOne(UsersModel::class, 'id', 'user_id')->withTrashed();
     }
 
-    public function file()
+    public function ticket()
     {
-        return $this->belongsTo(FilesModel::class , 'id', 'file_id')->withTrashed();
-    }
-
-    public function image()
-    {
-        return $this->hasOne(FilesModel::class, 'id', 'file_id')->withTrashed();
+        return $this->hasOne(TicketsModel::class, 'id', 'ticket_id')->withTrashed();
     }
 
 }

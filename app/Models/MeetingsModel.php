@@ -37,12 +37,12 @@ class MeetingsModel extends Model
 
     public function user_data()
     {
-        return $this->hasOne(UsersModel::class, 'id' , 'user_id');
+        return $this->hasOne(UsersModel::class, 'id' , 'user_id')->withTrashed();
     }
 
     public function engineer_data()
     {
-        return $this->hasOne(UsersModel::class, 'id' , 'engineer_id');
+        return $this->hasOne(UsersModel::class, 'id' , 'engineer_id')->withTrashed();
     }
 
 }

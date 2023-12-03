@@ -36,11 +36,11 @@ class WorksModel extends Model
 
     public function engineer()
     {
-        return $this->hasOne(UsersModel::class, 'id', 'engineer_id');
+        return $this->hasOne(UsersModel::class, 'id', 'engineer_id')->withTrashed();
     }
 
     public function worksFiles()
     {
-        return $this->hasMany(WorksFilesModel::class , 'work_id', 'id');
+        return $this->hasMany(WorksFilesModel::class , 'work_id', 'id')->withTrashed();
     }
 }

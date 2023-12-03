@@ -55,6 +55,6 @@ class UsersModel extends Authenticatable
 
     public function avatar()
     {
-        return $this->hasOne(EngineerAvatarModel::class, "user_id", "id");
+        return $this->hasOne(EngineerAvatarModel::class, "user_id", "id")->withTrashed();
     }
 }

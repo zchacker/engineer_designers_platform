@@ -14,7 +14,8 @@ class OrdersController extends Controller
     
     public function orders_list(Request $request)
     {
-        $query = OrdersModel::orderByDesc('created_at');
+        $query      = OrdersModel::with(['engineer_data' ,'user_data'])
+        ->orderByDesc('created_at');
 
         $sum        = $query->count("id");
         $orders     = $query->paginate(100);

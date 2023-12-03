@@ -12,17 +12,20 @@
 </section>
 
 <section class="bg-white py-10 md:py-16">    
-    <div class="grid grid-cols-1 md:grid-cols-3 px-6 gap-4 gap-y-20  space-x-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 px-6 gap-x-4 gap-y-20">
 
-        <div class="relative p-4 shadow-lg shadow-gray-400 rounded-3xl py-12">
-            <div class="flex flex-col items-center justify-center h-full p-4">
-                <img src="{{ asset('imgs/image/s4.png') }}" class="absolute -top-[50px] h-[120px] text-green-700 mb-4 mx-auto" />
-                <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ __('public')['service1'] }}</h4>
-                <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ __('public')['service1_details'] }}</p>
+        @foreach($services as $service)
+        <div class="relative p-4 shadow-lg shadow-gray-400 border rounded-3xl py-12">
+            <div class="flex flex-col items-center justify-center h-full p-4 pb-0">                
+                <img src="{{ $service->file->fileName  }}" class="absolute -top-[70px] h-[120px] text-green-700 mb-4 mx-auto" />
+                <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ $service->name }}</h4>
+                <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ $service->description }}</p>
+                <a href="#" class="normal_button mt-4">{{ __('public')['request_service'] }}</a>
             </div>
         </div>
+        @endforeach
         
-        <div class="relative p-4 shadow-lg shadow-gray-400 rounded-3xl py-12">
+        <!-- <div class="relative p-4 shadow-lg shadow-gray-400 rounded-3xl py-12">
             <div class="flex flex-col items-center justify-center h-full p-4">
                 <img src="{{ asset('imgs/image/s4.png') }}" class="absolute -top-[50px] h-[120px] text-green-700 mb-4 mx-auto" />
                 <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ __('public')['service2'] }}</h4>
@@ -77,7 +80,7 @@
                 <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ __('public')['service9'] }}</h4>
                 <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ __('public')['service9_details'] }}</p>
             </div>
-        </div>        
+        </div>         -->
     </div>   
 </section>
 @include('public.footer')

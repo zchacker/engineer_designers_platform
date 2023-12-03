@@ -40,17 +40,17 @@ class OrderFeedbackModel extends Model
 
     protected function order_data()
     {
-        return $this->hasOne(OrdersModel::class , 'id', 'order_id');
+        return $this->hasOne(OrdersModel::class , 'id', 'order_id')->withTrashed();
     }
 
     public function user_data()
     {
-        return $this->hasOne(UsersModel::class , 'id', 'user_id');
+        return $this->hasOne(UsersModel::class , 'id', 'user_id')->withTrashed();
     }
 
     public function feedback_files()
     {
-        return $this->hasMany(OrderFeedbackFilesModel::class , 'feedback_id', 'id');
+        return $this->hasMany(OrderFeedbackFilesModel::class , 'feedback_id', 'id')->withTrashed();
     }
 
 }

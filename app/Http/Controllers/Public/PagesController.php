@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Models\ServicesModel;
 use App\Models\UsersModel;
 use App\Models\WorksModel;
 use Illuminate\Http\Request;
@@ -18,8 +19,9 @@ class PagesController extends Controller
 
     public function services(Request $request)
     {
+        $services = ServicesModel::all();
         $active = 'services';
-        return view('public.services' ,compact('active'));
+        return view('public.services' ,compact('active','services'));
     }
     
     public function about(Request $request)

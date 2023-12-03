@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
-class EngineerAvatarModel extends Model
+class TicketsModel extends Model
 {
     use HasFactory, SoftDeletes, Notifiable;
 
-    protected $table = 'engineer_avatar';
-        
+    protected $table = 'tickets';
+    
+    
     /**
      * The primary key associated with the table.
      *
@@ -27,23 +28,21 @@ class EngineerAvatarModel extends Model
      * @var array<string, string>
      */
     protected $fillable = [
+        'subject',
+        'message',
+        'status',
+        'image_file',
         'user_id',
-        'file_id',              
     ];
+
+    protected $enumStatus = [
+        'oepn',
+        'closed',        
+    ]; // Define ENUM values
 
     public function user()
     {
-        return $this->belongsTo(UsersModel::class , 'id', 'user_id')->withTrashed();
+        return $this->hasOne(UsersModel::class, 'id', 'user_id')->withTrashed();
     }
-
-    public function file()
-    {
-        return $this->belongsTo(FilesModel::class , 'id', 'file_id')->withTrashed();
-    }
-
-    public function image()
-    {
-        return $this->hasOne(FilesModel::class, 'id', 'file_id')->withTrashed();
-    }
-
+    
 }

@@ -116,10 +116,7 @@
 
 <script>
     function confirmDelete() {
-        if (confirm(" {{__('cancel_contract_confirmation')}} ")) {
-            // If the user confirms, submit the form
-            document.forms[0].submit(); // You may need to adjust the form index if you have multiple forms on the page
-        }
+        return confirm(" {{__('cancel_contract_confirmation')}} ");            
     }
 </script>
 

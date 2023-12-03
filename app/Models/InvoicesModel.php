@@ -40,12 +40,12 @@ class InvoicesModel extends Model
     
     public function items()
     {
-        return $this->hasMany(InvoiceItemsModel::class, 'invoice_id' , 'id');
+        return $this->hasMany(InvoiceItemsModel::class, 'invoice_id' , 'id')->withTrashed();
     }
 
     public function order_data()
     {
-        return $this->hasOne(OrdersModel::class, 'id' , 'order_id');
+        return $this->hasOne(OrdersModel::class, 'id' , 'order_id')->withTrashed();
     }
     
 }

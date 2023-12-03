@@ -32,7 +32,7 @@ class OrderFeedbackFilesModel extends Model
 
     public function file()
     {
-        return $this->hasOne(FilesModel::class, 'id', 'file_id');
+        return $this->hasOne(FilesModel::class, 'id', 'file_id')->withTrashed();
     }
     
 }

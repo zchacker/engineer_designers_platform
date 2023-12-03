@@ -42,7 +42,7 @@ class ServicesModel extends Model
 
     public function file()
     {
-        return $this->hasOne(FilesModel::class, 'id', 'image_file');
+        return $this->hasOne(FilesModel::class, 'id', 'image_file')->withTrashed();
     }
 
 }

@@ -25,7 +25,7 @@ class MessageModel extends Model
      */
     public function user()
     {
-        return $this->belongsTo(UsersModel::class);
+        return $this->belongsTo(UsersModel::class)->withTrashed();
     }
 
     /**
@@ -33,6 +33,6 @@ class MessageModel extends Model
      */
     public function conversation()
     {
-        return $this->belongsTo(ConversationModel::class);
+        return $this->belongsTo(ConversationModel::class)->withTrashed();
     }
 }

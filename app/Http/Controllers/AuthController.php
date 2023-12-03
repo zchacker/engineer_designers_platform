@@ -43,18 +43,31 @@ class AuthController extends Controller
             try {
 
                 // looking for email if exists
-                $user = UsersModel::where('email', '=', $request->email)->first();
+                $user = UsersModel::withTrashed()
+                ->where('email', '=', $request->email)
+                ->first();
+               
+                if ($user->deleted_at !== null) {
+                    // Account soft deleted
+                    
+                    // Redirect with a message indicating that the account is deleted                    
+                    return back()
+                    ->withErrors(['login_error' => __('account_deleted')])
+                    ->withInput($request->all());                            
+                }
 
                 if ($user) {
 
                     if (Auth::guard($user->user_type)->attempt(['email' => $request->email, 'password' => $request->password], true)) {
                         
+                        //Auth::guard('user')->logoutOtherDevices( $request->password );
+                        
+
                         // mark this to logged in
                         $logged_user = Auth::guard($user->user_type)->user();
                         $logged_user->logout = false;
                         $logged_user->save();
-
-                        //Auth::guard('user')->logoutOtherDevices( $request->password );
+                        
                         
                         switch ($user->user_type) {
                             
@@ -78,12 +91,11 @@ class AuthController extends Controller
                                 return redirect()->intended(route('home'));
                                 // return redirect()->route('home');
                         }
-
                         
                         // return redirect()->intended(route('home'));
                         return redirect()->route('home');
                     } else {
-
+                       
                         return back()
                             ->withErrors(['login_error' => __('worng_password')])
                             ->withInput($request->all());
@@ -94,6 +106,7 @@ class AuthController extends Controller
                         ->withErrors(['login_error' => __('worng_password')])
                         ->withInput($request->all());
                 }
+
             } catch (Exception $ex) {
                 // dd($ex , $debug);
                 return back()

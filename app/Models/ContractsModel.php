@@ -39,22 +39,22 @@ class ContractsModel extends Model
 
     public function user_data()
     {
-        return $this->hasOne(UsersModel::class, 'id' , 'user_id');
+        return $this->hasOne(UsersModel::class, 'id' , 'user_id')->withTrashed();
     }
 
     public function engineer_data()
     {
-        return $this->hasOne(UsersModel::class, 'id' , 'engineer_id');
+        return $this->hasOne(UsersModel::class, 'id' , 'engineer_id')->withTrashed();
     }
 
     public function order_data()
     {
-        return $this->hasOne(OrdersModel::class, 'id' , 'order_id');
+        return $this->hasOne(OrdersModel::class, 'id' , 'order_id')->withTrashed();
     }
 
     public function contractDoc()
     {
-        return $this->hasOne(FilesModel::class, 'id' , 'file_id');
+        return $this->hasOne(FilesModel::class, 'id' , 'file_id')->withTrashed();
     }
 
 }

@@ -198,6 +198,10 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::post('/orders/add_comment/{order_id}', [\App\Http\Controllers\Admin\OrdersController::class, 'add_comment'])->name('admin.order.add_comment');
     Route::post('/orders/update_status/{order_id}', [\App\Http\Controllers\Admin\OrdersController::class, 'update_status'])->name('admin.order.status.update');
 
+    // invoices
+    Route::get('/invoices/list', [\App\Http\Controllers\Admin\InvoicesController::class, 'list'])->name('admin.invoices.list');    
+   
+
     // works
     Route::get('/work/list', [\App\Http\Controllers\Admin\WorksController::class, 'list'])->name('admin.work.list');
     Route::get('/work/details/{work_id}', [\App\Http\Controllers\Admin\WorksController::class, 'details'])->name('admin.work.details');

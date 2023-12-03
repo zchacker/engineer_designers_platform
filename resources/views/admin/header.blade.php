@@ -48,8 +48,13 @@
                 <div class="navbar_item">                    
                     <i class="las la-box la-2x"></i>
                     <a href="{{ route('admin.orders.list') }}" class="navbar_item_text"> الطلبات </a>
-                </div>                
-
+                </div>
+                
+                <div class="navbar_item">                    
+                    <i class="las la-file-invoice-dollar la-2x"></i>
+                    <a href="{{ route('admin.invoices.list') }}" class="navbar_item_text"> الفواتير </a>
+                </div>
+                
                 <div class="navbar_item">                    
                     <i class="las la-project-diagram la-2x"></i>
                     <a href="{{ route('admin.work.list') }}" class="navbar_item_text"> الأعمال المرفوعة </a>

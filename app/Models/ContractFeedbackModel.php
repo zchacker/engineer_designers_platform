@@ -40,11 +40,11 @@ class ContractFeedbackModel extends Model
 
     public function user_data()
     {
-        return $this->hasOne(UsersModel::class, 'id' , 'user_id');
+        return $this->hasOne(UsersModel::class, 'id' , 'user_id')->withTrashed();
     }   
 
     public function contractDoc()
     {
-        return $this->hasOne(FilesModel::class, 'id' , 'file_id');
+        return $this->hasOne(FilesModel::class, 'id' , 'file_id')->withTrashed();
     }
 }

@@ -53,17 +53,17 @@ class OrdersModel extends Model
 
     public function image()
     {
-        return $this->hasOne(FilesModel::class, 'id', 'file_id');
+        return $this->hasOne(FilesModel::class, 'id', 'file_id')->withTrashed();
     }
 
     public function user_data()
     {
-        return $this->hasOne(UsersModel::class, 'id' , 'user_id');
+        return $this->hasOne(UsersModel::class, 'id' , 'user_id')->withTrashed();
     }
 
     public function engineer_data()
     {
-        return $this->hasOne(UsersModel::class, 'id' , 'to_user_id');
+        return $this->hasOne(UsersModel::class, 'id' , 'to_user_id')->withTrashed();
     }
 
 }
