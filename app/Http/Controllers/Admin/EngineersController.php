@@ -17,9 +17,17 @@ use PhpParser\Node\Expr\FuncCall;
 class EngineersController extends Controller
 {
         
-    public function list(Request $requests)
+    public function list(Request $request)
     {
-        $query      = UsersModel::orderByDesc('created_at')->where('user_type', 'engineer');
+        
+        $type       = $request->type ?? "active";
+        $query      = UsersModel::orderByDesc('created_at')->where('user_type', 'engineer');        
+        if($type == "trashed")
+        {
+            $query      = UsersModel::orderByDesc('created_at')
+            ->where('user_type', 'engineer')
+            ->onlyTrashed();            
+        }
         $sum        = $query->count('id');
         $engineers  = $query->paginate(100);
         return view('admin.engineers.list', compact('engineers','sum'));
@@ -212,5 +220,22 @@ class EngineersController extends Controller
         $user->delete();
         return redirect()->route('admin.engineers.list');
     }
+
+    public function restore(Request $request)
+    {        
+        $id   = $request->id;
+        $user = UsersModel::withTrashed()->find($id);
+
+        if ($user->trashed()) {
+            if ($user) {
+                $user->restore();
+                // Optionally, you can add a success message or redirect the user
+                return redirect()->back()->with('success', 'User restored successfully!');
+            }
+        }
+        // $user->restore();
+        // return redirect()->route('admin.engineers.list');
+    }
+    
 
 }

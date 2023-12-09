@@ -74,7 +74,7 @@ class InvoicesController extends Controller
             $invoice->due_date          = $request->due_date;
             $invoice->tax               = ($total * ($taxRate / 100));
             $invoice->discount          = $request->discount;
-            $invoice->discount          = $request->discount_type;            
+            $invoice->discount_type          = $request->discount_type;            
             $invoice->total_amount      = $total;
             
             if($invoice->save()){

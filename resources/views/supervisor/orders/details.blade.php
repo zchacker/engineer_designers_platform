@@ -73,7 +73,8 @@
                         <div class="mt-8 flex flex-col">
                             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                                    {{--<section class="my-4 space-y-2">
+                                        {{--
+                                        <section class="my-4 space-y-2">
                                         @if(Session::has('status_update_error'))
                                         <div class="my-3 w-auto p-4 bg-orange-500 text-white rounded-md">
                                             {!! session('status_update_error')->first('error') !!}
@@ -110,7 +111,8 @@
 
                                         </div>
                                         
-                                    </section>--}}
+                                    </section>
+                                    --}}
 
                                     <section class="my-2">
 

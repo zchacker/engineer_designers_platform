@@ -30,13 +30,13 @@ class InvoicesController extends Controller
             return abort(Response::HTTP_NOT_FOUND);
         }
 
-        $customer_data = $invoice_data->order_data->user_data;        
+        $customer_data = $invoice_data->order_data->user_data ?? null;
 
         $customer = new Party([
             'name'          => $invoice_data->client_name,
             'custom_fields' => [
-                'email' => $customer_data->email,
-                'phone' => $customer_data->phone
+                'email' => $customer_data->email ?? NULL,
+                'phone' => $customer_data->phone ?? NULL
             ],
         ]);
 

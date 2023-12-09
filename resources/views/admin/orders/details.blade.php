@@ -121,36 +121,47 @@
                                         </div>
                                         @endif
 
-                                        
-                                        @if($feedbacks->first()->type == 'add_invoice' 
-                                        && $feedbacks->first()->invoice != NULL 
-                                        && $feedbacks->first()->show_to_client == 0)
-                                        <form action="{{ route('admin.order.add_comment', $order->id) }}" method="post">
-                                            @csrf
-                                            
-                                            <input type="hidden" name="last_feedback_id" value="{{ $feedbacks->first()->id }}">
-                                            <input type="hidden" name="comment" value="">
-                                            <input type="hidden" name="type" value="approve_invoice" />
+                                        @if($feedbacks->isNotEmpty())
+                                            @if($feedbacks->first()->type == 'add_invoice' 
+                                            && $feedbacks->first()->invoice != NULL 
+                                            && $feedbacks->first()->show_to_client == 0)
+                                            <form action="{{ route('admin.order.add_comment', $order->id) }}" method="post">
+                                                @csrf
+                                                
+                                                <input type="hidden" name="last_feedback_id" value="{{ $feedbacks->first()->id }}">
+                                                <input type="hidden" name="comment" value="">
+                                                <input type="hidden" name="type" value="approve_invoice" />
 
-                                            <div class="mb-4">
-                                                <div class="mb-8">                                                
-                                                    <label for="comment" class="lable_form">
-                                                        الرجاء مراجعة الفاتورة وإعتمادها
-                                                        <br/>
-                                                        <a href="{{ route('invoices.show' , $feedbacks->first()->invoice) }}" target="_blank" class="w-full h-full">تصفح الفاتورة</a>
-                                                        <br/>
-                                                        هل تم إعتماد الفاتورة؟
-                                                    </label>           
-                                                </div>                                                                                     
-                                                <input id="submitButton" type="submit" name="submit" value="{{ __('accept') }}" class="confirm_button" />
-                                                <input id="submitButton" type="submit" name="submit" value="{{ __('reject') }}" class="reject_button" />
-                                            </div>
-                                        </form>
+                                                <div class="mb-4">
+                                                    <div class="mb-8">                                                
+                                                        <label for="comment" class="lable_form">
+                                                            الرجاء مراجعة الفاتورة وإعتمادها
+                                                            <br/>
+                                                            <a href="{{ route('invoices.show' , $feedbacks->first()->invoice) }}" target="_blank" class="w-full h-full">تصفح الفاتورة</a>
+                                                            <br/>
+                                                            هل تم إعتماد الفاتورة؟
+                                                        </label>           
+                                                    </div>                                                                                     
+                                                    <input id="submitButton" type="submit" name="submit" value="{{ __('accept') }}" class="confirm_button" />
+                                                    <input id="submitButton" type="submit" name="submit" value="{{ __('reject') }}" class="reject_button" />
+                                                </div>
+                                            </form>
+                                            @endif
                                         @endif
 
                                     </section>
 
-                                    <section class="my-2">
+                                    @if($order->status == 'client_review' ||
+                                        $order->status == 'client_review' ||
+                                        $order->status == 'client_accept' ||
+                                        $order->status == 'client_reject' ||
+                                        $order->status == 'admin_review'  ||
+                                        $order->status == 'followup_project')
+                                        
+                                        <a href="{{ route('supervisor.invoices.create' , $order->id ) }}" class="normal_button">إنشاء مسودة فاتورة</a>
+                                    @endif
+
+                                    <section class="my-4">
 
                                         @if(Session::has('errors'))
                                         <div class="my-3 w-auto p-4 bg-orange-500 text-white rounded-md">

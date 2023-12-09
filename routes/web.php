@@ -176,12 +176,13 @@ Route::group(['middleware' => ['auth:engineer', 'account'], 'prefix' => 'enginee
 Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () {
 
     // engineers
-    Route::get('/engineers/list', [\App\Http\Controllers\Admin\EngineersController::class, 'list'])->name('admin.engineers.list');
+    Route::get('/engineers/list/', [\App\Http\Controllers\Admin\EngineersController::class, 'list'])->name('admin.engineers.list');
     Route::get('/engineers/create', [\App\Http\Controllers\Admin\EngineersController::class, 'create'])->name('admin.engineers.create');
     Route::post('/engineers/create/action', [\App\Http\Controllers\Admin\EngineersController::class, 'create_action'])->name('admin.engineers.create.action');
     Route::get('/engineers/edit/{id}', [\App\Http\Controllers\Admin\EngineersController::class, 'edit'])->name('admin.engineers.edit');
     Route::post('/engineers/edit/action', [\App\Http\Controllers\Admin\EngineersController::class, 'edit_action'])->name('admin.engineers.edit.action');
     Route::delete('/engineers/delete/{user}', [\App\Http\Controllers\Admin\EngineersController::class, 'delete'])->name('admin.engineers.delete');
+    Route::post('/engineers/restore/{user}', [\App\Http\Controllers\Admin\EngineersController::class, 'restore'])->name('admin.engineers.restore');
 
     Route::get('/engineers/details/{engineer_id}', [\App\Http\Controllers\Admin\EngineersController::class, 'details'])->name('admin.engineers.details');
     Route::get('/engineers/work/details/{engineer_id}/{work_id}', [\App\Http\Controllers\Admin\EngineersController::class, 'work_details'])->name('admin.engineers.work.details');
@@ -200,7 +201,8 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
 
     // invoices
     Route::get('/invoices/list', [\App\Http\Controllers\Admin\InvoicesController::class, 'list'])->name('admin.invoices.list');    
-   
+    Route::get('/invoices/create/{order_id?}', [\App\Http\Controllers\Admin\InvoicesController::class, 'create'])->name('admin.invoices.create');
+    Route::post('/invoices/create/{order_id?}', [\App\Http\Controllers\Admin\InvoicesController::class, 'create_action'])->name('admin.invoices.create.action');
 
     // works
     Route::get('/work/list', [\App\Http\Controllers\Admin\WorksController::class, 'list'])->name('admin.work.list');
@@ -231,7 +233,6 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::get('/services/edit/{service_id}', [\App\Http\Controllers\Admin\ServicesController::class, 'edit'])->name('admin.services.edit');
     Route::post('/services/edit/{service_id}', [\App\Http\Controllers\Admin\ServicesController::class, 'edit_action'])->name('admin.services.edit.action');
     Route::delete('/services/delete/{service}', [\App\Http\Controllers\Admin\ServicesController::class, 'delete'])->name('admin.services.delete');
-
 
     // update settings
     Route::get('/settings', [\App\Http\Controllers\Shared\SettingsController::class, 'admin_update_data'])->name('admin.settings');
@@ -270,8 +271,8 @@ Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], fu
 
     // invoices
     Route::get('/invoices/list', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'list'])->name('supervisor.invoices.list');    
-    Route::get('/invoices/create/{order_id}', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'create'])->name('supervisor.invoices.create');
-    Route::post('/invoices/create/{order_id}', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'create_action'])->name('supervisor.invoices.create');
+    Route::get('/invoices/create/{order_id?}', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'create'])->name('supervisor.invoices.create');
+    Route::post('/invoices/create/{order_id?}', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'create_action'])->name('supervisor.invoices.create.action');
 
     // contracts
     Route::get('/contract/list', [\App\Http\Controllers\Supervisor\ContractsController::class, 'list'])->name('supervisor.contract.list');

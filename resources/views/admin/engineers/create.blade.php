@@ -47,7 +47,7 @@
                             </div>
 
                             <div class="mb-4">
-                                <input type="submit" value="{{ __('create_account') }}" class="bg-green-700 text-white rounded-md py-2 px-4" />
+                                <input type="submit" value="{{ __('create_account') }}" class="normal_button" />
                             </div>
 
                         </form>

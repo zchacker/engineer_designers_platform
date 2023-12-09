@@ -19,8 +19,8 @@
                                 </p>
                             </div>
 
-                            <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-                                <a href="{{ route('admin.engineers.create') }}" class="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-auto">
+                            <div class="mt-4 sm:mt-0 flex sm:flex-none justify-end">
+                                <a href="{{ route('admin.engineers.create') }}" class="normal_button">
                                     {{__('add_engineer')}}
                                 </a>
                             </div>
@@ -29,9 +29,17 @@
                     </div>
 
                     <div class="mt-8 flex flex-col">
+                        @if(request()->has('type') == 'trashed')
+                        <a href="{{ route('admin.engineers.list') }}" class="text-blue-600 font-bold hover:underline mb-6">
+                            العودة
+                        </a>
+                        @else
+                        <a href="{{ route('admin.engineers.list') }}?type=trashed" class="text-red-600 font-bold hover:underline mb-6">
+                            قائمة المحذوفين
+                        </a>
+                        @endif
                         <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-
                                 <table class="table">
                                     <thead class="">
                                         <tr>
@@ -74,15 +82,30 @@
                                                     </svg>
                                                 </a>
 
+                                                @if($engineer->trashed())
+                                                <form action="{{ route('admin.engineers.restore', $engineer->id) }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{$engineer->id}}" />
+
+                                                    <button type="submit" class="text-red-600 hover:text-red-900" title="استعادة">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 48 48">
+                                                            <path fill="#7cb342" d="M24 3A21 21 0 1 0 24 45A21 21 0 1 0 24 3Z"></path>
+                                                            <path fill="#dcedc8" d="M24,36.1c-6.6,0-12-5.4-12-12c0-3.6,1.6-7,4.4-9.3l2.5,3.1c-1.8,1.5-2.9,3.8-2.9,6.2c0,4.4,3.6,8,8,8 s8-3.6,8-8c0-2.1-0.8-4-2.2-5.5l2.9-2.7C34.8,18,36,21,36,24.1C36,30.7,30.6,36.1,24,36.1z"></path>
+                                                            <path fill="#dcedc8" d="M12 13L21 13 21 22z"></path>
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                                @else
                                                 <form action="{{ route('admin.engineers.delete', $engineer->id) }}" method="POST" onsubmit="return confirmDelete();">
                                                     @method('DELETE')
                                                     @csrf
-                                                    <button type="submit"  class="text-red-600 hover:text-red-900" title="Delete">
+                                                    <button type="submit" class="text-red-600 hover:text-red-900" title="Delete">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                         </svg>
                                                     </button>
                                                 </form>
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach
@@ -113,12 +136,12 @@
 </script>
 
 <script>
-    function confirmDelete() {        
+    function confirmDelete() {
         return confirm(" {{__('delete_engineer_confirmation')}} ");
 
         //if (confirm(" {{__('delete_engineer_confirmation')}} ")) {
-            // If the user confirms, submit the form
-            //document.forms[0].submit(); // You may need to adjust the form index if you have multiple forms on the page
+        // If the user confirms, submit the form
+        //document.forms[0].submit(); // You may need to adjust the form index if you have multiple forms on the page
         //}
     }
 </script>
