@@ -63,7 +63,7 @@
                                 @foreach($works as $work)
                                 <div class="flex flex-col items-center justify-center gap-2 shadow-md rounded-md shadow-gray-400 p-4 mx-2">
                                     <div class="relative">                                         
-                                        @if($work->worksFiles[0]->file_type == 'image')                              
+                                        @if(($work->worksFiles[0]->file_type ?? '') == 'image')                              
                                             <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}"
                                             data-src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" loading="lazy"
                                             alt="" class="h-[300px] object-cover" />

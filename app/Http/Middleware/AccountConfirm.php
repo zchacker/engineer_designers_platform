@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\UsersModel;
 use Closure;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -29,14 +30,20 @@ class AccountConfirm
                 if($data->verified == 0 && $data->user_type != 'admin')
                 {
                     $random_number = rand(100000, 999999);
-                    $profile_data = UsersModel::where(['id' => $request->user()->id])->first();
+                    $profile_data  = UsersModel::where(['id' => $request->user()->id])->first();
                     $profile_data->confirm_code = $random_number;
                     $profile_data->save();
-                    
-                    Mail::send('emails.confirm_email', ['code' => $random_number], function ($message) use ($request , $random_number) {
-                        $message->to($request->user()->email);
-                        $message->subject(' رمز التحقق الخاص بحسابك: ' .$random_number);
-                    });
+
+                    try{
+                        
+                        Mail::send('emails.confirm_email', ['code' => $random_number], function ($message) use ($request , $random_number) {
+                            $message->to($request->user()->email);
+                            $message->subject(' رمز التحقق الخاص بحسابك: ' .$random_number);
+                        });
+
+                    }catch(Exception $e){
+
+                    }
                     
                     return redirect(route('confirm.email'));
                 }

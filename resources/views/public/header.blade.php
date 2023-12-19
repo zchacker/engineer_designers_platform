@@ -2,6 +2,13 @@
 <html lang="ar" dir="rtl">
 
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KVHWK9BT');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +34,10 @@
 </head>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KVHWK9BT"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <!-- header  -->
     <section class="bg-black z-20">
@@ -79,34 +90,43 @@
                     </li>
 
                 </ul>
-
-                @if (!auth('client')->check() && !auth('engineer')->check() && !auth('admin')->check())
-                <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
-                    <!-- <a href="{{ route('login') }}" class="font-semibold bg-yellow-300 p-4 rounded-md text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">{{ __('public')['sigin'] }}</a> -->
-                    <a href="{{ route('login') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
-                        {{ __('public')['sigin'] }}
-                    </a>
+                
+                <div class="flex items-center">
+                    <div class="flex text-white font-bold mx-12">
+                        @if(app()->getLocale() == 'ar')
+                            <a href="{{ route('language.switch' , 'en') }}">English</a>
+                        @else
+                            <a href="{{ route('language.switch' , 'ar') }}">عربي</a>
+                        @endif
+                    </div>
+                
+                    @if (!auth('client')->check() && !auth('engineer')->check() && !auth('admin')->check())
+                    <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
+                        <!-- <a href="{{ route('login') }}" class="font-semibold bg-yellow-300 p-4 rounded-md text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">{{ __('public')['sigin'] }}</a> -->
+                        <a href="{{ route('login') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                            {{ __('public')['sigin'] }}
+                        </a>
+                    </div>
+                    @elseif(auth('engineer')->check())
+                    <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
+                        <a href="{{ route('engineer.orders.list') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                            {{__('public')['controll_panel']}}
+                        </a>
+                    </div>
+                    @elseif(auth('client')->check())
+                    <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
+                        <a href="{{ route('client.engineers.list') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                            {{__('public')['controll_panel']}}
+                        </a>
+                    </div>
+                    @elseif(auth('admin')->check())
+                    <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
+                        <a href="{{ route('admin.engineers.list') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                            {{__('public')['controll_panel']}}
+                        </a>
+                    </div>
+                    @endif
                 </div>
-                @elseif(auth('engineer')->check())
-                <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
-                    <a href="{{ route('engineer.orders.list') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
-                        {{__('public')['controll_panel']}}
-                    </a>
-                </div>
-                @elseif(auth('client')->check())
-                <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
-                    <a href="{{ route('client.engineers.list') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
-                        {{__('public')['controll_panel']}}
-                    </a>
-                </div>
-                @elseif(auth('admin')->check())
-                <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
-                    <a href="{{ route('admin.engineers.list') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
-                        {{__('public')['controll_panel']}}
-                    </a>
-                </div>
-                @endif
-
             </nav>
         </div>
     </section>

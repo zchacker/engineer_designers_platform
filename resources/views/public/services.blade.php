@@ -8,7 +8,7 @@
 </section>
 
 <section class="bg-white flex items-center justify-center py-8">
-    <h2 class="font-bold text-3xl text-center text-black">خدماتنا شاملة لجميع المجالات الهندسية</h2>
+    <h2 class="font-bold text-3xl text-center text-black">{{__('public')['service_message']}}</h2>
 </section>
 
 <section class="bg-white py-10 md:py-16">    
@@ -23,64 +23,7 @@
                 <a href="#" class="normal_button mt-4">{{ __('public')['request_service'] }}</a>
             </div>
         </div>
-        @endforeach
-        
-        <!-- <div class="relative p-4 shadow-lg shadow-gray-400 rounded-3xl py-12">
-            <div class="flex flex-col items-center justify-center h-full p-4">
-                <img src="{{ asset('imgs/image/s4.png') }}" class="absolute -top-[50px] h-[120px] text-green-700 mb-4 mx-auto" />
-                <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ __('public')['service2'] }}</h4>
-                <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ __('public')['service2_details'] }}</p>
-            </div>
-        </div>
-        <div class="relative p-4 shadow-lg shadow-gray-400 rounded-3xl py-12">
-            <div class="flex flex-col items-center justify-center h-full p-4">
-                <img src="{{ asset('imgs/image/s4.png') }}" class="absolute -top-[50px] h-[120px] text-green-700 mb-4 mx-auto" />
-                <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ __('public')['service3'] }}</h4>
-                <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ __('public')['service3_details'] }}</p>
-            </div>
-        </div>
-        <div class="relative p-4 shadow-lg shadow-gray-400 rounded-3xl py-12">
-            <div class="flex flex-col items-center justify-center h-full p-4">
-                <img src="{{ asset('imgs/image/s4.png') }}" class="absolute -top-[50px] h-[120px] text-green-700 mb-4 mx-auto" />
-                <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ __('public')['service4'] }}</h4>
-                <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ __('public')['service4_details'] }}</p>
-            </div>
-        </div>
-        <div class="relative p-4 shadow-lg shadow-gray-400 rounded-3xl py-12">
-            <div class="flex flex-col items-center justify-center h-full p-4">
-                <img src="{{ asset('imgs/image/s4.png') }}" class="absolute -top-[50px] h-[120px] text-green-700 mb-4 mx-auto" />
-                <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ __('public')['service5'] }}</h4>
-                <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ __('public')['service5_details'] }}</p>
-            </div>
-        </div>
-        <div class="relative p-4 shadow-lg shadow-gray-400 rounded-3xl py-12">
-            <div class="flex flex-col items-center justify-center h-full p-4">
-                <img src="{{ asset('imgs/image/s4.png') }}" class="absolute -top-[50px] h-[120px] text-green-700 mb-4 mx-auto" />
-                <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ __('public')['service6'] }}</h4>
-                <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ __('public')['service6_details'] }}</p>
-            </div>
-        </div>
-        <div class="relative p-4 shadow-lg shadow-gray-400 rounded-3xl py-12">
-            <div class="flex flex-col items-center justify-center h-full p-4">
-                <img src="{{ asset('imgs/image/s4.png') }}" class="absolute -top-[50px] h-[120px] text-green-700 mb-4 mx-auto" />
-                <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ __('public')['service7'] }}</h4>
-                <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ __('public')['service7_details'] }}</p>
-            </div>
-        </div>
-        <div class="relative p-4 shadow-lg shadow-gray-400 rounded-3xl py-12">
-            <div class="flex flex-col items-center justify-center h-full p-4">
-                <img src="{{ asset('imgs/image/s4.png') }}" class="absolute -top-[50px] h-[120px] text-green-700 mb-4 mx-auto" />
-                <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ __('public')['service8'] }}</h4>
-                <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ __('public')['service8_details'] }}</p>
-            </div>
-        </div>
-        <div class="relative p-4 shadow-lg shadow-gray-400 rounded-3xl py-12">
-            <div class="flex flex-col items-center justify-center h-full p-4">
-                <img src="{{ asset('imgs/image/s4.png') }}" class="absolute -top-[50px] h-[120px] text-green-700 mb-4 mx-auto" />
-                <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ __('public')['service9'] }}</h4>
-                <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ __('public')['service9_details'] }}</p>
-            </div>
-        </div>         -->
+        @endforeach       
     </div>   
 </section>
 @include('public.footer')

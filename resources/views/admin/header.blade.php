@@ -90,15 +90,85 @@
                     <a href="{{ route('admin.supervisors.list') }}" class="navbar_item_text"> المشرفين </a>
                 </div>     
 
+                
                 <div class="navbar_item">                    
                     <i class="las la-cog la-2x"></i>
                     <a href="{{ route('admin.settings') }}" class="navbar_item_text"> الإعدادات </a>
-                </div>     
+                </div>
+                
+
                 
                 <div class="navbar_item">                    
                     <i class="las la-lock la-2x"></i>
                     <a href="{{ route('admin.password') }}" class="navbar_item_text"> تغيير كلمة المرور </a>
                 </div>  
+                
+                {{--
+                <div class="navbar_item" onclick="dropdown()">
+                    <i class="las la-lock la-2x"></i>
+                    <div class="flex justify-between w-full items-center">
+                        <span class="navbar_item_text_header">Chatbox</span>
+                        <span class="text-sm rotate-180" id="arrow">
+                            <i class="bi bi-chevron-down"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="text-right text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold hidden" id="submenu">
+                    <h1 class="navbar_item_text">
+                        Social
+                    </h1>
+                    <h1 class="navbar_item_text">
+                        Personal
+                    </h1>
+                    <h1 class="navbar_item_text">
+                        Friends
+                    </h1>
+                </div>
+
+
+                <div class="navbar_item" onclick="dropdown()">
+                    <i class="las la-lock la-2x"></i>
+                    <div class="flex justify-between w-full items-center">
+                        <span class="navbar_item_text_header">Chatbox2</span>
+                        <span class="text-sm rotate-180" id="arrow">
+                            <i class="bi bi-chevron-down"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="text-right text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold hidden" id="submenu">
+                    <h1 class="navbar_item_text">
+                        Social
+                    </h1>
+                    <h1 class="navbar_item_text">
+                        Personal
+                    </h1>
+                    <h1 class="navbar_item_text">
+                        Friends
+                    </h1>
+                </div>
+
+
+                <div class="navbar_item" onclick="dropdown(this)">
+                    <i class="las la-lock la-2x"></i>
+                    <div class="flex justify-between w-full items-center">
+                        <span class="navbar_item_text_header">Chatbox2</span>
+                        <span class="text-sm rotate-180 arrow">
+                            <i class="bi bi-chevron-down"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="text-right text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold submenu hidden">
+                    <h1 class="navbar_item_text">
+                        Social
+                    </h1>
+                    <h1 class="navbar_item_text">
+                        Personal
+                    </h1>
+                    <h1 class="navbar_item_text">
+                        Friends
+                    </h1>
+                </div>
+                --}}                
 
                 <div class="navbar_item navbar_logout">
                     <i class="las la-power-off la-2x"></i>
@@ -109,9 +179,16 @@
         </nav>
 
         <script type="text/javascript">
-            function dropdown() {
-                document.querySelector("#submenu").classList.toggle("hidden");
-                document.querySelector("#arrow").classList.toggle("rotate-0");
+            // function dropdown() {
+            //     document.querySelector("#submenu").classList.toggle("hidden");
+            //     document.querySelector("#arrow").classList.toggle("rotate-0");
+            // }
+
+            function dropdown(element) {
+                const submenu = element.nextElementSibling;
+                const arrow = element.querySelector('.arrow');
+                submenu.classList.toggle('hidden');
+                arrow.classList.toggle('rotate-0');
             }
 
             //dropdown();

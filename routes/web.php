@@ -24,6 +24,10 @@ Route::get('/test', function () {
     return view('errors.404');
 })->name('test');
 
+Route::get('/sitemap.xml', function(){
+    return response()->view('sitemap.pages')->header('Content-Type', 'text/xml');
+});
+
 // Route::get('/', [\App\Http\Controllers\RegisterController::class, 'register'])->name('home');
 
 // Route::group(['prefix' => '{locale?}'], function () {
@@ -61,13 +65,13 @@ Route::get('/test', function () {
     })->name('terms');
 
     Route::group(['middleware' => ['auth:client,engineer']], function () {
-
         Route::get('/confirm_email', [\App\Http\Controllers\AuthController::class, 'confirm_email'])->name('confirm.email');
         Route::post('/confirm_email/action', [\App\Http\Controllers\AuthController::class, 'confirm_email_action'])->name('confirm.email.action');
         Route::get('/confirm_email/resend', [\App\Http\Controllers\AuthController::class, 'confirm_email_resend'])->name('confirm.email.resend.action');
     });
 // });
 
+Route::get('language/{locale}' , [\App\Http\Controllers\Shared\LanguageController::class , 'switch'])->name('language.switch');
 
 // public invoice
 Route::get('/invoices/show/{invoice_id}', [\App\Http\Controllers\Shared\InvoicesController::class, 'show'])->name('invoices.show');
@@ -116,7 +120,6 @@ Route::group(['middleware' => ['auth:client', 'account'], 'prefix' => 'client'],
 
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'client_logout'])->name('client.logout');
 });
-
 
 Route::group(['middleware' => ['auth:engineer', 'account'], 'prefix' => 'engineer'], function () {
 
@@ -171,7 +174,6 @@ Route::group(['middleware' => ['auth:engineer', 'account'], 'prefix' => 'enginee
 
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'engineer_logout'])->name('engineer.logout');
 });
-
 
 Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () {
 
@@ -253,7 +255,6 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'admin_logout'])->name('admin.logout');
 
 });
-
 
 Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], function () {
 

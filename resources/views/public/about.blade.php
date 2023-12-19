@@ -47,26 +47,32 @@
 <section class="bg-gray-100 py-16">
     <div class="container mx-auto">
         <div class="text-center">
-            <h2 class="text-4xl font-bold mb-8">لماذا نحن</h2>
+            <h2 class="text-4xl font-bold mb-8">{{__('public')['why_us']}}</h2>
             <p class="text-lg text-gray-700">
-            نحن نقدم خدمات من الدرجة الأولى لعملائنا.
+            {{__('public')['why_us_details']}}
             </p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
             <div class="bg-white p-8 rounded-lg shadow-lg text-center">
                 <i class="fas fa-check-circle text-4xl text-primary mb-4"></i>
-                <h3 class="text-xl font-semibold mb-2">الجودة</h3>
-                <p class="text-gray-700">نحن نركز على تحقيق نتائج عالية الجودة.</p>
+                <h3 class="text-xl font-semibold mb-2">{{__('public')['quality']}}</h3>
+                <p class="text-gray-700">
+                    {{__('public')['quality_details']}}
+                </p>
             </div>
             <div class="bg-white p-8 rounded-lg shadow-lg text-center">
                 <i class="fas fa-chart-line text-4xl text-primary mb-4"></i>
-                <h3 class="text-xl font-semibold mb-2">ابتكار</h3>
-                <p class="text-gray-700">نبقى في المقدمة مع الحلول المبتكرة.</p>
+                <h3 class="text-xl font-semibold mb-2">{{__('public')['innovation']}}</h3>
+                <p class="text-gray-700">
+                    {{__('public')['innovation_details']}}
+                </p>
             </div>
             <div class="bg-white p-8 rounded-lg shadow-lg text-center">
                 <i class="fas fa-users text-4xl text-primary mb-4"></i>
-                <h3 class="text-xl font-semibold mb-2">الفريق</h3>
-                <p class="text-gray-700">فريقنا ذو الخبرة موجود هنا لمساعدتك.</p>
+                <h3 class="text-xl font-semibold mb-2">{{__('public')['team']}}</h3>
+                <p class="text-gray-700">
+                    {{__('public')['team_details']}}
+                </p>
             </div>
         </div>
     </div>
