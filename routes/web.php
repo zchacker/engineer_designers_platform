@@ -35,13 +35,16 @@ Route::get('/sitemap.xml', function(){
     Route::get('/', [\App\Http\Controllers\Public\PagesController::class, 'home'])->name('home');
     Route::get('/services', [\App\Http\Controllers\Public\PagesController::class, 'services'])->name('services');
     Route::get('/about', [\App\Http\Controllers\Public\PagesController::class, 'about'])->name('about');
-    Route::get('/projects', [\App\Http\Controllers\Public\PagesController::class, 'projects'])->name('projects');
     Route::get('/engineers', [\App\Http\Controllers\Public\PagesController::class, 'engineers'])->name('engineers');
     Route::get('/contact-us', [\App\Http\Controllers\Public\PagesController::class, 'contact'])->name('contact-us');
-
+    
+    // project
+    Route::get('/projects', [\App\Http\Controllers\Public\PagesController::class, 'projects'])->name('projects');
+    Route::get('/projects/details/{project_id}', [\App\Http\Controllers\Public\PagesController::class, 'project_details'])->name('projects.details');
+    
     // engineer works details
     Route::get('/engineers/details/{engineer_id}', [\App\Http\Controllers\Public\PagesController::class, 'details'])->name('engineers.details');
-    Route::get('/engineers/work/details/{engineer_id}/{work_id}', [\App\Http\Controllers\Public\PagesController::class, 'work_details'])->name('engineers.work.details');
+    Route::get('/engineers/work/details/{project_id}', [\App\Http\Controllers\Public\PagesController::class, 'work_details'])->name('engineers.work.details');
 
     Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
     Route::post('/login/action', [\App\Http\Controllers\AuthController::class, 'login_action'])->name('login.action');

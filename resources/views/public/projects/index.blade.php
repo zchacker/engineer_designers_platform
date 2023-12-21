@@ -9,13 +9,14 @@
 
 <section class="min-h-screen p-8">
 @if($works->isNotEmpty())
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mx-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:mx-8">
         @foreach($works as $work)
-            <div class="flex flex-col items-center p-8 hover:shadow-sm border">
-                <a href="#" class="">
-                    <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" alt="" class="w-40" />
+            <div class="flex flex-col items-center justify-center p-8 shadow-md shadow-gray-400 rounded-2xl h-[380px]">
+                <a href="{{ route('projects.details' , $work->id ) }}" class="text-center  h-full">
+                    <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" alt="{{$work->title}}" class="h-[250px] object-cover" />
                     <h2 class="text-black text-xl mt-4 font-bold"> {{$work->title}} </h2>
                 </a>
+                <a href="{{ route('projects.details' , $work->id ) }}" class="normal_button mt-4">{{__('work_details')}}</a>
             </div>
         @endforeach
     </div>

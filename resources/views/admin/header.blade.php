@@ -18,14 +18,30 @@
 
         <!-- header page  -->
         <nav class="lg:w-72">
-            <span class="absolute shadow-md p-2 border-gray-100 border-solid border-2 rounded-md text-black text-4xl top-5  right-4 cursor-pointer" onclick="openSidebar()">                
+        @if(app()->getLocale() == 'ar')
+            <span class="absolute shadow-none p-2 border-gray-500 border-solid border-2 rounded-md text-black text-4xl top-5  right-4 cursor-pointer" onclick="openSidebar()">
+            @else
+            <span class="absolute shadow-none p-2 border-gray-500 border-solid border-2 rounded-md text-black text-4xl top-5  left-4 cursor-pointer" onclick="openSidebar()">
+            @endif
                 <i class="las la-bars la-3xl"></i>
             </span>
-            <div class="sidebar z-50 transition duration-150 ease-in-out  hidden lg:block fixed top-0 bottom-0 lg:right-0 p-2 w-[250px] overflow-y-auto text-center bg-[#151616]">
-                <div class="text-gray-100 text-xl">
+
+            @if(app()->getLocale() == 'ar')
+            <div class="sidebar z-50 transition duration-150 ease-in-out  hidden lg:block fixed top-0 bottom-0 lg:right-0 p-2 w-[250px] overflow-y-auto bg-[#151616]">
+            @else
+            <div class="sidebar z-50 transition duration-150 ease-in-out  hidden lg:block fixed top-0 bottom-0 lg:left-0 p-2 w-[250px] overflow-y-auto bg-[#151616]">
+            @endif
+              <div class="text-gray-100 text-xl">
                     <div class="p-2.5 mt-1 flex items-center">
                         <a href="{{route('home')}}">                            
-                            <h1 class="font-bold text-right text-white lg:text-[1.6rem] ml-3"> الرجوع للموقع </h1>
+                            <h1 class="font-bold text-right text-white lg:text-[1.6rem] ml-3">
+                                @if(app()->getLocale() == 'ar')
+                                <i class="las la-arrow-circle-right" aria-hidden="true"></i>
+                                @else
+                                <i class="las la-arrow-circle-left" aria-hidden="true"></i>
+                                @endif                                
+                                {{__('back_to_site')}} 
+                            </h1>
                         </a>
                         <div class="lg:hidden left-0 absolute">
                             <i class="las la-times-circle la-2x h-8 w-8 ml-5 cursor-pointer" onclick="openSidebar()"></i>

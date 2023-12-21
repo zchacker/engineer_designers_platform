@@ -1,3 +1,9 @@
+<div class="fixed right-6 bottom-8 w-14 h-14">
+    <a href="https://wa.me/966536385896" target="_blank">
+        <img src="{{ asset('imgs/image/whatsapp.webp') }}" alt="">
+    </a>
+</div>
+
 <footer class="bg-black text-white pt-16">
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 items-start justify-center">
         <div class="flex items-center justify-center mb-6">

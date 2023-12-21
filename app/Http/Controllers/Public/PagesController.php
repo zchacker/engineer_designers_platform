@@ -7,6 +7,7 @@ use App\Models\ServicesModel;
 use App\Models\UsersModel;
 use App\Models\WorksModel;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class PagesController extends Controller
 {
@@ -39,7 +40,24 @@ class PagesController extends Controller
         ->get();
         
         $active = 'projects';
-        return view('public.projects' ,compact('works' , 'active'));
+        return view('public.projects.index' ,compact('works' , 'active'));
+    }
+
+    public function project_details(Request $request, $project_id)
+    {
+       
+        $work = WorksModel::with(['worksFiles' , 'engineer'])
+        ->where('id', $project_id)
+        ->first();
+
+        if($work == NULL)
+        {
+            return abort(Response::HTTP_NOT_FOUND);
+        }
+       
+        $engineer = $work->engineer;
+
+        return view('public.projects.details', compact('engineer','work') );
     }
 
     public function engineers(Request $request)
@@ -52,7 +70,7 @@ class PagesController extends Controller
         $engineers  = $query->paginate(200);
         
         $active = 'engineers';
-        return view('public.engineers' ,compact('engineers' , 'active')); 
+        return view('public.engineers.index' ,compact('engineers' , 'active')); 
     }
 
     public function details(Request $request, $engineer_id)
@@ -72,19 +90,21 @@ class PagesController extends Controller
 
     }
 
-    public function work_details(Request $request, $engineer_id, $work_id)
+    public function work_details(Request $request, $project_id)
     {
 
-        $engineer = UsersModel::with("avatar")              
-        ->where('id', $engineer_id)
+        $work = WorksModel::with(['worksFiles' , 'engineer'])
+        ->where('id', $project_id)
         ->first();
 
-        $work = WorksModel::with('worksFiles')
-        ->where('id', $work_id)
-        ->first();
-        
+        if($work == NULL)
+        {
+            return abort(Response::HTTP_NOT_FOUND);
+        }
+       
+        $engineer = $work->engineer;        
 
-        return view('public.engineers.work_details', compact('engineer','work') );
+        return view('public.projects.details', compact('engineer','work') );
 
     }
 
