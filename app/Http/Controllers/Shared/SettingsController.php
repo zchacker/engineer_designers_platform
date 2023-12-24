@@ -17,21 +17,18 @@ class SettingsController extends Controller
     
     public function update_data(Request $request)
     {
-
         $user = UsersModel::with('avatar')->find($request->user()->id);
         return view('engineer.settings.data', compact('user'));
     }
 
     public function client_update_data(Request $request)
     {
-
         $user = UsersModel::with('avatar')->find($request->user()->id);
         return view('clients.settings.data', compact('user'));
     }  
     
     public function admin_update_data(Request $request)
     {
-
         $user = UsersModel::with('avatar')->find($request->user()->id);
         return view('admin.settings.data', compact('user'));
     }  
@@ -42,7 +39,6 @@ class SettingsController extends Controller
         return view('supervisor.settings.data', compact('user'));
     }   
 
-    
     public function update_passwords(Request $request)
     {
         return view('engineer.settings.password');
@@ -117,7 +113,7 @@ class SettingsController extends Controller
                         );
 
 
-                        if ($url != false) // file stored successfully
+                        if ($url == true) // file stored successfully
                         {
                             $file_added = FilesModel::create([
                                 'fileName' => $url,

@@ -30,7 +30,7 @@ class WorksController extends Controller
         $rules = array(
             'title' => 'required|max:255',
             'work_details' => 'required',
-            'images.*' => 'mimes:jpeg,png,jpg,gif,svg,webp|image|max:20000',
+            'images.*' => 'mimes:jpeg,png,jpg,gif,svg,webp|image|max:25000',
             "files.*" =>  'file|max:20000',
         );
 
