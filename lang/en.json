@@ -54,6 +54,7 @@
     "order_details_required": "Order details are required",
     "update_status_required": "Please select order status",
     "create": "Create",
+    "create_google_meet":"Create Meeting via Google Meet",
     "enter_number_validate": "Please enter a valid number",
     "order_title": "Order Title",
     "order_details": "Write your order details",

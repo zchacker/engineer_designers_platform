@@ -44,9 +44,15 @@
                                             <tr data-href="" class="clickable-row cursor-pointer hover:bg-gray-200">
                                                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $invoice->invoice_number }} </td>
                                                 <td class="whitespace-nowrap py-4 px-3 text-sm text-center text-blue-500 font-bold hover:underline">
+                                                    @if($invoice->order_id != null)
                                                     <a href="{{ route('supervisor.order.details' , $invoice->order_id) }}">
-                                                        {{ $invoice->order_id }} 
+                                                        {{ $invoice->order_id ?? 'N/A' }}  
                                                     </a>
+                                                    @else 
+                                                    <a href="javascript:void(0);">
+                                                        {{ $invoice->order_id ?? 'N/A' }} 
+                                                    </a>
+                                                    @endif
                                                 </td>
                                                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $invoice->client_name }} </td>
                                                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $invoice->invoice_date }} </td>

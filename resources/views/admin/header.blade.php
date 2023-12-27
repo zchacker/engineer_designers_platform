@@ -18,7 +18,7 @@
 
         <!-- header page  -->
         <nav class="lg:w-72">
-        @if(app()->getLocale() == 'ar')
+            @if(app()->getLocale() == 'ar')
             <span class="absolute shadow-none p-2 border-gray-500 border-solid border-2 rounded-md text-black text-4xl top-5  right-4 cursor-pointer" onclick="openSidebar()">
             @else
             <span class="absolute shadow-none p-2 border-gray-500 border-solid border-2 rounded-md text-black text-4xl top-5  left-4 cursor-pointer" onclick="openSidebar()">

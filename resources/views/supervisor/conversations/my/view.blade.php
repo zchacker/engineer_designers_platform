@@ -6,9 +6,12 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 h-full flex flex-col">
             <div class="bg-white overflow-hidden shadow-md sm:rounded-lg flex-grow">
                 {{-- Conversation Header --}}
-                <div class="p-4 bg-blue-500 text-white">
+                <div class="flex items-center justify-between p-4 bg-blue-500 text-white">
                     {{-- Add conversation title or other header content here --}}
                     <h2 class="text-xl font-semibold">{{ $otherUser->name }} | {{ $myUser->name }}</h2>
+                    <a href="{{ route('supervisor.meeting.create' , $otherUser->id ) }}">
+                        <i class="las la-video la-2x"></i>
+                    </a>
                     {{-- Assuming you have a $user object with a 'name' property --}}
                     @php
                         $firstCharOther = (substr($otherUser->name, 0, 1));

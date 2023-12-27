@@ -74,6 +74,12 @@ Route::get('/sitemap.xml', function(){
     });
 // });
 
+
+// this must be public
+Route::group(['middleware' => ['auth:engineer,admin,supervisor'], 'prefix' => 'engineer'], function () {
+    Route::get('/google/get/token', [\App\Http\Controllers\Admin\MeetingsController::class, 'handleGoogleCallback'])->name('google.get.token');
+});
+
 Route::get('language/{locale}' , [\App\Http\Controllers\Shared\LanguageController::class , 'switch'])->name('language.switch');
 
 // public invoice
@@ -172,7 +178,7 @@ Route::group(['middleware' => ['auth:engineer', 'account'], 'prefix' => 'enginee
     Route::get('/meetings/cancel/{meeting_id}', [\App\Http\Controllers\Engineer\MeetingsController::class, 'cancel_meeting'])->name('engineer.meeting.cancel');
 
     Route::get('/google/request/token', [\App\Http\Controllers\Engineer\MeetingsController::class, 'redirectToGoogle'])->name('engineer.google.request.token');
-    Route::get('/google/get/token', [\App\Http\Controllers\Engineer\MeetingsController::class, 'handleGoogleCallback'])->name('engineer.google.get.token');
+    //Route::get('/google/get/token', [\App\Http\Controllers\Engineer\MeetingsController::class, 'handleGoogleCallback'])->name('engineer.google.get.token');
 
 
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'engineer_logout'])->name('engineer.logout');
@@ -216,7 +222,12 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
 
     // meetings
     Route::get('/meetings/list', [\App\Http\Controllers\Admin\MeetingsController::class, 'list'])->name('admin.meeting.list');
-
+    Route::get('/google/create/{client_id}', [\App\Http\Controllers\Admin\MeetingsController::class, 'create'])->name('admin.meeting.create');
+    Route::post('/google/create/{client_id}', [\App\Http\Controllers\Admin\MeetingsController::class, 'create_action'])->name('admin.meeting.create.action');
+    
+    Route::get('/meetings/cancel/{meeting_id}', [\App\Http\Controllers\Admin\MeetingsController::class, 'cancel_meeting'])->name('admin.meeting.cancel');
+    Route::get('/google/request/token', [\App\Http\Controllers\Admin\MeetingsController::class, 'redirectToGoogle'])->name('admin.google.request.token');
+        
     // messages
     Route::get('/conversation/list', [\App\Http\Controllers\Admin\ConversationController::class, 'listConversations'])->name('admin.conversation.list');
     Route::get('/conversation/view/{conversationId}', [\App\Http\Controllers\Admin\ConversationController::class, 'viewConversation'])->name('admin.conversation.view');
@@ -284,7 +295,12 @@ Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], fu
 
     // meetings
     Route::get('/meetings/list', [\App\Http\Controllers\Supervisor\MeetingsController::class, 'list'])->name('supervisor.meeting.list');
-
+    Route::get('/google/create/{client_id}', [\App\Http\Controllers\Supervisor\MeetingsController::class, 'create'])->name('supervisor.meeting.create');
+    Route::post('/google/create/{client_id}', [\App\Http\Controllers\Supervisor\MeetingsController::class, 'create_action'])->name('supervisor.meeting.create.action');
+    
+    Route::get('/meetings/cancel/{meeting_id}', [\App\Http\Controllers\Supervisor\MeetingsController::class, 'cancel_meeting'])->name('supervisor.meeting.cancel');
+    Route::get('/google/request/token', [\App\Http\Controllers\Supervisor\MeetingsController::class, 'redirectToGoogle'])->name('supervisor.google.request.token');
+        
     // My messages
     Route::post('/my/conversation/create', [\App\Http\Controllers\Supervisor\MyConversationController::class, 'initiateConversation'])->name('supervisor.my.conversation.create');
     Route::get('/my/conversation/list', [\App\Http\Controllers\Supervisor\MyConversationController::class, 'listConversations'])->name('supervisor.my.conversation.list');
@@ -301,5 +317,12 @@ Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], fu
 
 
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'supervisor_logout'])->name('supervisor.logout');
+
+});
+
+Route::group(['middleware' => ['auth:editor'], 'prefix' => 'editor'], function () {
+
+    Route::post('/image/upload', [\App\Http\Controllers\Editor\PostsController::class, 'upload'])->name('editor.image.upload');
+    Route::get('/posts/create', [\App\Http\Controllers\Editor\PostsController::class, 'create'])->name('editor.post.create');
 
 });

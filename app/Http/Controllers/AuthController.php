@@ -87,6 +87,10 @@ class AuthController extends Controller
                                 return redirect()->intended(route('engineer.orders.list'));
                                 // return redirect()->route('engineer.orders.list');
                                 break;
+                            case 'editor':
+                                return redirect()->intended(route('editor.post.create'));
+                                // return redirect()->route('engineer.orders.list');
+                                break;
                             default:
                                 return redirect()->intended(route('home'));
                                 // return redirect()->route('home');

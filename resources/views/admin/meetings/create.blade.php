@@ -1,6 +1,5 @@
-@include('engineer.header')
+@include('admin.header')
 <div class="content">
-
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
@@ -27,7 +26,7 @@
                         </div>
                         @endif
 
-                        <form method="POST" enctype="multipart/form-data" action="{{ route('engineer.meeting.create.action' , $client_id) }}" id="file-upload-form">
+                        <form method="POST" enctype="multipart/form-data" action="{{ route('admin.meeting.create.action' , $client_id) }}" id="file-upload-form">
                             @csrf
 
                             <div class="mb-4  items-center">
@@ -69,13 +68,11 @@
                     <h1 class="text-2xl font-bold mb-8"> {{__('meeting_create')}}</h1>
                     <img src="{{asset('imgs/image/google_meet.webp')}}" alt="Google Meet" class="w-[350px] h-[350px]">
                     <p class="text-xl my-8">{{__('meeting_permission_required')}}</p>
-                    <a href="{{route('engineer.google.request.token')}}" class="normal_button my-8">{{__('meeting_permission_garant')}}</a>
+                    <a href="{{route('admin.google.request.token')}}" class="normal_button my-8">{{__('meeting_permission_garant')}}</a>
                 </div>
                 @endif
             </div>
         </div>
     </div>
 </div>
-
-
-@include('engineer.footer')
+@include('admin.footer')

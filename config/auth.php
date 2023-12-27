@@ -55,7 +55,11 @@ return [
         'supervisor' => [
             'driver' => 'session',
             'provider' => 'users',
-        ]
+        ],
+        'editor' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],        
     ],
 
     /*

@@ -92,7 +92,7 @@ class MeetingsController extends Controller
             );
 
             if ($meet_link == null) {
-                return redirect()->route('engineer.google.request.token');
+                return redirect()->route('supervisor.google.request.token');
             } else {
 
                 // save the meeting in database 
@@ -105,7 +105,7 @@ class MeetingsController extends Controller
                 $meeting->meeting_link  = $meet_link;
 
                 if ($meeting->save()) {
-                    return redirect()->route('engineer.meeting.list')->with(['success' => __('added_successfuly')]);
+                    return redirect()->route('supervisor.meeting.list')->with(['success' => __('added_successfuly')]);
                 } else {
                     return back()
                         ->withErrors(['error' => __('unable_to_add')])
@@ -170,7 +170,7 @@ class MeetingsController extends Controller
 
         }else{
 
-            return redirect()->route('engineer.meeting.list');
+            return redirect()->route('supervisor.meeting.list');
             
         }
                    
@@ -179,7 +179,7 @@ class MeetingsController extends Controller
     public function refreshToken()
     {
 
-        $refreshToken = auth('engineer')->user()->googleRefreshToken; // "1//03nXbigO2IhOtCgYIARAAGAMSNwF-L9IrYN92rLJvB6X8kKDMol2-hriNpT_x76_F6GzWKO8JVYlGOXulnzjQL3PQIfjqeBdDNyM";        
+        $refreshToken = auth('supervisor')->user()->googleRefreshToken; // "1//03nXbigO2IhOtCgYIARAAGAMSNwF-L9IrYN92rLJvB6X8kKDMol2-hriNpT_x76_F6GzWKO8JVYlGOXulnzjQL3PQIfjqeBdDNyM";        
 
         $response = Http::asForm()
             ->post('https://oauth2.googleapis.com/token', [

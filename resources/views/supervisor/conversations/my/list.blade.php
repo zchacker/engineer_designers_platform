@@ -14,7 +14,7 @@
                 {{-- Conversation List --}}
                 <div class="p-4">
                     @forelse($conversations as $conversation)
-                    <a href="{{ route('admin.my.conversation.view', ['conversationId' => $conversation->id]) }}" class="block p-4 border-b hover:bg-gray-100">
+                    <a href="{{ route('supervisor.my.conversation.view', ['conversationId' => $conversation->id]) }}" class="block p-4 border-b hover:bg-gray-100">
                         <div class="flex items-center justify-between">
                             {{-- Display the names of participants or other conversation details --}}
                             <p class="text-lg font-semibold">

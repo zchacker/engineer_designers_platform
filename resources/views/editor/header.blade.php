@@ -1,5 +1,9 @@
 <!DOCTYPE html>
+@if(app()->getLocale() == 'ar')
 <html lang="ar" dir="rtl">
+@else
+<html lang="en" dir="ltr">
+@endif
 
 <head>
     <meta charset="UTF-8">
@@ -9,13 +13,14 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <title>المشرف</title>
+    <title>{{__('client_dashboard')}}</title>
+    <!-- Insert the blade containing the TinyMCE configuration and source script -->
+    <x-head.tinymce-config/>
 </head>
 
 <body class="bg-dash-bg">
     
-    <div class="flex">
-
+    <div class="flex">            
         <!-- header page  -->
         <nav class="lg:w-72">
             @if(app()->getLocale() == 'ar')
@@ -33,8 +38,8 @@
             @endif
                 <div class="text-gray-100 text-xl">
                     <div class="p-2.5 mt-1 flex items-center">
-                        <a href="{{route('home')}}">                            
-                            <h1 class="font-bold text-right text-white lg:text-[1.6rem] ml-3">
+                        <a href="{{route('home')}}">
+                            <h1 class="font-bold text-right text-white lg:text-[1.6rem] mr-0">
                                 @if(app()->getLocale() == 'ar')
                                 <i class="las la-arrow-circle-right" aria-hidden="true"></i>
                                 @else
@@ -43,63 +48,40 @@
                                 {{__('back_to_site')}} 
                             </h1>
                         </a>
+
+                        @if(app()->getLocale() == 'ar')
                         <div class="lg:hidden left-0 absolute">
-                            <i class="las la-times-circle la-2x h-8 w-8 ml-5 cursor-pointer" onclick="openSidebar()"></i>
-                        </div>
+                        @else
+                        <div class="lg:hidden right-3 absolute">
+                        @endif
+                            <i class="las la-times-circle la-2x h-8 w-8 ml-5 cursor-pointer" onclick="openSidebar()"></i>                            
+                        </div>                        
                         <!-- <img src="{{ asset('imgs/letter-x.svg') }}" class="h-8 w-8 ml-5 cursor-pointer left-0 absolute lg:hidden" onclick="openSidebar()" alt="">                         -->
-                    </div>
+                    </div>                    
                     <!-- <div class="my-2 bg-white h-[1px]"></div> -->
-                </div>                                                                        
-                
-                <div class="navbar_item">                    
-                    <i class="las la-user-tie la-2x"></i>
-                    <a href="{{ route('supervisor.engineers.list') }}" class="navbar_item_text"> المهندسين </a>
-                </div> 
-                
-                <div class="navbar_item">                    
-                    <i class="las la-users la-2x"></i>
-                    <a href="{{ route('supervisor.clients.list') }}" class="navbar_item_text"> العملاء </a>
-                </div>
-                
-                <div class="navbar_item">                    
-                    <i class="las la-box la-2x"></i>
-                    <a href="{{ route('supervisor.orders.list') }}" class="navbar_item_text"> الطلبات </a>
                 </div>
 
-                <div class="navbar_item">                    
-                    <i class="las la-project-diagram la-2x"></i>
-                    <a href="{{ route('supervisor.invoices.list') }}" class="navbar_item_text"> الفواتير </a>
-                </div>
-
-                <div class="navbar_item">                    
-                    <i class="las la-file-contract la-2x"></i>
-                    <a href="{{ route('supervisor.contract.list') }}" class="navbar_item_text"> العقود </a>
-                </div>
-                
-                <div class="navbar_item">                    
-                    <i class="las la-handshake la-2x"></i>
-                    <a href="{{ route('supervisor.meeting.list') }}" class="navbar_item_text"> الاجتماعات </a>
+                <div class="navbar_item">
+                    @if(app()->getLocale() == 'ar')
+                        <a href="{{ route('language.switch' , 'en') }}" ><i class="las la-language la-1x"></i> English</a>
+                    @else
+                        <a href="{{ route('language.switch' , 'ar') }}"> <i class="las la-language la-1x"></i> عربي</a>
+                    @endif
                 </div> 
-
-                <div class="navbar_item">                    
-                    <i class="las la-envelope la-2x"></i>
-                    <a href="{{ route('supervisor.my.conversation.list') }}" class="navbar_item_text"> المحادثات </a>
-                </div> 
-                
-                
-                <div class="navbar_item">                    
+            
+                <div class="navbar_item">
                     <i class="las la-cog la-2x"></i>
-                    <a href="{{ route('supervisor.settings') }}" class="navbar_item_text"> الإعدادات </a>
-                </div>     
-                
-                <div class="navbar_item">                    
+                    <a href="{{ route('client.settings') }}" class="navbar_item_text"> {{__('profile')}} </a>
+                </div>
+
+                <div class="navbar_item">
                     <i class="las la-lock la-2x"></i>
-                    <a href="{{ route('supervisor.password') }}" class="navbar_item_text"> تغيير كلمة المرور </a>
-                </div>  
+                    <a href="{{ route('client.password') }}" class="navbar_item_text"> {{__('change_password')}} </a>
+                </div>                
 
                 <div class="navbar_item navbar_logout">
                     <i class="las la-power-off la-2x"></i>
-                    <a href="{{ route('supervisor.logout') }}" class="navbar_item_text navbar_logout">تسجيل الخروج</a>
+                    <a href="{{ route('client.logout') }}" class="navbar_item_text navbar_logout"> {{__('logout')}} </a>
                 </div>
 
             </div>
@@ -118,5 +100,5 @@
             }
         </script>
         <!-- end of header  -->
-        
+
         <!-- start of body  -->
