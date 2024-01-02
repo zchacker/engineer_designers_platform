@@ -68,20 +68,31 @@
                         <a href="{{ route('language.switch' , 'ar') }}"> <i class="las la-language la-1x"></i> عربي</a>
                     @endif
                 </div> 
+
+
+                <div class="navbar_item">
+                    <i class="las la-blog la-2x"></i>
+                    <a href="{{ route('editor.post.list') }}" class="navbar_item_text"> {{__('post_list')}} </a>
+                </div>
+
+                <div class="navbar_item">
+                    <i class="las la-file la-2x"></i>
+                    <a href="{{ route('editor.page.list') }}" class="navbar_item_text"> {{__('pages_list')}} </a>
+                </div>
             
                 <div class="navbar_item">
                     <i class="las la-cog la-2x"></i>
-                    <a href="{{ route('client.settings') }}" class="navbar_item_text"> {{__('profile')}} </a>
+                    <a href="#" class="navbar_item_text"> {{__('profile')}} </a>
                 </div>
 
                 <div class="navbar_item">
                     <i class="las la-lock la-2x"></i>
-                    <a href="{{ route('client.password') }}" class="navbar_item_text"> {{__('change_password')}} </a>
+                    <a href="#" class="navbar_item_text"> {{__('change_password')}} </a>
                 </div>                
 
                 <div class="navbar_item navbar_logout">
                     <i class="las la-power-off la-2x"></i>
-                    <a href="{{ route('client.logout') }}" class="navbar_item_text navbar_logout"> {{__('logout')}} </a>
+                    <a href="{{ route('editor.logout') }}" class="navbar_item_text navbar_logout"> {{__('logout')}} </a>
                 </div>
 
             </div>

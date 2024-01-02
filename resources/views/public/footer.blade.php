@@ -1,9 +1,14 @@
-<div class="fixed right-6 bottom-8 w-14 h-14">
+<div class="fixed right-6 bottom-16 md:bottom-8 w-14 h-14 z-50">
     <a href="https://wa.me/966536385896" target="_blank">
         <img src="{{ asset('imgs/image/whatsapp.webp') }}" alt="">
     </a>
 </div>
 
+<div class="fixed bottom-0 left-0 right-0 md:hidden bg-green-500 text-center z-50">
+    <a href="tel:966536385896" target="_blank" class="bg-green-500 block w-full h-full text-white font-bold p-3">
+        {{__('contact_us_now')}}
+    </a>
+</div>
 <footer class="bg-black text-white pt-16">
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 items-start justify-center">
         <div class="flex items-center justify-center mb-6">
@@ -36,7 +41,7 @@
             </div>
         </div>
     </div>
-    <div class="flex flex-col items-center justify-center mt-4">
+    <div class="flex flex-col items-center justify-center mt-4 pb-14">
         <div class="flex items-center justify-center mb-4">
             <a href="{{ route('privacy') }}" class=" text-gray-400 hover:text-white transition duration-300 mx-2"> {{__('public')['privacy']}} </a>
             <span class="text-gray-400"> | </span>

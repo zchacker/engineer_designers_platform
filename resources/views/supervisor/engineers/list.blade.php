@@ -47,6 +47,15 @@
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $engineer->phone }} </td>
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $engineer->created_at }} </td>
                                             <td class="relative flex justify-between whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 md:pr-0">
+                                                
+                                            <form action="{{ route('supervisor.my.conversation.create') }}" method="post" class="flex">
+                                                    @csrf
+                                                    <input type="hidden" name="other_user_id" value="{{ $client->id }}">
+                                                    <button type="submit" class="flex text-yellow-400 hover:underline w-6 h-4">
+                                                        {{-- {{__('start_chat')}} --}}
+                                                        <img src="{{ asset('imgs/messenger.png') }}" alt="{{__('start_chat')}}" title="{{__('start_chat')}}" class="w-6 h-6" />
+                                                    </button>
+                                                </form>
                                                 <a href="{{ route('engineers.details' , $engineer->id ) }}" target="_blank" class="text-gray-600 hover:text-gray-900" title="View">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />

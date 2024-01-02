@@ -158,7 +158,7 @@
                                         $order->status == 'admin_review'  ||
                                         $order->status == 'followup_project')
                                         
-                                        <a href="{{ route('supervisor.invoices.create' , $order->id ) }}" class="normal_button">إنشاء مسودة فاتورة</a>
+                                        <a href="{{ route('admin.invoices.create' , $order->id ) }}" class="normal_button">إنشاء مسودة فاتورة</a>
                                     @endif
 
                                     <section class="my-4">

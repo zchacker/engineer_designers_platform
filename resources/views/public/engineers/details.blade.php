@@ -7,7 +7,7 @@
 </script>
 
 <section class="flex md:h-40 h-52 justify-center items-center flex-col">
-    <div class="w-full h-full bg-cover bg-no-repeat md:bg-cover md:bg-center" style="background-image: url('{{asset('imgs/image/head-pages.jpg')}}');">
+    <div class="w-full h-full bg-cover bg-no-repeat md:bg-cover md:bg-center" style="background-image: url('{{asset('imgs/image/head-pages.webp')}}');">
         <!-- <div class="w-full h-full px-8 py-8 flex justify-center items-end bg-black/5 backdrop-brightness-100"> -->
         <div class="w-full h-full px-8 py-8 flex justify-start items-start md:items-center bg-black/5 ">
             <h1 class="text-white text-3xl font-bold mb-4">{{__('works')}}</h1>
@@ -62,15 +62,11 @@
                             <div class="grid grid-cols-1 md:grid-cols-3  min-w-full py-2 ">
                                 @foreach($works as $work)
                                 <div class="flex flex-col items-center justify-center gap-2 shadow-md rounded-md shadow-gray-400 p-4 mx-2">
-                                    <div class="relative">                                         
-                                        @if(($work->worksFiles[0]->file_type ?? '') == 'image')                              
-                                            <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}"
-                                            data-src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" loading="lazy"
-                                            alt="" class="h-[300px] object-cover" />
-                                        @else 
-                                            <img src="{{ asset('imgs/packaging.png') }}"
-                                            data-src="{{ asset('imgs/packaging.png') }}" loading="lazy"
-                                            alt="" class="h-[300px] object-cover" />
+                                    <div class="relative">
+                                        @if(($work->worksFiles[0]->file_type ?? '') == 'image')
+                                        <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" data-src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" loading="lazy" alt="" class="h-[300px] object-cover" />
+                                        @else
+                                        <img src="{{ asset('imgs/packaging.png') }}" data-src="{{ asset('imgs/packaging.png') }}" loading="lazy" alt="" class="h-[300px] object-cover" />
                                         @endif
                                         <div class="absolute top-0 bottom-0 left-0 right-0 w-full h-full bg-transparent"></div>
                                     </div>

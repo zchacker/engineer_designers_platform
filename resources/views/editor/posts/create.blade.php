@@ -23,11 +23,11 @@
                         @endif
 
                         
-                        <form action="{{ route('admin.engineers.create.action') }}" method="post" enctype="multipart/form-data" onsubmit="return form_submit(this);" class="w-full">
+                        <form action="{{ route('editor.post.create.action') }}" method="post" enctype="multipart/form-data" onsubmit="return form_submit(this);" class="w-full">
                             @csrf
                             <div class="mb-4">
                                 <label for="title" class="lable_form">{{ __('post_title') }}</label>
-                                <input type="text" name="title" class="form_input !w-full" value="{{ old('title') }}" required/>
+                                <input type="text" name="title" class="form_input !w-full" value="{{ $post->title ?? old('title') }}" required/>
                             </div>
                             
                             <div class="mb-4">
@@ -36,40 +36,40 @@
                                 @php 
                                     $data = "Ahmed";
                                 @endphp
-                                <x-forms.tinymce-editor :body="old('body')" />
+                                <x-forms.tinymce-editor :body="$post->body ?? old('body')" />
                             </div>
 
                             <div class="mb-4">
                                 <label for="seo_title" class="lable_form">{{ __('post_seo_title') }}</label>
-                                <input type="text" name="seo_title" class="form_input !w-full" value="{{ old('seo_title') }}" required/>
+                                <input type="text" name="seo_title" class="form_input !w-full" value="{{ $post->seo_title ?? old('seo_title') }}" required/>
                             </div>
 
                             <div class="mb-4">
                                 <label for="seo_description" class="lable_form">{{ __('post_seo_description') }}</label>
-                                <input type="text" name="seo_description" class="form_input !w-full" value="{{ old('seo_description') }}" required />
+                                <input type="text" name="seo_description" class="form_input !w-full" value="{{ $post->seo_description ?? old('seo_description') }}" required />
                             </div>
 
                             <div class="mb-4">
                                 <label for="name" class="lable_form">{{ __('cover_image') }}</label>
-                                <input type="file" name="name" class="form_input !w-full"  />
+                                <input type="file" name="cover_image_file" class="form_input !w-full"  />
                             </div>
 
                             <div class="mb-4">
                                 <label for="slug" class="lable_form">{{ __('slug') }}</label>
-                                <input type="text" name="slug" class="form_input !w-full" value="{{ old('slug') }}" required/>
+                                <input type="text" name="slug" class="form_input !w-full" value="{{ $post->slug ?? old('slug') }}" required/>
                             </div>
 
                             <div class="mb-4">
                                 <label for="language" class="lable_form">{{ __('language') }}</label>
                                 <select name="language" id="language" class="form_input !w-full">
-                                    <option value="ar" {{ old('language') == 'ar' ? selected : "" }} >{{__('ar')}}</option>
-                                    <option value="en" {{ old('language') == 'en' ? selected : "" }} >{{__('en')}}</option>
+                                    <option value="ar" {{ ($post->language ?? old('language')) == 'ar' ? 'selected' : "" }} >{{__('ar')}}</option>
+                                    <option value="en" {{ ($post->language ?? old('language')) == 'en' ? 'selected' : "" }} >{{__('en')}}</option>
                                 </select>                                
                             </div>
 
                             <div class="mb-4">
                                 <label for="keywords" class="lable_form">{{ __('post_keywords') }}</label>
-                                <input type="text" name="keywords" class="form_input !w-full" value="{{ old('keywords') }}" />
+                                <input type="text" name="keywords" class="form_input !w-full" value="{{ $post->keywords ?? old('keywords') }}" />
                             </div>                            
 
                             <div class="mb-4">

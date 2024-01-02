@@ -12,7 +12,12 @@
             </div>
 
             <div class="z-10 relative top-10 my-8 md:block order-1 md:order-2">
-                <img src="{{asset('imgs/image/home.png')}}" alt="Home img" :class="{'hidden':navbarOpen}" />
+                <div class="border-2 border-yellow-300 box-border rounded-lg shadow-lg w-auto md:w-[600px]">
+                    <video :class="{'hidden':navbarOpen}" class="rounded-lg w-full h-full" controls autoplay="on">
+                        <source src="https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/videos/rclol3.mp4" type="video/mp4">
+                        <img src="{{asset('imgs/image/home.png')}}" alt="Home img" :class="{'hidden':navbarOpen}" />
+                    </video>
+                </div>
             </div>
 
             <div class=" sm:block md:visible md:absolute top-0 bottom-0 left-0 bg-yellow-300/70 w-2/5 bg-blend-color-dodge">

@@ -56,7 +56,10 @@
 
                             <hr>
                             <div class="my-4  items-center">
-                                <button type="submit" id="submit_btn" class="normal_button">{{__('create_google_meet')}}</button>
+                                <button type="submit" id="submit_btn" class="normal_button">
+                                    {{__('create_google_meet')}}
+                                    <img src="{{ asset('imgs/G.png') }}" class="bg-white w-10 h-10 p-1 mx-4 rounded-md" alt="">
+                                </button>
                             </div>
 
                         </form>

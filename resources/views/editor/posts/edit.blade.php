@@ -7,7 +7,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="relative rounded-tl-md  rounded-tr-md overflow-auto p-8">
-                    <h2 class="text-2xl font-bold mb-4"> {{__('edit_post')}} </h2>
+                    <h2 class="text-2xl font-bold mb-4"> {{ __('edit_post') }} </h2>
                     <div class="overflow-x-auto relative">
 
                         @if(Session::has('errors'))
@@ -22,48 +22,63 @@
                         </div>
                         @endif
 
-                        <form action="{{ route('admin.engineers.edit.action') }}" method="post" onsubmit="return form_submit(this);" class="w-full">
+                        
+                        <form action="{{ route('editor.post.edit.action' , $post->id) }}" method="post" enctype="multipart/form-data" onsubmit="return form_submit(this);" class="w-full">
                             @csrf
-                            <input type="hidden" value="{{ $user->id }}" name="user_id" />
-
                             <div class="mb-4">
-                                <label for="name" class="lable_form">{{ __('name') }}</label>
-                                <input type="text" name="name" class="form_input" value="{{ $user->name }}" />
+                                <label for="title" class="lable_form">{{ __('post_title') }}</label>
+                                <input type="text" name="title" class="form_input !w-full" value="{{ $post->title ?? old('title') }}" required/>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="body" class="lable_form">{{ __('post_body') }}</label>
+                                <!-- <textarea name="body" id="body" cols="30" rows="10" class="form_input"></textarea> -->
+                                @php 
+                                    $data = "Ahmed";
+                                @endphp
+                                <x-forms.tinymce-editor :body="$post->body ?? old('body')" />
                             </div>
 
                             <div class="mb-4">
-                                <label for="email" class="lable_form">{{ __('email') }}</label>
-                                <input type="text" name="email" class="form_input" value="{{ $user->email }}" />
+                                <label for="seo_title" class="lable_form">{{ __('post_seo_title') }}</label>
+                                <input type="text" name="seo_title" class="form_input !w-full" value="{{ $post->seo_title ?? old('seo_title') }}" required/>
                             </div>
 
                             <div class="mb-4">
-                                <label for="user_type" class="lable_form">{{ __('account_type') }}</label>
-                                <Select class="form_input" name="user_type">
-                                    <option value="engineer" @if($user->user_type == 'engineer') selected @endif>{{__('engineer')}}</option>
-                                    <option value="client" @if($user->user_type == 'client') selected @endif >{{__('client')}}</option>
-                                </Select>
+                                <label for="seo_description" class="lable_form">{{ __('post_seo_description') }}</label>
+                                <input type="text" name="seo_description" class="form_input !w-full" value="{{ $post->seo_description ?? old('seo_description') }}" required />
                             </div>
 
                             <div class="mb-4">
-                                <label for="phone_no" class="lable_form">{{ __('phone') }}</label>
-                                <input type="text" name="phone_no" id="phone_no" placeholder="512345678" class="form_input !w-full !border-blue-500 text-left" dir="ltr" value="{{ $user->phone }}" />
-                                <input type="hidden" name="phone_no[phone]" />
+                                <label for="name" class="lable_form">{{ __('cover_image') }}</label>
+                                <input type="file" name="cover_image_file" class="form_input !w-full"  />
                             </div>
 
                             <div class="mb-4">
-                                <label for="password" class="lable_form">{{ __('password') }}</label>
-                                <input type="password" name="password" class="form_input" />
+                                <label for="slug" class="lable_form">{{ __('slug') }}</label>
+                                <input type="text" name="slug" class="form_input !w-full" value="{{ $post->slug ?? old('slug') }}" required/>
                             </div>
 
                             <div class="mb-4">
-                                <input type="submit" value="{{ __('save') }}" class="bg-green-700 text-white rounded-md py-2 px-4" />
+                                <label for="language" class="lable_form">{{ __('language') }}</label>
+                                <select name="language" id="language" class="form_input !w-full">
+                                    <option value="ar" {{ ($post->language ?? old('language')) == 'ar' ? 'selected' : "" }} >{{__('ar')}}</option>
+                                    <option value="en" {{ ($post->language ?? old('language')) == 'en' ? 'selected' : "" }} >{{__('en')}}</option>
+                                </select>                                
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="keywords" class="lable_form">{{ __('post_keywords') }}</label>
+                                <input type="text" name="keywords" class="form_input !w-full" value="{{ $post->keywords ?? old('keywords') }}" />
+                            </div>                            
+
+                            <div class="mb-4">
+                                <input type="submit" value="{{ __('save') }}" class="normal_button" />
                             </div>
 
                         </form>
-
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -81,4 +96,5 @@
         hiddenInput: "phone"
     });
 </script>
+
 @include('editor.footer')

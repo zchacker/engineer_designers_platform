@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PagesModel;
 use App\Models\UsersModel;
 use Carbon\Carbon;
 use Exception;
@@ -19,7 +20,9 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        return view('auth.login');
+        $currentPath = $request->path();
+        $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+        return view('auth.login', compact('page'));
     }
 
     public function login_action(Request $request)
@@ -88,7 +91,7 @@ class AuthController extends Controller
                                 // return redirect()->route('engineer.orders.list');
                                 break;
                             case 'editor':
-                                return redirect()->intended(route('editor.post.create'));
+                                return redirect()->intended(route('editor.post.list'));
                                 // return redirect()->route('engineer.orders.list');
                                 break;
                             default:
@@ -398,4 +401,14 @@ class AuthController extends Controller
             return redirect()->route('home');
         }
     }
+
+    public function editor_logout(Request $request)
+    {
+        if (Auth::guard('editor')->check()) // this means that the engineer was logged in.
+        {
+            Auth::guard('editor')->logout();
+            return redirect()->route('home');
+        }
+    }
+
 }

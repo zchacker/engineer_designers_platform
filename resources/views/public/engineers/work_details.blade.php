@@ -7,7 +7,7 @@
 </script>
 
 <section class="flex md:h-40 h-52 justify-center items-center flex-col">
-    <div class="w-full h-full bg-cover bg-no-repeat md:bg-cover md:bg-center" style="background-image: url('{{asset('imgs/image/head-pages.jpg')}}');">
+    <div class="w-full h-full bg-cover bg-no-repeat md:bg-cover md:bg-center" style="background-image: url('{{asset('imgs/image/head-pages.webp')}}');">
         <!-- <div class="w-full h-full px-8 py-8 flex justify-center items-end bg-black/5 backdrop-brightness-100"> -->
         <div class="w-full h-full px-8 py-8 flex justify-start items-start md:items-center bg-black/5 ">
             <h1 class="text-white text-3xl font-bold mb-4">{{__('work_details')}}</h1>
@@ -60,16 +60,14 @@
                             <div class=" overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="grid grid-cols-1 md:grid-cols-3  min-w-full py-2 ">
                                     @foreach($work->worksFiles as $file)
-                                        @if($file->file_type == 'image')
-                                        <div class="relative shadow-none rounded-sm border-none border-gray-300 p-4 mx-2 my-1 justify-center grid">
-                                            <a href="{{ $file->file->fileName ?? asset('imgs/packaging.png') }}" data-lightbox="image-{{$file->file->id}}" >
-                                                <img src="{{ $file->file->fileName ?? asset('imgs/packaging.png') }}"
-                                                data-src="{{ $file->file->fileName ?? asset('imgs/packaging.png') }}" loading="lazy"
-                                                alt="" class="w-full object-cover" />
-                                                <div class="absolute top-0 bottom-0 left-0 right-0 w-full h-full bg-transparent"></div>
-                                            </a>
-                                        </div>
-                                        @endif
+                                    @if($file->file_type == 'image')
+                                    <div class="relative shadow-none rounded-sm border-none border-gray-300 p-4 mx-2 my-1 justify-center grid">
+                                        <a href="{{ $file->file->fileName ?? asset('imgs/packaging.png') }}" data-lightbox="image-{{$file->file->id}}">
+                                            <img src="{{ $file->file->fileName ?? asset('imgs/packaging.png') }}" data-src="{{ $file->file->fileName ?? asset('imgs/packaging.png') }}" loading="lazy" alt="" class="w-full object-cover" />
+                                            <div class="absolute top-0 bottom-0 left-0 right-0 w-full h-full bg-transparent"></div>
+                                        </a>
+                                    </div>
+                                    @endif
                                     @endforeach
                                 </div>
 
@@ -78,13 +76,13 @@
 
                                 <div class="grid grid-cols-2 md:grid-cols-5  min-w-full py-2 ">
                                     @foreach($work->worksFiles as $file)
-                                        @if($file->file_type != 'image')
-                                        <div class="shadow-none rounded-sm border-0 border-gray-300 p-4 mx-2 my-1 justify-center grid">
-                                            <a href="{{ $file->file->fileName ?? '#' }}" download class="w-full h-full">
-                                                <img src="{{ asset('imgs/file.png') }}" alt="" class="w-20" />
-                                            </a>
-                                        </div>
-                                        @endif
+                                    @if($file->file_type != 'image')
+                                    <div class="shadow-none rounded-sm border-0 border-gray-300 p-4 mx-2 my-1 justify-center grid">
+                                        <a href="{{ $file->file->fileName ?? '#' }}" download class="w-full h-full">
+                                            <img src="{{ asset('imgs/file.png') }}" alt="" class="w-20" />
+                                        </a>
+                                    </div>
+                                    @endif
                                     @endforeach
                                 </div>
                             </div>

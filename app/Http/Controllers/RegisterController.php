@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\PagesModel;
 use App\Models\UsersModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,9 @@ class RegisterController extends Controller
 
     function register(Request $request)
     {
-        return view('auth.register');
+        $currentPath = $request->path();
+        $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+        return view('auth.register', compact('page'));
     }
 
     function register_action(Request $request)

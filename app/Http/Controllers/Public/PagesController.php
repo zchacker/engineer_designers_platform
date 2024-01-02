@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Models\PagesModel;
 use App\Models\ServicesModel;
 use App\Models\UsersModel;
 use App\Models\WorksModel;
@@ -15,20 +16,27 @@ class PagesController extends Controller
     public function home(Request $request)
     {
         $active = 'home';
-        return view('public.index',compact('active'));
+        $currentPath = $request->path();
+        $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+        return view('public.index',compact('active', 'page'));
     }
 
     public function services(Request $request)
     {
         $services = ServicesModel::all();
         $active = 'services';
-        return view('public.services' ,compact('active','services'));
+        $currentPath = $request->path();
+        $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+        
+        return view('public.services' ,compact('active','services', 'page'));
     }
     
     public function about(Request $request)
     {
         $active = 'about';
-        return view('public.about',compact('active'));
+        $currentPath = $request->path();
+        $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first();  
+        return view('public.about',compact('active', 'page'));
     }
 
     public function projects(Request $request)
@@ -40,12 +48,15 @@ class PagesController extends Controller
         ->get();
         
         $active = 'projects';
-        return view('public.projects.index' ,compact('works' , 'active'));
+
+        $currentPath = $request->path();
+        $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+        return view('public.projects.index' ,compact('works' , 'active', 'page'));
     }
 
     public function project_details(Request $request, $project_id)
     {
-       
+               
         $work = WorksModel::with(['worksFiles' , 'engineer'])
         ->where('id', $project_id)
         ->first();
@@ -56,8 +67,9 @@ class PagesController extends Controller
         }
        
         $engineer = $work->engineer;
-
-        return view('public.projects.details', compact('engineer','work') );
+        $currentPath = $request->path();
+        $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+        return view('public.projects.details', compact('engineer','work', 'page') );
     }
 
     public function engineers(Request $request)
@@ -70,7 +82,11 @@ class PagesController extends Controller
         $engineers  = $query->paginate(200);
         
         $active = 'engineers';
-        return view('public.engineers.index' ,compact('engineers' , 'active')); 
+
+        $currentPath = $request->path();
+        $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+
+        return view('public.engineers.index' ,compact('engineers' , 'active', 'page')); 
     }
 
     public function details(Request $request, $engineer_id)
@@ -86,7 +102,10 @@ class PagesController extends Controller
         $sum        = $query->count("id");
         $works      = $query->paginate(100);
 
-        return view('public.engineers.details', compact('engineer','works', 'sum') );
+        $currentPath = $request->path();
+        $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+
+        return view('public.engineers.details', compact('engineer','works', 'sum', 'page') );
 
     }
 
@@ -104,14 +123,21 @@ class PagesController extends Controller
        
         $engineer = $work->engineer;        
 
-        return view('public.projects.details', compact('engineer','work') );
+        $currentPath = $request->path();
+        $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+
+        return view('public.projects.details', compact('engineer','work', 'page') );
 
     }
 
     public function contact(Request $request)
     {
         $active = 'projects';
-        return view('public.contact' ,compact( 'active'));
+
+        $currentPath = $request->path();
+        $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+
+        return view('public.contact' ,compact( 'active', 'page'));
     }
 
 }

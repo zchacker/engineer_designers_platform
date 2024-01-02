@@ -26,7 +26,15 @@ class InvoicesController extends Controller
 
     public function create(Request $requests)
     {
-        return view('admin.invoices.create');
+        $order_number = NULL;        
+
+        if($requests->order_id != null)
+        {
+            $order_number = $requests->order_id;            
+        }
+
+
+        return view('admin.invoices.create', compact('order_number'));
     }
 
     public function create_action(Request $request)
@@ -62,18 +70,20 @@ class InvoicesController extends Controller
                     $total += $quantity * $prices[$key];
                 }
             }
+            
 
             // save invoice in db
             $invoice                    = new InvoicesModel();
             $invoice->client_name       = $request->client_name;
-            $invoice->order_id          = $request->order_id;
+            $invoice->order_id          = $request->order_number;
             // $invoice->invoice_number    = 'INV-' . Str::random(8);
             $invoice->invoice_number    = 'INV-' . Carbon::now()->format('YmdHi');
             $invoice->invoice_date      = $request->invoice_date;
             $invoice->due_date          = $request->due_date;
             $invoice->tax               = ($total * ($taxRate / 100));
             $invoice->discount          = $request->discount;
-            $invoice->discount_type          = $request->discount_type;            
+            $invoice->discount_type     = $request->discount_type;            
+            $invoice->status            = "sent";            
             $invoice->total_amount      = $total;
             
             if($invoice->save()){
@@ -92,19 +102,23 @@ class InvoicesController extends Controller
 
             }
 
-            // add it to order log
-            $order_feedback                     = new OrderFeedbackModel();
-            $order_feedback->comment            = '';
-            $order_feedback->type               = 'add_invoice';
-            $order_feedback->order_id           = $request->order_id;
-            $order_feedback->user_id            = $request->user()->id;
-            $order_feedback->show_to_client     = 0;
-            $order_feedback->show_to_engineer   = 0;
-            $order_feedback->invoice            = $invoice->id;
-            $order_feedback->save();        
-            
-            // TODO: add invoice notification
-            // send email to admin to check
+            if($request->has('order_number'))
+            {
+                
+                // add it to order log
+                $order_feedback                     = new OrderFeedbackModel();
+                $order_feedback->comment            = '';
+                $order_feedback->type               = 'add_invoice';
+                $order_feedback->order_id           = $request->order_number;
+                $order_feedback->user_id            = $request->user()->id;
+                $order_feedback->show_to_client     = 1;
+                $order_feedback->show_to_engineer   = 0;
+                $order_feedback->invoice            = $invoice->id;
+                $order_feedback->save();        
+                
+                // TODO: add invoice notification
+                // send email to admin to check
+            }
 
 
             return back()->with(['success' => __('added_successfuly')]);            

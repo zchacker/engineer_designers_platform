@@ -323,6 +323,23 @@ Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], fu
 Route::group(['middleware' => ['auth:editor'], 'prefix' => 'editor'], function () {
 
     Route::post('/image/upload', [\App\Http\Controllers\Editor\PostsController::class, 'upload'])->name('editor.image.upload');
+    
+    // posts
+    Route::get('/posts/list', [\App\Http\Controllers\Editor\PostsController::class, 'list'])->name('editor.post.list');
     Route::get('/posts/create', [\App\Http\Controllers\Editor\PostsController::class, 'create'])->name('editor.post.create');
+    Route::post('/posts/create/action', [\App\Http\Controllers\Editor\PostsController::class, 'create_action'])->name('editor.post.create.action');
+    Route::get('/posts/edit/{id}', [\App\Http\Controllers\Editor\PostsController::class, 'edit'])->name('editor.post.edit');
+    Route::post('/posts/edit/action/{id}', [\App\Http\Controllers\Editor\PostsController::class, 'edit_action'])->name('editor.post.edit.action');
+    Route::delete('/posts/delete/{post}', [\App\Http\Controllers\Editor\PostsController::class, 'delete'])->name('editor.post.delete');
+
+    // Pages
+    Route::get('/pages/list', [\App\Http\Controllers\Editor\PagesController::class, 'list'])->name('editor.page.list');
+    Route::get('/page/create', [\App\Http\Controllers\Editor\PagesController::class, 'create'])->name('editor.page.create');
+    Route::post('/page/create/action', [\App\Http\Controllers\Editor\PagesController::class, 'create_action'])->name('editor.page.create.action');
+    Route::get('/page/edit/{id}', [\App\Http\Controllers\Editor\PagesController::class, 'edit'])->name('editor.page.edit');
+    Route::post('/page/edit/action/{id}', [\App\Http\Controllers\Editor\PagesController::class, 'edit_action'])->name('editor.page.edit.action');
+    Route::delete('/page/delete/{page}', [\App\Http\Controllers\Editor\PagesController::class, 'delete'])->name('editor.page.delete');
+
+    Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'editor_logout'])->name('editor.logout');
 
 });

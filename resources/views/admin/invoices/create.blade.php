@@ -33,12 +33,17 @@
                                 </div>
                                 
                                 <div class="mb-2 flex gap-2">
-                                    <div class="mb-0 flex items-center gap-2 w-1/2">
+                                    <div class="mb-0 flex items-center gap-2 w-1/3">
+                                        <label for="order_number" class="lable_form">{{__('order_number')}}</label>
+                                        <input type="number" name="order_number" value="{{ $order_number }}" placeholder="{{__('order_number')}}" class="form_input" >
+                                    </div>
+
+                                    <div class="mb-0 flex items-center gap-2 w-1/3">
                                         <label for="invoice_date" class="lable_form">{{__('invoice_date')}}</label>
                                         <input type="date" name="invoice_date" placeholder="{{__('invoice_date')}}" class="form_input" required>
                                     </div>
 
-                                    <div class="mb-0 flex items-center gap-2 w-1/2">
+                                    <div class="mb-0 flex items-center gap-2 w-1/3">
                                         <label for="due_date" class="lable_form">{{__('due_date')}}</label>
                                         <input type="date" name="due_date" placeholder="{{__('due_date')}}" class="form_input" required>
                                     </div>
