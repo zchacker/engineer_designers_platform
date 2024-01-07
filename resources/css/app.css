@@ -35,11 +35,7 @@
 
 /* dashboard menu */
 .navbar_item{
-    @apply p-0 rounded-md mt-3 flex items-center  duration-300 cursor-pointer transition-all  text-white hover:text-yellow-300 hover:border-r-0 hover:border-yellow-300 hover:pr-2
-}
-
-.navbar_active{
-    @apply !text-secondary bg-slate-900 rounded-md px-0 hover:border-secondary
+    @apply p-0 rounded-md mt-3 flex items-center cursor-pointer transition-all duration-100 text-white hover:text-yellow-300 hover:border-r-0 hover:border-yellow-300 hover:pr-2
 }
 
 .navbar_logout{
@@ -47,7 +43,11 @@
 }
 
 .navbar_item_text{
-    @apply w-full h-full p-2.5 text-[15px] ml-4 text-gray-200 transition-all duration-500 hover:text-yellow-300 font-bold
+    @apply w-full h-full p-2.5 text-[15px] ml-4  font-bold 
+}
+
+.navbar_active{
+    @apply !text-black bg-gray-50 rounded-md px-0 hover:border-secondary hover:!text-black
 }
 
 .navbar_item_header{

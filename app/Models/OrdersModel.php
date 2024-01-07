@@ -34,7 +34,8 @@ class OrdersModel extends Model
         'file_id',
         'user_id',
         'to_user_id',
-        'status'
+        'status',
+        'type'
     ];
 
     protected $enumStatus = [

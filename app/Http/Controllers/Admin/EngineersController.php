@@ -19,7 +19,7 @@ class EngineersController extends Controller
         
     public function list(Request $request)
     {
-        
+                
         $type       = $request->type ?? "active";
         $query      = UsersModel::orderByDesc('created_at')->where('user_type', 'engineer');        
         if($type == "trashed")

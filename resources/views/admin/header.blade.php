@@ -51,76 +51,112 @@
                     <!-- <div class="my-2 bg-white h-[1px]"></div> -->
                 </div>                                                                        
                 
-                <div class="navbar_item">                    
+                <div class="navbar_item {{ preg_match('/\b(engineers|clients|supervisors)\b/i', Route::currentRouteName()) ? 'navbar_active' : '' }}" onclick="dropdown(this)">
+                    <i class="las la-user-tie la-2x"></i>
+                    <div class="flex justify-between w-full items-center">
+                        <span class="navbar_item_text_header">المستخدمين</span>
+                        <span class="text-sm rotate-180 arrow">
+                            <i class="bi bi-chevron-down"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="text-right text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold {{ preg_match('/\b(engineers|clients|supervisors)\b/i', Route::currentRouteName()) ? '' : 'hidden' }} ">
+                    <div class="navbar_item {{ strpos(Route::currentRouteName(), 'engineers')? 'navbar_active' : '' }} ">                    
+                        <i class="las la-user-tie la-2x"></i>
+                        <a href="{{ route('admin.engineers.list') }}" class="navbar_item_text"> المهندسين </a>
+                    </div>
+
+                    <div class="navbar_item {{ strpos(Route::currentRouteName(), 'clients')? 'navbar_active' : '' }} ">                    
+                        <i class="las la-users la-2x"></i>
+                        <a href="{{ route('admin.clients.list') }}" class="navbar_item_text"> العملاء </a>
+                    </div>
+
+                    <div class="navbar_item {{ strpos(Route::currentRouteName(), 'supervisors')? 'navbar_active' : '' }} ">                    
+                        <i class="las la-user-tie la-2x"></i>
+                        <a href="{{ route('admin.supervisors.list') }}" class="navbar_item_text"> المشرفين </a>
+                    </div>                   
+                </div>
+            
+                {{--
+                <div class="navbar_item {{ strpos(Route::currentRouteName(), 'engineers')? 'navbar_active' : '' }} ">                    
                     <i class="las la-user-tie la-2x"></i>
                     <a href="{{ route('admin.engineers.list') }}" class="navbar_item_text"> المهندسين </a>
                 </div> 
                 
-                <div class="navbar_item">                    
+                <div class="navbar_item {{ strpos(Route::currentRouteName(), 'clients')? 'navbar_active' : '' }} ">                    
                     <i class="las la-users la-2x"></i>
                     <a href="{{ route('admin.clients.list') }}" class="navbar_item_text"> العملاء </a>
                 </div>
+                --}}
                 
-                <div class="navbar_item">                    
+                <div class="navbar_item {{ strpos(Route::currentRouteName(), 'orders')? 'navbar_active' : '' }} ">                    
                     <i class="las la-box la-2x"></i>
                     <a href="{{ route('admin.orders.list') }}" class="navbar_item_text"> الطلبات </a>
                 </div>
                 
-                <div class="navbar_item">                    
+                <div class="navbar_item {{ strpos(Route::currentRouteName(), 'invoices')? 'navbar_active' : '' }} ">                    
                     <i class="las la-file-invoice-dollar la-2x"></i>
                     <a href="{{ route('admin.invoices.list') }}" class="navbar_item_text"> الفواتير </a>
                 </div>
                 
-                <div class="navbar_item">                    
+                <div class="navbar_item {{ strpos(Route::currentRouteName(), 'work')? 'navbar_active' : '' }} ">                    
                     <i class="las la-project-diagram la-2x"></i>
                     <a href="{{ route('admin.work.list') }}" class="navbar_item_text"> الأعمال المرفوعة </a>
                 </div>
                 
-                <div class="navbar_item">                    
+                <div class="navbar_item {{ strpos(Route::currentRouteName(), 'meeting')? 'navbar_active' : '' }} ">                    
                     <i class="las la-handshake la-2x"></i>
                     <a href="{{ route('admin.meeting.list') }}" class="navbar_item_text"> الاجتماعات </a>
                 </div> 
 
-                <div class="navbar_item">                    
+                <div class="navbar_item {{ preg_match('/\b(conversation)\b/i', Route::currentRouteName()) ? 'navbar_active' : '' }}" onclick="dropdown(this)">
                     <i class="las la-envelope la-2x"></i>
-                    <a href="{{ route('admin.conversation.list') }}" class="navbar_item_text"> المحادثات </a>
-                </div> 
+                    <div class="flex justify-between w-full items-center">
+                        <span class="navbar_item_text_header">المحادثات</span>
+                        <span class="text-sm rotate-180 arrow">
+                            <i class="bi bi-chevron-down"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="text-right text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold {{ preg_match('/\b(engineers|clients|supervisors)\b/i', Route::currentRouteName()) ? '' : 'hidden' }} ">
+                    <div class="navbar_item {{ (Route::currentRouteName() == 'admin.conversation.list')? 'navbar_active' : '' }} ">                    
+                        <i class="las la-envelope la-2x"></i>
+                        <a href="{{ route('admin.conversation.list') }}" class="navbar_item_text"> المحادثات </a>
+                    </div>
 
-                <div class="navbar_item">                    
-                    <i class="las la-envelope la-2x"></i>
-                    <a href="{{ route('admin.my.conversation.list') }}" class="navbar_item_text"> محادثاتي </a>
-                </div> 
+                    <div class="navbar_item {{ strpos(Route::currentRouteName(), 'my.conversation')? 'navbar_active' : '' }} ">                    
+                        <i class="las la-envelope la-2x"></i>
+                        <a href="{{ route('admin.my.conversation.list') }}" class="navbar_item_text"> محادثاتي </a>
+                    </div>
+
+                </div>                 
                 
-                <div class="navbar_item">                    
+                <div class="navbar_item {{ strpos(Route::currentRouteName(), 'contract')? 'navbar_active' : '' }} ">                    
                     <i class="las la-file-contract la-2x"></i>
                     <a href="{{ route('admin.contract.list') }}" class="navbar_item_text"> العقود </a>
                 </div>   
                 
-                <div class="navbar_item">                    
-                    <i class="las la-file-contract la-2x"></i>
+                <div class="navbar_item {{ strpos(Route::currentRouteName(), 'services')? 'navbar_active' : '' }} ">                    
+                    <i class="lab la-servicestack la-2x"></i>
                     <a href="{{ route('admin.services.list') }}" class="navbar_item_text"> الخدمات </a>
                 </div>
                 
-                <div class="navbar_item">                    
-                    <i class="las la-user-tie la-2x"></i>
-                    <a href="{{ route('admin.supervisors.list') }}" class="navbar_item_text"> المشرفين </a>
-                </div>     
+                     
 
                 
-                <div class="navbar_item">                    
+                <div class="navbar_item {{ strpos(Route::currentRouteName(), 'settings')? 'navbar_active' : '' }} ">                    
                     <i class="las la-cog la-2x"></i>
                     <a href="{{ route('admin.settings') }}" class="navbar_item_text"> الإعدادات </a>
                 </div>
                 
-
                 
-                <div class="navbar_item">                    
+                <div class="navbar_item {{ strpos(Route::currentRouteName(), 'password')? 'navbar_active' : '' }} ">                    
                     <i class="las la-lock la-2x"></i>
                     <a href="{{ route('admin.password') }}" class="navbar_item_text"> تغيير كلمة المرور </a>
                 </div>  
                 
                 {{--
-                <div class="navbar_item" onclick="dropdown()">
+                <div class="navbar_item" onclick="dropdown(this)">
                     <i class="las la-lock la-2x"></i>
                     <div class="flex justify-between w-full items-center">
                         <span class="navbar_item_text_header">Chatbox</span>
@@ -142,7 +178,7 @@
                 </div>
 
 
-                <div class="navbar_item" onclick="dropdown()">
+                <div class="navbar_item" onclick="dropdown(this)">
                     <i class="las la-lock la-2x"></i>
                     <div class="flex justify-between w-full items-center">
                         <span class="navbar_item_text_header">Chatbox2</span>
@@ -184,7 +220,7 @@
                         Friends
                     </h1>
                 </div>
-                --}}                
+                --}}
 
                 <div class="navbar_item navbar_logout">
                     <i class="las la-power-off la-2x"></i>

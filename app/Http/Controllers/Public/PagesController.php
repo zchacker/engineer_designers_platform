@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Models\ContactsModel;
 use App\Models\PagesModel;
 use App\Models\ServicesModel;
 use App\Models\UsersModel;
@@ -139,5 +140,29 @@ class PagesController extends Controller
 
         return view('public.contact' ,compact( 'active', 'page'));
     }
+
+    public function contact_action(Request $request)
+    {
+        try {
+            $validatedData = $request->validate([
+                'email' => 'required|email',
+                'name' => 'required',
+                'message' => 'required',            
+            ], [
+                'email.required' => __('email_required'),
+                'email.email' => __('email_required'),
+                'name.required' => __('name_required'),
+                'message.required' => __('message_required'),            
+            ]);
+
+            ContactsModel::create($request->all());
+
+            return redirect()->back()->with(['success' => __('sent_successfuly'), 'scrollTo' => 'contact']);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withErrors($e->validator->errors())->with('scrollTo', 'contact');
+        }
+    }
+
 
 }

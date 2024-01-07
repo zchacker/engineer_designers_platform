@@ -76,14 +76,21 @@
                                                         @method('PUT')
                                                         @csrf
 
-                                                        <button type="submit" >
+                                                        <button type="submit">
                                                             @if(!$work->publish)
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="text-green-600 hover:text-green-900" width="42" height="32" id="upload" stroke="currentColor" stroke-width="1">
+                                                            <!-- <svg xmlns="http://www.w3.org/2000/svg" class="text-green-600 hover:text-green-900 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                                 <path fill="#828282" d="M33.958 12.988C33.531 6.376 28.933 0 20.5 0 12.787 0 6.839 5.733 6.524 13.384 2.304 14.697 0 19.213 0 22.5 0 27.561 4.206 32 9 32h6.5a.5.5 0 0 0 0-1H9c-4.262 0-8-3.972-8-8.5C1 19.449 3.674 14 9 14h1.5a.5.5 0 0 0 0-1H9c-.509 0-.99.057-1.459.139C7.933 7.149 12.486 1 20.5 1 29.088 1 33 7.739 33 14v1.5a.5.5 0 0 0 1 0v-1.509c3.019.331 7 3.571 7 8.509 0 3.826-3.691 8.5-8 8.5h-7.5c-3.238 0-4.5-1.262-4.5-4.5V12.783l4.078 4.07a.5.5 0 1 0 .708-.706l-4.461-4.452c-.594-.592-1.055-.592-1.648 0l-4.461 4.452a.5.5 0 0 0 .707.707L20 12.783V26.5c0 3.804 1.696 5.5 5.5 5.5H33c4.847 0 9-5.224 9-9.5 0-5.167-4.223-9.208-8.042-9.512z"></path>
+                                                            </svg> -->
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-transparent fill-green-600 "  width="48" height="48" id="publish">
+                                                                <path fill="none" d="M0 0h48v48H0z"></path>
+                                                                <path d="M10 8v4h28V8H10zm0 20h8v12h12V28h8L24 14 10 28z"></path>
                                                             </svg>
                                                             @else
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="text-red-600 hover:text-red-900" width="42" height="32" id="upload" stroke="currentColor" stroke-width="1">
+                                                            <!-- <svg xmlns="http://www.w3.org/2000/svg" class="text-red-600 hover:text-red-900" width="42" height="32" id="upload" stroke="currentColor" stroke-width="1">
                                                                 <path fill="#828282" d="M33.958 12.982C33.528 6.372 28.931 0 20.5 0c-1.029 0-2.044.1-3.018.297a.5.5 0 0 0 .199.981A14.156 14.156 0 0 1 20.5 1C29.088 1 33 7.739 33 14v1.5a.5.5 0 0 0 1 0V14l-.001-.016C37.062 14.248 41 16.916 41 22.5c0 4.767-3.514 8.5-8 8.5H9c-3.976 0-8-2.92-8-8.5C1 18.406 3.504 14 9 14h1.5a.5.5 0 0 0 0-1H9v-2c0-3.727 2.299-6.042 6-6.042 3.364 0 6 2.654 6 6.042v12.993l-4.16-3.86a.499.499 0 1 0-.68.732l4.516 4.189c.299.298.563.445.827.445.261 0 .52-.145.808-.433l4.529-4.202a.498.498 0 0 0 .026-.706.497.497 0 0 0-.706-.026L22 23.993V11c0-3.949-3.075-7.042-7-7.042-4.252 0-7 2.764-7 7.042v2.051c-5.255.508-8 5.003-8 9.449C0 27.105 3.154 32 9 32h24c5.047 0 9-4.173 9-9.5 0-6.304-4.557-9.278-8.042-9.518z"></path>
+                                                            </svg> -->
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-red-600 fill-red-600 h-6" viewBox="0 0 16 16" width="48" height="48" id="down">
+                                                                <path d="M1 13h14v3H1zm12-6-1.5-1.5-2.506 2.506L8.969 0H7.062l-.05 8.012L4.5 5.5 3 7l5 5z"></path>
                                                             </svg>
                                                             @endif
                                                             <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

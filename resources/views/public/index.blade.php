@@ -379,45 +379,54 @@
 </section>
 
 <!-- book section -->
-<section class="bg-gradient-to-r from-white to-gray-200 py-10 md:py-16">
+<section class="bg-gradient-to-r from-gray-100 to-gray-300 py-10 md:py-16" id="contact">
     <div class="container max-w-screen-xl mx-auto px-4 xl:relative">
-        <div class="bg-gray-800 w-full md:w-4/6 flex flex-col lg:flex-row items-center justify-center px-8 py-14 rounded-3xl">
+        <div class="bg-[#1E1E1E]/80 w-full md:w-4/6 flex flex-col lg:flex-row items-center justify-center px-8 py-14 rounded-3xl">
             <div class="text-center lg:text-right mb-10 lg:mb-0 w-full md:mr-8 flex flex-col gap-8">
                 <h1 class="font-bold text-white text-4xl md:text-5xl lg:text-5xl leading-normal mb-4">{!! __('public')['talk_us'] !!}</h1>
                 <p class="font-normal text-white text-md md:text-xl">{!! __('public')['more_talk'] !!}</p>
             </div>
-            <div class=" md:block bg-white xl:relative md:-ml-52 shadow-xl shadow-gray-800 px-4 w-full md:w-auto py-3 rounded-xl">
+            <div class=" md:block bg-gray-300/95 xl:relative md:-ml-52 shadow-xl shadow-gray-800 px-4 w-full md:w-auto py-3 rounded-xl">
                 <div class="py-3">
-                    <h3 class="font-semibold text-gray-900 text-3xl">{{__('public')['book_meeting']}}</h3>
+                    <h3 class="font-semibold text-gray-900 text-3xl">{{__('public')['contact']}}</h3>
                 </div>
 
-                <div class="py-3">
-                    <input type="text" placeholder="{{__('name')}}" class="px-4 py-4 md:w-96 w-full bg-gray-100 border-none placeholder-gray-400 rounded-xl outline-none">
-                </div>
+                @if(session('success'))
+                    <div class="my-3 w-auto p-4 bg-green-700 text-white rounded-md">
+                        {!! session('success') !!}
+                    </div>
+                @endif
 
-                <div class="py-3">
-                    <input type="text" placeholder="{{__('email')}}" class="px-4 py-4 md:w-96 w-full bg-gray-100 border-none placeholder-gray-400 rounded-xl outline-none">
-                </div>
 
-                <div class="py-3 relative">
-                    <input type="date" placeholder="{{__('date')}}" class="px-4 py-4 md:w-96 w-full bg-gray-100 border-none font-normal text-lg placeholder-gray-400 rounded-xl outline-none">
+                <form action="{{ route('contact-us.send') }}" method="post">
+                    @csrf
 
-                    <!-- <div class="absolute inset-y-0 left-80 ml-6 flex items-center text-xl text-gray-600">
-                        <i data-feather="calendar"></i>
-                    </div> -->
-                </div>
+                    <div class="py-3">
+                        @error('name')
+                            <span class="text-red-600 font-bold">{{ $message }}</span>
+                        @enderror
+                        <input type="text" name="name" placeholder="{{__('name')}}" class="px-4 py-4 md:w-96 w-full bg-white shadow-lg rounded-full border-none placeholder-gray-400 outline-none">
+                    </div>
 
-                <div class="py-3 relative">
-                    <input type="text" placeholder="{{__('notes')}}" class="px-4 py-4 md:w-96 w-full bg-gray-100 border-none placeholder-gray-400 rounded-xl outline-none">
+                    <div class="py-3">
+                        @error('email')
+                            <span class="text-red-600 font-bold">{{ $message }}</span>
+                        @enderror
+                        <input type="text" name="email" placeholder="{{__('email')}}" class="px-4 py-4 md:w-96 w-full bg-white shadow-lg rounded-full border-none placeholder-gray-400 outline-none">
+                    </div>
+                    
 
-                    <!-- <div class="absolute inset-y-0 left-80 ml-6 flex items-center text-xl text-gray-600">
-                        <i data-feather="chevron-down"></i>
-                    </div> -->
-                </div>
+                    <div class="py-3 relative">
+                        @error('message')
+                            <span class="text-red-600 font-bold">{{ $message }}</span>
+                        @enderror
+                        <textarea type="text" name="message" placeholder="{{__('notes')}}" class="px-4 py-4 md:w-96 w-full bg-white shadow-lg rounded-3xl border-none placeholder-gray-400 outline-none"></textarea>
+                    </div>
 
-                <div class="py-3 text-center">
-                    <button class="w-auto mx-auto py-2 px-8 font-semibold text-lg text-white bg-yellow-300 rounded-lg hover:bg-black transition ease-in-out duration-500">أرسل</button>
-                </div>
+                    <div class="py-3 text-center">
+                        <button type="submit" class="normal_button">{{__('public')['send_now']}}</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

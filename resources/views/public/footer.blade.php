@@ -62,4 +62,17 @@
     feather.replace()
 </script>
 
+
+@if(session('scrollTo'))
+    <script>        
+        window.onload = function() {
+            var scrollToElement = document.getElementById("{{ session('scrollTo') }}");
+            if (scrollToElement) {
+                scrollToElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        };
+    </script>
+@endif
+
+
 </html>
