@@ -46,6 +46,8 @@
             <a href="{{ route('privacy') }}" class=" text-gray-400 hover:text-white transition duration-300 mx-2"> {{__('public')['privacy']}} </a>
             <span class="text-gray-400"> | </span>
             <a href="{{route('terms')}}" class="text-gray-400 hover:text-white transition duration-300 mx-2"> {{__('public')['terms']}}</a>
+            <span class="text-gray-400"> | </span>
+            <a href="{{route('blog.list')}}" class="text-gray-400 hover:text-white transition duration-300 mx-2"> المدونة </a>
         </div>
         <p class="text-center mb-2">جميع الحقوق محفوظة &copy; 2023 شركة رشيد العجيان للدراسات و الاستشارات الهندسية شركة مهنية</p>
         <p class="text-center mb-12"> سجل تجاري رقم : 1010877829</p>

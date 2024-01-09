@@ -39,6 +39,9 @@ Route::get('/sitemap.xml', function(){
     Route::get('/contact-us', [\App\Http\Controllers\Public\PagesController::class, 'contact'])->name('contact-us');
     Route::post('/contact-us/send', [\App\Http\Controllers\Public\PagesController::class, 'contact_action'])->name('contact-us.send');
     
+    Route::get('/blog', [\App\Http\Controllers\Public\BlogController::class, 'list'])->name('blog.list');
+    Route::get('/blog/post/{id}/{title?}', [\App\Http\Controllers\Public\BlogController::class, 'post'])->name('blog.post');
+    
     // project
     Route::get('/projects', [\App\Http\Controllers\Public\PagesController::class, 'projects'])->name('projects');
     Route::get('/projects/details/{project_id}', [\App\Http\Controllers\Public\PagesController::class, 'project_details'])->name('projects.details');
