@@ -14,9 +14,9 @@ class SupervisorController extends Controller
 {
     public function list(Request $requests)
     {
-        $query      = UsersModel::orderByDesc('created_at')->where('user_type', 'supervisor');
-        $sum        = $query->count('id');
-        $supervisors  = $query->paginate(100);
+        $query          = UsersModel::orderByDesc('created_at')->whereIn('user_type', ['supervisor','editor','assistant']);
+        $sum            = $query->count('id');
+        $supervisors    = $query->paginate(100);
         return view('admin.supervisors.list', compact('supervisors', 'sum'));
     }
 
@@ -52,7 +52,7 @@ class SupervisorController extends Controller
 
             // update password set it as hashed one
             $request['password']    = Hash::make($request->password);
-            $request['user_type']   = "supervisor";
+            //$request['user_type']   = "supervisor";
 
             // create user account
             $user = UsersModel::create($request->all());
@@ -116,7 +116,8 @@ class SupervisorController extends Controller
             $profile_data->name  = $request->name;
             $profile_data->email = $request->email;
             $profile_data->phone = $request->phone;
-
+            $profile_data->user_type = $request->user_type;
+            
             // dd($request->filled('name'));        
             // dd($request->has('password'));
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\PostsModel;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 
@@ -64,11 +65,13 @@ Route::get('/sitemap.xml', function(){
     Route::post('/set_password', [\App\Http\Controllers\AuthController::class, 'rest_password_new'])->name('set.new.password');
 
     Route::get('/privacy', function () {
-        return view('public.privacy');
+        $post = PostsModel::where('slug' , 'privacy')->first();
+        return view('public.privacy', compact('post'));
     })->name('privacy');
 
     Route::get('/terms', function () {
-        return view('public.terms');
+        $post = PostsModel::where('slug' , 'terms')->first();
+        return view('public.terms', compact('post'));
     })->name('terms');
 
     Route::group(['middleware' => ['auth:client,engineer']], function () {
@@ -208,6 +211,15 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::post('/clients/edit/action', [\App\Http\Controllers\Admin\ClientsController::class, 'edit_action'])->name('admin.clients.edit.action');
     Route::delete('/clients/delete/{user}', [\App\Http\Controllers\Admin\ClientsController::class, 'delete'])->name('admin.clients.delete');
 
+    // supervisors    
+    Route::get('/supervisors/list', [\App\Http\Controllers\Admin\SupervisorController::class, 'list'])->name('admin.supervisors.list');
+    Route::get('/supervisors/create', [\App\Http\Controllers\Admin\SupervisorController::class, 'create'])->name('admin.supervisors.create');
+    Route::post('/supervisors/create/action', [\App\Http\Controllers\Admin\SupervisorController::class, 'create_action'])->name('admin.supervisors.create.action');
+    Route::get('/supervisors/edit/{id}', [\App\Http\Controllers\Admin\SupervisorController::class, 'edit'])->name('admin.supervisors.edit');
+    Route::post('/supervisors/edit/action', [\App\Http\Controllers\Admin\SupervisorController::class, 'edit_action'])->name('admin.supervisors.edit.action');
+    Route::delete('/supervisors/delete/{user}', [\App\Http\Controllers\Admin\SupervisorController::class, 'delete'])->name('admin.supervisors.delete');
+
+
     // orders
     Route::get('/orders/list', [\App\Http\Controllers\Admin\OrdersController::class, 'orders_list'])->name('admin.orders.list');
     Route::get('/orders/details/{order_id}', [\App\Http\Controllers\Admin\OrdersController::class, 'details'])->name('admin.order.details');
@@ -257,15 +269,11 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     // update settings
     Route::get('/settings', [\App\Http\Controllers\Shared\SettingsController::class, 'admin_update_data'])->name('admin.settings');
     Route::post('/settings/action', [\App\Http\Controllers\Shared\SettingsController::class, 'update_data_action'])->name('admin.settings.action');
-
-    // supervisors    
-    Route::get('/supervisors/list', [\App\Http\Controllers\Admin\SupervisorController::class, 'list'])->name('admin.supervisors.list');
-    Route::get('/supervisors/create', [\App\Http\Controllers\Admin\SupervisorController::class, 'create'])->name('admin.supervisors.create');
-    Route::post('/supervisors/create/action', [\App\Http\Controllers\Admin\SupervisorController::class, 'create_action'])->name('admin.supervisors.create.action');
-    Route::get('/supervisors/edit/{id}', [\App\Http\Controllers\Admin\SupervisorController::class, 'edit'])->name('admin.supervisors.edit');
-    Route::post('/supervisors/edit/action', [\App\Http\Controllers\Admin\SupervisorController::class, 'edit_action'])->name('admin.supervisors.edit.action');
-    Route::delete('/supervisors/delete/{user}', [\App\Http\Controllers\Admin\SupervisorController::class, 'delete'])->name('admin.supervisors.delete');
-
+    
+    Route::get('/policy/list', [\App\Http\Controllers\Admin\PolicyController::class, 'list'])->name('admin.policy.list');
+    Route::get('/policy/edit/{id}', [\App\Http\Controllers\Admin\PolicyController::class, 'edit'])->name('admin.policy.edit');
+    Route::post('/policy/edit/action/{id}', [\App\Http\Controllers\Admin\PolicyController::class, 'edit_action'])->name('admin.policy.edit.action');
+    
     // update password
     Route::get('/password', [\App\Http\Controllers\Shared\SettingsController::class, 'admin_update_passwords'])->name('admin.password');
     Route::post('/password/action', [\App\Http\Controllers\Shared\SettingsController::class, 'update_passwords_action'])->name('admin.password.action');

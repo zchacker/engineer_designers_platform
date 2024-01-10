@@ -266,6 +266,9 @@
     "title":"العنوان",
     "path":"مسار الصفحة مثلا  /service",
     "description_page_required":"وصف مفقود",
+    "user_type":"نوع المستخدم",
+    "editor":" محرر",
+    "assistant":"مساعد", 
     "public": {
         "home": "Home",
         "about": "About Us",

@@ -34,7 +34,16 @@
                             <div class="mb-4">
                                 <label for="email" class="lable_form">{{ __('email') }}</label>
                                 <input type="text" name="email" class="form_input" value="{{ $user->email }}" />
-                            </div>                            
+                            </div>  
+                            
+                            <div class="mb-4">
+                                <label for="phone_no" class="lable_form">{{ __('user_type') }}</label>
+                                <select name="user_type" id="" class="form_input">
+                                    <option value="supervisor" {{ ($user->user_type == 'supervisor')? 'selected':'' }}>{{ __('supervisor') }}</option>
+                                    <option value="editor"     {{ ($user->user_type == 'editor')? 'selected':'' }}>{{ __('editor') }}</option>
+                                    <option value="assistant"  {{ ($user->user_type == 'assistant')? 'selected':'' }}>{{ __('assistant') }}</option>
+                                </select>
+                            </div>
 
                             <div class="mb-4">
                                 <label for="phone_no" class="lable_form">{{ __('phone') }}</label>

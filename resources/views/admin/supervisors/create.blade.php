@@ -36,6 +36,15 @@
                             </div>
 
                             <div class="mb-4">
+                                <label for="phone_no" class="lable_form">{{ __('user_type') }}</label>
+                                <select name="user_type" id="" class="form_input">
+                                    <option value="supervisor">{{ __('supervisor') }}</option>
+                                    <option value="editor">{{ __('editor') }}</option>
+                                    <option value="assistant">{{ __('assistant') }}</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
                                 <label for="phone_no" class="lable_form">{{ __('phone') }}</label>
                                 <input type="text" name="phone_no" id="phone_no" placeholder="512345678" class="form_input !w-full !border-blue-500 text-left" dir="ltr" value="{{ old('phone') }}" />
                                 <input type="hidden" name="phone_no[phone]" />
@@ -47,7 +56,7 @@
                             </div>
 
                             <div class="mb-4">
-                                <input type="submit" value="{{ __('create_account') }}" class="bg-green-700 text-white rounded-md py-2 px-4" />
+                                <input type="submit" value="{{ __('create_account') }}" class="normal_button" />
                             </div>
 
                         </form>

@@ -10,6 +10,7 @@
     @vite('resources/js/app.js')
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <title>المدير</title>
+    <x-head.tinymce-config/>
 </head>
 
 <body class="bg-dash-bg">
@@ -27,9 +28,9 @@
             </span>
 
             @if(app()->getLocale() == 'ar')
-            <div class="sidebar z-50 transition duration-150 ease-in-out  hidden lg:block fixed top-0 bottom-0 lg:right-0 p-2 w-[250px] overflow-y-auto bg-[#151616]">
+            <div class="sidebar z-50 transition duration-150 ease-in-out  hidden md:block md:absolute fixed top-0 bottom-0 lg:right-0 p-2 w-[250px] overflow-y-auto bg-[#151616]">
             @else
-            <div class="sidebar z-50 transition duration-150 ease-in-out  hidden lg:block fixed top-0 bottom-0 lg:left-0 p-2 w-[250px] overflow-y-auto bg-[#151616]">
+            <div class="sidebar z-50 transition duration-150 ease-in-out  hidden md:block md:static fixed top-0 bottom-0 lg:left-0 p-2 w-[250px] overflow-y-auto bg-[#151616]">
             @endif
               <div class="text-gray-100 text-xl">
                     <div class="p-2.5 mt-1 flex items-center">
@@ -75,19 +76,7 @@
                         <i class="las la-user-tie la-2x"></i>
                         <a href="{{ route('admin.supervisors.list') }}" class="navbar_item_text"> المشرفين </a>
                     </div>                   
-                </div>
-            
-                {{--
-                <div class="navbar_item {{ strpos(Route::currentRouteName(), 'engineers')? 'navbar_active' : '' }} ">                    
-                    <i class="las la-user-tie la-2x"></i>
-                    <a href="{{ route('admin.engineers.list') }}" class="navbar_item_text"> المهندسين </a>
-                </div> 
-                
-                <div class="navbar_item {{ strpos(Route::currentRouteName(), 'clients')? 'navbar_active' : '' }} ">                    
-                    <i class="las la-users la-2x"></i>
-                    <a href="{{ route('admin.clients.list') }}" class="navbar_item_text"> العملاء </a>
-                </div>
-                --}}
+                </div>                        
                 
                 <div class="navbar_item {{ strpos(Route::currentRouteName(), 'orders')? 'navbar_active' : '' }} ">                    
                     <i class="las la-box la-2x"></i>
@@ -141,12 +130,14 @@
                     <a href="{{ route('admin.services.list') }}" class="navbar_item_text"> الخدمات </a>
                 </div>
                 
-                     
-
+                <div class="navbar_item {{ strpos(Route::currentRouteName(), 'policy')? 'navbar_active' : '' }} ">                    
+                        <i class="las la-user-tie la-2x"></i>
+                        <a href="{{ route('admin.policy.list') }}" class="navbar_item_text"> السياسات </a>
+                </div>                
                 
                 <div class="navbar_item {{ strpos(Route::currentRouteName(), 'settings')? 'navbar_active' : '' }} ">                    
                     <i class="las la-cog la-2x"></i>
-                    <a href="{{ route('admin.settings') }}" class="navbar_item_text"> الإعدادات </a>
+                    <a href="{{ route('admin.settings') }}" class="navbar_item_text"> الملف الشخصي </a>
                 </div>
                 
                 
