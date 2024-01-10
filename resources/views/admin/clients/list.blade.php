@@ -3,7 +3,7 @@
 <div class="content">
 
     <div class="py-6">
-        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 {{-- Content--}}
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -42,7 +42,7 @@
                                         @foreach($clients as $client)
                                         <tr data-href="" class="clickable-row cursor-pointer hover:bg-gray-200">
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $client->id}} </td>
-                                            <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $client->name }} </td>
+                                            <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ Str::limit( $client->name , 30)}} </td>
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $client->email }} </td>
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $client->phone }} </td>
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $client->created_at }} </td>
