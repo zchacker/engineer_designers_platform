@@ -47,6 +47,7 @@ class RegisterController extends Controller
 
             // update password set it as hashed one
             $request['password'] = Hash::make($request->password);
+            $request['verified'] = 1;
 
             // create user account
             $user = UsersModel::create($request->all());
