@@ -35,6 +35,7 @@ Route::get('/sitemap.xml', function(){
 
     Route::get('/', [\App\Http\Controllers\Public\PagesController::class, 'home'])->name('home');
     Route::get('/services', [\App\Http\Controllers\Public\PagesController::class, 'services'])->name('services');
+    Route::get('/services/details/{id}/{name?}', [\App\Http\Controllers\Public\PagesController::class, 'services_details'])->name('services.details');
     Route::get('/about', [\App\Http\Controllers\Public\PagesController::class, 'about'])->name('about');
     Route::get('/engineers', [\App\Http\Controllers\Public\PagesController::class, 'engineers'])->name('engineers');
     Route::get('/contact-us', [\App\Http\Controllers\Public\PagesController::class, 'contact'])->name('contact-us');
@@ -258,7 +259,7 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::get('/contract/list', [\App\Http\Controllers\Admin\ContractsController::class, 'list'])->name('admin.contract.list');
     Route::get('/contract/details/{contract_id}', [\App\Http\Controllers\Admin\ContractsController::class, 'details'])->name('admin.contract.details');
 
-    // update settings
+    // services settings
     Route::get('/services/list', [\App\Http\Controllers\Admin\ServicesController::class, 'list'])->name('admin.services.list');
     Route::get('/services/create', [\App\Http\Controllers\Admin\ServicesController::class, 'create'])->name('admin.services.create');
     Route::post('/services/create', [\App\Http\Controllers\Admin\ServicesController::class, 'create_action'])->name('admin.services.create.action');
@@ -351,6 +352,15 @@ Route::group(['middleware' => ['auth:editor'], 'prefix' => 'editor'], function (
     Route::get('/page/edit/{id}', [\App\Http\Controllers\Editor\PagesController::class, 'edit'])->name('editor.page.edit');
     Route::post('/page/edit/action/{id}', [\App\Http\Controllers\Editor\PagesController::class, 'edit_action'])->name('editor.page.edit.action');
     Route::delete('/page/delete/{page}', [\App\Http\Controllers\Editor\PagesController::class, 'delete'])->name('editor.page.delete');
+
+    // services settings
+    Route::get('/services/list', [\App\Http\Controllers\Editor\ServicesController::class, 'list'])->name('editor.services.list');
+    Route::get('/services/create', [\App\Http\Controllers\Editor\ServicesController::class, 'create'])->name('editor.services.create');
+    Route::post('/services/create', [\App\Http\Controllers\Editor\ServicesController::class, 'create_action'])->name('editor.services.create.action');
+    Route::get('/services/edit/{service_id}', [\App\Http\Controllers\Editor\ServicesController::class, 'edit'])->name('editor.services.edit');
+    Route::post('/services/edit/{service_id}', [\App\Http\Controllers\Editor\ServicesController::class, 'edit_action'])->name('editor.services.edit.action');
+    Route::delete('/services/delete/{service}', [\App\Http\Controllers\Editor\ServicesController::class, 'delete'])->name('editor.services.delete');
+
 
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'editor_logout'])->name('editor.logout');
 

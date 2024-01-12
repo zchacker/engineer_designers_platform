@@ -73,11 +73,32 @@
 <section class="px-8 ">
     <div class="">
         <h2 class="font-bold text-3xl text-center md:text-right my-4 text-black">{{__('public')['services']}}</h2>
-    </div>
+    </div> 
 
     <div id="default-carousel" class="relative hidden md:block w-full" data-carousel="slide">
         <!-- Carousel wrapper -->
         <div class="relative overflow-hidden rounded-lg h-[400px]">
+            
+            @foreach($services->chunk(3) as $chunk)
+            <!-- Item 1 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <div class="grid grid-cols-3 gap-4 items-center p-16 py-[50px]">
+
+                    @foreach($chunk as $service)                    
+                    <div class="flex-wrap items-center relative shadow-lg shadow-gray-500 rounded-md bg-white h-[300px]">
+                        <div class="flex flex-col items-center justify-center h-full p-4">
+                            <img src="{{ $service->file->fileName ?? asset('imgs/image/s1.png') }}" class="absolute -top-[40px] h-[100px] text-green-700 mb-4 mx-auto" />
+                            <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ $service->name }}</h4>
+                            <p class="font-normal text-gray-700 text-md leading-relaxed text-justify">{{ __('public')['service1_details'] }}</p>
+                        </div>
+                    </div>
+                    @endforeach                                    
+                </div>
+            </div>
+            @endforeach
+                      
+
+            {{--
             <!-- Item 1 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
                 <div class="grid grid-cols-3 gap-4 items-center p-16 py-[50px]">
@@ -162,14 +183,17 @@
                     </div>
                 </div>
             </div>
+            --}}
         </div>
+        
         <!-- Slider indicators -->
         <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+            <!-- <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
             <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button> -->
         </div>
-        <!-- Slider controls -->
+        
+        <!-- Slider controls -->        
         <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
             <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-transparent  group-focus:ring-white group-focus:outline-none">
                 <svg class="w-4 h-4 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">

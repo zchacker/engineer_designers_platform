@@ -19,7 +19,8 @@ class PagesController extends Controller
         $active = 'home';
         $currentPath = $request->path();
         $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
-        return view('public.index',compact('active', 'page'));
+        $services = ServicesModel::all();
+        return view('public.index',compact('active','services', 'page'));
     }
 
     public function services(Request $request)
@@ -29,7 +30,23 @@ class PagesController extends Controller
         $currentPath = $request->path();
         $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
         
-        return view('public.services' ,compact('active','services', 'page'));
+        return view('public.services.index' ,compact('active','services', 'page'));
+    }
+
+    public function services_details(Request $request)
+    {
+        $service    = ServicesModel::where('id' , $request->id )->first();
+
+        if($service == NULL)
+        {
+            return abort(Response::HTTP_NOT_FOUND);
+        }
+
+        $active      = 'services';
+        $currentPath = $request->path();
+        $page        = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+        
+        return view('public.services.details' ,compact('active','service', 'page')); 
     }
     
     public function about(Request $request)

@@ -81,6 +81,12 @@
                 </div>
             
                 <div class="navbar_item">
+                    <i class="las la-file la-2x"></i>
+                    <a href="{{ route('editor.services.list') }}" class="navbar_item_text"> {{__('services_list')}} </a>
+                </div>
+                
+
+                <div class="navbar_item">
                     <i class="las la-cog la-2x"></i>
                     <a href="#" class="navbar_item_text"> {{__('profile')}} </a>
                 </div>
