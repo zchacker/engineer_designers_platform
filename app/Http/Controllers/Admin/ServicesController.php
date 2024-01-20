@@ -78,6 +78,9 @@ class ServicesController extends Controller
                 }
             }                                       
 
+            $request->merge([ 'description' => $request->body ]);  
+            $request->except('body');
+
             // create services
             $services = ServicesModel::create($request->all());            
 
@@ -168,7 +171,8 @@ class ServicesController extends Controller
                 }
             }
 
-            // dd($request->all());
+            $request->merge([ 'description' => $request->body ]);  
+            $request->except('body');
 
             $service = ServicesModel::find($request->service_id);
             $service->update($request->all());

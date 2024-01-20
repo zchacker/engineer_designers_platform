@@ -31,8 +31,9 @@
                             </div>
 
                             <div class="mb-4">
-                                <label for="description" class="lable_form">{{ __('description') }} <span class="text-red-500">*</span></label>
-                                <textarea name="description" id="description" class="form_input" cols="30" rows="10" required>{{ old('description') }}</textarea>                                
+                                <label for="description" class="lable_form">{{ __('description') }} <span class="text-red-500">*</span></label>                                
+                                {{-- <textarea name="description" id="description" class="form_input" cols="30" rows="10" required>{{ old('description') }}</textarea> --}}
+                                <x-forms.tinymce-editor :body=" old('description')" />
                             </div>
 
                             <div class="mb-4">

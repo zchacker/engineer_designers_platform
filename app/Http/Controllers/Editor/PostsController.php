@@ -104,30 +104,46 @@ class PostsController extends Controller
 
     public function create(Request $request)
     {
-        return view('editor.posts.create');
+
+        $post = PostsModel::create([
+            'title'     => '',
+            'body'      => '',
+            'auther_id' => $request->user()->id,
+            'type'      => 'post',
+            'status'    => 'draft'
+        ]);
+
+        return redirect()->route('editor.post.create.view', ['post' => $post->id ]);
+        // return view('editor.posts.create' , compact('post'));
+
     }
 
-    public function create_action(Request $request)
+    public function view_create_form(Request $request, PostsModel $post)
+    {
+        return view('editor.posts.create' , compact('post'));
+    }
+
+    public function create_action(Request $request, PostsModel $post)
     {
         $rules = array(
-            'title'     => 'required',
-            'body'      => 'required',
-            'slug'      => 'required',
-            'language'  => 'required',
-            'keywords'  => 'required',
-            'seo_title' => 'required',
-            'seo_description'  => 'required',    
-            'cover_image'      => 'mimes:jpeg,png,jpg,gif,svg,webp|image|max:25000',        
+            'title'                     => 'required',
+            'body'                      => 'required',
+            'slug'                      => 'required',
+            'language'                  => 'required',
+            'keywords'                  => 'required',
+            'seo_title'                 => 'required',
+            'seo_description'           => 'required',    
+            'cover_image'               => 'mimes:jpeg,png,jpg,gif,svg,webp|image|max:25000',        
         );
 
         $messages = [
             'title.required'            => __('name_required'),
             'body.required'             => __('email_required'),
-            'slug.unique'               => __('email_unique'),
-            'language.required'         => __('phone_required'),
-            'keywords.unique'           => __('phone_unique'),
-            'seo_title.required'        => __('password_required'),
-            'seo_description.required'  => __('password_required'),   
+            'slug.required'             => __('slug_required'),
+            'language.required'         => __('language_required'),
+            'keywords.required'         => __('keywords_required'),
+            'seo_title.required'        => __('seo_title_required'),
+            'seo_description.required'  => __('seo_description_required'),   
             'cover_image.mimies'        => __('images_mimies'),
             'cover_image.image'         => __('images_image'),
             'cover_image.max'           => __('images_max', ["size" => "20"]),         
@@ -146,7 +162,7 @@ class PostsController extends Controller
 
                 if ($fileDB == null) 
                 {
-                    $url = $request->file('file')->storePublicly(
+                    $url = $request->file('cover_image_file')->storePublicly(
                         "avatar/images",
                         $this->basicStorage
                     );
@@ -176,9 +192,11 @@ class PostsController extends Controller
 
             $request['slug'] = str_replace(' ', '-', $request->slug);
             $request->merge(['auther_id' => auth()->user()->id]);
+            $request->merge([ 'status' => 'published' ]);  
 
             // create user account
-            $post = PostsModel::create($request->all());            
+            //$post = PostsModel::create($request->all());            
+            $post = $post->update( $request->all() );
 
             return back()->with(['success' => __('added_successfuly')]); 
 
@@ -197,6 +215,17 @@ class PostsController extends Controller
 
         }
 
+    }
+
+    public function autosave(Request $request, PostsModel $post)
+    {
+        $request->merge([ 'status' => 'draft' ]); 
+
+        $post->update( $request->all() );
+        
+        //dd($request->all());
+
+        return response()->json(['message' => __('saved_successfuly')]);
     }
 
     public function edit(Request $request)
@@ -252,7 +281,7 @@ class PostsController extends Controller
 
                 if ($fileDB == null) 
                 {
-                    $url = $request->file('file')->storePublicly(
+                    $url = $request->file('cover_image_file')->storePublicly(
                         "avatar/images",
                         $this->basicStorage
                     );
@@ -282,6 +311,7 @@ class PostsController extends Controller
 
             $request['slug'] = str_replace(' ', '-', $request->slug);
             $request->merge(['auther_id' => auth()->user()->id]);
+            $request->merge(['status' => 'published']);
 
             // update post data
             $post = PostsModel::findOrFail($request->id);

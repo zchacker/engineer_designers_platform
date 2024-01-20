@@ -89,7 +89,7 @@
                         <div class="flex flex-col items-center justify-center h-full p-4">
                             <img src="{{ $service->file->fileName ?? asset('imgs/image/s1.png') }}" class="absolute -top-[40px] h-[100px] text-green-700 mb-4 mx-auto" />
                             <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ $service->name }}</h4>
-                            <p class="font-normal text-gray-700 text-md leading-relaxed text-justify">{{ __('public')['service1_details'] }}</p>
+                            <p class="font-normal text-gray-700 text-md leading-relaxed text-justify">{{ Str::limit( $service->description , 100) }}</p>
                         </div>
                     </div>
                     @endforeach                                    
@@ -218,16 +218,19 @@
         <!-- Carousel wrapper -->
         <div class="relative overflow-hidden px-8 rounded-lg h-[400px]">
 
+            @foreach($services as $service)
             <div class="hidden duration-700 ease-in-out" data-carousel-item><!-- Item 1 -->
                 <div class="flex-wrap items-center relative shadow-lg rounded-md bg-white h-[320px]">
                     <div class="flex flex-col items-center justify-center h-full p-4">
-                        <img src="{{ asset('imgs/image/s1.png') }}" class="absolute -top-[2px] h-[100px] text-green-700 mb-4 mx-auto" />
-                        <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ __('public')['service1'] }}</h4>
-                        <p class="font-normal text-gray-700 text-md leading-relaxed text-justify">{{ __('public')['service1_details'] }}</p>
+                        <img src="{{ $service->file->fileName ?? asset('imgs/image/s1.png') }}" class="absolute -top-[2px] h-[100px] text-green-700 mb-4 mx-auto" />
+                        <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ $service->name }}</h4>
+                        <p class="font-normal text-gray-700 text-md leading-relaxed text-justify">{{ Str::limit( $service->description , 50) }}</p>
                     </div>
                 </div>
             </div>
+            @endforeach
 
+            {{--
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
                 <div class="flex-wrap items-center relative shadow-lg rounded-md bg-white h-[320px]">
                     <div class="flex flex-col items-center justify-center h-full p-4">
@@ -311,7 +314,11 @@
                 </div>
             </div>
 
+            --}}
+
         </div>
+
+        {{--
         <!-- Slider indicators -->
         <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
             <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
@@ -324,6 +331,7 @@
             <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="7"></button>
             <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="8"></button>
         </div>
+        --}}
         <!-- Slider controls -->
         <button type="button" class="absolute top-0 -left-8 z-30 flex items-center justify-end h-full px-2 cursor-pointer group focus:outline-none" data-carousel-next>
             <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-transparent  group-focus:ring-white group-focus:outline-none">

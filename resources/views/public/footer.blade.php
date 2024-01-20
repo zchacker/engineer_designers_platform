@@ -36,6 +36,10 @@
                 <img src="{{ asset('imgs/image/call.png') }}" alt="" class="w-auto">
             </div>
             <div class="flex md:grid md:grid-cols-2 gap-4 justify-between">
+                <a href="tel:+966112666766">0112666766</a>
+                <img src="{{ asset('imgs/image/call.png') }}" alt="" class="w-auto">
+            </div>
+            <div class="flex md:grid md:grid-cols-2 gap-4 justify-between">
                 <a href="mailto:info@alojian.com">info@alojian.com</a>
                 <img src="{{ asset('imgs/image/mail.png') }}" alt="" class="w-auto">
             </div>
@@ -50,7 +54,8 @@
             <a href="{{route('blog.list')}}" class="text-gray-400 hover:text-white transition duration-300 mx-2"> المدونة </a>
         </div>
         <p class="text-center mb-2">جميع الحقوق محفوظة &copy; 2023 شركة رشيد العجيان للدراسات و الاستشارات الهندسية شركة مهنية</p>
-        <p class="text-center mb-12"> سجل تجاري رقم : 1010877829</p>
+        <p class="text-center mb-2"> سجل تجاري رقم : 1010877829</p>
+        <p class="text-center mb-12"> الرقم الضريبي : 311953897400003</p>
         <p class="mb-4 text-sm text-gray-600 " dir="ltr">Designed by
             <a href="https://browndiamondstech.com" class="hover:text-gray-300" target="_blank">Brown Diamond Tech Ltd.</a>
         </p>

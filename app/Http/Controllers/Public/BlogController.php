@@ -12,7 +12,7 @@ class BlogController extends Controller
     
     public function list(Request $requests)
     {
-        $query      = PostsModel::orderByDesc('created_at')->where('type', 'post');
+        $query      = PostsModel::orderByDesc('created_at')->where('type', 'post')->where('status', 'published');
         $sum        = $query->count('id');
         $posts      = $query->paginate(20);
         return view('public.posts.list', compact('posts','sum'));
@@ -20,7 +20,7 @@ class BlogController extends Controller
 
     public function post(Request $request)
     {
-        $post = PostsModel::find($request->id);
+        $post = PostsModel::with('image' , 'auther')->find($request->id);
 
         if($post == null)
         {

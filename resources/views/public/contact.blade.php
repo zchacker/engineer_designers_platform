@@ -12,6 +12,9 @@
                 <a href="tel:+966536385896">
                     <p class="text-gray-800 text-right" dir="ltr">+966 53 638 5896</p>
                 </a>
+                <a href="tel:+966112666766">
+                    <p class="text-gray-800 text-right" dir="ltr">+966 11 266 6766</p>
+                </a>
             </div>
             <div class="mb-4">
                 <p class="text-xl font-semibold text-gray-700">{{__('email')}}:</p>

@@ -26,16 +26,17 @@ class PostsModel extends Model
      * @var array<string, string>
      */
     protected $fillable = [
-        'cover_image',
         'title',
         'body',
+        'cover_image',
         'slug',
         'language',
         'related_post',
         'keywords',
         'seo_title',
         'seo_description',
-        'auther_id'
+        'auther_id',
+        'status'
     ];
 
     protected $enumLanguage = [
@@ -48,4 +49,8 @@ class PostsModel extends Model
         return $this->hasOne(UsersModel::class , 'id' , 'auther_id');
     }
 
+    public function image()
+    {
+        return $this->hasOne(FilesModel::class , 'id' , 'cover_image');
+    }
 }

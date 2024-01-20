@@ -48,6 +48,7 @@
                                             <th scope="col" class="py-3 px-6">#</th>
                                             <th scope="col" class="py-3 px-6"> {{__('post_title')}} </th>
                                             <th scope="col" class="py-3 px-6"> {{__('auther')}} </th>
+                                            <th scope="col" class="py-3 px-6"> {{__('status')}} </th>
                                             <th scope="col" class="py-3 px-6"> {{__('language')}} </th>
                                             <th scope="col" class="py-3 px-6"> {{__('publish_update_date')}} </th>
                                             <th scope="col" class="py-3 px-6"> {{__('publish_date')}} </th>
@@ -60,6 +61,7 @@
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $post->id }} </td>
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $post->title }} </td>
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $post->auther->name ?? "" }} </td>
+                                            <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ __($post->status) }} </td>
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ __($post->language) }} </td>
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $post->created_at }} </td>
                                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"> {{ $post->updated_at }} </td>

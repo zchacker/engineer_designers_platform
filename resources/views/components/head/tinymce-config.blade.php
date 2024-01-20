@@ -54,9 +54,21 @@
     remove_script_host: false,
     convert_urls: true,
     images_reuse_filename: true,
-    plugins: 'autosave fullscreen preview directionality anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-    toolbar: 'undo redo | preview | fullscreen | link image media table | ltr rtl |  bold italic underline strikethrough | blocks fontfamily fontsize | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat ',
+    plugins: 'autosave save fullscreen preview directionality anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+    toolbar: 'undo redo | save | preview | fullscreen | link image media table | ltr rtl |  bold italic underline strikethrough | blocks fontfamily fontsize | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat ',
     autosave_interval: '3s',
+    autosave_restore_when_empty: true,
     fullscreen_native: true,
+    autosave_prefix: 'tinymce-autosave-{path}{query}-{id}-',
+    autosave_retention: '1440m',
+    save_onsavecallback: () => {
+      console.log(`{{ __('saved_successfuly') }}`);
+      
+      // Get the reference to the div element by its ID
+      var myDiv = document.getElementById('save-msg');
+
+        // Add text content to the div
+        myDiv.textContent = `{{ __('saved_successfuly') }}`;
+    }    
   });
 </script>

@@ -340,7 +340,9 @@ Route::group(['middleware' => ['auth:editor'], 'prefix' => 'editor'], function (
     // posts
     Route::get('/posts/list', [\App\Http\Controllers\Editor\PostsController::class, 'list'])->name('editor.post.list');
     Route::get('/posts/create', [\App\Http\Controllers\Editor\PostsController::class, 'create'])->name('editor.post.create');
-    Route::post('/posts/create/action', [\App\Http\Controllers\Editor\PostsController::class, 'create_action'])->name('editor.post.create.action');
+    Route::get('/posts/create/view/{post}', [\App\Http\Controllers\Editor\PostsController::class, 'view_create_form'])->name('editor.post.create.view');
+    Route::post('/posts/autosave/{post}', [\App\Http\Controllers\Editor\PostsController::class, 'autosave'])->name('editor.autosave');
+    Route::post('/posts/create/action/{post}', [\App\Http\Controllers\Editor\PostsController::class, 'create_action'])->name('editor.post.create.action');
     Route::get('/posts/edit/{id}', [\App\Http\Controllers\Editor\PostsController::class, 'edit'])->name('editor.post.edit');
     Route::post('/posts/edit/action/{id}', [\App\Http\Controllers\Editor\PostsController::class, 'edit_action'])->name('editor.post.edit.action');
     Route::delete('/posts/delete/{post}', [\App\Http\Controllers\Editor\PostsController::class, 'delete'])->name('editor.post.delete');
