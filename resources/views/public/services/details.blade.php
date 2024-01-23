@@ -9,7 +9,7 @@
 
 <section class="bg-white grid grid-cols-1 md:grid-cols-2 gap-8 w-3/4 mx-auto py-8">
     <div class="flex flex-col items-start justify-between order-2 md:order-1">
-        <p>{{ $service->description }}</p>
+        <div>{!! $service->description !!}</div>
         <a href="{{ route('login') }}" class="normal_button mt-4">{{ __('public')['request_service'] }}</a>
     </div>
     <div class="order-1 md:order-2">        

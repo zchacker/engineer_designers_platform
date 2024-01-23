@@ -126,6 +126,12 @@
                             {{__('public')['controll_panel']}}
                         </a>
                     </div>
+                    @elseif(auth('editor')->check())
+                    <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
+                        <a href="{{ route('editor.post.list') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                            {{__('public')['controll_panel']}}
+                        </a>
+                    </div>
                     @endif
                 </div>
             </nav>

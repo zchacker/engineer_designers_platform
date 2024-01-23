@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\MeetingsModel;
 use App\Models\UsersModel;
 use Carbon\Carbon;
+use Exception;
 use Laravel\Socialite\Facades\Socialite;
 use Google\Client as GoogleClient;
 use Illuminate\Http\Response;
@@ -142,17 +143,22 @@ class MeetingsController extends Controller
     public function handleGoogleCallback(Request $request)
     {
 
-        $user = Socialite::driver('google')->user();
+        try{
 
-        // The user's access token
-        $accessToken  = $user->token;
-        $refreshToken = $user->refreshToken;
+            $user = Socialite::driver('google')->user();
 
-        // Store the access token securely for later use
-        $user_data = UsersModel::where(['id' => auth()->user()->id])->first();
-        $user_data->googleRefreshToken = $refreshToken;
-        $user_data->update();
+            // The user's access token
+            $accessToken  = $user->token;
+            $refreshToken = $user->refreshToken;
 
+            // Store the access token securely for later use
+            $user_data = UsersModel::where(['id' => auth()->user()->id])->first();
+            $user_data->googleRefreshToken = $refreshToken;
+            $user_data->update();
+            
+        }catch(Exception $ex){
+
+        }
 
         // Redirect or perform other actions
         if (session()->has('previous_url')) {

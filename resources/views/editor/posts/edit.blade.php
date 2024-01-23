@@ -22,12 +22,15 @@
                         </div>
                         @endif
 
+                        <div class="my-3 w-auto p-2 text-green-600 rounded-md" id="save-msg">
+                            
+                        </div>
                         
-                        <form action="{{ route('editor.post.edit.action' , $post->id) }}" method="post" enctype="multipart/form-data" onsubmit="return form_submit(this);" class="w-full">
+                        <form action="{{ route('editor.post.edit.action' , $post->id) }}" method="post" id="blog-post" enctype="multipart/form-data" class="w-full">
                             @csrf
                             <div class="mb-4">
                                 <label for="title" class="lable_form">{{ __('post_title') }}</label>
-                                <input type="text" name="title" class="form_input !w-full" value="{{ $post->title ?? old('title') }}" required/>
+                                <input type="text" name="title" class="form_input !w-full" value="{{ $post->title ?? old('title') }}"  autocomplete="off" required/>
                             </div>
                             
                             <div class="mb-4">
@@ -36,27 +39,27 @@
                                 @php 
                                     $data = "Ahmed";
                                 @endphp
-                                <x-forms.tinymce-editor :body="$post->body ?? old('body')" />
+                                <x-forms.tinymce-editor :body="$post->body ?? old('body')"  autocomplete="off"/>
                             </div>
 
                             <div class="mb-4">
                                 <label for="seo_title" class="lable_form">{{ __('post_seo_title') }}</label>
-                                <input type="text" name="seo_title" class="form_input !w-full" value="{{ $post->seo_title ?? old('seo_title') }}" required/>
+                                <input type="text" name="seo_title" class="form_input !w-full" value="{{ $post->seo_title ?? old('seo_title') }}"  autocomplete="off" required/>
                             </div>
 
                             <div class="mb-4">
                                 <label for="seo_description" class="lable_form">{{ __('post_seo_description') }}</label>
-                                <input type="text" name="seo_description" class="form_input !w-full" value="{{ $post->seo_description ?? old('seo_description') }}" required />
+                                <input type="text" name="seo_description" class="form_input !w-full" value="{{ $post->seo_description ?? old('seo_description') }}"  autocomplete="off" required />
                             </div>
 
                             <div class="mb-4">
                                 <label for="name" class="lable_form">{{ __('cover_image') }}</label>
-                                <input type="file" name="cover_image_file" class="form_input !w-full"  />
+                                <input type="file" name="cover_image_file" class="form_input !w-full"  autocomplete="off" />
                             </div>
 
                             <div class="mb-4">
                                 <label for="slug" class="lable_form">{{ __('slug') }}</label>
-                                <input type="text" name="slug" class="form_input !w-full" value="{{ $post->slug ?? old('slug') }}" required/>
+                                <input type="text" name="slug" class="form_input !w-full" value="{{ $post->slug ?? old('slug') }}" autocomplete="off" required/>
                             </div>
 
                             <div class="mb-4">
@@ -67,13 +70,14 @@
                                 </select>                                
                             </div>
 
-                            <div class="mb-4">
+                            <div class="mb-16">
                                 <label for="keywords" class="lable_form">{{ __('post_keywords') }}</label>
-                                <input type="text" name="keywords" class="form_input !w-full" value="{{ $post->keywords ?? old('keywords') }}" />
+                                <input type="text" name="keywords" class="form_input !w-full" value="{{ $post->keywords ?? old('keywords') }}"  autocomplete="off" />
                             </div>                            
 
-                            <div class="mb-4">
-                                <input type="submit" value="{{ __('save') }}" class="normal_button" />
+                            <div class="mb-4 flex flex-col md:flex-row gap-5">
+                                <input type="button" value="{{ __('save_draft') }}" onclick="autoSaveForm();" class="gray_button" />
+                                <input type="submit" value="{{ __('publish') }}" class="normal_button" />
                             </div>
 
                         </form>
@@ -84,17 +88,71 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include this script in your Blade file or in a separate JavaScript file -->
 <script>
-    const input = document.querySelector("#phone_no");
-    window.intlTelInput(input, {
-        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
-        dropdownContainer: document.getElementById("form-cover"),
-        initialCountry: 'sa',
-        separateDialCode: true,
-        preferredCountries: ["sa", "ae", 'uk', 'us'],
-        hiddenInput: "phone"
+    var autoSaveTimer;
+
+    function startAutoSave() {
+        autoSaveTimer = setInterval(function () {
+            // Call the function to auto-save the form
+            autoSaveForm();
+        }, 180000); // 2 minutes in milliseconds
+    }
+
+    function autoSaveForm() {
+
+        tinymce.activeEditor.execCommand('mceSave');
+
+        // Create a new Date object
+        var currentDate = new Date();
+
+        // Get the current time components
+        var hours = currentDate.getHours();
+        var minutes = currentDate.getMinutes();
+        var seconds = currentDate.getSeconds();
+
+        // Format the time as a string
+        var currentTime = hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+
+
+        var myDiv = document.getElementById('save-msg');
+        // Add text content to the div
+        myDiv.textContent = `{{ __('saved_successfuly') }}` + " " + `{{ __('draft') }}` + ' ' + currentTime;
+
+        // Exclude the file input from the serialized data
+        var formData = $('#blog-post').serialize();
+
+        $.ajax({
+            method: 'POST',
+            url: '{{ route("editor.autosave", $post->id) }}', // Change this route as per your setup
+            data: formData,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+                console.log(response.message);
+            },
+            error: function (error) {
+                console.error('Autosave failed', error);
+            },
+        });
+
+      
+    }
+
+    // Start auto-save when the page is loaded
+    $(document).ready(function () {
+        startAutoSave();
     });
+
+    // Stop auto-save when the form is submitted
+    $('#blog-post').submit(function () {
+        clearInterval(autoSaveTimer);
+    });
+
 </script>
 
 @include('editor.footer')

@@ -1,12 +1,16 @@
 @include('public.header')
 
-<section class="my-4">
-    <h1 class="font-bold text-3xl text-center">المدونة</h1>
+<section class="flex h-40 justify-center items-center flex-col">
+    <div class="w-full flex flex-col justify-center pr-8 h-full bg-cover bg-no-repeat md:bg-cover md:bg-center" style="background-image: url('{{asset('imgs/image/head-pages.webp')}}');">
+        <div class="w-full h-full px-8 py-8 flex  justify-start items-end bg-black/5 backdrop-brightness-100">
+            <h1 class="text-white text-3xl font-bold mb-4">{{__('public')['blog']}}</h1>
+        </div>
+    </div>
 </section>
 
 <section class="bg-white py-10 md:py-16">
+    @if($posts->isNotEmpty())
     <div class="grid grid-cols-1 md:grid-cols-3 px-6 gap-x-4 gap-y-20">
-
         @foreach($posts as $post)
         <div class="relative p-0 shadow-lg shadow-gray-400 border rounded-3xl py-0">
             <div class="flex flex-col items-center justify-between h-full pb-4 max-h-[400px]">
@@ -19,6 +23,14 @@
         </div>
         @endforeach
     </div>
+    @else
+
+    <div class="flex flex-col  h-[70vh] items-center justify-center mx-8">
+        <img src="{{ asset('imgs/empty.png') }}" alt="" class="w-40">
+        <h2 class="font-bold text-gray-700 text-xl mt-8">{{ __('public')['no_posts'] }}</h2>
+    </div>
+
+    @endif
 </section>
 
 <div class="text-left mt-10" dir="rtl">

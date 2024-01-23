@@ -31,33 +31,33 @@
 
                             <div class="mb-4">
                                 <label for="title" class="lable_form">{{ __('post_title') }}</label>
-                                <input type="text" name="title" class="form_input !w-full" value="{{ $post->title ?? old('title') }}" required/>
+                                <input type="text" name="title" class="form_input !w-full" value="{{ $post->title ?? old('title') }}" required  autocomplete="off" />
                             </div>
                             
                             <div class="mb-4">
                                 <label for="body" class="lable_form">{{ __('post_body') }}</label>
                                 <!-- <textarea name="body" id="body" cols="30" rows="10" class="form_input"></textarea> -->                                
-                                <x-forms.tinymce-editor :body="$post->body ?? old('body')" />
+                                <x-forms.tinymce-editor :body="$post->body ?? old('body')"  autocomplete="off" />
                             </div>
 
                             <div class="mb-4">
                                 <label for="seo_title" class="lable_form">{{ __('post_seo_title') }}</label>
-                                <input type="text" name="seo_title" class="form_input !w-full" value="{{ $post->seo_title ?? old('seo_title') }}" />
+                                <input type="text" name="seo_title" class="form_input !w-full" value="{{ $post->seo_title ?? old('seo_title') }}"  autocomplete="off" />
                             </div>
 
                             <div class="mb-4">
                                 <label for="seo_description" class="lable_form">{{ __('post_seo_description') }}</label>
-                                <input type="text" name="seo_description" class="form_input !w-full" value="{{ $post->seo_description ?? old('seo_description') }}"  />
+                                <input type="text" name="seo_description" class="form_input !w-full" value="{{ $post->seo_description ?? old('seo_description') }}"  autocomplete="off" />
                             </div>
 
                             <div class="mb-4">
                                 <label for="name" class="lable_form">{{ __('cover_image') }}</label>
-                                <input type="file" name="cover_image_file" class="form_input !w-full"  />
+                                <input type="file" name="cover_image_file" class="form_input !w-full"   autocomplete="off" />
                             </div>
 
                             <div class="mb-4">
                                 <label for="slug" class="lable_form">{{ __('slug') }}</label>
-                                <input type="text" name="slug" class="form_input !w-full" value="{{ $post->slug ?? old('slug') }}" />
+                                <input type="text" name="slug" class="form_input !w-full" value="{{ $post->slug ?? old('slug') }}"  autocomplete="off" />
                             </div>
 
                             <div class="mb-4">
@@ -70,11 +70,11 @@
 
                             <div class="mb-16">
                                 <label for="keywords" class="lable_form">{{ __('post_keywords') }}</label>
-                                <input type="text" name="keywords" class="form_input !w-full" value="{{ $post->keywords ?? old('keywords') }}" />
+                                <input type="text" name="keywords" class="form_input !w-full" value="{{ $post->keywords ?? old('keywords') }}" autocomplete="off" />
                             </div>                            
 
                             <div class="mb-4 flex flex-col md:flex-row gap-5">
-                                <input type="button" value="{{ __('save') }}" onclick="autoSaveForm();" class="gray_button" />
+                                <input type="button" value="{{ __('save_draft') }}" onclick="autoSaveForm();" class="gray_button" />
                                 <input type="submit" value="{{ __('publish') }}" class="normal_button" />
                             </div>
 

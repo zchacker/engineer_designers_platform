@@ -225,6 +225,7 @@
     "status": "Status",
     "due_date": "Due Date",
     "draft": "Draft",
+    "save_draft":"حفظ مسودة",
     "published": "Published",
     "publish": "Publish",
     "sent": "Sent",
@@ -338,6 +339,7 @@
         "faq": "Frequently Asked Questions",
         "terms": "Terms and Conditions",
         "no_projects": "No projects yet",
+        "no_posts": "No posts yet",
         "privacy": "Privacy",
         "no_engineers": "No engineers",
         "no_works_profile": "No work profiles",
@@ -353,6 +355,7 @@
         "contact_us_today": "Feel free to send us a message",
         "message": "Your Message",
         "send_now": "Send Now",
-        "more":"المزيد"
+        "more":"المزيد",
+        "blog":"Blog"
     }
 }

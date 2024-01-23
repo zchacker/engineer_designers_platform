@@ -19,7 +19,7 @@
             <div class="flex flex-col items-center justify-center h-full p-4 pb-0">
                 <img src="{{ $service->file->fileName ?? asset('imgs/image/s2.png') }}" class="absolute -top-[70px] h-[120px] text-green-700 mb-4 mx-auto" />
                 <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ $service->name }}</h4>
-                <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ Str::limit( $service->description , 100)}}</p>
+                <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ strip_tags( Str::limit( $service->description , 100) ) }}</p>
                 <a href="{{ route('services.details' , [ $service->id , $service->name ]) }}" class="normal_button mt-4">{{ __('public')['more'] }}</a>
             </div>
         </div>
