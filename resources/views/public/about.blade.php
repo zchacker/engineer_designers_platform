@@ -1,5 +1,5 @@
 @include('public.header')
-<section class=" mx-auto py-0 bg-green-50">
+<section class=" mx-auto py-0 bg-gray-100">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
         <div class="flex items-center justify-center">
             <img src="{{asset('imgs/image/about-page.jpg')}}" alt="Image 1" class="rounded-none w-full">
@@ -14,7 +14,7 @@
         </div>
     </div>
 </section>
-<section class=" mx-auto py-0 bg-green-50">
+<section class=" mx-auto py-0 bg-yellow-50">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
         <div class="flex items-center justify-center md:order-last">
             <img src="{{asset('imgs/image/vision.jpg')}}" alt="Image 1" class="rounded-none w-full">
@@ -29,7 +29,7 @@
         </div>
     </div>
 </section>
-<section class=" mx-auto py-0 bg-green-50">
+<section class=" mx-auto py-0 bg-gray-100">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
         <div class="flex items-center justify-center">
             <img src="{{asset('imgs/image/mission.jpg')}}" alt="Image 1" class="rounded-none w-full">

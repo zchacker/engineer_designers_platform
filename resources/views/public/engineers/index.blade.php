@@ -43,10 +43,18 @@
             <div class="flex flex-col justify-start items-center">
                 <h3 class="font-bold text-lg">{{ $engineer->name }}</h3>
                 <div class="my-2">
-                    <a href="{{ route('engineers.details', $engineer->id) }}" class="link">{{__('works_details')}}</a>
+                    @if(app()->getLocale() == 'ar')
+                    <a href="{{ route('engineers.details', ['', $engineer->id] ) }}" class="link">{{__('works_details')}}</a>
+                    @else
+                    <a href="{{ route('engineers.details', [app()->getLocale(), $engineer->id] ) }}" class="link">{{__('works_details')}}</a>
+                    @endif
                 </div>
                 <div class="my-2">
-                    <a href="{{ route('client.order.create' , $engineer->id ) }}" class="normal_button">{{__('create_order')}}</a>
+                    @if(app()->getLocale() == 'ar')
+                    <a href="{{ route('client.order.create' ,['', $engineer->id] ) }}" class="normal_button">{{__('create_order')}}</a>
+                    @else
+                    <a href="{{ route('client.order.create' ,[app()->getLocale(), $engineer->id] ) }}" class="normal_button">{{__('create_order')}}</a>
+                    @endif
                 </div>
             </div>
         </div>

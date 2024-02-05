@@ -2,6 +2,7 @@
 
 <!-- about  -->
 <div class="overflow-hidden">
+    @if(app()->getLocale() == 'ar')
     <section class="bg-white px-8 py-10 items-center relative">
         <div class="grid md:grid-cols-2 grid-cols-1">
 
@@ -25,32 +26,61 @@
             </div>
         </div>
     </section>
+    @else
+    <section class="bg-white px-8 py-10 items-center relative">
+        <div class="grid md:grid-cols-2 grid-cols-1">
 
-    <section class="bg-[#1E1E1E]/80 py-12 rounded-r-3xl shadow-2xl flex justify-start mr-12 px-8 items-center my-24 ">
-        <div class="md:flex flex-1 items-center">
+            <div class="mt-8 md:mt-28 text-center xl:text-left z-20 order-2 md:order-1">
+                <h1 class="font-bold text-xl md:text-3xl lg:text-4xl leading-normal text-gray-900 mb-6">{!! __('public')['hero_msg'] !!}</h1>
+                <p class="font-normal text-xl text-gray-800 leading-relaxed mb-12">{{__('public')['sub_hero']}}</p>
+                <a href="{{ route('register.user') }}" class="px-6 py-2 bg-yellow-300 text-white font-semibold text-lg rounded-md shadow-md hover:bg-black transition ease-in-out duration-500">{{__('public')['register_now']}}</a>
+            </div>
+
+            <div class="z-10 relative top-10 right-0 my-8 md:block order-1 md:order-2">
+                <div class="border-2 border-yellow-300 box-border rounded-lg shadow-lg w-auto md:w-[600px]">
+                    <video :class="{'hidden':navbarOpen}" class="rounded-lg w-full h-full" controls autoplay="on">
+                        <source src="https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/videos/rclol3.mp4" type="video/mp4">
+                        <img src="{{asset('imgs/image/home.png')}}" alt="Home img" :class="{'hidden':navbarOpen}" />
+                    </video>
+                </div>
+            </div>
+
+            <div class=" sm:block md:visible md:absolute top-0 bottom-0 right-0 bg-yellow-300/70 w-2/5 bg-blend-color-dodge">
+
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <section class="overflow-hidden bg-[#1E1E1E]/80 py-12 rounded-r-3xl shadow-2xl flex justify-start mr-12 px-8 items-center my-24 relative">
+        <div class="md:flex flex-1 items-center relative">
             <img src="{{ asset('imgs/image/about-img2.png') }}" alt="" class="w-[150px] mx-4">
             <div class="flex-col space-y-4">
                 <h2 class="text-white text-3xl font-bold">{{__('public')['get_know_us']}}</h2>
                 <p class="font-normal text-gray-50 text-md md:text-xl text-justify mb-16">{{__('public')['about_message']}}</p>
             </div>
-            <div class="hidden md:block p-8 -ml-[300px] z-10">
-                <img src="{{ asset('imgs/image/box.png') }}" alt="" class="w-[800px]">
+        </div>
+        <div class="max-h-[200px] relative">            
+            <div class="hidden md:block p-0 px-8 z-50">
+                <img src="{{ asset('imgs/image/box.png') }}" alt="" class=" w-[200px] max-h-[200px]">
             </div>
         </div>
-        <img src="{{ asset('imgs/image/lines.png') }}" class="hidden sm:block w-[320px] h-[400px] -ml-[40px] -mt-[200px] top-0" alt="">
+        <img src="{{ asset('imgs/image/lines.png') }}" class="hidden absolute left-10 top-0 z-0 sm:block w-[320px] h-[400px] -ml-[40px] -mt-[200px] " alt="">
     </section>
 </div>
 
 <!-- vision  -->
-<section class="bg-[#1E1E1E]/80 md:py-4 py-8 rounded-l-3xl shadow-xl shadow-gray-500 flex justify-start ml-16 md:ml-52 px-8 items-center my-10">
-    <div class=" md:flex md:items-center">
-        <img src="{{ asset('imgs/image/about-img2.png') }}" alt="" class="w-[150px] mx-4">
-        <div class="flex-col space-y-4">
-            <h2 class="text-white text-3xl font-bold">{{__('public')['vision']}}</h2>
-            <p class="font-normal text-gray-50 text-md md:text-xl text-justify mb-16">{{__('public')['vision_details']}}</p>
+<section class="overflow-hidden bg-[#1E1E1E]/80 md:py-4 py-8 rounded-l-3xl shadow-xl shadow-gray-500 flex justify-start ml-16 md:ml-52 px-8 items-center my-10">
+    <div class="md:flex md:items-center">
+        <div class="md:flex">
+            <img src="{{ asset('imgs/image/about-img2.png') }}" alt="" class="w-[150px] mx-4">
+            <div class="flex-col space-y-4">
+                <h2 class="text-white text-3xl font-bold">{{__('public')['vision']}}</h2>
+                <p class="font-normal text-gray-50 text-md md:text-xl text-justify mb-16">{{__('public')['vision_details']}}</p>
+            </div>
         </div>
-        <div class="hidden md:block p-8 -ml-[100px] z-10">
-            <img src="{{ asset('imgs/image/box2.png') }}" alt="" class="w-[330px] object-cover">
+        <div class="hidden md:block p-8 -ml-[10px] z-10">
+            <img src="{{ asset('imgs/image/box2.png') }}" alt="" class="w-[280px] object-cover">
         </div>
     </div>
 </section>
@@ -58,13 +88,15 @@
 <!-- mission  -->
 <section class="bg-[#1E1E1E]/80 py-12 rounded-r-2xl shadow-xl shadow-gray-500 flex justify-start mr-12 px-8 items-center my-24 ">
     <div class="md:flex  items-center">
-        <img src="{{ asset('imgs/image/about-img2.png') }}" alt="" class="w-[150px] mx-4">
-        <div class="flex-col space-y-4">
-            <h2 class="text-white text-3xl font-bold">{{__('public')['mission']}}</h2>
-            <p class="font-normal text-gray-50 text-md md:text-xl text-justify mb-16">{{__('public')['mission_details']}}</p>
+        <div class="md:flex">
+            <img src="{{ asset('imgs/image/about-img2.png') }}" alt="" class="w-[150px] mx-4">
+            <div class="flex-col space-y-4">
+                <h2 class="text-white text-3xl font-bold">{{__('public')['mission']}}</h2>
+                <p class="font-normal text-gray-50 text-md md:text-xl text-justify mb-16">{{__('public')['mission_details']}}</p>
+            </div>
         </div>
         <div class="hidden md:block p-8 ml-[0px] z-10">
-            <img src="{{ asset('imgs/image/box3.png') }}" alt="" class="w-[70%] relative -left-20">
+            <img src="{{ asset('imgs/image/box3.png') }}" alt="" class="w-[430px]">
         </div>
     </div>
 </section>
@@ -72,7 +104,11 @@
 <!-- services  -->
 <section class="px-8 ">
     <div class="">
+        @if(app()->getLocale() == 'ar')
         <h2 class="font-bold text-3xl text-center md:text-right my-4 text-black">{{__('public')['services']}}</h2>
+        @else 
+        <h2 class="font-bold text-3xl text-center md:text-left my-4 text-black">{{__('public')['services']}}</h2>
+        @endif
     </div> 
 
     <div id="default-carousel" class="relative hidden md:block w-full" data-carousel="slide">
@@ -89,7 +125,7 @@
                         <div class="flex flex-col items-center justify-center h-full p-4">
                             <img src="{{ $service->file->fileName ?? asset('imgs/image/s1.png') }}" class="absolute -top-[40px] h-[100px] text-green-700 mb-4 mx-auto" />
                             <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ $service->name }}</h4>
-                            <p class="font-normal text-gray-700 text-md leading-relaxed text-justify">{{ Str::limit( $service->description , 100) }}</p>
+                            <p class="font-normal text-gray-700 text-md leading-relaxed text-justify">{{ strip_tags( Str::limit( $service->description , 100) ) }}</p>
                         </div>
                     </div>
                     @endforeach                                    
@@ -413,12 +449,12 @@
 <!-- book section -->
 <section class="bg-gradient-to-r from-gray-100 to-gray-300 py-10 md:py-16" id="contact">
     <div class="container max-w-screen-xl mx-auto px-4 xl:relative">
-        <div class="bg-[#1E1E1E]/80 w-full md:w-4/6 flex flex-col lg:flex-row items-center justify-center px-8 py-14 rounded-3xl">
-            <div class="text-center lg:text-right mb-10 lg:mb-0 w-full md:mr-8 flex flex-col gap-8">
-                <h1 class="font-bold text-white text-4xl md:text-5xl lg:text-5xl leading-normal mb-4">{!! __('public')['talk_us'] !!}</h1>
-                <p class="font-normal text-white text-md md:text-xl">{!! __('public')['more_talk'] !!}</p>
+        <div class="bg-[#1E1E1E]/80 w-full  flex flex-col lg:flex-row items-center justify-start px-8 py-14 rounded-3xl">
+            <div class="mb-10 lg:mb-0 w-full md:mr-8 flex flex-col gap-8">
+                <h1 class="font-bold text-white text-4xl md:text-5xl lg:text-5xl leading-normal mb-4"  style="line-height: 1.5;">{!! __('public')['talk_us'] !!}</h1>
+                <p class="font-normal text-white text-md md:text-xl" style="line-height: 1.8;">{!! __('public')['more_talk'] !!}</p>
             </div>
-            <div class=" md:block bg-gray-300/95 xl:relative md:-ml-52 shadow-xl shadow-gray-800 px-4 w-full md:w-auto py-3 rounded-xl">
+            <div class=" md:block bg-gray-300/95 xl:relative  shadow-xl shadow-gray-800 px-4 w-full md:w-auto py-3 rounded-xl">
                 <div class="py-3">
                     <h3 class="font-semibold text-gray-900 text-3xl">{{__('public')['contact']}}</h3>
                 </div>

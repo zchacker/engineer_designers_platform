@@ -1,5 +1,9 @@
 <!DOCTYPE html>
+@if(app()->getLocale() == 'ar')
 <html lang="ar" dir="rtl">
+@else 
+<html lang="en" dir="ltr">
+@endif
 
 <head>
     <!-- Google Tag Manager -->
@@ -14,15 +18,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{ $page->description ?? '' }}">
     <title>{{ $page->title ?? "شركة رشيد العجيان"}}</title>
+    <link rel="icon" type="image/x-icon" href="{{asset('imgs/icon.ico')}}">
     <!-- <link rel="stylesheet" href="assets/css/tailwind.css"> -->
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" async integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" async rel="stylesheet">
     
     
     <!-- Include Lightbox2 CSS -->
@@ -46,8 +51,13 @@
             <!-- <nav class="flex-wrap lg:flex items-center py-14 pb-16 xl:relative z-50 h-40" x-data="{navbarOpen:false}" :class="{'h-20':!navbarOpen,'h-[470px]':navbarOpen}"> -->
             <nav class="flex-wrap md:flex items-center justify-between py-4 z-50" x-data="{navbarOpen:false}" :class="{'block':navbarOpen}">
 
-                <div class="flex items-center justify-between mb-0 lg:mb-0">
+                <div class="flex items-center justify-center mb-0 lg:mb-0">
+
+                    @if(app()->getLocale() != 'ar')
+                    <button class="lg:hidden w-10 h-10 mr-auto flex items-center justify-center stroke-white text-white border border-white rounded-md" @click="navbarOpen = !navbarOpen">
+                    @else
                     <button class="lg:hidden w-10 h-10 ml-auto flex items-center justify-center stroke-white text-white border border-white rounded-md" @click="navbarOpen = !navbarOpen">
+                    @endif
                         <i data-feather="menu"></i>
                     </button>
 
@@ -59,8 +69,48 @@
                 <ul class="hidden md:flex flex-col md:flex-row justify-between md:gap-8" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
                     <!-- <ul class="md:flex flex-col-reverse lg:flex-row text-right lg:items-center lg:mx-auto gap-6 justify-around" :class="{'hidden':!navbarOpen,'flex':navbarOpen}"> -->
 
+                    @if(app()->getLocale() != 'ar')
+                    
+
                     <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'home') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">
-                        <a href="{{ route('home') }}">{{ __('public')['home'] }}</a>
+                        <a href="{{ route('home', app()->getLocale()) }}">{{ __('public')['home'] }}</a>
+                    </li>
+
+                    <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'about') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">
+                        <a href="{{ route('about', app()->getLocale()) }}">{{ __('public')['about'] }}</a>
+                    </li>
+
+                    <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'services') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">
+                        <a href="{{ route('services', app()->getLocale()) }}">{{ __('public')['services'] }}</a>
+                    </li>
+
+                    <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'projects') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">
+                        <a href="{{ route('projects', app()->getLocale()) }}">{{ __('public')['projects'] }}</a>
+                    </li>
+
+                    <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'engineers') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">
+                        <a href="{{ route('engineers', app()->getLocale()) }}">{{ __('public')['engineers'] }}</a>
+                    </li>
+
+                    <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'blog') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">
+                        <a href="{{route('blog.list', app()->getLocale())}}"> {{ __('public')['blog'] }} </a>
+                    </li>                    
+
+                    {{-- 
+                    <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'projects') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">
+                        <a href="{{ route('projects', app()->getLocale()) }}">{{ __('public')['ads'] }}</a>
+                    </li>
+                    --}}
+
+
+                    <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'contact') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">
+                        <a href="{{ route('contact-us', app()->getLocale()) }}">{{ __('public')['contact'] }}</a>
+                    </li>
+
+                    @else 
+
+                    <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'home') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">
+                        <a href="{{ route('home' ) }}">{{ __('public')['home'] }}</a>
                     </li>
 
                     <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'about') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">
@@ -79,6 +129,10 @@
                         <a href="{{ route('engineers') }}">{{ __('public')['engineers'] }}</a>
                     </li>
 
+                    <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'blog') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">
+                        <a href="{{route('blog.list')}}"> {{ __('public')['blog'] }} </a>
+                    </li>                    
+
                     {{-- 
                     <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'projects') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">
                         <a href="{{ route('projects') }}">{{ __('public')['ads'] }}</a>
@@ -88,23 +142,28 @@
 
                     <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'contact') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">
                         <a href="{{ route('contact-us') }}">{{ __('public')['contact'] }}</a>
+                    </li>                    
+
+                    @endif
+
+                    <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'contact') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">                        
+                        @if(app()->getLocale() == 'ar')
+                            <a href="{{ route(request()->route()->getName(), ['locale' => 'en'] + request()->route()->parameters()) }}">English</a>
+                            <!-- <a href="{{ route('language.switch' , 'en') }}">English</a> -->
+                        @else
+                            <a href="{{ route(request()->route()->getName(), ['locale' => ''] + request()->route()->parameters()) }}">عربي</a>
+                            <!-- <a href="{{ route('language.switch' , 'ar') }}">عربي</a> -->
+                        @endif
                     </li>
 
                 </ul>
                 
                 <div class="flex items-center">
-                    <div class="flex text-white font-bold mx-12">
-                        @if(app()->getLocale() == 'ar')
-                            <a href="{{ route('language.switch' , 'en') }}">English</a>
-                        @else
-                            <a href="{{ route('language.switch' , 'ar') }}">عربي</a>
-                        @endif
-                    </div>
-                
+                                    
                     @if (!auth('client')->check() && !auth('engineer')->check() && !auth('admin')->check())
                     <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
                         <!-- <a href="{{ route('login') }}" class="font-semibold bg-yellow-300 p-4 rounded-md text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">{{ __('public')['sigin'] }}</a> -->
-                        <a href="{{ route('login') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                        <a href="{{ route('login', app()->getLocale() ) }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
                             {{ __('public')['sigin'] }}
                         </a>
                     </div>

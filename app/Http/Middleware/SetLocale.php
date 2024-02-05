@@ -18,6 +18,17 @@ class SetLocale
     {
 
         $locale = $request->segment(1);
+
+        // If no locale is provided in the URL, set the default locale to 'ar'
+        // if (!$locale || !in_array($locale, config('app.available_locales'))) {
+        //     $locale = 'ar';
+        // }
+
+        // app()->setLocale($locale);
+
+        // // Save the locale in the session for future requests
+        // Session::put('locale', $locale);
+
         if (in_array($locale, config('app.available_locales'))) {
             app()->setLocale($locale);
         }else if(Session::has('locale')){

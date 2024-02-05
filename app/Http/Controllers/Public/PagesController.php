@@ -68,7 +68,9 @@ class PagesController extends Controller
         $active = 'projects';
 
         $currentPath = $request->path();
-        $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+        $page        = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+
+
         return view('public.projects.index' ,compact('works' , 'active', 'page'));
     }
 
@@ -86,7 +88,15 @@ class PagesController extends Controller
        
         $engineer = $work->engineer;
         $currentPath = $request->path();
-        $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+        $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first();         
+
+        if($page == NULL)
+        {
+            $page = new \stdClass();
+            $page->title = $work->title ." | شركة رشيد العجيان للاستشارات الهندسية" ;
+            $page->description = $work->description;            
+        }
+
         return view('public.projects.details', compact('engineer','work', 'page') );
     }
 
@@ -102,26 +112,35 @@ class PagesController extends Controller
         $active = 'engineers';
 
         $currentPath = $request->path();
-        $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+        $page        = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+    
 
         return view('public.engineers.index' ,compact('engineers' , 'active', 'page')); 
     }
 
-    public function details(Request $request, $engineer_id)
+    public function details(Request $request)
     {
 
         $engineer = UsersModel::with("avatar")              
-        ->where('id', $engineer_id)
+        ->where('id', $request->engineer_id)        
         ->first();
 
         $query = WorksModel::with('worksFiles')
-        ->where('engineer_id', $engineer_id);
+        ->where('engineer_id', $request->engineer_id);
 
         $sum        = $query->count("id");
         $works      = $query->paginate(100);
 
         $currentPath = $request->path();
-        $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+        $page        = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+        
+
+        if($page == NULL)
+        {
+            $page = new \stdClass();
+            $page->title = $engineer->name ." | شركة رشيد العجيان للاستشارات الهندسية" ;
+            $page->description = "أعمال المهندس ".$engineer->name ;            
+        }
 
         return view('public.engineers.details', compact('engineer','works', 'sum', 'page') );
 
@@ -143,6 +162,14 @@ class PagesController extends Controller
 
         $currentPath = $request->path();
         $page   = PagesModel::where('path' , 'like',  '%' . $currentPath . '%')->first(); 
+
+        
+        if($page == NULL)
+        {
+            $page = new \stdClass();
+            $page->title = $work->title ." | شركة رشيد العجيان للاستشارات الهندسية" ;
+            $page->description = $work->description;            
+        }
 
         return view('public.projects.details', compact('engineer','work', 'page') );
 

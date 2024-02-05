@@ -15,7 +15,8 @@ class BlogController extends Controller
         $query      = PostsModel::orderByDesc('created_at')->where('type', 'post')->where('status', 'published');
         $sum        = $query->count('id');
         $posts      = $query->paginate(20);
-        return view('public.posts.list', compact('posts','sum'));
+        $active     = 'blog';
+        return view('public.posts.list', compact('posts','sum', 'active'));
     }
 
     public function post(Request $request)

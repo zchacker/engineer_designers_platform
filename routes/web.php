@@ -3,6 +3,7 @@
 use App\Models\PostsModel;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,29 +26,63 @@ Route::get('/test', function () {
     return view('errors.404');
 })->name('test');
 
-Route::get('/sitemap.xml', function(){
+Route::get('/sitemap.xml', function () {
     return response()->view('sitemap.pages')->header('Content-Type', 'text/xml');
 });
 
 // Route::get('/', [\App\Http\Controllers\RegisterController::class, 'register'])->name('home');
+Route::get('/', [\App\Http\Controllers\Public\PagesController::class, 'home'])->name('home');
 
-// Route::group(['prefix' => '{locale?}'], function () {
+
+Route::get('/services', [\App\Http\Controllers\Public\PagesController::class, 'services'])->name('services');
+Route::get('/services/details/{id}/{name?}', [\App\Http\Controllers\Public\PagesController::class, 'services_details'])->name('services.details');
+Route::get('/about', [\App\Http\Controllers\Public\PagesController::class, 'about'])->name('about');
+Route::get('/engineers', [\App\Http\Controllers\Public\PagesController::class, 'engineers'])->name('engineers');
+Route::get('/contact-us', [\App\Http\Controllers\Public\PagesController::class, 'contact'])->name('contact-us');
+Route::post('/contact-us/send', [\App\Http\Controllers\Public\PagesController::class, 'contact_action'])->name('contact-us.send');
+
+Route::get('/blog', [\App\Http\Controllers\Public\BlogController::class, 'list'])->name('blog.list');
+Route::get('/blog/post/{id}/{title?}', [\App\Http\Controllers\Public\BlogController::class, 'post'])->name('blog.post');
+
+// project
+Route::get('/projects', [\App\Http\Controllers\Public\PagesController::class, 'projects'])->name('projects');
+Route::get('/projects/details/{project_id}', [\App\Http\Controllers\Public\PagesController::class, 'project_details'])->name('projects.details');
+
+// engineer works details
+Route::get('/engineers/details/{engineer_id}', [\App\Http\Controllers\Public\PagesController::class, 'details'])->name('engineers.details');
+Route::get('/engineers/work/details/{project_id}', [\App\Http\Controllers\Public\PagesController::class, 'work_details'])->name('engineers.work.details');
+
+Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
+Route::post('/login/action', [\App\Http\Controllers\AuthController::class, 'login_action'])->name('login.action');
+
+Route::get('/register', [\App\Http\Controllers\RegisterController::class, 'register'])->name('register.user');
+Route::post('/register/action', [\App\Http\Controllers\RegisterController::class, 'register_action'])->name('register.user.action');
+
+
+Route::get('/forgotpassword', [\App\Http\Controllers\AuthController::class, 'forgot_password'])->name('password.forgot');
+Route::post('/forgotpassword/action', [\App\Http\Controllers\AuthController::class, 'forgot_password_action'])->name('password.forgot.action');
+
+Route::get('/resetpassword/{id}/{token}', [\App\Http\Controllers\AuthController::class, 'reset_password'])->name('reset.password.link');
+Route::post('/set_password', [\App\Http\Controllers\AuthController::class, 'rest_password_new'])->name('set.new.password');
+
+
+Route::group(['prefix' => '{locale?}', 'where' => ['locale' => 'en|ar']], function () {
 
     Route::get('/', [\App\Http\Controllers\Public\PagesController::class, 'home'])->name('home');
+    Route::get('/about', [\App\Http\Controllers\Public\PagesController::class, 'about'])->name('about');
     Route::get('/services', [\App\Http\Controllers\Public\PagesController::class, 'services'])->name('services');
     Route::get('/services/details/{id}/{name?}', [\App\Http\Controllers\Public\PagesController::class, 'services_details'])->name('services.details');
-    Route::get('/about', [\App\Http\Controllers\Public\PagesController::class, 'about'])->name('about');
     Route::get('/engineers', [\App\Http\Controllers\Public\PagesController::class, 'engineers'])->name('engineers');
     Route::get('/contact-us', [\App\Http\Controllers\Public\PagesController::class, 'contact'])->name('contact-us');
     Route::post('/contact-us/send', [\App\Http\Controllers\Public\PagesController::class, 'contact_action'])->name('contact-us.send');
-    
+
     Route::get('/blog', [\App\Http\Controllers\Public\BlogController::class, 'list'])->name('blog.list');
     Route::get('/blog/post/{id}/{title?}', [\App\Http\Controllers\Public\BlogController::class, 'post'])->name('blog.post');
-    
+
     // project
     Route::get('/projects', [\App\Http\Controllers\Public\PagesController::class, 'projects'])->name('projects');
     Route::get('/projects/details/{project_id}', [\App\Http\Controllers\Public\PagesController::class, 'project_details'])->name('projects.details');
-    
+
     // engineer works details
     Route::get('/engineers/details/{engineer_id}', [\App\Http\Controllers\Public\PagesController::class, 'details'])->name('engineers.details');
     Route::get('/engineers/work/details/{project_id}', [\App\Http\Controllers\Public\PagesController::class, 'work_details'])->name('engineers.work.details');
@@ -65,22 +100,26 @@ Route::get('/sitemap.xml', function(){
     Route::get('/resetpassword/{id}/{token}', [\App\Http\Controllers\AuthController::class, 'reset_password'])->name('reset.password.link');
     Route::post('/set_password', [\App\Http\Controllers\AuthController::class, 'rest_password_new'])->name('set.new.password');
 
-    Route::get('/privacy', function () {
-        $post = PostsModel::where('slug' , 'privacy')->first();
-        return view('public.privacy', compact('post'));
-    })->name('privacy');
+})->prefix('ar'); // Set the default value to 'ar';
 
-    Route::get('/terms', function () {
-        $post = PostsModel::where('slug' , 'terms')->first();
-        return view('public.terms', compact('post'));
-    })->name('terms');
 
-    Route::group(['middleware' => ['auth:client,engineer']], function () {
-        Route::get('/confirm_email', [\App\Http\Controllers\AuthController::class, 'confirm_email'])->name('confirm.email');
-        Route::post('/confirm_email/action', [\App\Http\Controllers\AuthController::class, 'confirm_email_action'])->name('confirm.email.action');
-        Route::get('/confirm_email/resend', [\App\Http\Controllers\AuthController::class, 'confirm_email_resend'])->name('confirm.email.resend.action');
-    });
-// });
+
+Route::get('/privacy', function () {
+    $post = PostsModel::where('slug', 'privacy')->first();
+    return view('public.privacy', compact('post'));
+})->name('privacy');
+
+Route::get('/terms', function () {
+    $post = PostsModel::where('slug', 'terms')->first();
+    return view('public.terms', compact('post'));
+})->name('terms');
+
+Route::group(['middleware' => ['auth:client,engineer']], function () {
+    Route::get('/confirm_email', [\App\Http\Controllers\AuthController::class, 'confirm_email'])->name('confirm.email');
+    Route::post('/confirm_email/action', [\App\Http\Controllers\AuthController::class, 'confirm_email_action'])->name('confirm.email.action');
+    Route::get('/confirm_email/resend', [\App\Http\Controllers\AuthController::class, 'confirm_email_resend'])->name('confirm.email.resend.action');
+});
+
 
 
 // this must be public
@@ -88,7 +127,7 @@ Route::group(['middleware' => ['auth:engineer,admin,supervisor'], 'prefix' => 'e
     Route::get('/google/get/token', [\App\Http\Controllers\Admin\MeetingsController::class, 'handleGoogleCallback'])->name('google.get.token');
 });
 
-Route::get('language/{locale}' , [\App\Http\Controllers\Shared\LanguageController::class , 'switch'])->name('language.switch');
+Route::get('language/{locale}', [\App\Http\Controllers\Shared\LanguageController::class, 'switch'])->name('language.switch');
 
 // public invoice
 Route::get('/invoices/show/{invoice_id}', [\App\Http\Controllers\Shared\InvoicesController::class, 'show'])->name('invoices.show');
@@ -228,7 +267,7 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::post('/orders/update_status/{order_id}', [\App\Http\Controllers\Admin\OrdersController::class, 'update_status'])->name('admin.order.status.update');
 
     // invoices
-    Route::get('/invoices/list', [\App\Http\Controllers\Admin\InvoicesController::class, 'list'])->name('admin.invoices.list');    
+    Route::get('/invoices/list', [\App\Http\Controllers\Admin\InvoicesController::class, 'list'])->name('admin.invoices.list');
     Route::get('/invoices/create/{order_id?}', [\App\Http\Controllers\Admin\InvoicesController::class, 'create'])->name('admin.invoices.create');
     Route::post('/invoices/create/{order_id?}', [\App\Http\Controllers\Admin\InvoicesController::class, 'create_action'])->name('admin.invoices.create.action');
 
@@ -241,10 +280,10 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::get('/meetings/list', [\App\Http\Controllers\Admin\MeetingsController::class, 'list'])->name('admin.meeting.list');
     Route::get('/google/create/{client_id}', [\App\Http\Controllers\Admin\MeetingsController::class, 'create'])->name('admin.meeting.create');
     Route::post('/google/create/{client_id}', [\App\Http\Controllers\Admin\MeetingsController::class, 'create_action'])->name('admin.meeting.create.action');
-    
+
     Route::get('/meetings/cancel/{meeting_id}', [\App\Http\Controllers\Admin\MeetingsController::class, 'cancel_meeting'])->name('admin.meeting.cancel');
     Route::get('/google/request/token', [\App\Http\Controllers\Admin\MeetingsController::class, 'redirectToGoogle'])->name('admin.google.request.token');
-        
+
     // messages
     Route::get('/conversation/list', [\App\Http\Controllers\Admin\ConversationController::class, 'listConversations'])->name('admin.conversation.list');
     Route::get('/conversation/view/{conversationId}', [\App\Http\Controllers\Admin\ConversationController::class, 'viewConversation'])->name('admin.conversation.view');
@@ -270,27 +309,26 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     // update settings
     Route::get('/settings', [\App\Http\Controllers\Shared\SettingsController::class, 'admin_update_data'])->name('admin.settings');
     Route::post('/settings/action', [\App\Http\Controllers\Shared\SettingsController::class, 'update_data_action'])->name('admin.settings.action');
-    
+
     Route::get('/policy/list', [\App\Http\Controllers\Admin\PolicyController::class, 'list'])->name('admin.policy.list');
     Route::get('/policy/edit/{id}', [\App\Http\Controllers\Admin\PolicyController::class, 'edit'])->name('admin.policy.edit');
     Route::post('/policy/edit/action/{id}', [\App\Http\Controllers\Admin\PolicyController::class, 'edit_action'])->name('admin.policy.edit.action');
-    
+
     // update password
     Route::get('/password', [\App\Http\Controllers\Shared\SettingsController::class, 'admin_update_passwords'])->name('admin.password');
     Route::post('/password/action', [\App\Http\Controllers\Shared\SettingsController::class, 'update_passwords_action'])->name('admin.password.action');
 
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'admin_logout'])->name('admin.logout');
-
 });
 
 Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], function () {
 
     // engineers list
     Route::get('/engineers/list', [\App\Http\Controllers\Supervisor\EngineersController::class, 'list'])->name('supervisor.engineers.list');
-  
+
     // clients  
     Route::get('/clients/list', [\App\Http\Controllers\Supervisor\ClientsController::class, 'list'])->name('supervisor.clients.list');
-    
+
     // orders list
     Route::get('/orders/list', [\App\Http\Controllers\Supervisor\OrdersController::class, 'orders_list'])->name('supervisor.orders.list');
     Route::get('/orders/details/{order_id}', [\App\Http\Controllers\Supervisor\OrdersController::class, 'details'])->name('supervisor.order.details');
@@ -298,7 +336,7 @@ Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], fu
     Route::post('/orders/update_status/{order_id}', [\App\Http\Controllers\Supervisor\OrdersController::class, 'update_status'])->name('supervisor.order.status.update');
 
     // invoices
-    Route::get('/invoices/list', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'list'])->name('supervisor.invoices.list');    
+    Route::get('/invoices/list', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'list'])->name('supervisor.invoices.list');
     Route::get('/invoices/create/{order_id?}', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'create'])->name('supervisor.invoices.create');
     Route::post('/invoices/create/{order_id?}', [\App\Http\Controllers\Supervisor\InvoicesController::class, 'create_action'])->name('supervisor.invoices.create.action');
 
@@ -310,10 +348,10 @@ Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], fu
     Route::get('/meetings/list', [\App\Http\Controllers\Supervisor\MeetingsController::class, 'list'])->name('supervisor.meeting.list');
     Route::get('/google/create/{client_id}', [\App\Http\Controllers\Supervisor\MeetingsController::class, 'create'])->name('supervisor.meeting.create');
     Route::post('/google/create/{client_id}', [\App\Http\Controllers\Supervisor\MeetingsController::class, 'create_action'])->name('supervisor.meeting.create.action');
-    
+
     Route::get('/meetings/cancel/{meeting_id}', [\App\Http\Controllers\Supervisor\MeetingsController::class, 'cancel_meeting'])->name('supervisor.meeting.cancel');
     Route::get('/google/request/token', [\App\Http\Controllers\Supervisor\MeetingsController::class, 'redirectToGoogle'])->name('supervisor.google.request.token');
-        
+
     // My messages
     Route::post('/my/conversation/create', [\App\Http\Controllers\Supervisor\MyConversationController::class, 'initiateConversation'])->name('supervisor.my.conversation.create');
     Route::get('/my/conversation/list', [\App\Http\Controllers\Supervisor\MyConversationController::class, 'listConversations'])->name('supervisor.my.conversation.list');
@@ -330,13 +368,12 @@ Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], fu
 
 
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'supervisor_logout'])->name('supervisor.logout');
-
 });
 
 Route::group(['middleware' => ['auth:editor'], 'prefix' => 'editor'], function () {
 
     Route::post('/image/upload', [\App\Http\Controllers\Editor\PostsController::class, 'upload'])->name('editor.image.upload');
-    
+
     // posts
     Route::get('/posts/list', [\App\Http\Controllers\Editor\PostsController::class, 'list'])->name('editor.post.list');
     Route::get('/posts/create', [\App\Http\Controllers\Editor\PostsController::class, 'create'])->name('editor.post.create');
@@ -365,5 +402,4 @@ Route::group(['middleware' => ['auth:editor'], 'prefix' => 'editor'], function (
 
 
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'editor_logout'])->name('editor.logout');
-
 });

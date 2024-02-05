@@ -1,6 +1,13 @@
-<div class="fixed right-6 bottom-16 md:bottom-8 w-14 h-14 z-50">
-    <a href="https://wa.me/966536385896" target="_blank">
-        <img src="{{ asset('imgs/image/whatsapp.webp') }}" alt="">
+@if(app()->getLocale() == 'ar')
+<div class="fixed right-6 bottom-16 md:bottom-8  z-50">
+@else
+<div class="fixed left-2 bottom-16 md:bottom-8  z-50">
+@endif
+    <a href="https://wa.me/966536385896" target="_blank" class="flex gap-4 items-center">
+        <img src="{{ asset('imgs/image/whatsapp.webp') }}" alt="" class="w-14 h-14">
+        <p class="p-1 px-2 rounded-md bg-white text-black">
+            {{__('contact_us_now')}}
+        </p>
     </a>
 </div>
 
@@ -9,6 +16,7 @@
         {{__('contact_us_now')}}
     </a>
 </div>
+
 <footer class="bg-black text-white pt-16">
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 items-start justify-center">
         <div class="flex items-center justify-center mb-6">
@@ -16,6 +24,7 @@
         </div>
         <div class="flex flex-wrap justify-center items-end mb-2">
             <ul class="flex text-center flex-col md:flex-row gap-4">
+                @if(app()->getLocale() == 'ar')
                 <li class="font-semibold text-white transition ease-in-out duration-300 mb-2 lg:mb-0">
                     <a href="{{ route('about') }}">{{ __('public')['about'] }}</a>
                 </li>
@@ -25,6 +34,17 @@
                 <li class="font-semibold text-white transition ease-in-out duration-300 mb-2 lg:mb-0">
                     <a href="{{ route('projects') }}">{{ __('public')['projects'] }}</a>
                 </li>
+                @else
+                <li class="font-semibold text-white transition ease-in-out duration-300 mb-2 lg:mb-0">
+                    <a href="{{ route('about', app()->getLocale()) }}">{{ __('public')['about'] }}</a>
+                </li>
+                <li class="font-semibold text-white transition ease-in-out duration-300 mb-2 lg:mb-0">
+                    <a href="{{ route('services', app()->getLocale()) }}">{{ __('public')['services'] }}</a>
+                </li>
+                <li class="font-semibold text-white transition ease-in-out duration-300 mb-2 lg:mb-0">
+                    <a href="{{ route('projects', app()->getLocale()) }}">{{ __('public')['projects'] }}</a>
+                </li>
+                @endif
             </ul>
         </div>
         <div class="flex flex-col flex-wrap items-center justify-center gap-4">
@@ -45,13 +65,13 @@
             </div>
         </div>
     </div>
-    <div class="flex flex-col items-center justify-center mt-4 pb-14">
+    <div class="flex flex-col items-center justify-center mt-4 pb-28">
         <div class="flex items-center justify-center mb-4">
             <a href="{{ route('privacy') }}" class=" text-gray-400 hover:text-white transition duration-300 mx-2"> {{__('public')['privacy']}} </a>
             <span class="text-gray-400"> | </span>
             <a href="{{route('terms')}}" class="text-gray-400 hover:text-white transition duration-300 mx-2"> {{__('public')['terms']}}</a>
             <span class="text-gray-400"> | </span>
-            <a href="{{route('blog.list')}}" class="text-gray-400 hover:text-white transition duration-300 mx-2"> المدونة </a>
+            <a href="{{route('blog.list')}}" class="text-gray-400 hover:text-white transition duration-300 mx-2"> {{ __('public')['blog'] }} </a>
         </div>
         <p class="text-center mb-2">جميع الحقوق محفوظة &copy; 2023 شركة رشيد العجيان للدراسات و الاستشارات الهندسية شركة مهنية</p>
         <p class="text-center mb-2"> سجل تجاري رقم : 1010877829</p>
