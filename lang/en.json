@@ -277,6 +277,7 @@
     "user_type":"نوع المستخدم",
     "editor":" محرر",
     "assistant":"مساعد", 
+    "about_message": "Rashid Al-Ajyan Limited Engineering Consultations Company, a professional engineering company compatible with the requirements of the modern era in the quality of vision, projects, and management methods to achieve growth standards according to our government's prudent approach in the 2030 vision. Our way is about how, not how much, and our goal is success with our clients. Our diversity of experiences is one of our pillars of strength through our company's relationship with global content in various fields.",
     "public": {
         "home": "Home",
         "about": "About Us",
@@ -293,7 +294,6 @@
         "sub_hero": "Elite designers exceeding 20 architects",
         "start_now": "Start Now",
         "register_now": "Register Now",
-        "about_message": "Rashid Al-Ajyan Limited Engineering Consultations Company, a professional engineering company compatible with the requirements of the modern era in the quality of vision, projects, and management methods to achieve growth standards according to our government's prudent approach in the 2030 vision. Our way is about how, not how much, and our goal is success with our clients. Our diversity of experiences is one of our pillars of strength through our company's relationship with global content in various fields.",
         "get_know_us": "Get to Know Us",
         "vision": "Vision",
         "vision_details": "Our strength lies with our clients and by sharing our global and local experiences and the demands of the needs in our era, we strive to be at the forefront of our field.",

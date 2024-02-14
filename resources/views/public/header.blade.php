@@ -146,7 +146,7 @@
 
                     @endif
 
-                    <li class="font-semibold text-white hover:text-yellow-300 @if(@$active == 'contact') active_page @endif transition ease-in-out duration-300 mb-5 lg:mb-0">                        
+                    <li class="font-semibold text-white hover:text-yellow-300 transition ease-in-out duration-300 mb-5 lg:mb-0">                        
                         @if(app()->getLocale() == 'ar')
                             <a href="{{ route(request()->route()->getName(), ['locale' => 'en'] + request()->route()->parameters()) }}">English</a>
                             <!-- <a href="{{ route('language.switch' , 'en') }}">English</a> -->

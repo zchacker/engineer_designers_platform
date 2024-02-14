@@ -8,7 +8,7 @@
             <div class="px-10">
                 <h2 class="text-3xl font-bold mb-4">{{__('public')['get_know_us']}}</h2>
                 <p class="text-gray-800 leading-7 text-justify">
-                    {{__('public')['about_message']}}
+                    {!! __('about_message') !!}
                 </p>
             </div>
         </div>

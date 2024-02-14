@@ -29,7 +29,7 @@ class OrdersController extends Controller
 
     public function details(Request $request)
     {
-        $order = OrdersModel::with(['image', 'engineer_data'])
+        $order = OrdersModel::with(['image', 'engineer_data', 'user_data'])
             ->where('id', $request->order_id)
             ->first();
 
@@ -65,13 +65,13 @@ class OrdersController extends Controller
             $order_feedback           = new OrderFeedbackModel();
             if ($request->type == 'add_quote') {
                 $order_feedback->comment  = $request->comment . ' ريال سعودي';
-            }else{
+            } else {
                 $order_feedback->comment  = $request->comment;
             }
             $order_feedback->type     = $request->type;
             $order_feedback->order_id = $request->order_id;
             $order_feedback->user_id  = $request->user()->id;
-            if($request->type == 'upload_design')
+            if ($request->type == 'upload_design')
                 $order_feedback->show_to_client = 0;
 
             if ($order_feedback->save()) {
@@ -123,9 +123,9 @@ class OrdersController extends Controller
 
                 $order = OrdersModel::find($request->order_id);
                 $order->status = $request->status;
-                
-                if($request->type == 'add_quote')
-                    $order->price_quote = $request->comment;                                
+
+                if ($request->type == 'add_quote')
+                    $order->price_quote = $request->comment;
 
                 $order->update();
 
@@ -140,10 +140,9 @@ class OrdersController extends Controller
 
                 if ($request->type == 'add_quote') {
                     return back()->with(['success' => __('added_successfuly')]);
-                }else{
+                } else {
                     return $response;
                 }
-
             } else {
 
                 $status         = Response::HTTP_OK;
@@ -154,15 +153,14 @@ class OrdersController extends Controller
 
                 $json       = json_encode($myObj, JSON_PRETTY_PRINT);
                 $response   = response($json, $status);
-                
+
                 if ($request->type == 'add_quote') {
                     return back()
-                    ->withErrors(['error' => __('unable_to_add')])
-                    ->withInput($request->all());
-                }else{
+                        ->withErrors(['error' => __('unable_to_add')])
+                        ->withInput($request->all());
+                } else {
                     return $response;
-                }            
-
+                }
             }
         } else {
 
@@ -184,12 +182,11 @@ class OrdersController extends Controller
 
             if ($request->type == 'add_quote') {
                 return back()
-                ->withErrors(['error' => __('unable_to_add')])
-                ->withInput($request->all());
-            }else{
+                    ->withErrors(['error' => __('unable_to_add')])
+                    ->withInput($request->all());
+            } else {
                 return $response;
             }
-
         }
     }
 

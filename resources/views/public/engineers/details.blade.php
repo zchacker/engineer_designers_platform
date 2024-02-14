@@ -71,7 +71,7 @@
                                         <div class="absolute top-0 bottom-0 left-0 right-0 w-full h-full bg-transparent"></div>
                                     </div>
                                     <h2 class="text-center font-bold">{{ $work->title }}</h2>
-                                    <a href="{{ route('engineers.work.details' , [$work->id ]) }}" class="normal_button !w-auto">{{__('work_details')}}</a>
+                                    <a href="{{ route('engineers.work.details' , [app()->getLocale(),$work->id ]) }}" class="normal_button !w-auto">{{__('work_details')}}</a>
                                 </div>
                                 @endforeach
                             </div>

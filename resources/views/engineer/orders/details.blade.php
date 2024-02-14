@@ -32,8 +32,8 @@
                                     </div>
 
                                     <h2 class="text-sm font-semibold text-black mb-4">
-                                        <span class="text-gray-500">{{__('enineer_name')}}:</span>
-                                        <span class="text-black text-md">{{ $order->engineer_data->name }}</span>
+                                        <span class="text-gray-500">{{__('client_name')}}:</span>
+                                        <span class="text-black text-md">{{ $order->user_data->name }}</span>
                                     </h2>
 
                                     <h2 class="text-sm font-semibold text-black mb-4">
@@ -48,7 +48,7 @@
 
                                     <form action="{{ route('engineer.conversation.create', $order->id) }}" method="post" class="flex">
                                         @csrf
-                                        <input type="hidden" name="other_user_id" value="{{ $order->engineer_data->id }}">
+                                        <input type="hidden" name="other_user_id" value="{{ $order->user_data->id }}">
                                         <button type="submit" class="flex text-yellow-400 hover:underline">
                                             {{__('start_chat')}}
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-yellow-400 fill-yellow-400" viewBox="0 0 24 24" id="chat">
@@ -253,7 +253,7 @@
         @endif
 
     </div>
-    
+
 </div>
 
 <script>

@@ -7,6 +7,7 @@ use App\Models\ConversationModel;
 use App\Models\MessageModel;
 use App\Models\UsersModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -83,7 +84,7 @@ class ConversationController extends Controller
 
         // Assuming you have a way to determine the other user's ID in the context of your application
         $otherUserId = $this->getOtherUserId($conversationId); // Replace with your logic
-        
+
         // Retrieve the other user's information
         $otherUser = UsersModel::find($otherUserId); // Replace with your logic
         $myUser = UsersModel::find(auth()->user()->id); // Replace with your logic
@@ -108,23 +109,22 @@ class ConversationController extends Controller
         ]);
 
         $otherUserId = $this->getOtherUserId($conversationId);
-        $otherUser   = UsersModel::find($otherUserId);        
+        $otherUser   = UsersModel::find($otherUserId);
 
-        if($otherUser != null){
+        if ($otherUser != null) {
 
-            $otherUserData = $otherUser;            
+            $otherUserData = $otherUser;
 
             $title     = "إشعار رسالة جديدة";
-            $sub_title = "قام ".auth()->user()->name." بإرسال رسالة إليك";
+            $sub_title = "قام " . auth()->user()->name . " بإرسال رسالة إليك";
             $content   = $request->input('content');
 
-            Mail::send('emails.notification', compact('title' , 'sub_title' , 'content' ), function ($message) use ($request , $otherUserData) {
+            Mail::send('emails.notification', compact('title', 'sub_title', 'content'), function ($message) use ($request, $otherUserData) {
                 $message->to($otherUserData->email);
                 $message->subject('لديك رسالة جديدة - منصة رشيد العجيان');
             });
-
         }
-        
+
         // Redirect back to the conversation view after sending the message
         return redirect()->route('engineer.conversation.view', ['conversationId' => $conversationId]);
     }
@@ -135,9 +135,9 @@ class ConversationController extends Controller
         // Replace this with your logic to determine the other user's ID
         // For example, if the conversation has two users, you can query the conversation's users and exclude the current user
         $conversation = ConversationModel::findOrFail($conversationId);
-        $currentUserId = auth()->user()->id;
+        $currentUserId = Auth::guard('engineer')->user()->id;
         $otherUserId = $conversation->users()->where('user_id', '!=', $currentUserId)->first();
-        
+
         return $otherUserId->id; // This assumes that you have a 'users' relationship defined in your Conversation model
     }
 }
