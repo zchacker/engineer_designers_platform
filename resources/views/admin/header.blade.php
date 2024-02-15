@@ -28,9 +28,9 @@
             </span>
 
             @if(app()->getLocale() == 'ar')
-            <div class="sidebar z-50 transition duration-150 ease-in-out  hidden md:block md:absolute fixed top-0 bottom-0 lg:right-0 p-2 w-[250px] overflow-y-auto bg-[#151616]">
+            <div class="sidebar z-50 transition duration-150 ease-in-out  hidden md:block  fixed top-0 bottom-0 lg:right-0 p-2 w-[250px] overflow-y-auto bg-[#151616]">
             @else
-            <div class="sidebar z-50 transition duration-150 ease-in-out  hidden md:block md:static fixed top-0 bottom-0 lg:left-0 p-2 w-[250px] overflow-y-auto bg-[#151616]">
+            <div class="sidebar z-50 transition duration-150 ease-in-out  hidden md:block  fixed top-0 bottom-0 lg:left-0 p-2 w-[250px] overflow-y-auto bg-[#151616]">
             @endif
               <div class="text-gray-100 text-xl">
                     <div class="p-2.5 mt-1 flex items-center">

@@ -45,7 +45,11 @@
                     </div>
 
                     <div class="mb-4">
+                        @if( app()->getLocale() == 'en')
+                        <a href="{{ route( 'login' , app()->getLocale() ) }}" title="{{__('login')}}" class="link">{{__('login')}}</a>
+                        @else
                         <a href="{{ route( 'login' ) }}" title="{{__('login')}}" class="link">{{__('login')}}</a>
+                        @endif
                     </div>
 
                 </form>

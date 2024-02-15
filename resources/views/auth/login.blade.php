@@ -36,7 +36,11 @@
                     </div>
 
                     <div class="md:flex mb-4 justify-start gap-3 w-full">
-                        <a href="{{ route('register.user') }}" title="{{__('register')}}" class="link">{{__('register')}}</a>
+                        @if(app()->getLocale() == 'en')
+                        <a href="{{ route('register.user' , app()->getLocale() ) }}" title="{{__('register')}}" class="link">{{__('register')}}</a>
+                        @else
+                        <a href="{{ route('register.user' ) }}" title="{{__('register')}}" class="link">{{__('register')}}</a>
+                        @endif
                         <span> | </span>
                         <a href="{{ route('password.forgot') }}" title="{{__('forgot_password')}}" class="link">{{__('forgot_password')}}</a>
                     </div>

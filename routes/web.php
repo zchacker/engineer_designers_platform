@@ -68,6 +68,8 @@ Route::post('/set_password', [\App\Http\Controllers\AuthController::class, 'rest
 
 Route::group(['prefix' => '{locale?}', 'where' => ['locale' => 'en|ar']], function () {
 
+    App::setLocale('en');
+
     Route::get('/', [\App\Http\Controllers\Public\PagesController::class, 'home'])->name('home');
     Route::get('/about', [\App\Http\Controllers\Public\PagesController::class, 'about'])->name('about');
     Route::get('/services', [\App\Http\Controllers\Public\PagesController::class, 'services'])->name('services');
@@ -100,19 +102,17 @@ Route::group(['prefix' => '{locale?}', 'where' => ['locale' => 'en|ar']], functi
     Route::get('/resetpassword/{id}/{token}', [\App\Http\Controllers\AuthController::class, 'reset_password'])->name('reset.password.link');
     Route::post('/set_password', [\App\Http\Controllers\AuthController::class, 'rest_password_new'])->name('set.new.password');
 
+    Route::get('/privacy', function () {
+        $post = PostsModel::where('slug', 'privacy')->first();
+        return view('public.privacy', compact('post'));
+    })->name('privacy');
+
+    Route::get('/terms', function () {
+        $post = PostsModel::where('slug', 'terms')->first();
+        return view('public.terms', compact('post'));
+    })->name('terms');
 })->prefix('ar'); // Set the default value to 'ar';
 
-
-
-Route::get('/privacy', function () {
-    $post = PostsModel::where('slug', 'privacy')->first();
-    return view('public.privacy', compact('post'));
-})->name('privacy');
-
-Route::get('/terms', function () {
-    $post = PostsModel::where('slug', 'terms')->first();
-    return view('public.terms', compact('post'));
-})->name('terms');
 
 Route::group(['middleware' => ['auth:client,engineer']], function () {
     Route::get('/confirm_email', [\App\Http\Controllers\AuthController::class, 'confirm_email'])->name('confirm.email');

@@ -51,9 +51,9 @@
                 </div>
                 <div class="my-2">
                     @if(app()->getLocale() == 'ar')
-                    <a href="{{ route('client.order.create' ,['', $engineer->id] ) }}" class="normal_button">{{__('create_order')}}</a>
+                    <a href="{{ route('client.order.create' ,[$engineer->id] ) }}" class="normal_button">{{__('create_order')}}</a>
                     @else
-                    <a href="{{ route('client.order.create' ,[app()->getLocale(), $engineer->id] ) }}" class="normal_button">{{__('create_order')}}</a>
+                    <a href="{{ route('client.order.create' ,[ $engineer->id] ) }}" class="normal_button">{{__('create_order')}}</a>
                     @endif
                 </div>
             </div>

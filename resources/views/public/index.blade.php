@@ -33,12 +33,16 @@
             <div class="mt-8 md:mt-28 text-center xl:text-left z-20 order-2 md:order-1">
                 <h1 class="font-bold text-xl md:text-3xl lg:text-4xl leading-normal text-gray-900 mb-6">{!! __('public')['hero_msg'] !!}</h1>
                 <p class="font-normal text-xl text-gray-800 leading-relaxed mb-12">{{__('public')['sub_hero']}}</p>
+                @if(app()->getLocale() == 'en')
+                <a href="{{ route('register.user' , app()->getLocale()) }}" class="px-6 py-2 bg-yellow-300 text-white font-semibold text-lg rounded-md shadow-md hover:bg-black transition ease-in-out duration-500">{{__('public')['register_now']}}</a>
+                @else
                 <a href="{{ route('register.user') }}" class="px-6 py-2 bg-yellow-300 text-white font-semibold text-lg rounded-md shadow-md hover:bg-black transition ease-in-out duration-500">{{__('public')['register_now']}}</a>
+                @endif
             </div>
 
             <div class="z-10 relative top-10 right-0 my-8 md:block order-1 md:order-2">
                 <div class="border-2 border-yellow-300 box-border rounded-lg shadow-lg w-auto md:w-[600px]">
-                    <video :class="{'hidden':navbarOpen}" class="rounded-lg w-full h-full" controls autoplay="on">
+                    <video :class="{'hidden':navbarOpen}" class="rounded-lg w-full h-full" controls autoplay="off">
                         <source src="https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/videos/rclol3.mp4" type="video/mp4">
                         <img src="{{asset('imgs/image/home.png')}}" alt="Home img" :class="{'hidden':navbarOpen}" />
                     </video>

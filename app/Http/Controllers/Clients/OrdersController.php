@@ -7,6 +7,7 @@ use App\Models\FilesModel;
 use App\Models\OrderFeedbackModel;
 use App\Models\OrdersModel;
 use App\Models\UsersModel;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -159,7 +160,23 @@ class OrdersController extends Controller
 
             // send email for engineer account
             // TODO: send email
+            try{
 
+                $engineer_user   = UsersModel::find($request->engineer_id);
+                $email     = $engineer_user->email;
+
+                $title     = "إشعار طلب جديد";
+                $sub_title = "قام ".auth()->user()->name." بإرسال طلب جديد إليك";
+                $content   = $request->input('content');
+
+                Mail::send('emails.notification', compact('title' , 'sub_title' , 'content' ), function ($message) use ($request , $email) {
+                    $message->to($email);
+                    $message->subject('لديك طلب جديد - منصة رشيد العجيان');
+                });
+                
+            }catch(Exception $e){
+
+            }
             
 
             return back()->with(['success' => __('added_successfuly')]);
