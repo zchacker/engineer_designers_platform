@@ -30,9 +30,18 @@
                             </div>
 
                             <div class="mb-4">
+                                <label for="name" class="lable_form">English Name <span class="text-red-500">*</span> </label>
+                                <input type="text" name="name_en" class="form_input" value="{{ $service->name_en }}" />
+                            </div>
+
+                            <div class="mb-4">
                                 <label for="description" class="lable_form">{{ __('description') }} <span class="text-red-500">*</span></label>
-                                {{--<textarea name="description" id="description" class="form_input" cols="30" rows="10">{{ $service->description }}</textarea>--}}
                                 <x-forms.tinymce-editor :body="$service->description" />
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="description" class="lable_form">English Description <span class="text-red-500">*</span></label>
+                                <x-forms.tinymce-editor-en :body="$service->description_en" />
                             </div>
 
                             <div class="mb-4">

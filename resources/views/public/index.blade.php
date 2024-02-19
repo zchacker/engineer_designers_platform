@@ -13,10 +13,21 @@
             </div>
 
             <div class="z-10 relative top-10 my-8 md:block order-1 md:order-2">
-                <div class="border-2 border-yellow-300 box-border rounded-lg shadow-lg w-auto md:w-[600px]">
+                <div class="border-2 border-yellow-300 p-2 box-border rounded-lg shadow-lg w-auto md:w-[665px]">
+                    {{--
                     <video :class="{'hidden':navbarOpen}" class="rounded-lg w-full h-full" controls autoplay="off">
                         <source src="https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/videos/rclol3.mp4" type="video/mp4">
                         <img src="{{asset('imgs/image/home.png')}}" alt="Home img" :class="{'hidden':navbarOpen}" />
+                    </video>
+                    --}}
+
+                    <video id="my-video" class="video-js vjs-fluid vjs-16-9 " controls preload="auto" width="640" height="360" data-setup="{}">
+                        <source src="https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/videos/rclol3.mp4" type="video/mp4">
+                        <p class="vjs-no-js">
+                            To view this video please enable JavaScript, and consider upgrading to a
+                            web browser that
+                            <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                        </p>
                     </video>
                 </div>
             </div>
@@ -41,11 +52,24 @@
             </div>
 
             <div class="z-10 relative top-10 right-0 my-8 md:block order-1 md:order-2">
-                <div class="border-2 border-yellow-300 box-border rounded-lg shadow-lg w-auto md:w-[600px]">
+                <div class="border-2 border-yellow-300 p-2 box-border rounded-lg shadow-lg w-auto md:w-[600px]">
+                    {{--
                     <video :class="{'hidden':navbarOpen}" class="rounded-lg w-full h-full" controls autoplay="off">
                         <source src="https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/videos/rclol3.mp4" type="video/mp4">
                         <img src="{{asset('imgs/image/home.png')}}" alt="Home img" :class="{'hidden':navbarOpen}" />
                     </video>
+                    --}}
+
+
+                    <video id="my-video" class="video-js  vjs-fluid vjs-16-9 " controls preload="auto" width="640" height="360" data-setup="{}">
+                        <source src="https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/videos/rclol3.mp4" type="video/mp4">
+                        <p class="vjs-no-js">
+                            To view this video please enable JavaScript, and consider upgrading to a
+                            web browser that
+                            <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                        </p>
+                    </video>
+
                 </div>
             </div>
 
@@ -128,8 +152,13 @@
                     <div class="flex-wrap items-center relative shadow-lg shadow-gray-500 rounded-md bg-white h-[300px]">
                         <div class="flex flex-col items-center justify-center h-full p-4">
                             <img src="{{ $service->file->fileName ?? asset('imgs/image/s1.png') }}" class="absolute -top-[40px] h-[100px] text-green-700 mb-4 mx-auto" />
+                            @if(app()->getLocale() == 'ar')
                             <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ $service->name }}</h4>
                             <p class="font-normal text-gray-700 text-md leading-relaxed text-justify">{{ strip_tags( Str::limit( $service->description , 100) ) }}</p>
+                            @else
+                            <h4 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ $service->name_en }}</h4>
+                            <p class="font-normal text-gray-700 text-md leading-relaxed text-justify">{{ strip_tags( Str::limit( $service->description_en , 100) ) }}</p>
+                            @endif
                         </div>
                     </div>
                     @endforeach
@@ -242,6 +271,7 @@
             <span class="sr-only">Next</span>
         </span>
     </button>
+
     <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
         <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-transparent  group-focus:ring-white group-focus:outline-none">
             <svg class="w-4 h-4 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
@@ -251,7 +281,6 @@
         </span>
     </button>
     </div>
-
 
     <!-- this is for mobile  -->
     <div id="default-carousel" class="relative md:hidden w-full" data-carousel="slide">
@@ -323,7 +352,6 @@
     </div>
 
     <!-- Item 3 -->
-
     <div class="hidden duration-700 ease-in-out" data-carousel-item>
         <div class="flex-wrap items-center relative shadow-lg rounded-md bg-white h-[320px]">
             <div class="flex flex-col items-center justify-center h-full p-4">
@@ -504,5 +532,13 @@
     </div>
 </section>
 <!-- book section //end -->
+
+
+<script async src="https://vjs.zencdn.net/8.10.0/video.min.js">
+    const player = videojs('my-video');
+    player.aspectRatio('16:9');
+    player.fluid(true);
+    player.responsive(true);
+</script>
 
 @include('public.footer')

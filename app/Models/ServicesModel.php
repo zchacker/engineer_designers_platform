@@ -30,6 +30,8 @@ class ServicesModel extends Model
     protected $fillable = [
         'name',
         'description',
+        'name_en',
+        'description_en',
         'type',
         'url',
         'image_file',

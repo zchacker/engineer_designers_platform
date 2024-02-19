@@ -16,7 +16,7 @@ class ServicesController extends Controller
         $query      = ServicesModel::orderByDesc('created_at');
         $sum        = $query->count('id');
         $services   = $query->paginate(100);
-        return view('editor.services.list', compact('services','sum'));
+        return view('editor.services.list', compact('services', 'sum'));
     }
 
     public function create(Request $request)
@@ -27,25 +27,23 @@ class ServicesController extends Controller
     public function create_action(Request $request)
     {
         $rules = array(
-            'name' => 'required',            
+            'name' => 'required',
         );
 
         $messages = [
             'name.required' => __('name_required'),
         ];
-        
+
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails() == false) {
 
-            if($request->hasFile('file'))
-            {
+            if ($request->hasFile('file')) {
                 $file_hash = hash_file('sha256', $request->file->getRealPath());
-                $fileDB    = FilesModel::where(['hash' => $file_hash])->first();                    
+                $fileDB    = FilesModel::where(['hash' => $file_hash])->first();
 
-                if ($fileDB == null) 
-                {
-                    
+                if ($fileDB == null) {
+
                     $fileName = $request->file('file')->getClientOriginalName() . '_' . time() . '.' . $request->file('file')->extension();
 
                     // store it in disk
@@ -63,31 +61,29 @@ class ServicesController extends Controller
                             'hash'           => $file_hash,
                             'storage_driver' => $this->basicStorage
                         ]);
-                        
+
                         $request['image_file'] = $file_added->id;
-
                     }
-
                 } else {
 
                     // save it to database
                     $request['image_file'] = $fileDB->id;
-
                 }
-            }                                       
-
-            $request->merge([ 'description' => $request->body ]);  
-            $request->except('body');
-
-            // create services
-            $services = ServicesModel::create($request->all());            
-
-            if($services){
-                return back()->with(['success' => __('added_successfuly')]);
-            }else{
-                return back() ->withErrors(['error' => __('unknown_error')]);
             }
 
+            $request->merge(['description' => $request->body]);
+            $request->merge(['description_en' => $request->body_en]);
+            $request->except('body');
+            $request->except('body_en');
+
+            // create services
+            $services = ServicesModel::create($request->all());
+
+            if ($services) {
+                return back()->with(['success' => __('added_successfuly')]);
+            } else {
+                return back()->withErrors(['error' => __('unknown_error')]);
+            }
         } else {
 
             $error     = $validator->errors();
@@ -107,8 +103,7 @@ class ServicesController extends Controller
     {
         $service = ServicesModel::find($request->service_id);
 
-        if($service == null)
-        {
+        if ($service == null) {
             return abort(Response::HTTP_NOT_FOUND);
         }
 
@@ -126,19 +121,17 @@ class ServicesController extends Controller
         $messages = [
             'name.required' => __('name_required'),
         ];
-        
+
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails() == false) {
 
-            if($request->hasFile('file'))
-            {
+            if ($request->hasFile('file')) {
                 $file_hash = hash_file('sha256', $request->file->getRealPath());
-                $fileDB    = FilesModel::where(['hash' => $file_hash])->first();                    
+                $fileDB    = FilesModel::where(['hash' => $file_hash])->first();
 
-                if ($fileDB == null) 
-                {
-                    
+                if ($fileDB == null) {
+
                     $fileName = $request->file('file')->getClientOriginalName() . '_' . time() . '.' . $request->file('file')->extension();
 
                     // store it in disk
@@ -156,35 +149,32 @@ class ServicesController extends Controller
                             'hash'           => $file_hash,
                             'storage_driver' => $this->basicStorage
                         ]);
-                        
+
                         $request['image_file'] = $file_added->id;
-
                     }
-
                 } else {
 
                     // save it to database
                     $request['image_file'] = $fileDB->id;
-
                 }
             }
 
-            $request->merge([ 'description' => $request->body ]);  
+            $request->merge(['description' => $request->body]);
+            $request->merge(['description_en' => $request->body_en]);
             $request->except('body');
+            $request->except('body_en');
 
             $service = ServicesModel::find($request->service_id);
             $service->update($request->all());
-            
-            if ($service)
-            {                            
+
+            if ($service) {
                 return back()->with(['success' => __('updated_successfuly')]);
-            } else {            
+            } else {
                 return back()->withErrors(['error' => __('unknown_error')]);
-            }            
+            }
 
             // send email for verification
-            return back()->with(['success' => __('added_successfuly')]);            
-
+            return back()->with(['success' => __('added_successfuly')]);
         } else {
 
             $error     = $validator->errors();
@@ -202,7 +192,7 @@ class ServicesController extends Controller
 
 
     public function delete(ServicesModel $service)
-    {        
+    {
         $service->delete();
         return redirect()->route('editor.services.list');
     }
