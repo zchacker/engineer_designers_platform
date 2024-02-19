@@ -44,11 +44,12 @@ class ServicesController extends Controller
 
                 if ($fileDB == null) {
 
-                    $fileName = $request->file('file')->getClientOriginalName() . '_' . time() . '.' . $request->file('file')->extension();
+                    $fileName = time() . '_' .$request->file('file')->getClientOriginalName();// . '_' . time() . '.' . $request->file('file')->extension();
 
                     // store it in disk
-                    $url = $request->file('file')->storePublicly(
+                    $url = $request->file('file')->storePubliclyAs(
                         "services/images",
+                        $fileName,
                         $this->basicStorage
                     );
 
@@ -132,11 +133,12 @@ class ServicesController extends Controller
 
                 if ($fileDB == null) {
 
-                    $fileName = $request->file('file')->getClientOriginalName() . '_' . time() . '.' . $request->file('file')->extension();
+                    $fileName = time() . '_' .$request->file('file')->getClientOriginalName();// . '_' . time() . '.' . $request->file('file')->extension();
 
                     // store it in disk
-                    $url = $request->file('file')->storePublicly(
+                    $url = $request->file('file')->storePubliclyAs(
                         "services/images",
+                        $fileName,
                         $this->basicStorage
                     );
 
