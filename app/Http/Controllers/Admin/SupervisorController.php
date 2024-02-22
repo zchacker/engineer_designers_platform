@@ -114,6 +114,7 @@ class SupervisorController extends Controller
             $profile_data = UsersModel::where(['id' => $user_id])->first();
 
             $profile_data->name  = $request->name;
+            $profile_data->name_en = $request->name_en;
             $profile_data->email = $request->email;
             $profile_data->phone = $request->phone;
             $profile_data->user_type = $request->user_type;

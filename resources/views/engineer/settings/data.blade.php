@@ -41,6 +41,11 @@
                             </div>
 
                             <div class="mb-4  space-x-4 gap-2 items-center">
+                                <label for="name" class="lable_form"> English Name </label>
+                                <input type="text" name="name_en" id="name" class="form_input !w-full" value="{{ $user->name_en }}" />
+                            </div>
+
+                            <div class="mb-4  space-x-4 gap-2 items-center">
                                 <label for="email" class="lable_form">{{ __('email') }} </label>
                                 <input type="email" name="email" id="email" class="form_input !w-full" value="{{ $user->email }}" />
                             </div>

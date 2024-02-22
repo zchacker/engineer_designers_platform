@@ -161,6 +161,7 @@ class SettingsController extends Controller
             }
                        
             $profile_data->name = $request->name;
+            $profile_data->name_en = $request->name_en;
             $profile_data->email = $request->email;
             $profile_data->phone = $request->phone;           
 

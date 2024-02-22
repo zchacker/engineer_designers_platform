@@ -12,8 +12,9 @@
     </div>
 
     <div class="fixed bottom-0 left-0 right-0 md:hidden bg-green-500 text-center z-50">
-        <a href="tel:966536385896" target="_blank" class="bg-green-500 block w-full h-full text-white font-bold p-3">
-            {{__('contact_us_now')}}
+        <a href="tel:966536385896" target="_blank" class="flex items-center justify-center gap-4 bg-green-500 w-full h-full text-white font-bold p-3">
+            <span>{{__('call_us_now')}}</span>
+            <i data-feather="phone-call"></i>
         </a>
     </div>
 

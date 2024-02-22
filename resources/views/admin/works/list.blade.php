@@ -38,6 +38,10 @@
                                                     {{__('work_title')}}
                                                 </th>
 
+                                                <th scope="col" class="py-3.5 pl-4 pr-3 text-right text-sm font-semibold text-gray-900 sm:pl-6 md:pl-0">
+                                                    {{__('engineer_name')}}
+                                                </th>
+
                                                 <th scope="col" class="py-3.5 px-3 text-right text-sm font-semibold text-gray-900">
                                                     {{__('created_at')}}
                                                 </th>
@@ -60,6 +64,12 @@
                                                     {{ $work->title }}
                                                 </td>
 
+                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 md:pl-0">
+                                                    <a href="{{ route('admin.engineers.details' , $work->engineer->id ) }}" class="text-blue-700 hover:underline">
+                                                        {{ strip_tags( Str::limit( $work->engineer->name , 25) ) }}
+                                                    </a>
+                                                </td>
+
                                                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
                                                     {{ $work->created_at }}
                                                 </td>
@@ -72,6 +82,12 @@
                                                         </svg>
                                                     </a>
 
+                                                    <a href="{{ route('admin.work.edit' , $work->id) }}" class="text-blue-600 hover:text-blue-900" title="Edit">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                        </svg>
+                                                    </a>
+
                                                     <form action="{{ route('admin.work.update', $work->id) }}" method="POST">
                                                         @method('PUT')
                                                         @csrf
@@ -81,7 +97,7 @@
                                                             <!-- <svg xmlns="http://www.w3.org/2000/svg" class="text-green-600 hover:text-green-900 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                                 <path fill="#828282" d="M33.958 12.988C33.531 6.376 28.933 0 20.5 0 12.787 0 6.839 5.733 6.524 13.384 2.304 14.697 0 19.213 0 22.5 0 27.561 4.206 32 9 32h6.5a.5.5 0 0 0 0-1H9c-4.262 0-8-3.972-8-8.5C1 19.449 3.674 14 9 14h1.5a.5.5 0 0 0 0-1H9c-.509 0-.99.057-1.459.139C7.933 7.149 12.486 1 20.5 1 29.088 1 33 7.739 33 14v1.5a.5.5 0 0 0 1 0v-1.509c3.019.331 7 3.571 7 8.509 0 3.826-3.691 8.5-8 8.5h-7.5c-3.238 0-4.5-1.262-4.5-4.5V12.783l4.078 4.07a.5.5 0 1 0 .708-.706l-4.461-4.452c-.594-.592-1.055-.592-1.648 0l-4.461 4.452a.5.5 0 0 0 .707.707L20 12.783V26.5c0 3.804 1.696 5.5 5.5 5.5H33c4.847 0 9-5.224 9-9.5 0-5.167-4.223-9.208-8.042-9.512z"></path>
                                                             </svg> -->
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-transparent fill-green-600 "  width="48" height="48" id="publish">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-transparent fill-green-600 " width="48" height="48" id="publish">
                                                                 <path fill="none" d="M0 0h48v48H0z"></path>
                                                                 <path d="M10 8v4h28V8H10zm0 20h8v12h12V28h8L24 14 10 28z"></path>
                                                             </svg>

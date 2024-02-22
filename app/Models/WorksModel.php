@@ -12,8 +12,8 @@ class WorksModel extends Model
     use HasFactory, SoftDeletes, Notifiable;
 
     protected $table = 'works';
-    
-    
+
+
     /**
      * The primary key associated with the table.
      *
@@ -30,7 +30,9 @@ class WorksModel extends Model
     protected $fillable = [
         'engineer_id',
         'title',
+        'title_en',
         'description',
+        'description_en',
         'publish'
     ];
 
@@ -41,6 +43,6 @@ class WorksModel extends Model
 
     public function worksFiles()
     {
-        return $this->hasMany(WorksFilesModel::class , 'work_id', 'id')->withTrashed();
+        return $this->hasMany(WorksFilesModel::class, 'work_id', 'id')->withTrashed();
     }
 }

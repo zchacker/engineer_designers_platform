@@ -1,5 +1,5 @@
 @include('public.header')
-<section class="flex h-40 justify-center items-center flex-col">
+<section class="flex min-h-40 justify-center items-center flex-col">
     <div class="w-full flex flex-col justify-center pr-8 h-full bg-cover bg-no-repeat md:bg-cover md:bg-center" style="background-image: url('{{asset('imgs/image/head-pages.webp')}}');">
         <div class="w-full h-full px-8 py-8 flex  justify-start items-end bg-black/5 backdrop-brightness-100">
             @if(app()->getLocale() == 'ar')

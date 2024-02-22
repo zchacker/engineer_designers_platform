@@ -64,7 +64,7 @@ class EngineersController extends Controller
             $password = $request->password;
 
             // update password set it as hashed one
-            $request['password'] = Hash::make($request->password);
+            $request['password']  = Hash::make($request->password);
             $request['user_type'] = "engineer";
             
             // create user account
@@ -86,6 +86,7 @@ class EngineersController extends Controller
             return back()
                 ->withErrors(['error' => $allErrors])
                 ->withInput($request->all());
+
         }
     }
 
@@ -161,6 +162,7 @@ class EngineersController extends Controller
             $profile_data = UsersModel::where(['id' => $user_id])->first();            
 
             $profile_data->name  = $request->name;
+            $profile_data->name_en  = $request->name_en;
             $profile_data->email = $request->email;
             $profile_data->phone = $request->phone; 
                     

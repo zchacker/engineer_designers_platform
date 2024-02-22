@@ -31,6 +31,11 @@
                             </div>
 
                             <div class="mb-4">
+                                <label for="name" class="lable_form">{{ __('name') }}</label>
+                                <input type="text" name="name_en" class="form_input" value="{{ old('name_en') }}" />
+                            </div>
+
+                            <div class="mb-4">
                                 <label for="email" class="lable_form">{{ __('email') }}</label>
                                 <input type="text" name="email" class="form_input" value="{{ old('email') }}" />
                             </div>

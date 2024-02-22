@@ -26,7 +26,9 @@
                                         
                                         @if($file->file_type == 'image')
                                             <div class="shadow-none rounded-sm border border-gray-300 p-4 mx-2 my-1 justify-center grid">
-                                                <img src="{{ $file->file->fileName ?? asset('imgs/packaging.png') }}" alt="" class="w-40" />                                            
+                                                <a href="{{ $file->file->fileName ?? asset('imgs/packaging.png') }}" data-lightbox="image-{{$file->file->id}}">
+                                                    <img src="{{ $file->file->fileName ?? asset('imgs/packaging.png') }}" data-src="{{ $file->file->fileName ?? asset('imgs/packaging.png') }}" loading="lazy" alt="" class="w-40" />
+                                                </a>
                                             </div> 
                                         @endif                                   
                                                                                
@@ -62,4 +64,11 @@
     </div>
 
 </div>
+
+<!-- Include jQuery (required for Lightbox2) -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Include Lightbox2 JavaScript -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+
 @include('admin.footer')

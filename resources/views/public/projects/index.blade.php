@@ -9,10 +9,10 @@
 
 <section class="min-h-fit py-8 px-8 text-center">
     <p>
-        استشارات هندسية و تصميم ديكور منازل أو مقاهي وغيرها الكثير من التصاميم والمشاريع التي قام بها مهندسونا
+        {{ __('public')['design_title'] }}
     </p>
     <p>
-        يمكنك تصفح التصاميم وأخذ نظرة عليها
+        {{ __('public')['design_subtitle'] }}
     </p>
 </section>
 
@@ -23,17 +23,21 @@
         <div class="flex flex-col items-center justify-center p-8 shadow-md shadow-gray-400 rounded-2xl h-[380px]">
             @if(app()->getLocale() == 'ar')
             <a href="{{ route('projects.details' , ['',$work->id] ) }}" class="text-center  h-full">
-            @else
-            <a href="{{ route('projects.details' , [app()->getLocale(), $work->id] ) }}" class="text-center  h-full">
-            @endif
-                <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" alt="{{$work->title}}" class="h-[250px] object-cover" loading="lazy" />
-                <h2 class="text-black text-xl mt-4 font-bold"> {{$work->title}} </h2>
-            </a>
-            @if(app()->getLocale() == 'ar')
-            <a href="{{ route('projects.details' , ['',$work->id] ) }}" class="normal_button mt-4">{{__('work_details')}}</a>
-            @else
-            <a href="{{ route('projects.details' , [app()->getLocale(), $work->id] ) }}" class="normal_button mt-4">{{__('work_details')}}</a>
-            @endif
+                @else
+                <a href="{{ route('projects.details' , [app()->getLocale(), $work->id] ) }}" class="text-center  h-full">
+                    @endif
+                    <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" alt="{{$work->title}}" class="h-[250px] object-cover" loading="lazy" />
+                    @if(app()->getLocale() == 'ar')
+                    <h2 class="text-black text-xl mt-4 font-bold"> {{ $work->title }} </h2>
+                    @else
+                    <h2 class="text-black text-xl mt-4 font-bold"> {{ $work->title_en ?? $work->title  }} </h2>
+                    @endif
+                </a>
+                @if(app()->getLocale() == 'ar')
+                <a href="{{ route('projects.details' , ['',$work->id] ) }}" class="normal_button mt-4">{{__('work_details')}}</a>
+                @else
+                <a href="{{ route('projects.details' , [app()->getLocale(), $work->id] ) }}" class="normal_button mt-4">{{__('work_details')}}</a>
+                @endif
         </div>
         @endforeach
     </div>

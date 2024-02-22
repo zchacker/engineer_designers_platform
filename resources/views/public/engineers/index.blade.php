@@ -15,7 +15,11 @@
         <div class="flex flex-col items-center justify-center text-center p-8 hover:shadow-lg border rounded-lg shadow-md">
             <a href="{{ route('engineers.details', $engineer->id) }}" class="">
     <img src="{{ $engineer->avatar->image->fileName ?? asset('imgs/user.png') }}" alt="" class="w-full object-cover" />
+    @if(app()->getLocale() == 'ar')
     <h2 class="text-black text-xl mt-4 font-bold">{{ $engineer->name }}</h2>
+    @else
+    <h2 class="text-black text-xl mt-4 font-bold">{{ $engineer->name_en ?? $engineer->name }}</h2>
+    @endif
     </a>
     </div>
     @endforeach
@@ -23,7 +27,7 @@
     --}}
 
     <div class="my-4 mb-8 text-gray-700">
-        <h3 class="text-center">يمكنك التواصل مع أكثر من مهندس بنفس الوقت</h3>
+        <h3 class="text-center"> {{ __('public')['contact_with_more_than_engineer'] }}</h3>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -41,7 +45,11 @@
             </div>
             <img src="{{ $engineer->avatar->image->fileName ?? asset('imgs/user.png') }}" class="w-[100px] h-[100px] mx-auto p-2 rounded-full object-cover border-0 border-blue-300" alt="{{ $engineer->name }}">
             <div class="flex flex-col justify-start items-center">
+                @if(app()->getLocale() == 'ar')
                 <h3 class="font-bold text-lg">{{ $engineer->name }}</h3>
+                @else
+                <h3 class="font-bold text-lg">{{ $engineer->name_en ?? $engineer->name }}</h3>
+                @endif
                 <div class="my-2">
                     @if(app()->getLocale() == 'ar')
                     <a href="{{ route('engineers.details', ['', $engineer->id] ) }}" class="link">{{__('works_details')}}</a>

@@ -263,6 +263,7 @@
     "post_seo_title_reqired": "عنوان SEO مطلوب",
     "post_seo_description_reqired": "عنوان SEO وصف",
     "contact_us_now": "Contact Us Now",
+    "call_us_now": "Call Us Now",
     "pages_list": "الصفحات",
     "path_required": "الرجاء إدخال المسار",
     "seo_title_required": "الرجاء إرفاق عنوان SEO",
@@ -356,7 +357,10 @@
         "message": "Your Message",
         "send_now": "Send Now",
         "more": "More",
-        "blog": "Blog"
+        "blog": "Blog",
+        "design_title": "Engineering consultations, home or cafe interior design, and many other designs and projects carried out by our engineers.",
+        "design_subtitle": "You can browse through the designs and take a look at them.",
+        "contact_with_more_than_engineer": "You can communicate with more than one engineer at the same time"
     },
     "copyright": "All rights reserved © 2023 Rasheed Al-Ojian Company for Engineering Studies and Consultations is a professional company",
     "cr_no": "Commercial Registration No.: 1010877829",

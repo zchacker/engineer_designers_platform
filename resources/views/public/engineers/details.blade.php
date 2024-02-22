@@ -20,7 +20,11 @@
         <div>
             <img src="{{ $engineer->avatar->image->fileName ?? asset('imgs/user.png') }}" class="w-[100px] h-[100px] mx-auto p-2 rounded-full object-cover border-0 border-blue-300 object-cover" alt="">
             <div class="grid place-items-center ">
+                @if(app()->getLocale() == 'ar')
                 <h3 class="font-bold text-lg">{{ $engineer->name }}</h3>
+                @else
+                <h3 class="font-bold text-lg">{{ $engineer->name_en ?? $engineer->name }}</h3>
+                @endif
             </div>
             <!-- <section class="flex items-center gap-4">
                 <div class="my-2">
@@ -70,7 +74,11 @@
                                         @endif
                                         <div class="absolute top-0 bottom-0 left-0 right-0 w-full h-full bg-transparent"></div>
                                     </div>
+                                    @if(app()->getLocale() == 'ar')
                                     <h2 class="text-center font-bold">{{ $work->title }}</h2>
+                                    @else
+                                    <h2 class="text-center font-bold">{{ $work->title_en ?? $work->title }}</h2>
+                                    @endif
                                     <a href="{{ route('engineers.work.details' , [app()->getLocale(),$work->id ]) }}" class="normal_button !w-auto">{{__('work_details')}}</a>
                                 </div>
                                 @endforeach

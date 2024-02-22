@@ -29,7 +29,7 @@
                             <div class="mb-4">
                                 <label for="name" class="lable_form">{{ __('name') }}</label>
                                 <input type="text" name="name" class="form_input" value="{{ $user->name }}" />
-                            </div>
+                            </div>                           
 
                             <div class="mb-4">
                                 <label for="email" class="lable_form">{{ __('email') }}</label>

@@ -207,7 +207,6 @@ Route::group(['middleware' => ['auth:engineer', 'account'], 'prefix' => 'enginee
     Route::get('/conversation/view/{conversationId}', [\App\Http\Controllers\Engineer\ConversationController::class, 'viewConversation'])->name('engineer.conversation.view');
     Route::post('/conversation/message/create/{conversationId}', [\App\Http\Controllers\Engineer\ConversationController::class, 'sendMessage'])->name('engineer.conversation.message.send');
 
-
     // update settings
     Route::get('/settings', [\App\Http\Controllers\Shared\SettingsController::class, 'update_data'])->name('engineer.settings');
     Route::post('/settings/action', [\App\Http\Controllers\Shared\SettingsController::class, 'update_data_action'])->name('engineer.settings.action');
@@ -274,6 +273,8 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     // works
     Route::get('/work/list', [\App\Http\Controllers\Admin\WorksController::class, 'list'])->name('admin.work.list');
     Route::get('/work/details/{work_id}', [\App\Http\Controllers\Admin\WorksController::class, 'details'])->name('admin.work.details');
+    Route::get('/work/edit/{work_id}', [\App\Http\Controllers\Admin\WorksController::class, 'edit'])->name('admin.work.edit');
+    Route::post('/work/edit/action', [\App\Http\Controllers\Admin\WorksController::class, 'edit_action'])->name('admin.work.edit.action');
     Route::put('/work/update/{work}', [\App\Http\Controllers\Admin\WorksController::class, 'publish_unpublish_work'])->name('admin.work.update');
 
     // meetings

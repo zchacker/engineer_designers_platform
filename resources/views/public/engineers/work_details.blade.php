@@ -20,7 +20,11 @@
         <div>
             <img src="{{ $engineer->avatar->image->fileName ?? asset('imgs/user.png') }}" class="w-[100px] h-[100px] mx-auto p-2 rounded-full object-cover border-0 border-blue-300 object-cover" alt="">
             <div class="grid place-items-center ">
+                @if(app()->getLocale() == 'ar')
                 <h3 class="font-bold text-lg">{{ $engineer->name }}</h3>
+                @else
+                <h3 class="font-bold text-lg">{{ $engineer->name_en ?? $engineer->name }}</h3>
+                @endif
             </div>
             <!-- <section class="flex items-center gap-4">
                 <div class="my-2">
@@ -53,7 +57,11 @@
                     <div class="px-4 sm:px-6 lg:px-8">
                         <div class="sm:flex sm:items-center">
                             <div class="sm:flex-auto">
+                                @if(app()->getLocale() == 'ar')
                                 <h2 class="text-2xl font-bold">{{ $work->title }}</h2>
+                                @else
+                                <h2 class="text-2xl font-bold">{{ $work->title_en ?? $work->title }}</h2>
+                                @endif
                             </div>
                         </div>
                         <div class="mt-8 flex flex-col">

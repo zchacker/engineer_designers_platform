@@ -239,10 +239,12 @@ class WorksController extends Controller
 
     public function edit(Request $request)
     {
+        
     }
 
     public function edit_action(Request $request)
     {
+
     }
 
     public function delete(WorksModel $work)

@@ -7,7 +7,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="relative rounded-tl-md  rounded-tr-md overflow-auto p-8">
-                <h2 class="text-2xl font-bold mb-4"> تعديل مهندس </h2>
+                    <h2 class="text-2xl font-bold mb-4"> تعديل مهندس </h2>
                     <div class="overflow-x-auto relative">
 
                         @if(Session::has('errors'))
@@ -25,10 +25,15 @@
                         <form action="{{ route('admin.engineers.edit.action') }}" method="post" onsubmit="return form_submit(this);" class="w-full">
                             @csrf
                             <input type="hidden" value="{{  $user->id }}" name="user_id" />
-                            
+
                             <div class="mb-4">
                                 <label for="name" class="lable_form">{{ __('name') }}</label>
                                 <input type="text" name="name" class="form_input" value="{{ $user->name }}" />
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="name" class="lable_form">english name</label>
+                                <input type="text" name="name_en" class="form_input" value="{{ $user->name_en }}" />
                             </div>
 
                             <div class="mb-4">
@@ -40,8 +45,8 @@
                                 <label for="user_type" class="lable_form">{{ __('account_type') }}</label>
                                 <Select class="form_input" name="user_type">
                                     <option value="engineer" @if($user->user_type == 'engineer') selected @endif>{{__('engineer')}}</option>
-                                    <option value="client" @if($user->user_type == 'client')  selected @endif >{{__('client')}}</option>
-                                </Select>                                
+                                    <option value="client" @if($user->user_type == 'client') selected @endif >{{__('client')}}</option>
+                                </Select>
                             </div>
 
                             <div class="mb-4">
@@ -69,16 +74,16 @@
     </div>
 </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
-    <script>
-        const input = document.querySelector("#phone_no");
-        window.intlTelInput(input, {
-            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
-            dropdownContainer: document.getElementById("form-cover"),
-            initialCountry: 'sa',
-            separateDialCode: true,
-            preferredCountries: ["sa", "ae", 'uk', 'us'],
-            hiddenInput: "phone"
-        });
-    </script>
-    @include('admin.footer')
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+<script>
+    const input = document.querySelector("#phone_no");
+    window.intlTelInput(input, {
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+        dropdownContainer: document.getElementById("form-cover"),
+        initialCountry: 'sa',
+        separateDialCode: true,
+        preferredCountries: ["sa", "ae", 'uk', 'us'],
+        hiddenInput: "phone"
+    });
+</script>
+@include('admin.footer')

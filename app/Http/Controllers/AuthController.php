@@ -357,6 +357,7 @@ class AuthController extends Controller
         if (Auth::guard('admin')->check()) // this means that the admins was logged in.
         {
             Auth::guard('admin')->logout();
+            $request->session()->flush();
             return redirect()->route('home');
         }
 
@@ -373,6 +374,7 @@ class AuthController extends Controller
         if (Auth::guard('supervisor')->check()) // this means that the admins was logged in.
         {
             Auth::guard('supervisor')->logout();
+            $request->session()->flush();
             return redirect()->route('home');
         }
 
@@ -389,6 +391,7 @@ class AuthController extends Controller
         if (Auth::guard('client')->check()) // this means that the client was logged in.
         {
             Auth::guard('client')->logout();
+            $request->session()->flush();
             return redirect()->route('home');
         }
     }
@@ -398,6 +401,7 @@ class AuthController extends Controller
         if (Auth::guard('engineer')->check()) // this means that the engineer was logged in.
         {
             Auth::guard('engineer')->logout();
+            $request->session()->flush();
             return redirect()->route('home');
         }
     }
@@ -407,6 +411,7 @@ class AuthController extends Controller
         if (Auth::guard('editor')->check()) // this means that the engineer was logged in.
         {
             Auth::guard('editor')->logout();
+            $request->session()->flush();
             return redirect()->route('home');
         }
     }
