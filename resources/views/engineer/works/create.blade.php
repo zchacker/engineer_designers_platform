@@ -38,7 +38,17 @@
 
                             <div class="mb-4 items-center">
                                 <label for="work_details" class="lable_form">{{ __('work_details') }} <span class="text-red-500">*</span> </label>
-                                <textarea name="work_details" id="work_details" class="form_input !w-full" cols="30" rows="10">{{ old('order_details') }}</textarea>
+                                <textarea name="description" id="work_details" class="form_input !w-full" cols="30" rows="10">{{ old('description') }}</textarea>
+                            </div>
+
+                            <div class="mb-4 items-center">
+                                <label for="order_title" class="lable_form">English Work Title <span class="text-red-500">*</span> </label>
+                                <input type="text" name="title_en" id="work_title" class="form_input !w-full" maxlength="255" value="{{ old('title_en') }}" />
+                            </div>
+
+                            <div class="mb-4 items-center">
+                                <label for="work_details" class="lable_form">English Work Details <span class="text-red-500">*</span> </label>
+                                <textarea name="description_en" id="work_details" class="form_input !w-full" cols="30" rows="10">{{ old('description_en') }}</textarea>
                             </div>
 
                             <div class="mb-4  items-center">
@@ -77,7 +87,7 @@
                             </div>
                         </form>
 
-                        
+
 
                     </div>
                 </div>
@@ -174,9 +184,9 @@
 
     function removeAllImages() {
         const imagePreviewContainer = document.getElementById('image-preview-container');
-        const filePreviewContainer  = document.getElementById('file-preview-container');
-        const work_title            = document.getElementById('work_title');
-        const work_details          = document.getElementById('work_details');
+        const filePreviewContainer = document.getElementById('file-preview-container');
+        const work_title = document.getElementById('work_title');
+        const work_details = document.getElementById('work_details');
 
         work_title.value = '';
         work_details.value = '';
@@ -199,15 +209,15 @@
 </script>
 
 <script type="module">
-    const success_msg   = $('#success_msg');
-    const error_msg     = $('#error_msg');    
+    const success_msg = $('#success_msg');
+    const error_msg = $('#error_msg');
 
     document.getElementById('file-upload-form').addEventListener('submit', function(event) {
         event.preventDefault();
 
         // Clear the existing input files
         imageInput.value = '';
-        fileInput.value  = '';
+        fileInput.value = '';
 
         // Create a new FormData object for images and append all selected images to it
         const imageFormData = new FormData();

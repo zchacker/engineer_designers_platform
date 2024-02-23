@@ -19,7 +19,7 @@ class SetLocale
 
         $locale = $request->segment(1);
 
-        // If no locale is provided in the URL, set the default locale to 'ar'
+        // // If no locale is provided in the URL, set the default locale to 'ar'
         // if (!$locale || !in_array($locale, config('app.available_locales'))) {
         //     $locale = 'ar';
         // }
@@ -29,11 +29,12 @@ class SetLocale
         // // Save the locale in the session for future requests
         // Session::put('locale', $locale);
 
+
         if (in_array($locale, config('app.available_locales'))) {
             app()->setLocale($locale);
-        }else if(Session::has('locale')){
+        } else if (Session::has('locale')) {
             app()->setLocale(Session::get('locale'));
-        }else{
+        } else {
             app()->setLocale(config('app.fallback_locale'));
         }
 

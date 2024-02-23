@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Session;
 //     return view('welcome');
 // });
 
+// from start set default locale 
 App::setLocale('ar');
 
 Route::get('/test', function () {
@@ -114,12 +115,14 @@ Route::group(['prefix' => '{locale?}', 'where' => ['locale' => 'en|ar']], functi
 })->prefix('ar'); // Set the default value to 'ar';
 
 
+// set default locale
+App::setLocale('ar');
+
 Route::group(['middleware' => ['auth:client,engineer']], function () {
     Route::get('/confirm_email', [\App\Http\Controllers\AuthController::class, 'confirm_email'])->name('confirm.email');
     Route::post('/confirm_email/action', [\App\Http\Controllers\AuthController::class, 'confirm_email_action'])->name('confirm.email.action');
     Route::get('/confirm_email/resend', [\App\Http\Controllers\AuthController::class, 'confirm_email_resend'])->name('confirm.email.resend.action');
 });
-
 
 
 // this must be public

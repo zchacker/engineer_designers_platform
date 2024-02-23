@@ -29,7 +29,7 @@ class WorksController extends Controller
     {
         $rules = array(
             'title' => 'required|max:255',
-            'work_details' => 'required',
+            'description' => 'required',
             'images.*' => 'mimes:jpeg,png,jpg,gif,svg,webp|image|max:25000',
             "files.*" =>  'file|max:20000',
         );
@@ -37,7 +37,7 @@ class WorksController extends Controller
         $messages = [
             'title.required' => __('title_required'),
             'title.max' => __('title_max', ['max' => 25]),
-            'work_details.required' => __('work_details_required'),
+            'description.required' => __('work_details_required'),
             'images.max' => __('images_max'),
             'images.mimies' => __('images_mimies'),
             'images.image' => __('images_image'),
@@ -53,10 +53,12 @@ class WorksController extends Controller
         if ($validator->fails() == false) {
 
             // create order object to save it
-            $work = new WorksModel();
-            $work->engineer_id = $request->user()->id;
-            $work->title       = $request->title;
-            $work->description = $request->work_details;
+            $work                   = new WorksModel();
+            $work->engineer_id      = $request->user()->id;
+            $work->title            = $request->title;
+            $work->title_en         = $request->title_en;
+            $work->description      = $request->description;
+            $work->description_en   = $request->description_en;
 
             try {
 
