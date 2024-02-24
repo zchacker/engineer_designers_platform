@@ -42,8 +42,11 @@ class PagesController extends Controller
         }
 
         $active      = 'services';
-        $currentPath = $request->path();
+        $currentPath = urldecode($request->path());
         $page        = PagesModel::where('path', 'like',  '%' . $currentPath . '%')->first();
+        // print(urldecode($currentPath));
+        // var_dump($page);
+        // var_dump(PagesModel::where('path', 'like',  '%' . $currentPath . '%')->toSql());
 
         return view('public.services.details', compact('active', 'service', 'page'));
     }

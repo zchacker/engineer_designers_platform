@@ -21,11 +21,11 @@
                 @if(app()->getLocale() == 'ar')
                 <h2 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ $service->name }}</h2>
                 <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ strip_tags( Str::limit( $service->description , 100) ) }}</p>
-                @else                
+                @else
                 <h2 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ $service->name_en }}</h2>
                 <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ strip_tags( Str::limit( $service->description_en , 100) ) }}</p>
                 @endif
-                <a href="{{ route('services.details' , [app()->getLocale(), $service->id , $service->name ]) }}" class="normal_button mt-4">{{ __('public')['more'] }}</a>
+                <a href="{{ route('services.details' , [app()->getLocale(), $service->id , str_replace(' ', '-', $service->name) ]) }}" class="normal_button mt-4">{{ __('public')['more'] }}</a>
             </div>
         </div>
         @endforeach
