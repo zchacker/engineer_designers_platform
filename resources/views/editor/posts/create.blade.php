@@ -23,7 +23,7 @@
                         @endif
 
                         <div class="my-3 w-auto p-2 text-green-600 rounded-md" id="save-msg">
-                            
+
                         </div>
 
                         <form action="{{ route('editor.post.create.action', $post->id) }}" method="post" id="blog-post" enctype="multipart/form-data" class="w-full">
@@ -31,47 +31,53 @@
 
                             <div class="mb-4">
                                 <label for="title" class="lable_form">{{ __('post_title') }}</label>
-                                <input type="text" name="title" class="form_input !w-full" value="{{ $post->title ?? old('title') }}" required  autocomplete="off" />
+                                <input type="text" name="title" class="form_input !w-full" value="{{ $post->title ?? old('title') }}" required autocomplete="off" />
                             </div>
-                            
+
                             <div class="mb-4">
                                 <label for="body" class="lable_form">{{ __('post_body') }}</label>
-                                <!-- <textarea name="body" id="body" cols="30" rows="10" class="form_input"></textarea> -->                                
-                                <x-forms.tinymce-editor :body="$post->body ?? old('body')"  autocomplete="off" />
+                                <!-- <textarea name="body" id="body" cols="30" rows="10" class="form_input"></textarea> -->
+                                <x-forms.tinymce-editor :body="$post->body ?? old('body')" autocomplete="off" required/>
                             </div>
 
                             <div class="mb-4">
                                 <label for="seo_title" class="lable_form">{{ __('post_seo_title') }}</label>
-                                <input type="text" name="seo_title" class="form_input !w-full" value="{{ $post->seo_title ?? old('seo_title') }}"  autocomplete="off" />
+                                <input type="text" name="seo_title" class="form_input !w-full" value="{{ $post->seo_title ?? old('seo_title') }}" autocomplete="off" required />
                             </div>
 
                             <div class="mb-4">
                                 <label for="seo_description" class="lable_form">{{ __('post_seo_description') }}</label>
-                                <input type="text" name="seo_description" class="form_input !w-full" value="{{ $post->seo_description ?? old('seo_description') }}"  autocomplete="off" />
+                                <input type="text" name="seo_description" class="form_input !w-full" value="{{ $post->seo_description ?? old('seo_description') }}" autocomplete="off" required/>
                             </div>
 
                             <div class="mb-4">
                                 <label for="name" class="lable_form">{{ __('cover_image') }}</label>
-                                <input type="file" name="cover_image_file" class="form_input !w-full"   autocomplete="off" />
+                                <input type="file" name="cover_image_file" class="form_input !w-full" autocomplete="off" />
                             </div>
 
                             <div class="mb-4">
                                 <label for="slug" class="lable_form">{{ __('slug') }}</label>
-                                <input type="text" name="slug" class="form_input !w-full" value="{{ $post->slug ?? old('slug') }}"  autocomplete="off" />
+                                <input type="text" name="slug" class="form_input !w-full" value="{{ $post->slug ?? old('slug') }}" autocomplete="off" required/>
                             </div>
 
                             <div class="mb-4">
                                 <label for="language" class="lable_form">{{ __('language') }}</label>
                                 <select name="language" id="language" class="form_input !w-full">
-                                    <option value="ar" {{ ($post->language ?? old('language')) == 'ar' ? 'selected' : "" }} >{{__('ar')}}</option>
-                                    <option value="en" {{ ($post->language ?? old('language')) == 'en' ? 'selected' : "" }} >{{__('en')}}</option>
-                                </select>                                
+                                    <option value="ar" {{ ($post->language ?? old('language')) == 'ar' ? 'selected' : "" }}>{{__('ar')}}</option>
+                                    <option value="en" {{ ($post->language ?? old('language')) == 'en' ? 'selected' : "" }}>{{__('en')}}</option>
+                                </select>
                             </div>
 
                             <div class="mb-16">
                                 <label for="keywords" class="lable_form">{{ __('post_keywords') }}</label>
-                                <input type="text" name="keywords" class="form_input !w-full" value="{{ $post->keywords ?? old('keywords') }}" autocomplete="off" />
-                            </div>                            
+                                <input type="text" name="keywords" class="form_input !w-full" value="{{ $post->keywords ?? old('keywords') }}" autocomplete="off" required/>
+                            </div>
+
+                            <div class="mb-8">
+                                <div class="my-3 w-auto p-2 text-green-600 rounded-md" id="save-msg2">
+
+                                </div>
+                            </div>
 
                             <div class="mb-4 flex flex-col md:flex-row gap-5">
                                 <input type="button" value="{{ __('save_draft') }}" onclick="autoSaveForm();" class="gray_button" />
@@ -95,7 +101,7 @@
     var autoSaveTimer;
 
     function startAutoSave() {
-        autoSaveTimer = setInterval(function () {
+        autoSaveTimer = setInterval(function() {
             // Call the function to auto-save the form
             autoSaveForm();
         }, 180000); // 2 minutes in milliseconds
@@ -116,10 +122,11 @@
         // Format the time as a string
         var currentTime = hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
 
-
         var myDiv = document.getElementById('save-msg');
+        var saveMsg = document.getElementById('save-msg2');
         // Add text content to the div
-        myDiv.textContent = `{{ __('saved_successfuly') }}` + " " + `{{ __('draft') }}` + ' ' + currentTime;
+        myDiv.textContent = 'جاري حفظ البيانات';
+        saveMsg.textContent = 'جاري حفظ البيانات';
 
         // Exclude the file input from the serialized data
         var formData = $('#blog-post').serialize();
@@ -128,30 +135,35 @@
             method: 'POST',
             url: '{{ route("editor.autosave", $post->id) }}', // Change this route as per your setup
             data: formData,
+            contentType: false, // Set contentType to false, FormData will automatically set it
+            processData: false, // Set processData to false, FormData will automatically process the data           
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            success: function (response) {
+            success: function(response) {
                 console.log(response.message);
+                myDiv.textContent = `{{ __('saved_successfuly') }}` + " " + `{{ __('draft') }}` + ' ' + currentTime;
+                saveMsg.textContent = `{{ __('saved_successfuly') }}` + " " + `{{ __('draft') }}` + ' ' + currentTime;
             },
-            error: function (error) {
+            error: function(error) {
                 console.error('Autosave failed', error);
+                myDiv.textContent = 'حدث خطأ لم يتم الحفظ <br/>' + error;
+                saveMsg.textContent = 'حدث خطأ لم يتم الحفظ <br/>' + error;
             },
         });
 
-      
+
     }
 
     // Start auto-save when the page is loaded
-    $(document).ready(function () {
+    $(document).ready(function() {
         startAutoSave();
     });
 
     // Stop auto-save when the form is submitted
-    $('#blog-post').submit(function () {
+    $('#blog-post').submit(function() {
         clearInterval(autoSaveTimer);
     });
-
 </script>
 
 

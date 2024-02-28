@@ -176,7 +176,7 @@ class PostsController extends Controller
             }
 
             // Define the allowed HTML tags
-            $allowedTags = '<p><a><br><strong><h1><h2><h3><h4><h5><h6>';        
+            $allowedTags = '<p><a><br><strong><h1><h2><h3><h4><h5><h6><img>';        
             $clean_body = strip_tags($request->body, $allowedTags);
             $request->merge(['body' => $clean_body]);
 
@@ -208,7 +208,7 @@ class PostsController extends Controller
     {
 
         // Define the allowed HTML tags
-        $allowedTags = '<p><a><br><strong><h1><h2><h3><h4><h5><h6>';        
+        $allowedTags = '<p><a><br><strong><h1><h2><h3><h4><h5><h6><img>';        
         $clean_body = strip_tags($request->body, $allowedTags);
         $request->merge(['body' => $clean_body]);
 
@@ -278,13 +278,13 @@ class PostsController extends Controller
         );
 
         $messages = [
-            'title.required'            => __('name_required'),
-            'body.required'             => __('email_required'),
-            'slug.unique'               => __('email_unique'),
-            'language.required'         => __('phone_required'),
-            'keywords.unique'           => __('phone_unique'),
-            'seo_title.required'        => __('password_required'),
-            'seo_description.required'  => __('password_required'),
+            'title.required'            => 'العنوان مطلوب',
+            'body.required'             => 'المقالة مطلوبة',
+            'slug.required'               => 'الاسم في رابط المقالة مطلوب',
+            'language.required'         => 'اللغة مطلوبة',
+            'keywords.required'           => 'الكلمات المفتاحية مطلوبة',
+            'seo_title.required'        => 'عنوان SEO مطلوب',
+            'seo_description.required'  => 'وصف SEO مطلوب',
             'cover_image.mimies'        => __('images_mimies'),
             'cover_image.image'         => __('images_image'),
             'cover_image.max'           => __('images_max', ["size" => "20"]),
@@ -294,7 +294,6 @@ class PostsController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails() == false) {
-
 
             // if upload cover image
             if ($request->has('cover_image_file')) {
@@ -336,7 +335,7 @@ class PostsController extends Controller
             $post = PostsModel::findOrFail($request->id);
 
             // Define the allowed HTML tags
-            $allowedTags = '<p><a><br><strong><h1><h2><h3><h4><h5><h6>';        
+            $allowedTags = '<p><a><br><strong><h1><h2><h3><h4><h5><h6><img>';        
             $clean_body = strip_tags($request->body, $allowedTags);
             $request->merge(['body' => $clean_body]);
 
