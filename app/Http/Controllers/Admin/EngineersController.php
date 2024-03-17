@@ -43,7 +43,7 @@ class EngineersController extends Controller
         $rules = array(
             'name' => 'required',
             'email' => 'required|unique:users,email',
-            'phone' => 'required|unique:users,phone',
+            //'phone' => 'required|unique:users,phone',
             'password' => 'required',
         );
 
@@ -142,7 +142,7 @@ class EngineersController extends Controller
         $rules = array(
             'name' => 'required',            
             'email' => ['required',Rule::unique('users')->ignore($user_id)],
-            'phone' => ['required',Rule::unique('users')->ignore($user_id)],
+            //'phone' => ['required',Rule::unique('users')->ignore($user_id)],
             // 'password' => 'required',
         );
 

@@ -4,155 +4,160 @@
 @tailwind variants;
 
 
-.fix_menue{
+.fix_menue {
     @apply fixed left-0 right-0 top-0 z-10
 }
 
-.iti{
+.iti {
     /* width:100%; */
 }
 
-.active_page{
+.active_page {
     @apply text-yellow-300
 }
 
 /* home page */
-.card{
+.card {
     @apply grid place-items-center text-center p-6 max-w-xs bg-secondary rounded-3xl border-2 border-secondary hover:opacity-95
 }
 
-.icon_home{
+.icon_home {
     @apply text-xl w-20 h-20 text-center self-center stroke-black
 }
 
-.menue_sample_wraper{
+.menue_sample_wraper {
     @apply mx-2 lg:w-[250px] w-[90%] my-4 rounded-xl p-0 flex place-content-center place-items-center
 }
 
-.menue_sample_img{
+.menue_sample_img {
     @apply rounded-xl
 }
 
 /* dashboard menu */
-.navbar_item{
+.navbar_item {
     @apply p-0 rounded-md mt-3 flex items-center cursor-pointer transition-all duration-100 text-white hover:text-yellow-300 hover:border-r-0 hover:border-yellow-300 hover:pr-2
 }
 
-.navbar_logout{
+.navbar_logout {
     @apply !text-red-600 hover:border-secondary
 }
 
-.navbar_item_text{
-    @apply w-full h-full p-2.5 text-[15px] ml-4  font-bold 
+.navbar_item_text {
+    @apply w-full h-full p-2.5 text-[15px] ml-4 font-bold
 }
 
-.navbar_active{
-    @apply !text-black bg-gray-50 rounded-md px-0 hover:border-secondary hover:!text-black
+.navbar_active {
+    @apply !text-black bg-gray-50 rounded-md px-0 hover:border-secondary hover:text-black
 }
 
-.navbar_item_header{
-    @apply p-0 mt-3 flex items-center  duration-700  transition-all 
+.navbar_item_header {
+    @apply p-0 mt-3 flex items-center duration-700 transition-all
 }
 
-.navbar_item_text_header{
-    @apply w-full h-full p-2.5 text-right text-[15px] ml-4  transition-all duration-500 font-bold
+.navbar_item_text_header {
+    @apply w-full h-full p-2.5 text-right text-[15px] ml-4 transition-all duration-500 font-bold
 }
 
-.nav_item_header{
-    @apply w-full h-full p-2.5 text-right text-[15px] ml-4 text-red-600  font-bold
+.nav_item_header {
+    @apply w-full h-full p-2.5 text-right text-[15px] ml-4 text-red-600 font-bold
 }
 
 /*form style*/
-.lable_form{
+.lable_form {
     @apply block text-gray-700 text-sm font-bold mb-2
 }
 
-.form_input{
+.form_input {
     @apply block w-full md:w-1/2 border-gray-400 border ring-yellow-300 ring-inset focus:border-yellow-300 focus:ring-yellow-300 focus:outline-yellow-300 focus:outline-0 shadow-sm rounded-md p-2
 }
 
-.form_dash_input{
+.form_dash_input {
     @apply block min-h-[40px] w-full bg-gray-50 border-gray-300 focus:bg-white focus:border-blue-400 focus:border focus:outline-blue-400 focus:outline-1 border shadow-sm rounded-md p-2
 }
 
-.lable_form_number{
+.lable_form_number {
     @apply block text-gray-700 text-sm font-bold mb-2 min-w-[120px]
 }
 
-.form_dash_input_numbers{
+.form_dash_input_numbers {
     @apply block min-h-[40px] max-w-[80px] w-full bg-gray-50 border-gray-300 focus:bg-white focus:border-blue-400 focus:border focus:outline-blue-400 focus:outline-1 border shadow-sm rounded-md p-2
 }
 
-.link{
+.link {
     @apply text-black hover:text-blue-600 transition-all transform-gpu duration-500
 }
 
-.content_width{
+.content_width {
     width: max-content;
 }
 
-.action_btn{
-    @apply inline-flex items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:w-auto 
+.action_btn {
+    @apply inline-flex items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:w-auto
 }
 
-.normal_button{
-    @apply inline-flex items-center justify-center rounded-full border border-transparent cursor-pointer bg-yellow-300 px-8 py-2 text-sm font-medium text-white shadow-md shadow-gray-400 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-auto 
+.normal_button {
+    @apply inline-flex items-center justify-center rounded-full border border-transparent cursor-pointer bg-yellow-300 px-8 py-2 text-sm font-medium text-white shadow-md shadow-gray-400 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-auto
 }
 
-.gray_button{
-    @apply inline-flex items-center justify-center rounded-full border border-transparent cursor-pointer bg-gray-600 px-8 py-2 text-sm font-medium text-white shadow-md shadow-gray-400 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 sm:w-auto 
+.cta_button {
+    @apply inline-flex items-center justify-center rounded-md border border-transparent cursor-pointer bg-yellow-300 px-4 py-2 text-lg font-bold text-black shadow-md shadow-gray-800 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-auto capitalize
 }
 
-.send_btn{
+.gray_button {
+    @apply inline-flex items-center justify-center rounded-full border border-transparent cursor-pointer bg-gray-600 px-8 py-2 text-sm font-medium text-white shadow-md shadow-gray-400 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 sm:w-auto
+}
+
+.send_btn {
     @apply bg-red-600 text-white rounded-md py-2 px-4
 }
 
-.confirm_button{
-    @apply inline-flex items-center justify-center rounded-full border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:w-auto 
+.confirm_button {
+    @apply inline-flex items-center justify-center rounded-full border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:w-auto
 }
 
-.reject_button{
-    @apply inline-flex items-center justify-center rounded-full border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:w-auto 
+.reject_button {
+    @apply inline-flex items-center justify-center rounded-full border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:w-auto
 }
 
 /* dashboad style  */
-.content{ 
-    @apply w-full bg-dash-bg py-0  min-h-screen mt-[20%] lg:mt-0 mb-[100px]
+.content {
+    @apply w-full bg-dash-bg py-0 min-h-screen mt-[20%] lg:mt-0 mb-[100px]
 }
 
-.data-box{
-    @apply bg-data-dash w-full rounded-xl min-h-fit p-4  shadow-md
+.data-box {
+    @apply bg-data-dash w-full rounded-xl min-h-fit p-4 shadow-md
 }
 
-.monthly{
-    @apply py-4 cursor-pointer  font-bold text-2xl text-white  bg-transparent bg-gradient-to-b from-primary to-dark-purble
+.monthly {
+    @apply py-4 cursor-pointer font-bold text-2xl text-white bg-transparent bg-gradient-to-b from-primary to-dark-purble
 }
 
-.yearly{
-    @apply py-[0.95rem] cursor-pointer border border-purple-300  font-bold text-2xl text-black  /*bg-gradient-to-r from-purple-400 to-red-400*/
+.yearly {
+    @apply py-[0.95rem] cursor-pointer border border-purple-300 font-bold text-2xl text-black
+    /*bg-gradient-to-r from-purple-400 to-red-400*/
 }
 
-.show_plan{
+.show_plan {
     @apply md:flex grid grid-cols-1 gap-8
 }
 
-.hide_plan{
+.hide_plan {
     @apply hidden md:hidden
 }
 
-.call_to_action{
+.call_to_action {
     @apply transition py-4 px-8 font-medium text-dark-purble bg-gradient-to-b bg-secondary rounded-full hover:scale-105 duration-500
 }
 
-.submit_btn{
+.submit_btn {
     @apply bg-blue-600 text-white rounded-md py-2 px-4 shadow-lg min-w-[150px] cursor-pointer
 }
 
-.download_btn{
-    @apply  bg-orange-400 text-white rounded-md py-2 px-4 shadow-lg min-w-[150px] cursor-pointer
+.download_btn {
+    @apply bg-orange-400 text-white rounded-md py-2 px-4 shadow-lg min-w-[150px] cursor-pointer
 }
 
-.delete_btn{
+.delete_btn {
     @apply bg-red-600 text-white rounded-md py-2 px-4 shadow-lg min-w-[150px] cursor-pointer
 }
 
@@ -160,64 +165,64 @@
 * orders status
 */
 
-.holding{
+.holding {
     @apply bg-red-700 text-white text-sm px-5 py-1 rounded-md font-bold
 }
 
-.pending , .under_review{
+.pending, .under_review {
     @apply text-orange-700 font-bold
 }
 
-.accepted , .completed, .paid{
+.accepted, .completed, .paid {
     @apply text-green-700 font-bold
 }
 
-.draft{
+.draft {
     @apply text-gray-700 font-bold
 }
 
-.uncomplete{
+.uncomplete {
     @apply bg-slate-500 text-white text-sm px-5 py-1 rounded-md font-bold
 }
 
-.canceled , .rejected, .sent{
+.canceled, .rejected, .sent {
     @apply text-red-700 font-bold
 }
 
 /* table style */
-.table_old{
+.table_old {
     @apply w-full text-sm text-right text-gray-500
 }
 
-.table{
+.table {
     @apply min-w-full divide-y divide-gray-300
 }
 
-.table_head{
+.table_head {
     @apply text-xs text-gray-50 uppercase bg-primary
 }
 
-.table_body{
-    @apply bg-white 
+.table_body {
+    @apply bg-white
 }
 
-.table_column{
-    @apply  p-4 pl-8 text-slate-500
+.table_column {
+    @apply p-4 pl-8 text-slate-500
 }
 
-.table_row{
-    @apply  hover:bg-gray-100 border-l border-r border-gray-300  border-b border-b-gray-300
+.table_row {
+    @apply hover:bg-gray-100 border-l border-r border-gray-300 border-b border-b-gray-300
 }
 
 .ltr-grid {
-  direction: ltr;
+    direction: ltr;
 }
 
-.downupPopup-header{
+.downupPopup-header {
     @apply !bg-dark-purble text-white
 }
 
-svg.downupPopup-kapat{
+svg.downupPopup-kapat {
     @apply stroke-white
 }
 
@@ -264,14 +269,16 @@ svg.downupPopup-kapat{
     background: #c0a0b9;
 }
 
-.hide_scroll::-webkit-scrollbar{
+.hide_scroll::-webkit-scrollbar {
     display: none;
 }
 
 /* For IE, Edge and Firefox */
 .hide_scroll {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
 /* item vars */
@@ -281,6 +288,10 @@ svg.downupPopup-kapat{
     @apply bg-data-dash-items w-full p-2 text-start rounded-md text-black font-bold
 }
 
+li {
+    @apply list-disc
+}
 
-
-
+ul {
+    @apply mx-8 my-4 indent-1.5
+}

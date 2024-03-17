@@ -39,43 +39,24 @@ class ServicesController extends Controller
         if ($validator->fails() == false) {
 
             if ($request->hasFile('file')) {
-                $file_hash = hash_file('sha256', $request->file->getRealPath());
-                $fileDB    = FilesModel::where(['hash' => $file_hash])->first();
-
-                if ($fileDB == null) {
-
-                    $fileName = time() . '_' .$request->file('file')->getClientOriginalName();// . '_' . time() . '.' . $request->file('file')->extension();
-
-                    // store it in disk
-                    $url = $request->file('file')->storePubliclyAs(
-                        "services/images",
-                        $fileName,
-                        $this->basicStorage
-                    );
-
-                    if ($url != false) // file stored successfully
-                    {
-
-                        // save file data in batabase
-                        $file_added = FilesModel::create([
-                            'fileName'       => $url,
-                            'hash'           => $file_hash,
-                            'storage_driver' => $this->basicStorage
-                        ]);
-
-                        $request['image_file'] = $file_added->id;
-                    }
-                } else {
-
-                    // save it to database
-                    $request['image_file'] = $fileDB->id;
-                }
+                $request['cover_image_file'] = $this->upload_images_helper($request->file('file'));
             }
 
-            $request->merge(['description' => $request->body]);
-            $request->merge(['description_en' => $request->body_en]);
-            $request->except('body');
-            $request->except('body_en');
+            if ($request->hasFile('hero_img_file')) {
+                $request['hero_img_file_id'] = $this->upload_images_helper($request->file('hero_img_file'));
+            }
+
+            if ($request->hasFile('about_img_file')) {
+                $request['about_img_file_id'] = $this->upload_images_helper($request->file('about_img_file'));
+            }
+
+            if ($request->hasFile('cta_img_file')) {
+                $request['cta_img_file_id'] = $this->upload_images_helper($request->file('cta_img_file'));
+            }
+
+            if ($request->hasFile('video_file')) {
+                $request['video_file_id'] = $this->upload_videos_helper($request->file('video_file'));
+            }
 
             // create services
             $services = ServicesModel::create($request->all());
@@ -128,43 +109,24 @@ class ServicesController extends Controller
         if ($validator->fails() == false) {
 
             if ($request->hasFile('file')) {
-                $file_hash = hash_file('sha256', $request->file->getRealPath());
-                $fileDB    = FilesModel::where(['hash' => $file_hash])->first();
-
-                if ($fileDB == null) {
-
-                    $fileName = time() . '_' .$request->file('file')->getClientOriginalName();// . '_' . time() . '.' . $request->file('file')->extension();
-
-                    // store it in disk
-                    $url = $request->file('file')->storePubliclyAs(
-                        "services/images",
-                        $fileName,
-                        $this->basicStorage
-                    );
-
-                    if ($url != false) // file stored successfully
-                    {
-
-                        // save file data in batabase
-                        $file_added = FilesModel::create([
-                            'fileName'       => $url,
-                            'hash'           => $file_hash,
-                            'storage_driver' => $this->basicStorage
-                        ]);
-
-                        $request['image_file'] = $file_added->id;
-                    }
-                } else {
-
-                    // save it to database
-                    $request['image_file'] = $fileDB->id;
-                }
+                $request['cover_image_file'] = $this->upload_images_helper($request->file('file'));
             }
 
-            $request->merge(['description' => $request->body]);
-            $request->merge(['description_en' => $request->body_en]);
-            $request->except('body');
-            $request->except('body_en');
+            if ($request->hasFile('hero_img_file')) {
+                $request['hero_img_file_id'] = $this->upload_images_helper($request->file('hero_img_file'));
+            }
+
+            if ($request->hasFile('about_img_file')) {
+                $request['about_img_file_id'] = $this->upload_images_helper($request->file('about_img_file'));
+            }
+
+            if ($request->hasFile('cta_img_file')) {
+                $request['cta_img_file_id'] = $this->upload_images_helper($request->file('cta_img_file'));
+            }
+
+            if ($request->hasFile('video_file')) {
+                $request['video_file_id'] = $this->upload_videos_helper($request->file('video_file'));
+            }
 
             $service = ServicesModel::find($request->service_id);
             $service->update($request->all());
@@ -197,5 +159,76 @@ class ServicesController extends Controller
     {
         $service->delete();
         return redirect()->route('editor.services.list');
+    }
+
+
+    private function upload_images_helper($file): int
+    {
+        $file_hash = hash_file('sha256', $file->getRealPath());
+        $fileDB    = FilesModel::where(['hash' => $file_hash])->first();
+
+        if ($fileDB == null) {
+
+            $fileName = time() . '_' . $file->getClientOriginalName(); // . '_' . time() . '.' . $file->extension();
+
+            // store it in disk
+            $url = $file->storePubliclyAs(
+                "services/images",
+                $fileName,
+                $this->basicStorage
+            );
+
+            if ($url != false) // file stored successfully
+            {
+
+                // save file data in batabase
+                $file_added = FilesModel::create([
+                    'fileName'       => $url,
+                    'hash'           => $file_hash,
+                    'storage_driver' => $this->basicStorage
+                ]);
+
+                return $file_added->id;
+            }
+        } else {
+
+            // save it to database
+            return $fileDB->id;
+        }
+    }
+
+    private function upload_videos_helper($file): int
+    {
+        $file_hash = hash_file('sha256', $file->getRealPath());
+        $fileDB    = FilesModel::where(['hash' => $file_hash])->first();
+
+        if ($fileDB == null) {
+
+            $fileName = time() . '_' . $file->getClientOriginalName(); // . '_' . time() . '.' . $file->extension();
+
+            // store it in disk
+            $url = $file->storePubliclyAs(
+                "services/videos",
+                $fileName,
+                $this->basicStorage
+            );
+
+            if ($url != false) // file stored successfully
+            {
+
+                // save file data in batabase
+                $file_added = FilesModel::create([
+                    'fileName'       => $url,
+                    'hash'           => $file_hash,
+                    'storage_driver' => $this->basicStorage
+                ]);
+
+                return $file_added->id;
+            }
+        } else {
+
+            // save it to database
+            return $fileDB->id;
+        }
     }
 }

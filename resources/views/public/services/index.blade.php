@@ -11,13 +11,13 @@
     <h2 class="font-bold text-3xl text-center text-black">{{__('public')['service_message']}}</h2>
 </section>
 
-<section class="bg-white py-10 md:py-16">
-    <div class="grid grid-cols-1 md:grid-cols-3 px-6 gap-x-4 gap-y-20">
+<section class="bg-white py-10 md:py-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 px-6 gap-x-8 gap-y-20">
 
         @foreach($services as $service)
-        <div class="relative p-4 shadow-lg shadow-gray-400 border rounded-3xl py-12">
-            <div class="flex flex-col items-center justify-center h-full p-4 pb-0">
-                <img src="{{ $service->file->fileName ?? asset('imgs/image/s2.png') }}" class="absolute -top-[70px] h-[120px] text-green-700 mb-4 mx-auto" />
+        <div class="relative p-4 shadow-lg shadow-gray-400 border rounded-3xl py-4">
+            <div class="flex flex-col items-center justify-center h-full p-0 pb-0">
+                <img src="{{ $service->file->fileName ?? asset('imgs/image/s2.png') }}" alt="{{ $service->cover_img_alt }}" title="{{ $service->cover_img_alt }}" class="h-[200px] object-cover rounded-md text-green-700 mb-4 mx-auto" />
                 @if(app()->getLocale() == 'ar')
                 <h2 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ $service->name }}</h2>
                 <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ strip_tags( Str::limit( $service->description , 100) ) }}</p>

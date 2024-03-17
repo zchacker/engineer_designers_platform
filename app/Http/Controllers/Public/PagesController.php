@@ -25,7 +25,7 @@ class PagesController extends Controller
 
     public function services(Request $request)
     {
-        $services = ServicesModel::all();
+        $services = ServicesModel::orderBy('id', 'desc')->get();//ServicesModel::all();
         $active = 'services';
         $currentPath = $request->path();
         $page   = PagesModel::where('path', 'like',  '%' . $currentPath . '%')->first();
@@ -48,7 +48,8 @@ class PagesController extends Controller
         // var_dump($page);
         // var_dump(PagesModel::where('path', 'like',  '%' . $currentPath . '%')->toSql());
 
-        return view('public.services.details', compact('active', 'service', 'page'));
+        // return view('public.services.details', compact('active', 'service', 'page'));
+        return view('public.services.land', compact('active', 'service', 'page'));
     }
 
     public function about(Request $request)

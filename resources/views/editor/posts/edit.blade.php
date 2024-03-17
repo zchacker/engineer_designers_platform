@@ -30,7 +30,7 @@
                             @csrf
                             <div class="mb-4">
                                 <label for="title" class="lable_form">{{ __('post_title') }}</label>
-                                <input type="text" name="title" class="form_input !w-full" value="{{ $post->title ?? old('title') }}" autocomplete="off" required />
+                                <input type="text" name="title" class="form_input !w-full" value="{{ $post->title ?? old('title') }}" maxlength="250" autocomplete="off" required />
                             </div>
 
                             <div class="mb-4">
@@ -39,17 +39,17 @@
                                 @php
                                 $data = "Ahmed";
                                 @endphp
-                                <x-forms.tinymce-editor :body="$post->body ?? old('body')" autocomplete="off" required/>
+                                <x-forms.tinymce-editor :body="$post->body ?? old('body')" autocomplete="off" required />
                             </div>
 
                             <div class="mb-4">
                                 <label for="seo_title" class="lable_form">{{ __('post_seo_title') }}</label>
-                                <input type="text" name="seo_title" class="form_input !w-full" value="{{ $post->seo_title ?? old('seo_title') }}" autocomplete="off" required />
+                                <input type="text" name="seo_title" class="form_input !w-full" value="{{ $post->seo_title ?? old('seo_title') }}" maxlength="100" autocomplete="off" required />
                             </div>
 
                             <div class="mb-4">
                                 <label for="seo_description" class="lable_form">{{ __('post_seo_description') }}</label>
-                                <input type="text" name="seo_description" class="form_input !w-full" value="{{ $post->seo_description ?? old('seo_description') }}" autocomplete="off" required />
+                                <input type="text" name="seo_description" class="form_input !w-full" value="{{ $post->seo_description ?? old('seo_description') }}" maxlength="170" autocomplete="off" required />
                             </div>
 
                             <div class="mb-4">
@@ -59,7 +59,7 @@
 
                             <div class="mb-4">
                                 <label for="slug" class="lable_form">{{ __('slug') }}</label>
-                                <input type="text" name="slug" class="form_input !w-full" value="{{ $post->slug ?? old('slug') }}" autocomplete="off" required />
+                                <input type="text" name="slug" class="form_input !w-full" value="{{ $post->slug ?? old('slug') }}" maxlength="170" autocomplete="off" required />
                             </div>
 
                             <div class="mb-4">
@@ -72,7 +72,7 @@
 
                             <div class="mb-16">
                                 <label for="keywords" class="lable_form">{{ __('post_keywords') }}</label>
-                                <input type="text" name="keywords" class="form_input !w-full" value="{{ $post->keywords ?? old('keywords') }}" autocomplete="off" required/>
+                                <input type="text" name="keywords" class="form_input !w-full" value="{{ $post->keywords ?? old('keywords') }}" maxlength="300" autocomplete="off" required />
                             </div>
 
                             <div class="mb-8">

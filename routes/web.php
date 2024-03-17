@@ -66,10 +66,10 @@ Route::post('/forgotpassword/action', [\App\Http\Controllers\AuthController::cla
 Route::get('/resetpassword/{id}/{token}', [\App\Http\Controllers\AuthController::class, 'reset_password'])->name('reset.password.link');
 Route::post('/set_password', [\App\Http\Controllers\AuthController::class, 'rest_password_new'])->name('set.new.password');
 
-
 Route::group(['prefix' => '{locale?}', 'where' => ['locale' => 'en|ar']], function () {
 
     App::setLocale('en');
+    Route::get('/land', [\App\Http\Controllers\Public\PagesController::class, 'land'])->name('land');
 
     Route::get('/', [\App\Http\Controllers\Public\PagesController::class, 'home'])->name('home');
     Route::get('/about', [\App\Http\Controllers\Public\PagesController::class, 'about'])->name('about');
@@ -280,6 +280,15 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::post('/work/edit/action', [\App\Http\Controllers\Admin\WorksController::class, 'edit_action'])->name('admin.work.edit.action');
     Route::put('/work/update/{work}', [\App\Http\Controllers\Admin\WorksController::class, 'publish_unpublish_work'])->name('admin.work.update');
 
+    // OUR works
+    Route::get('/my/work/list', [\App\Http\Controllers\Admin\MyWorksController::class, 'list'])->name('admin.my.work.list');
+    Route::get('/my/work/create', [\App\Http\Controllers\Admin\MyWorksController::class, 'create'])->name('admin.my.work.create');
+    Route::get('/my/work/details/{work_id}', [\App\Http\Controllers\Admin\MyWorksController::class, 'details'])->name('admin.my.work.details');
+    Route::post('/my/work/create/action', [\App\Http\Controllers\Admin\MyWorksController::class, 'create_action'])->name('admin.my.work.create.action');
+    Route::get('/my/work/edit/{work_id}', [\App\Http\Controllers\Admin\MyWorksController::class, 'edit'])->name('admin.my.work.edit');
+    Route::post('/my/work/edit/{work_id}/action', [\App\Http\Controllers\Admin\MyWorksController::class, 'edit_action'])->name('admin.my.work.edit.action');
+    Route::delete('/my/work/delete/{work}', [\App\Http\Controllers\Admin\MyWorksController::class, 'delete'])->name('admin.my.work.delete');
+    
     // meetings
     Route::get('/meetings/list', [\App\Http\Controllers\Admin\MeetingsController::class, 'list'])->name('admin.meeting.list');
     Route::get('/google/create/{client_id}', [\App\Http\Controllers\Admin\MeetingsController::class, 'create'])->name('admin.meeting.create');
@@ -362,6 +371,15 @@ Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], fu
     Route::get('/my/conversation/view/{conversationId}', [\App\Http\Controllers\Supervisor\MyConversationController::class, 'viewConversation'])->name('supervisor.my.conversation.view');
     Route::post('/my/conversation/message/create/{conversationId}', [\App\Http\Controllers\Supervisor\MyConversationController::class, 'sendMessage'])->name('supervisor.my.conversation.message.send');
 
+    // OUR works
+    Route::get('/my/work/list', [\App\Http\Controllers\Supervisor\WorksController::class, 'list'])->name('supervisor.my.work.list');
+    Route::get('/my/work/create', [\App\Http\Controllers\Supervisor\WorksController::class, 'create'])->name('supervisor.my.work.create');
+    Route::get('/my/work/details/{work_id}', [\App\Http\Controllers\Supervisor\WorksController::class, 'details'])->name('supervisor.my.work.details');
+    Route::post('/my/work/create/action', [\App\Http\Controllers\Supervisor\WorksController::class, 'create_action'])->name('supervisor.my.work.create.action');
+    Route::get('/my/work/edit/{work_id}', [\App\Http\Controllers\Supervisor\WorksController::class, 'edit'])->name('supervisor.my.work.edit');
+    Route::post('/my/work/edit/{work_id}/action', [\App\Http\Controllers\Supervisor\WorksController::class, 'edit_action'])->name('supervisor.my.work.edit.action');
+    Route::delete('/my/work/delete/{work}', [\App\Http\Controllers\Supervisor\WorksController::class, 'delete'])->name('supervisor.my.work.delete');
+     
     // settings
     Route::get('/settings', [\App\Http\Controllers\Shared\SettingsController::class, 'supervisor_update_data'])->name('supervisor.settings');
     Route::post('/settings/action', [\App\Http\Controllers\Shared\SettingsController::class, 'update_data_action'])->name('supervisor.settings.action');

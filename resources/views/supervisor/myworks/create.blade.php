@@ -1,4 +1,4 @@
-@include('engineer.header')
+@include('supervisor.header')
 <div class="content">
 
     <div class="py-6">
@@ -29,7 +29,7 @@
                         </div>
                         @endif
 
-                        <form method="POST" enctype="multipart/form-data" action="{{ route('engineer.work.create.action') }}" id="file-upload-form">
+                        <form method="POST" enctype="multipart/form-data" action="{{ route('supervisor.my.work.create.action') }}" id="file-upload-form">
                             @csrf
                             <div class="mb-4 items-center">
                                 <label for="order_title" class="lable_form">{{ __('work_title') }} <span class="text-red-500">*</span> </label>
@@ -271,7 +271,7 @@
             uploadingBox.appendChild(uploadMessage);
 
             // Make a POST request to the server
-            const response = await fetch(`{{ route('engineer.work.create.action') }}`, {
+            const response = await fetch(`{{ route('supervisor.my.work.create.action') }}`, {
                 method: 'POST',
                 body: formData,
             });
@@ -318,4 +318,4 @@
         }
     }
 </script>
-@include('engineer.footer')
+@include('supervisor.footer')

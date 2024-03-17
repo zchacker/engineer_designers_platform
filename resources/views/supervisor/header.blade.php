@@ -81,6 +81,11 @@
                     <a href="{{ route('supervisor.meeting.list') }}" class="navbar_item_text"> الاجتماعات </a>
                 </div> 
 
+                <div class="navbar_item {{ strpos(Route::currentRouteName() , 'my.work')? 'navbar_active' : '' }} ">
+                            <i class="las la-project-diagram la-2x"></i>
+                            <a href="{{ route('supervisor.my.work.list') }}" class="navbar_item_text"> أعمال المكتب </a>
+                        </div>
+
                 <div class="navbar_item">                    
                     <i class="las la-envelope la-2x"></i>
                     <a href="{{ route('supervisor.my.conversation.list') }}" class="navbar_item_text"> المحادثات </a>

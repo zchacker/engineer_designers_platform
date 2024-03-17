@@ -31,23 +31,23 @@
 
                             <div class="mb-4">
                                 <label for="title" class="lable_form">{{ __('post_title') }}</label>
-                                <input type="text" name="title" class="form_input !w-full" value="{{ $post->title ?? old('title') }}" required autocomplete="off" />
+                                <input type="text" name="title" class="form_input !w-full" value="{{ $post->title ?? old('title') }}" maxlength="100" required autocomplete="off" />
                             </div>
 
                             <div class="mb-4">
                                 <label for="body" class="lable_form">{{ __('post_body') }}</label>
                                 <!-- <textarea name="body" id="body" cols="30" rows="10" class="form_input"></textarea> -->
-                                <x-forms.tinymce-editor :body="$post->body ?? old('body')" autocomplete="off" required/>
+                                <x-forms.tinymce-editor :body="$post->body ?? old('body')" autocomplete="off" required />
                             </div>
 
                             <div class="mb-4">
                                 <label for="seo_title" class="lable_form">{{ __('post_seo_title') }}</label>
-                                <input type="text" name="seo_title" class="form_input !w-full" value="{{ $post->seo_title ?? old('seo_title') }}" autocomplete="off" required />
+                                <input type="text" name="seo_title" class="form_input !w-full" value="{{ $post->seo_title ?? old('seo_title') }}" maxlength="255" autocomplete="off" required />
                             </div>
 
                             <div class="mb-4">
                                 <label for="seo_description" class="lable_form">{{ __('post_seo_description') }}</label>
-                                <input type="text" name="seo_description" class="form_input !w-full" value="{{ $post->seo_description ?? old('seo_description') }}" autocomplete="off" required/>
+                                <input type="text" name="seo_description" class="form_input !w-full" value="{{ $post->seo_description ?? old('seo_description') }}" maxlength="170" autocomplete="off" required />
                             </div>
 
                             <div class="mb-4">
@@ -57,7 +57,7 @@
 
                             <div class="mb-4">
                                 <label for="slug" class="lable_form">{{ __('slug') }}</label>
-                                <input type="text" name="slug" class="form_input !w-full" value="{{ $post->slug ?? old('slug') }}" autocomplete="off" required/>
+                                <input type="text" name="slug" class="form_input !w-full" value="{{ $post->slug ?? old('slug') }}" maxlength="250" autocomplete="off" required />
                             </div>
 
                             <div class="mb-4">
@@ -70,7 +70,7 @@
 
                             <div class="mb-16">
                                 <label for="keywords" class="lable_form">{{ __('post_keywords') }}</label>
-                                <input type="text" name="keywords" class="form_input !w-full" value="{{ $post->keywords ?? old('keywords') }}" autocomplete="off" required/>
+                                <input type="text" name="keywords" class="form_input !w-full" value="{{ $post->keywords ?? old('keywords') }}" maxlength="250" autocomplete="off" required />
                             </div>
 
                             <div class="mb-8">
@@ -129,7 +129,7 @@
         saveMsg.textContent = 'جاري حفظ البيانات';
 
         // Exclude the file input from the serialized data
-        var formData = $('#blog-post').serialize();
+        var formData = new FormData($('#blog-post')[0]); //$('#blog-post').serialize();
 
         $.ajax({
             method: 'POST',

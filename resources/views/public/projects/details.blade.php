@@ -15,10 +15,11 @@
     </div>
 </section>
 
-<section class="flex -mt-20 mx-4 md:mr-20 z-50">
+<section class="flex -mt-20 mb-16 mx-4 md:mr-20 z-50">
     <div class="flex gap-8 justify-around items-end p-4 bg-transparent">
+        @if($engineer->type == 'engineer')
         <div>
-            <img src="{{ $engineer->avatar->image->fileName ?? asset('imgs/user.png') }}" class="w-[100px] h-[100px] mx-auto p-2 rounded-full object-cover border-0 border-blue-300 object-cover" alt="">
+            <img src="{{ $engineer->avatar->image->fileName ?? asset('imgs/user.png') }}" class="w-[100px] h-[100px] mx-auto p-2 rounded-full object-cover border-0 border-blue-300" alt="">
             <div class="grid place-items-center ">
                 @if(app()->getLocale() == 'ar')
                 <h3 class="font-bold text-lg">{{ $engineer->name }}</h3>
@@ -44,6 +45,7 @@
             <a href="{{ route('client.order.create' , $engineer->id ) }}" class="normal_button">{{__('create_order')}}</a>
         </div>
 
+        @endif
     </div>
 </section>
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Engineer;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\FilesModel;
@@ -10,19 +10,19 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
-class WorksController extends Controller
+class MyWorksController extends Controller
 {
     public function list(Request $request)
     {
-        $query      = WorksModel::orderByDesc('created_at')->where('engineer_id', $request->user()->id);
+        $query      = WorksModel::orderByDesc('created_at'); //->where('engineer_id', $request->user()->id);
         $sum        = $query->count('id');
         $works      = $query->paginate(100);
-        return view('engineer.works.list', compact('works', 'sum'));
+        return view('admin.myworks.list', compact('works', 'sum'));
     }
 
     public function create(Request $request)
     {
-        return view('engineer.works.create');
+        return view('admin.myworks.create');
     }
 
     public function create_action(Request $request)
@@ -186,9 +186,8 @@ class WorksController extends Controller
                     // ->withInput($request->all());
 
                 }
-
             } catch (\Exception $e) {
-                
+
                 $status         = Response::HTTP_OK;
                 $myObj          = new \stdClass();
                 $myObj->success = false;
@@ -199,9 +198,7 @@ class WorksController extends Controller
                 $response   = response($json, $status);
 
                 return $response;
-                
             }
-
         } else {
 
             $error     = $validator->errors();
@@ -233,26 +230,24 @@ class WorksController extends Controller
     {
         $work = WorksModel::with('worksFiles')
             ->where('id', $request->work_id)
-            ->where('engineer_id', $request->user()->id)
+            // ->where('engineer_id', $request->user()->id) // this for admin only
             ->first();
 
-        return view('engineer.works.details', compact('work'));
+        return view('admin.myworks.details', compact('work'));
     }
 
     public function edit(Request $request)
     {
-        
     }
 
     public function edit_action(Request $request)
     {
-
     }
 
     public function delete(WorksModel $work)
     {
         $work->delete();
 
-        return redirect()->route('engineer.work.list');
+        return redirect()->route('admin.my.work.list');
     }
 }

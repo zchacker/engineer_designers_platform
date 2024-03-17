@@ -12,8 +12,8 @@ class ServicesModel extends Model
     use HasFactory, SoftDeletes, Notifiable;
 
     protected $table = 'services';
-    
-    
+
+
     /**
      * The primary key associated with the table.
      *
@@ -32,19 +32,55 @@ class ServicesModel extends Model
         'description',
         'name_en',
         'description_en',
+        'sub_title',
+        'sub_title_en',
+        'about_service',
+        'about_service_en',
+        'about_plus',
+        'about_plus_en',
+        'cta',
+        'cta_en',
+        'sub_cta',
+        'sub_cta_en',
+        'hero_img_file_id',
+        'about_img_file_id',
+        'video_file_id',
+        'cta_img_file_id',
+        'cover_img_alt',
+        'about_img_alt',
         'type',
-        'url',
-        'image_file',
+        'cta_url',
+        'cover_image_file',
     ];
 
     protected $enumStatus = [
         'internal',
-        'external',        
+        'external',
     ]; // Define ENUM values
 
     public function file()
     {
-        return $this->hasOne(FilesModel::class, 'id', 'image_file')->withTrashed();
+        return $this->hasOne(FilesModel::class, 'id', 'cover_image_file')->withTrashed();
+    }
+
+    public function hero_img()
+    {
+        return $this->hasOne(FilesModel::class, 'id', 'hero_img_file_id')->withTrashed();
+    }
+
+    public function about_img()
+    {
+        return $this->hasOne(FilesModel::class, 'id', 'about_img_file_id')->withTrashed();
+    }
+
+    public function cta_img()
+    {
+        return $this->hasOne(FilesModel::class, 'id', 'cta_img_file_id')->withTrashed();
+    }
+
+    public function video_file()
+    {
+        return $this->hasOne(FilesModel::class, 'id', 'video_file_id')->withTrashed();
     }
 
 }

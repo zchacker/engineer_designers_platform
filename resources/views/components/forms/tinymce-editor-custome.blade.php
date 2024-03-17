@@ -1,0 +1,1 @@
+<textarea id="myeditorinstance" name="{{ $name ?? null}}" placeholder="إبدأ بالكتابة">{{ $body ?? null }}</textarea>
