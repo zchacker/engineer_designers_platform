@@ -5,7 +5,7 @@
 <div class="content">
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-transparent overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="relative rounded-tl-md  rounded-tr-md overflow-auto p-8">
                     <h2 class="text-2xl font-bold mb-4"> {{__('service_create')}} </h2>
                     <div class="overflow-x-auto relative">
@@ -68,7 +68,7 @@
                                 </div>
 
                                 <div class="mb-4">
-                                    <label for="about_service" class="lable_form">About Server (inside page) <span class="text-red-500">*</span></label>
+                                    <label for="about_service" class="lable_form">About Service (inside page) <span class="text-red-500">*</span></label>
                                     @php
                                     $input_name = "about_service_en";
                                     @endphp

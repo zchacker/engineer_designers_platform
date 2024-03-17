@@ -25,7 +25,7 @@
 
 </section>
 
-<section class="py-16 px-8 md:pt-32 md:px-32">
+<section class="about-content py-16 px-8 md:pt-32 md:px-32">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div class="flex flex-col items-start gap-6">
             <h3 class="text-2xl font-bold">{{ __('about_service') }}</h3>
@@ -79,6 +79,13 @@
     </div>
 </section>
 
+<style>
+    .about-content ul {
+        list-style-type: disc;
+        margin: 10px 30px;
+    }
+</style>
+
 <section class="py-16 px-8 md:px-32">
     <div class="flex flex-col justify-start items-center gap-4">
 
@@ -97,7 +104,7 @@
                 </video>
             </div>
 
-            <div class="flex flex-col items-start justify-start gap-6">
+            <div class="about-content flex flex-col items-start justify-start gap-6">
                 @if(app()->getLocale() == 'ar')
                 <div class="text-justify">{!! $service->about_plus !!}</div>
                 @else

@@ -288,10 +288,10 @@ svg.downupPopup-kapat {
     @apply bg-data-dash-items w-full p-2 text-start rounded-md text-black font-bold
 }
 
-li {
+/* li {
     @apply list-disc
 }
 
 ul {
     @apply mx-8 my-4 indent-1.5
-}
+} */

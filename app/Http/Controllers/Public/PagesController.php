@@ -25,7 +25,7 @@ class PagesController extends Controller
 
     public function services(Request $request)
     {
-        $services = ServicesModel::orderBy('id', 'desc')->get();//ServicesModel::all();
+        $services = ServicesModel::orderBy('id', 'desc')->get(); //ServicesModel::all();
         $active = 'services';
         $currentPath = $request->path();
         $page   = PagesModel::where('path', 'like',  '%' . $currentPath . '%')->first();
@@ -43,7 +43,8 @@ class PagesController extends Controller
 
         $active      = 'services';
         $currentPath = urldecode($request->path());
-        $page        = PagesModel::where('path', 'like',  '%' . $currentPath . '%')->first();
+        $page        = PagesModel::where('path', '/' . $currentPath)->first();
+        // dd($currentPath, $page);
         // print(urldecode($currentPath));
         // var_dump($page);
         // var_dump(PagesModel::where('path', 'like',  '%' . $currentPath . '%')->toSql());
