@@ -7,7 +7,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="relative rounded-tl-md  rounded-tr-md overflow-auto p-8">
-                    <h2 class="text-2xl font-bold mb-4"> {{ __('edit_post') }} </h2>
+                    <h2 class="text-2xl font-bold mb-4"> {{ __('add_post') }} </h2>
                     <div class="overflow-x-auto relative">
 
                         @if(Session::has('errors'))
@@ -22,29 +22,27 @@
                         </div>
                         @endif
 
-                        <div class="my-3 w-auto p-2 text-green-600 rounded-md save-msg" id="save-msg">
+                        <div class="my-3 w-auto p-2 text-green-600 rounded-md" id="save-msg">
 
                         </div>
 
-                        <form action="{{ route('admin.post.edit.action' , $post->id) }}" method="post" id="blog-post" enctype="multipart/form-data" class="w-full">
+                        <form action="{{ route('admin.post.create.action', $post->id) }}" method="post" id="blog-post" enctype="multipart/form-data" class="w-full">
                             @csrf
+
                             <div class="mb-4">
                                 <label for="title" class="lable_form">{{ __('post_title') }}</label>
-                                <input type="text" name="title" class="form_input !w-full" value="{{ $post->title ?? old('title') }}" maxlength="250" autocomplete="off" required />
+                                <input type="text" name="title" class="form_input !w-full" value="{{ $post->title ?? old('title') }}" maxlength="100" required autocomplete="off" />
                             </div>
 
                             <div class="mb-4">
                                 <label for="body" class="lable_form">{{ __('post_body') }}</label>
                                 <!-- <textarea name="body" id="body" cols="30" rows="10" class="form_input"></textarea> -->
-                                @php
-                                $data = "Ahmed";
-                                @endphp
                                 <x-forms.tinymce-editor :body="$post->body ?? old('body')" autocomplete="off" required />
                             </div>
 
                             <div class="mb-4">
                                 <label for="seo_title" class="lable_form">{{ __('post_seo_title') }}</label>
-                                <input type="text" name="seo_title" class="form_input !w-full" value="{{ $post->seo_title ?? old('seo_title') }}" maxlength="100" autocomplete="off" required />
+                                <input type="text" name="seo_title" class="form_input !w-full" value="{{ $post->seo_title ?? old('seo_title') }}" maxlength="255" autocomplete="off" required />
                             </div>
 
                             <div class="mb-4">
@@ -59,12 +57,12 @@
 
                             <div class="mb-4">
                                 <label for="slug" class="lable_form">{{ __('slug') }}</label>
-                                <input type="text" name="slug" class="form_input !w-full" value="{{ $post->slug ?? old('slug') }}" maxlength="170" autocomplete="off" required />
+                                <input type="text" name="slug" class="form_input !w-full" value="{{ $post->slug ?? old('slug') }}" maxlength="250" autocomplete="off" required />
                             </div>
 
                             <div class="mb-4">
                                 <label for="language" class="lable_form">{{ __('language') }}</label>
-                                <select name="language" id="language" class="form_input !w-full" required>
+                                <select name="language" id="language" class="form_input !w-full">
                                     <option value="ar" {{ ($post->language ?? old('language')) == 'ar' ? 'selected' : "" }}>{{__('ar')}}</option>
                                     <option value="en" {{ ($post->language ?? old('language')) == 'en' ? 'selected' : "" }}>{{__('en')}}</option>
                                 </select>
@@ -72,11 +70,11 @@
 
                             <div class="mb-16">
                                 <label for="keywords" class="lable_form">{{ __('post_keywords') }}</label>
-                                <input type="text" name="keywords" class="form_input !w-full" value="{{ $post->keywords ?? old('keywords') }}" maxlength="300" autocomplete="off" required />
+                                <input type="text" name="keywords" class="form_input !w-full" value="{{ $post->keywords ?? old('keywords') }}" maxlength="250" autocomplete="off" required />
                             </div>
 
                             <div class="mb-8">
-                                <div class="my-3 w-auto p-2 text-green-600 rounded-md save-msg" id="save-msg2">
+                                <div class="my-3 w-auto p-2 text-green-600 rounded-md" id="save-msg2">
 
                                 </div>
                             </div>
@@ -93,6 +91,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Include jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -123,7 +122,6 @@
         // Format the time as a string
         var currentTime = hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
 
-
         var myDiv = document.getElementById('save-msg');
         var saveMsg = document.getElementById('save-msg2');
         // Add text content to the div
@@ -138,7 +136,7 @@
             url: '{{ route("admin.autosave", $post->id) }}', // Change this route as per your setup
             data: formData,
             contentType: false, // Set contentType to false, FormData will automatically set it
-            processData: false, // Set processData to false, FormData will automatically process the data
+            processData: false, // Set processData to false, FormData will automatically process the data           
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
@@ -167,5 +165,6 @@
         clearInterval(autoSaveTimer);
     });
 </script>
+
 
 @include('admin.footer')

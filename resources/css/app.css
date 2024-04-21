@@ -288,6 +288,45 @@ svg.downupPopup-kapat {
     @apply bg-data-dash-items w-full p-2 text-start rounded-md text-black font-bold
 }
 
+
+#blog-body h1, #blog-body h2, #blog-body h3, #blog-body h4, #blog-body h5, #blog-body h6 {
+    display: block;    
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+
+#blog-body h1{
+    font-size: 2em;
+}
+
+#blog-body h2{
+    font-size: 1.5em;
+}
+
+#blog-body h3{
+    font-size: 1em;
+}
+
+#blog-body h4{
+    font-size: 0.8em;
+}
+
+#blog-body h5{
+    font-size: 0.5em;
+}
+
+#blog-body h6{
+    font-size: 0.3em;
+}
+
+#blog-body {
+    @apply leading-[3rem]
+}
+
 /* li {
     @apply list-disc
 }

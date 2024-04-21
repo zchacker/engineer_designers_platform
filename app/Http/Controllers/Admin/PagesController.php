@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Editor;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\PagesModel;
@@ -10,19 +10,17 @@ use Illuminate\Support\Facades\Validator;
 
 class PagesController extends Controller
 {
-
-
     public function list(Request $request)
     {
         $query      = PagesModel::orderByDesc('created_at');
         $sum        = $query->count('id');
         $pages  = $query->paginate(100);
-        return view('editor.pages.list', compact('pages', 'sum'));
+        return view('admin.pages.list', compact('pages', 'sum'));
     }
 
     public function create(Request $request)
     {
-        return view('editor.pages.create');
+        return view('admin.pages.create');
     }
 
     public function create_action(Request $request)
@@ -74,7 +72,7 @@ class PagesController extends Controller
             return abort(Response::HTTP_NOT_FOUND);
         }
 
-        return view('editor.pages.edit', compact('page'));
+        return view('admin.pages.edit', compact('page'));
     }
 
     public function edit_action(Request $request)
@@ -125,7 +123,7 @@ class PagesController extends Controller
     public function delete(PagesModel $page)
     {
         $page->delete();
-        return redirect()->route('editor.page.list')->with('success', 'Post Deleted successfully!');
+        return redirect()->route('admin.page.list')->with('success', 'Post Deleted successfully!');
     }
 
 

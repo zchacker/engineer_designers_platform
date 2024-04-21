@@ -85,6 +85,16 @@
                             <a href="{{ route('admin.orders.list') }}" class="navbar_item_text"> الطلبات </a>
                         </div>
 
+                        <div class="navbar_item {{ strpos(Route::currentRouteName(), 'orders')? 'navbar_active' : '' }} ">
+                            <i class="las la-blog la-2x"></i>
+                            <a href="{{ route('admin.post.list') }}" class="navbar_item_text"> المقالات </a>
+                        </div>
+
+                        <div class="navbar_item {{ strpos(Route::currentRouteName(), 'orders')? 'navbar_active' : '' }} ">
+                            <i class="las la-file la-2x"></i>
+                            <a href="{{ route('admin.page.list') }}" class="navbar_item_text"> الصفحات </a>
+                        </div>
+
                         <div class="navbar_item {{ strpos(Route::currentRouteName(), 'invoices')? 'navbar_active' : '' }} ">
                             <i class="las la-file-invoice-dollar la-2x"></i>
                             <a href="{{ route('admin.invoices.list') }}" class="navbar_item_text"> الفواتير </a>

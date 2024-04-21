@@ -25,6 +25,10 @@
         </div>
         @endforeach
     </div>
+    <div class="text-left mt-10 w-[500px] mx-auto" dir="rtl">
+        {{-- $posts->onEachSide(5)->links('pagination::tailwind') --}}
+        {{ $posts->onEachSide(5)->links('components.pagination') }}
+    </div>
     @else
 
     <div class="flex flex-col  h-[70vh] items-center justify-center mx-8">
@@ -35,8 +39,6 @@
     @endif
 </section>
 
-<div class="text-left mt-10" dir="rtl">
-    {{ $posts->onEachSide(5)->links('pagination::tailwind') }}
-</div>
+
 
 @include('public.footer')

@@ -268,6 +268,25 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::post('/orders/add_comment/{order_id}', [\App\Http\Controllers\Admin\OrdersController::class, 'add_comment'])->name('admin.order.add_comment');
     Route::post('/orders/update_status/{order_id}', [\App\Http\Controllers\Admin\OrdersController::class, 'update_status'])->name('admin.order.status.update');
 
+    // posts
+    Route::get('/posts/list', [\App\Http\Controllers\Admin\PostsController::class, 'list'])->name('admin.post.list');
+    Route::get('/posts/create', [\App\Http\Controllers\Admin\PostsController::class, 'create'])->name('admin.post.create');
+    Route::get('/posts/create/view/{post}', [\App\Http\Controllers\Admin\PostsController::class, 'view_create_form'])->name('admin.post.create.view');
+    Route::post('/posts/autosave/{post}', [\App\Http\Controllers\Admin\PostsController::class, 'autosave'])->name('admin.autosave');
+    Route::post('/posts/create/action/{post}', [\App\Http\Controllers\Admin\PostsController::class, 'create_action'])->name('admin.post.create.action');
+    Route::get('/posts/edit/{id}', [\App\Http\Controllers\Admin\PostsController::class, 'edit'])->name('admin.post.edit');
+    Route::post('/posts/edit/action/{id}', [\App\Http\Controllers\Admin\PostsController::class, 'edit_action'])->name('admin.post.edit.action');
+    Route::delete('/posts/delete/{post}', [\App\Http\Controllers\Admin\PostsController::class, 'delete'])->name('admin.post.delete');
+
+    // Pages
+    Route::get('/pages/list', [\App\Http\Controllers\Admin\PagesController::class, 'list'])->name('admin.page.list');
+    Route::get('/page/create', [\App\Http\Controllers\Admin\PagesController::class, 'create'])->name('admin.page.create');
+    Route::post('/page/create/action', [\App\Http\Controllers\Admin\PagesController::class, 'create_action'])->name('admin.page.create.action');
+    Route::get('/page/edit/{id}', [\App\Http\Controllers\Admin\PagesController::class, 'edit'])->name('admin.page.edit');
+    Route::post('/page/edit/action/{id}', [\App\Http\Controllers\Admin\PagesController::class, 'edit_action'])->name('admin.page.edit.action');
+    Route::delete('/page/delete/{page}', [\App\Http\Controllers\Admin\PagesController::class, 'delete'])->name('admin.page.delete');
+
+
     // invoices
     Route::get('/invoices/list', [\App\Http\Controllers\Admin\InvoicesController::class, 'list'])->name('admin.invoices.list');
     Route::get('/invoices/create/{order_id?}', [\App\Http\Controllers\Admin\InvoicesController::class, 'create'])->name('admin.invoices.create');
@@ -288,7 +307,7 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::get('/my/work/edit/{work_id}', [\App\Http\Controllers\Admin\MyWorksController::class, 'edit'])->name('admin.my.work.edit');
     Route::post('/my/work/edit/{work_id}/action', [\App\Http\Controllers\Admin\MyWorksController::class, 'edit_action'])->name('admin.my.work.edit.action');
     Route::delete('/my/work/delete/{work}', [\App\Http\Controllers\Admin\MyWorksController::class, 'delete'])->name('admin.my.work.delete');
-    
+
     // meetings
     Route::get('/meetings/list', [\App\Http\Controllers\Admin\MeetingsController::class, 'list'])->name('admin.meeting.list');
     Route::get('/google/create/{client_id}', [\App\Http\Controllers\Admin\MeetingsController::class, 'create'])->name('admin.meeting.create');
@@ -379,7 +398,7 @@ Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], fu
     Route::get('/my/work/edit/{work_id}', [\App\Http\Controllers\Supervisor\WorksController::class, 'edit'])->name('supervisor.my.work.edit');
     Route::post('/my/work/edit/{work_id}/action', [\App\Http\Controllers\Supervisor\WorksController::class, 'edit_action'])->name('supervisor.my.work.edit.action');
     Route::delete('/my/work/delete/{work}', [\App\Http\Controllers\Supervisor\WorksController::class, 'delete'])->name('supervisor.my.work.delete');
-     
+
     // settings
     Route::get('/settings', [\App\Http\Controllers\Shared\SettingsController::class, 'supervisor_update_data'])->name('supervisor.settings');
     Route::post('/settings/action', [\App\Http\Controllers\Shared\SettingsController::class, 'update_data_action'])->name('supervisor.settings.action');
@@ -392,9 +411,13 @@ Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], fu
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'supervisor_logout'])->name('supervisor.logout');
 });
 
-Route::group(['middleware' => ['auth:editor'], 'prefix' => 'editor'], function () {
+Route::group(['middleware' => ['auth:editor,admin'], 'prefix' => 'editor'], function () { 
 
     Route::post('/image/upload', [\App\Http\Controllers\Editor\PostsController::class, 'upload'])->name('editor.image.upload');
+
+});
+
+Route::group(['middleware' => ['auth:editor'], 'prefix' => 'editor'], function () {
 
     // posts
     Route::get('/posts/list', [\App\Http\Controllers\Editor\PostsController::class, 'list'])->name('editor.post.list');

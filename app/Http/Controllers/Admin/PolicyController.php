@@ -16,7 +16,7 @@ class PolicyController extends Controller
         $query      = PostsModel::orderByDesc('created_at')->where('type' , 'page');           
         $sum        = $query->count('id');
         $posts      = $query->paginate(100);
-        return view('admin.posts.list', compact('posts','sum'));
+        return view('admin.policies.list', compact('posts','sum'));
     }
 
 
@@ -30,7 +30,7 @@ class PolicyController extends Controller
             return abort(Response::HTTP_NOT_FOUND);
         }
 
-        return view('admin.posts.edit', compact('post'));
+        return view('admin.policies.edit', compact('post'));
     }
 
     public function edit_action(Request $request)
