@@ -175,7 +175,7 @@ class PostsController extends Controller
             }
 
             // Define the allowed HTML tags
-            $allowedTags = '<p><a><br><strong><h1><h2><h3><h4><h5><h6><img>';
+            $allowedTags = '<p><a><br><strong><h1><h2><h3><h4><h5><h6><img>[cta_btn]';
             $clean_body = strip_tags($request->body, $allowedTags);
             $request->merge(['body' => $clean_body]);
 
@@ -207,7 +207,7 @@ class PostsController extends Controller
     {
 
         // Define the allowed HTML tags
-        $allowedTags = '<p><a><br><strong><h1><h2><h3><h4><h5><h6><img>';
+        $allowedTags = '<p><a><br><strong><h1><h2><h3><h4><h5><h6><img>[cta_btn]';
         $clean_body = strip_tags($request->body, $allowedTags);
         $request->merge(['body' => $clean_body]);
 

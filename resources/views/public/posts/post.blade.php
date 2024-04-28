@@ -22,8 +22,17 @@
     <div class="my-8">
     </div>
 
-    <div class="mx-[4%] md:mx-16 mb-16 bg-gray-50 p-4 rounded-xl w-full md:w-[800px]" id="blog-body">
-        {!! $post->body !!}
+    <div class="mx-[4%] md:mx-16 mb-16 bg-white p-4 rounded-xl w-full md:w-[800px]" id="blog-body">
+        @php
+        $call_btn = '<div class="my-8">
+            <a href="https://wa.me/966536385896" target="_blank" class="flex items-center justify-center gap-4 bg-green-400 w-full h-full !text-white font-bold p-2 rounded-sm shadow-xl hover:!no-underline">
+                <span class="!text-white">' . __('call_us_now') . '</span>
+            </a>
+        </div>';
+        @endphp
+        
+        {!! str_replace('[cta_btn]', $call_btn, $post->body) !!}
+
     </div>
 
 </section>

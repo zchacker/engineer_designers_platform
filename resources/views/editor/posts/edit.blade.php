@@ -35,6 +35,7 @@
 
                             <div class="mb-4">
                                 <label for="body" class="lable_form">{{ __('post_body') }}</label>
+                                <span class="my-16">أضف الرمز [cta_btn] حيث ما تريد عرض زر الاتصال</span>
                                 <!-- <textarea name="body" id="body" cols="30" rows="10" class="form_input"></textarea> -->
                                 @php
                                 $data = "Ahmed";
