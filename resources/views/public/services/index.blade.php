@@ -19,11 +19,11 @@
             <div class="flex flex-col items-center justify-stretch h-full p-0 pb-4">
                 <img src="{{ $service->file->fileName ?? asset('imgs/image/s2.png') }}" alt="{{ $service->cover_img_alt }}" title="{{ $service->cover_img_alt }}" class="w-full h-[240px] object-cover rounded-none text-green-700 mb-4 mx-auto" />
                 @if(app()->getLocale() == 'ar')
-                <a href="{{ route('services.details' , [ $service->id , $service->slug_ar ]) }}">
+                <a href="{{ route('services.details' , ['', $service->id , $service->slug_ar ]) }}">
                     <h2 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ $service->name }}</h2>
                 </a>
                 <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ strip_tags( Str::limit( $service->description , 100) ) }}</p>
-                <a href="{{ route('services.details' , [ $service->id , $service->slug_ar ]) }}" class="normal_button mt-4">{{ __('public')['more'] }}</a>
+                <a href="{{ route('services.details' , ['', $service->id , $service->slug_ar ]) }}" class="normal_button mt-4">{{ __('public')['more'] }}</a>
                 @else
                 <a href="{{ route('services.details' , [app()->getLocale(), $service->id , $service->slug_en ?? $service->slug_ar ]) }}">
                     <h2 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ $service->name_en }}</h2>
