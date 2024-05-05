@@ -15,21 +15,22 @@
     <div class="grid grid-cols-1 md:grid-cols-3 px-6 gap-x-8 gap-y-20">
 
         @foreach($services as $service)
-        <div class="relative p-0 shadow-lg shadow-gray-400 border rounded-3xl py-0">
-            <div class="flex flex-col items-center justify-center h-full p-0 pb-4">
-                <img src="{{ $service->file->fileName ?? asset('imgs/image/s2.png') }}" alt="{{ $service->cover_img_alt }}" title="{{ $service->cover_img_alt }}" class="w-full h-[240px] object-cover rounded-md text-green-700 mb-4 mx-auto" />
+        <div class="relative p-0 shadow-lg shadow-gray-400 border rounded-3xl py-0 overflow-hidden">
+            <div class="flex flex-col items-center justify-stretch h-full p-0 pb-4">
+                <img src="{{ $service->file->fileName ?? asset('imgs/image/s2.png') }}" alt="{{ $service->cover_img_alt }}" title="{{ $service->cover_img_alt }}" class="w-full h-[240px] object-cover rounded-none text-green-700 mb-4 mx-auto" />
                 @if(app()->getLocale() == 'ar')
-                <a href="{{ route('services.details' , [app()->getLocale(), $service->id , str_replace(' ', '-', $service->name) ]) }}">
+                <a href="{{ route('services.details' , [ $service->id , $service->slug_ar ]) }}">
                     <h2 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ $service->name }}</h2>
                 </a>
                 <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ strip_tags( Str::limit( $service->description , 100) ) }}</p>
+                <a href="{{ route('services.details' , [ $service->id , $service->slug_ar ]) }}" class="normal_button mt-4">{{ __('public')['more'] }}</a>
                 @else
-                <a href="{{ route('services.details' , [app()->getLocale(), $service->id , str_replace(' ', '-', $service->name) ]) }}">
+                <a href="{{ route('services.details' , [app()->getLocale(), $service->id , $service->slug_en ?? $service->slug_ar ]) }}">
                     <h2 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ $service->name_en }}</h2>
                 </a>
                 <p class="font-normal text-gray-700 text-md leading-relaxed text-center">{{ strip_tags( Str::limit( $service->description_en , 100) ) }}</p>
+                <a href="{{ route('services.details' , [app()->getLocale(), $service->id ,  $service->slug_en ?? $service->slug_ar ]) }}" class="normal_button mt-4">{{ __('public')['more'] }}</a>
                 @endif
-                <a href="{{ route('services.details' , [app()->getLocale(), $service->id , str_replace(' ', '-', $service->name) ]) }}" class="normal_button mt-4">{{ __('public')['more'] }}</a>
             </div>
         </div>
         @endforeach

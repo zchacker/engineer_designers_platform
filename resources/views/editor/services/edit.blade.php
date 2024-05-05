@@ -166,6 +166,16 @@
                                 </div>
 
                                 <div class="mb-4">
+                                    <label for="slug_ar" class="lable_form"> كلمات في الرابط بالعربي </label>
+                                    <input type="text" name="slug_ar" class="form_input" value="{{ $service->slug_ar ?? old('slug_ar') }}" maxlength="200" required />
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="slug_en" class="lable_form"> كلمات في الرابط بالانجليزي </label>
+                                    <input type="text" name="slug_en" class="form_input" value="{{ $service->slug_en ?? old('slug_en') }}" maxlength="200" required />
+                                </div>
+
+                                <div class="mb-4">
                                     <span class="text-red-500">الرجاء رفع صورة لا تتخطى 1MB يمكن استخدام موقع <a href="https://tinypng.com/" class="text-blue-700 hover:underline" target="_blank">https://tinypng.com</a> </span>
                                     <label for="name" class="lable_form">
                                         صورة قسم الدعوة لإتخاذ إجراء

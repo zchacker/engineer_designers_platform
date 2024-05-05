@@ -107,7 +107,7 @@
 
                         <div class="navbar_item {{ (Route::currentRouteName() == 'admin.work.list')? 'navbar_active' : '' }} ">
                             <i class="las la-project-diagram la-2x"></i>
-                            <a href="{{ route('admin.work.list') }}" class="navbar_item_text"> الأعمال المرفوعة </a>
+                            <a href="{{ route('admin.work.list') }}" class="navbar_item_text"> تصاميمنا </a>
                         </div>
 
                         <div class="navbar_item {{ strpos(Route::currentRouteName(), 'meeting')? 'navbar_active' : '' }} ">

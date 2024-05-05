@@ -174,6 +174,16 @@
                                 </div>
 
                                 <div class="mb-4">
+                                    <label for="slug_ar" class="lable_form"> كلمات في الرابط بالعربي </label>
+                                    <input type="text" name="slug_ar" class="form_input" value="{{ old('slug_ar') }}" maxlength="200" required/>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="slug_en" class="lable_form"> كلمات في الرابط بالانجليزي </label>
+                                    <input type="text" name="slug_en" class="form_input" value="{{ old('slug_en') }}" maxlength="200" required/>
+                                </div>
+
+                                <div class="mb-4">
                                     <label for="cta_url" class="lable_form">رابط زر اتخاذ إجراء (في حالة تركه فارغ يتم التوجيه إلى رقم الواتساب)</label>
                                     <input type="url" name="cta_url" id="cta_url" placeholder="http://...." class="form_input" dir="ltr" value="{{  old('cta_url') }}" />
                                 </div>

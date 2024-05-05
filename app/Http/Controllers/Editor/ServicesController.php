@@ -58,6 +58,9 @@ class ServicesController extends Controller
                 $request['video_file_id'] = $this->upload_videos_helper($request->file('video_file'));
             }
 
+            $request['slug_en'] = str_replace(' ', '-', $request->slug_en);
+            $request['slug_ar'] = str_replace(' ', '-', $request->slug_ar);
+
             // create services
             $services = ServicesModel::create($request->all());
 
@@ -127,6 +130,9 @@ class ServicesController extends Controller
             if ($request->hasFile('video_file')) {
                 $request['video_file_id'] = $this->upload_videos_helper($request->file('video_file'));
             }
+
+            $request['slug_en'] = str_replace(' ', '-', $request->slug_en);
+            $request['slug_ar'] = str_replace(' ', '-', $request->slug_ar);
 
             $service = ServicesModel::find($request->service_id);
             $service->update($request->all());

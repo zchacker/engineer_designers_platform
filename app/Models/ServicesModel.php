@@ -51,6 +51,8 @@ class ServicesModel extends Model
         'type',
         'cta_url',
         'cover_image_file',
+        'slug_ar',
+        'slug_en'
     ];
 
     protected $enumStatus = [
@@ -82,5 +84,4 @@ class ServicesModel extends Model
     {
         return $this->hasOne(FilesModel::class, 'id', 'video_file_id')->withTrashed();
     }
-
 }
