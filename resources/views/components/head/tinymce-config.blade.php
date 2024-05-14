@@ -1,4 +1,5 @@
-<script src="https://cdn.tiny.cloud/1/u52u8z22ugown233ypp73gk1jkhqfy28rwzmnr759q9actzo/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+{{--<script src="https://cdn.tiny.cloud/1/u52u8z22ugown233ypp73gk1jkhqfy28rwzmnr759q9actzo/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>--}}
+<script src="{{ asset('js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
 <script>
   const example_image_upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -48,6 +49,7 @@
   var url = "{{ route('editor.image.upload') }}";
 
   tinymce.init({
+    license_key: 'gpl',
     selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
     images_upload_handler: example_image_upload_handler,
     relative_urls: false,
@@ -63,12 +65,18 @@
     autosave_retention: '1440m',
     save_onsavecallback: () => {
       console.log(`{{ __('saved_successfuly') }}`);
-      
+
       // Get the reference to the div element by its ID
       var myDiv = document.getElementById('save-msg');
 
-        // Add text content to the div
-        myDiv.textContent = `{{ __('saved_successfuly') }}`;
-    }    
+      // Add text content to the div
+      myDiv.textContent = `{{ __('saved_successfuly') }}`;
+    }
   });
 </script>
+
+<style>
+  .tox-promotion {
+    display: none;
+  }
+</style>
