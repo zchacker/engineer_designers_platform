@@ -251,6 +251,7 @@ class WorksController extends Controller
 
     public function delete(WorksModel $work)
     {
+        
         $work->delete();
 
         return redirect()->route('engineer.work.list');
