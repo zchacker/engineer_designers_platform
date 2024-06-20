@@ -1,10 +1,14 @@
 @include('public.header')
-<section class="flex h-40 justify-center items-center flex-col">
-    <div class="w-full h-full bg-cover bg-no-repeat md:bg-cover md:bg-center" style="background-image: url('{{asset('imgs/image/head-pages.webp')}}');">
-        <div class="w-full h-full px-8 py-8 flex  justify-start items-end bg-black/5 backdrop-brightness-100">
-            <h1 class="text-white text-3xl font-bold mb-4">{{__('public')['engineers']}}</h1>
-        </div>
+
+<section class="flex h-40 justify-center items-center flex-col bg-primary">
+    <div class="w-full flex flex-col justify-center ps-8 h-full h-max-[1100px]">
+        <h1 class="text-black text-3xl font-bold mb-4">{{__('public')['engineers']}}</h1>
     </div>
+</section>
+
+<section class="bg-white flex flex-col items-start justify-start space-y-4 py-8 px-8 h-max-[1100px]">
+    <p class="font-medium text-xl text-start text-black">{{__('public')['vision_details']}}</p>
+    <a href="https://wa.me/966536385896" class="cta_button">{{ __('service_cta_button') }}</a>
 </section>
 
 <section class="min-h-screen p-8">
@@ -30,9 +34,9 @@
         <h3 class="text-center"> {{ __('public')['contact_with_more_than_engineer'] }}</h3>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
         @foreach($engineers as $engineer)
-        <div class="flex flex-col justify-between p-4 shadow-md shadow-gray-400 rounded-2xl h-[345px]">
+        <div class="flex flex-col justify-around p-4 shadow-sm border border-gray-300 shadow-gray-400 rounded-2xl h-[325px]">
             <div class="flex justify-end">
                 <form action="{{ route('client.conversation.create') }}" method="post" class="flex">
                     @csrf
@@ -45,11 +49,13 @@
             </div>
             <img src="{{ $engineer->avatar->image->fileName ?? asset('imgs/user.png') }}" class="w-[100px] h-[100px] mx-auto p-2 rounded-full object-cover border-0 border-blue-300" alt="{{ $engineer->name }}">
             <div class="flex flex-col justify-start items-center">
-                @if(app()->getLocale() == 'ar')
-                <h3 class="font-bold text-lg">{{ $engineer->name }}</h3>
-                @else
-                <h3 class="font-bold text-lg">{{ $engineer->name_en ?? $engineer->name }}</h3>
-                @endif
+                <a href="{{ route('client.order.create' ,[$engineer->id] ) }}">
+                    @if(app()->getLocale() == 'ar')
+                    <h3 class="font-bold text-lg">{{ Str::limit( $engineer->name, 25 ) }}</h3>
+                    @else
+                    <h3 class="font-bold text-lg">{{ Str::limit( $engineer->name_en ?? $engineer->name, 25 ) }} </h3>
+                    @endif
+                </a>
                 <div class="my-2">
                     @if(app()->getLocale() == 'ar')
                     <a href="{{ route('engineers.details', ['', $engineer->id] ) }}" class="link">{{__('works_details')}}</a>
