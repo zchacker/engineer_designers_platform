@@ -36,7 +36,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
         @foreach($engineers as $engineer)
-        <div class="flex flex-col justify-around p-4 shadow-sm border border-gray-300 shadow-gray-400 rounded-2xl h-[325px]">
+        <div class="engineer-item flex flex-col justify-around p-4 shadow-sm border border-gray-300 shadow-gray-200 rounded-2xl h-[325px]" style="display: none;" >
             <div class="flex justify-end">
                 <form action="{{ route('client.conversation.create') }}" method="post" class="flex">
                     @csrf
@@ -65,15 +65,21 @@
                 </div>
                 <div class="my-2">
                     @if(app()->getLocale() == 'ar')
-                    <a href="{{ route('client.order.create' ,[$engineer->id] ) }}" class="normal_button">{{__('create_order')}}</a>
+                    <a href="{{ route('client.order.create' ,[$engineer->id] ) }}" class="cta_button">{{__('create_order')}}</a>
                     @else
-                    <a href="{{ route('client.order.create' ,[ $engineer->id] ) }}" class="normal_button">{{__('create_order')}}</a>
+                    <a href="{{ route('client.order.create' ,[ $engineer->id] ) }}" class="cta_button">{{__('create_order')}}</a>
                     @endif
                 </div>
             </div>
         </div>
         @endforeach
+
     </div>
+
+    <div class="flex justify-center mt-10">
+        <button id="load-more" class="cta_button">{{ __('public')['more'] }}</button>
+    </div>
+
     @else
 
     <div class="flex flex-col  h-[70vh] items-center justify-center mx-8">
@@ -83,4 +89,33 @@
 
     @endif
 </section>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let items = document.querySelectorAll('.engineer-item');
+        let loadMoreButton = document.getElementById('load-more');
+        let itemsToShow = 6;
+        let itemsIncrement = 10;
+
+        function showItems() {
+            for (let i = 0; i < itemsToShow && i < items.length; i++) {
+                items[i].style.display = 'flex';
+            }
+            if (itemsToShow >= items.length) {
+                loadMoreButton.style.display = 'none';
+            }
+        }
+
+        loadMoreButton.addEventListener('click', function() {
+            itemsToShow += itemsIncrement;
+            showItems();
+        });
+
+        showItems();
+    });
+</script>
+
+
 @include('public.footer')

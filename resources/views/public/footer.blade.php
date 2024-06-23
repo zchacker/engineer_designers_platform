@@ -114,4 +114,23 @@
     @endif
 
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchButton = document.getElementById('searchButton');
+            const searchInputContainer = document.getElementById('searchInputContainer');
+
+            searchButton.addEventListener('click', function(event) {
+                searchInputContainer.classList.toggle('hidden');
+                searchInputContainer.querySelector('input').focus();
+                event.stopPropagation();
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!searchInputContainer.contains(event.target) && !searchButton.contains(event.target)) {
+                    searchInputContainer.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+
     </html>

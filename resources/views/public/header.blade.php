@@ -48,6 +48,28 @@
             font-family: 'Cairo', sans-serif;
         }
     </style>
+
+    <!-- Swiper CSS -->
+    <link defer rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+        .swiper-container {
+            width: 100%;
+            max-width: 1100px;
+            overflow: hidden;
+        }
+
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+        }
+
+        .star {
+            color: #ffd700;
+            /* Gold color */
+        }
+
+        /* .hidden { display: none; } */
+    </style>
 </head>
 
 <body>
@@ -156,19 +178,20 @@
 
                     @endif
 
-                    <li class="font-semibold text-white hover:text-yellow-300 transition ease-in-out duration-300 mb-5 lg:mb-0">
-                        @if(app()->getLocale() == 'ar')
-                        <a href="{{ route(request()->route()->getName(), ['locale' => 'en'] + request()->route()->parameters()) }}">English</a>
-                        <!-- <a href="{{ route('language.switch' , 'en') }}">English</a> -->
-                        @else
-                        <a href="{{ route(request()->route()->getName(), ['locale' => ''] + request()->route()->parameters()) }}">عربي</a>
-                        <!-- <a href="{{ route('language.switch' , 'ar') }}">عربي</a> -->
-                        @endif
-                    </li>
 
                 </ul>
 
                 <div class="flex items-center">
+
+                    <div class="relative hidden md:block" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                        <button id="searchButton" class="p-2">
+                            <img src="{{ asset('imgs/image/search.png') }}" class="h-8" alt="">
+                        </button>
+                        <div id="searchInputContainer" class="hidden absolute top-full left-0 mt-2 w-64 bg-white shadow-lg p-2 rounded z-50">
+                            <input id="searchInput" type="text" class="w-full p-2 border border-gray-300 rounded" placeholder="Search...">
+                        </div>
+                    </div>
+
 
                     @if (!auth('client')->check() && !auth('engineer')->check() && !auth('admin')->check())
                     <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
@@ -179,29 +202,39 @@
                     </div>
                     @elseif(auth('engineer')->check())
                     <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
-                        <a href="{{ route('engineer.orders.list') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
-                            {{__('public')['controll_panel']}}
+                        <a href="{{ route('engineer.orders.list') }}" class="px-4 py-3 lg:block  font-semibold text-lg text-white tansition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                            <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @elseif(auth('client')->check())
                     <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
                         <a href="{{ route('client.engineers.list') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
-                            {{__('public')['controll_panel']}}
+                            <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @elseif(auth('admin')->check())
                     <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
                         <a href="{{ route('admin.engineers.list') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
-                            {{__('public')['controll_panel']}}
+                            <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @elseif(auth('editor')->check())
                     <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
                         <a href="{{ route('editor.post.list') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
-                            {{__('public')['controll_panel']}}
+                            <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @endif
+
+                    <div class="mx-2 md:block" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                        @if(app()->getLocale() == 'ar')
+                        <a href="{{ route(request()->route()->getName(), ['locale' => 'en'] + request()->route()->parameters()) }}" class="text-white">EN</a>
+                        <!-- <a href="{{ route('language.switch' , 'en') }}">English</a> -->
+                        @else
+                        <a href="{{ route(request()->route()->getName(), ['locale' => ''] + request()->route()->parameters()) }}" class="text-white">ع</a>
+                        <!-- <a href="{{ route('language.switch' , 'ar') }}">عربي</a> -->
+                        @endif
+                    </div>
                 </div>
             </nav>
         </div>

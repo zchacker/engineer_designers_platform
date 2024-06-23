@@ -19,8 +19,15 @@ class PagesController extends Controller
         $active = 'home';
         $currentPath = $request->path();
         $page   = PagesModel::where('path', 'like',  '%' . $currentPath . '%')->first();
-        $services = ServicesModel::all();
-        return view('public.index', compact('active', 'services', 'page'));
+        $services = ServicesModel::orderBy('id', 'desc')->get();
+
+        $works = WorksModel::with('worksFiles')
+            ->orderByDesc('created_at')
+            ->where('publish', 1)
+            ->limit(10)
+            ->get();
+
+        return view('public.index', compact('active', 'services', 'works', 'page'));
     }
 
     public function services(Request $request)

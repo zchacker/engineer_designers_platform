@@ -6,12 +6,10 @@
     });
 </script>
 
-<section class="flex md:h-40 h-52 justify-center items-center flex-col">
-    <div class="w-full h-full bg-cover bg-no-repeat md:bg-cover md:bg-center" style="background-image: url('{{asset('imgs/image/head-pages.webp')}}');">
-        <!-- <div class="w-full h-full px-8 py-8 flex justify-center items-end bg-black/5 backdrop-brightness-100"> -->
-        <div class="w-full h-full px-8 py-8 flex justify-start items-start md:items-center bg-black/5 ">
-            <h1 class="text-white text-3xl font-bold mb-4">{{__('work_details')}}</h1>
-        </div>
+
+<section class="flex h-40 justify-center items-center flex-col bg-primary">
+    <div class="w-full flex flex-col justify-center ps-8 h-full h-max-[1100px]">        
+        <h1 class="text-black text-3xl font-bold mb-4">{{ __('work_details') }}</h1>        
     </div>
 </section>
 
@@ -27,11 +25,7 @@
                 <h3 class="font-bold text-lg">{{ $engineer->name_en ??  $engineer->name }}</h3>
                 @endif
             </div>
-            <!-- <section class="flex items-center gap-4">
-                <div class="my-2">
-                    <a href="{{ route('client.order.create' , $engineer->id ) }}" class="normal_button">{{__('create_order')}}</a>
-                </div>
-            </section> -->
+            
         </div>
         <div class="flex gap-6 justify-end items-end">
             <form action="{{ route('client.conversation.create') }}" method="post" class="flex">
@@ -55,7 +49,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white2 overflow-hidden shadow-none sm:rounded-lg">
                 {{-- Content--}}
-                <div class="p-6 bg-white border-b shadow-sm rounded-md border-gray-200">
+                <div class="p-6 bg-white border-none shadow-sm rounded-md border-gray-200">
                     <div class="px-4 sm:px-6 lg:px-8">
                         <div class="sm:flex sm:items-center">
                             <div class="sm:flex-auto">
@@ -82,28 +76,35 @@
                                     @if($file->file_type == 'image')
                                     <div class="relative shadow-none rounded-sm border-none border-gray-300 p-4 mx-2 my-1 justify-center grid">
                                         <a href="{{ $file->file->fileName ?? asset('imgs/packaging.png') }}" data-lightbox="image-{{$file->file->id}}">
-                                            <img src="{{ $file->file->fileName ?? asset('imgs/packaging.png') }}" data-src="{{ $file->file->fileName ?? asset('imgs/packaging.png') }}" loading="lazy" alt="" class="w-full object-cover" />
+                                            <img src="{{ $file->file->fileName ?? asset('imgs/packaging.png') }}" data-src="{{ $file->file->fileName ?? asset('imgs/packaging.png') }}" loading="lazy" alt="" class="w-full object-cover rounded-3xl" />
                                             <div class="absolute top-0 bottom-0 left-0 right-0 w-full h-full bg-transparent"></div>
                                         </a>
                                     </div>
                                     @endif
                                     @endforeach
                                 </div>
+                                
+                                @php
+                                    $hasNonImageFiles = $work->worksFiles->where('file_type', '!=', 'image')->isNotEmpty();
+                                @endphp
 
+                                @if($hasNonImageFiles)
                                 <hr>
                                 <h3>{{ __('files') }}</h3>
 
                                 <div class="grid grid-cols-2 md:grid-cols-5  min-w-full py-2 ">
                                     @foreach($work->worksFiles as $file)
-                                    @if($file->file_type != 'image')
-                                    <div class="shadow-none rounded-sm border-0 border-gray-300 p-4 mx-2 my-1 justify-center grid">
-                                        <a href="{{ $file->file->fileName ?? '#' }}" download class="w-full h-full">
-                                            <img src="{{ asset('imgs/file.png') }}" alt="" class="w-20" />
-                                        </a>
-                                    </div>
-                                    @endif
+                                        @if($file->file_type != 'image')
+                                        <div class="shadow-none rounded-sm border-0 border-gray-300 p-4 mx-2 my-1 justify-center grid">
+                                            <a href="{{ $file->file->fileName ?? '#' }}" download class="w-full h-full">
+                                                <img src="{{ asset('imgs/file.png') }}" alt="" class="w-20" />
+                                            </a>
+                                        </div>
+                                        @endif
                                     @endforeach
                                 </div>
+                                @endif
+
                             </div>
                         </div>
                     </div>

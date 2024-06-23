@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Chat</title>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+</head>
+
+<body>
+    <h1>Voice Chat</h1>
+    <button id="joinRoom">Join Room</button>
+    <button id="requestSpeaker" disabled>Request to Speak</button>
+    <div id="audioContainer"></div>
+
+    <script>
+        const socket = io('http://localhost:3000');
+        let isSpeaker = false;
+        let roomId = 'test-room';
+        let transport = null;
+        let localStream = null;
+        let rtpSender = null;
+
+        document.getElementById('joinRoom').onclick = () => {
+            socket.emit('join-room', { roomId, isSpeaker }, (response) => {
+                console.log('Joined room:', response);
+                createTransport();
+            });
+        };
+
+        document.getElementById('requestSpeaker').onclick = () => {
+            socket.emit('request-speaker', (response) => {
+                console.log('Speaker request response:', response);
+                isSpeaker = true;
+                document.getElementById('requestSpeaker').disabled = true;
+            });
+        };
+
+        const createTransport = () => {
+            socket.emit('create-transport', (data) => {
+                if (data.status === 'error') {
+                    console.error('Error creating transport:', data.message);
+                    return;
+                }
+
+                const { id, iceParameters, iceCandidates, dtlsParameters } = data;
+                console.log(`Created transport with ID: ${id}`);
+
+                transport = new RTCPeerConnection({ iceServers: [] });
+
+                transport.onicecandidate = (event) => {
+                    if (event.candidate) {
+                        socket.emit('connect-transport', { transportId: id, dtlsParameters });
+                    }
+                };
+
+                transport.ontrack = (event) => {
+                    const [remoteStream] = event.streams;
+                    const audioElement = document.createElement('audio');
+                    audioElement.srcObject = remoteStream;
+                    audioElement.play();
+                    document.getElementById('audioContainer').appendChild(audioElement);
+                };
+
+                navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+                    localStream = stream;
+                    const [track] = localStream.getAudioTracks();
+                    rtpSender = transport.addTrack(track, localStream);
+
+                    transport.createOffer().then((offer) => {
+                        return transport.setLocalDescription(offer);
+                    }).then(() => {
+                        const rtpParameters = {
+                            codecs: [
+                                {
+                                    mimeType: 'audio/opus',
+                                    payloadType: 100,
+                                    clockRate: 48000,
+                                    channels: 2,
+                                    parameters: {},
+                                    rtcpFeedback: []
+                                }
+                            ],
+                            encodings: [{ ssrc: 1 }],
+                            headerExtensions: [],
+                            rtcp: { cname: 'cname' },
+                            mid: transport.transceivers[0].mid
+                        };
+                        console.log('Sending RTP parameters:', rtpParameters);
+
+                        socket.emit('produce-audio', { transportId: id, kind: 'audio', rtpParameters }, (response) => {
+                            if (response.status === 'error') {
+                                console.error('Error producing audio:', response.message);
+                                return;
+                            }
+
+                            console.log('Produced audio:', response);
+                            document.getElementById('requestSpeaker').disabled = false;
+                        });
+                    });
+                });
+
+                socket.on('new-consumer', (data) => {
+                    const { producerId, id, kind, rtpParameters } = data;
+                    const consumerTransport = new RTCPeerConnection({ iceServers: [] });
+
+                    consumerTransport.ontrack = (event) => {
+                        const [remoteStream] = event.streams;
+                        const audioElement = document.createElement('audio');
+                        audioElement.srcObject = remoteStream;
+                        audioElement.play();
+                        document.getElementById('audioContainer').appendChild(audioElement);
+                    };
+
+                    consumerTransport.setRemoteDescription(new RTCSessionDescription({ type: 'offer', sdp: rtpParameters.sdp }));
+                    consumerTransport.addIceCandidate(new RTCIceCandidate(rtpParameters.iceCandidates[0]));
+                });
+            });
+        };
+    </script>
+</body>
+
+</html>

@@ -72,46 +72,83 @@
     <div class="flex flex-col items-center justify-center space-y-8">
         <h2 class="text-black font-bold text-3xl text-center">{{ __('works')}}</h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-[1100px]">
-
-            <div class="flex flex-col items-end justify-start rounded-3xl overflow-hidden bg-white h-[300px] p-0 shadow-xl">
-                <a href="#" class="object-cover w-full">
-                    <img src="{{ asset('imgs/image/gallery-5.png') }}" class="object-cover h-[150px] w-full" alt="">
-                </a>
-                <a href="#">
-                    <div class="flex flex-col items-center p-3 space-y-3">
-                        <h3 class="font-bold text-center text-xl">فندق خمس نجوم بالطراز المودرن</h3>
-                        <p class="font-normal text-lg text-center text-gray-500">نقدم خدمات هندسية شاملة تشمل الاستشارات وإدارة المشاريع في مجموعة متنوعة من القطاعات.</p>
+        <!-- Swiper -->
+        <div class="swiper-container mx-auto relative">
+            <div class="swiper-wrapper mb-16">
+                <div class="swiper-slide">
+                    <div class="flex flex-col items-end justify-start rounded-3xl overflow-hidden bg-white h-[300px] p-0 shadow-xl w-full max-w-xs">
+                        <a href="#" class="object-cover w-full">
+                            <img src="{{ asset('imgs/image/gallery-5.png') }}" class="object-cover h-[150px] w-full" alt="">
+                        </a>
+                        <a href="#">
+                            <div class="flex flex-col items-center p-3 space-y-3">
+                                <h3 class="font-bold text-center text-xl">فندق خمس نجوم بالطراز المودرن</h3>
+                                <p class="font-normal text-lg text-center text-gray-500">نقدم خدمات هندسية شاملة تشمل الاستشارات وإدارة المشاريع في مجموعة متنوعة من القطاعات.</p>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-
-            <div class="flex flex-col items-end justify-start rounded-3xl overflow-hidden bg-white h-[300px] p-0 shadow-xl">
-                <a href="#" class="object-cover w-full">
-                    <img src="{{ asset('imgs/image/gallery-5.png') }}" class="object-cover h-[150px] w-full" alt="">
-                </a>
-                <a href="#">
-                    <div class="flex flex-col items-center p-3 space-y-3">
-                        <h3 class="font-bold text-center text-xl">
-                            تصميم مودرن فله شاليه
-                        </h3>
-                        <p class="font-normal text-lg text-center text-gray-500">نقدم خدمات هندسية شاملة تشمل الاستشارات وإدارة المشاريع في مجموعة متنوعة من القطاعات.</p>
+                </div>
+                <div class="swiper-slide">
+                    <div class="flex flex-col items-end justify-start rounded-3xl overflow-hidden bg-white h-[300px] p-0 shadow-xl w-full max-w-xs">
+                        <a href="#" class="object-cover w-full">
+                            <img src="{{ asset('imgs/image/gallery-5.png') }}" class="object-cover h-[150px] w-full" alt="">
+                        </a>
+                        <a href="#">
+                            <div class="flex flex-col items-center p-3 space-y-3">
+                                <h3 class="font-bold text-center text-xl">تصميم مودرن فله شاليه</h3>
+                                <p class="font-normal text-lg text-center text-gray-500">نقدم خدمات هندسية شاملة تشمل الاستشارات وإدارة المشاريع في مجموعة متنوعة من القطاعات.</p>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-
-            <div class="flex flex-col items-end justify-start rounded-3xl overflow-hidden bg-white h-[300px] p-0 shadow-xl">
-                <a href="#" class="object-cover w-full">
-                    <img src="{{ asset('imgs/image/gallery-5.png') }}" class="object-cover h-[150px] w-full" alt="">
-                </a>
-                <a href="#">
-                    <div class="flex flex-col items-center p-3 space-y-3">
-                        <h3 class="font-bold text-center text-xl">فندق خمس نجوم بالطراز المودرن</h3>
-                        <p class="font-normal text-lg text-center text-gray-500">نقدم خدمات هندسية شاملة تشمل الاستشارات وإدارة المشاريع في مجموعة متنوعة من القطاعات.</p>
+                </div>
+                <div class="swiper-slide">
+                    <div class="flex flex-col items-end justify-start rounded-3xl overflow-hidden bg-white h-[300px] p-0 shadow-xl w-full max-w-xs">
+                        <a href="#" class="object-cover w-full">
+                            <img src="{{ asset('imgs/image/gallery-5.png') }}" class="object-cover h-[150px] w-full" alt="">
+                        </a>
+                        <a href="#">
+                            <div class="flex flex-col items-center p-3 space-y-3">
+                                <h3 class="font-bold text-center text-xl">فندق خمس نجوم بالطراز المودرن</h3>
+                                <p class="font-normal text-lg text-center text-gray-500">نقدم خدمات هندسية شاملة تشمل الاستشارات وإدارة المشاريع في مجموعة متنوعة من القطاعات.</p>
+                            </div>
+                        </a>
                     </div>
-                </a>
+                </div>
+                <div class="swiper-slide">
+                    <div class="flex flex-col items-end justify-start rounded-3xl overflow-hidden bg-white h-[300px] p-0 shadow-xl w-full max-w-xs">
+                        <a href="#" class="object-cover w-full">
+                            <img src="{{ asset('imgs/image/gallery-5.png') }}" class="object-cover h-[150px] w-full" alt="">
+                        </a>
+                        <a href="#">
+                            <div class="flex flex-col items-center p-3 space-y-3">
+                                <h3 class="font-bold text-center text-xl">فندق خمس نجوم بالطراز المودرن</h3>
+                                <p class="font-normal text-lg text-center text-gray-500">نقدم خدمات هندسية شاملة تشمل الاستشارات وإدارة المشاريع في مجموعة متنوعة من القطاعات.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="flex flex-col items-end justify-start rounded-3xl overflow-hidden bg-white h-[300px] p-0 shadow-xl w-full max-w-xs">
+                        <a href="#" class="object-cover w-full">
+                            <img src="{{ asset('imgs/image/gallery-5.png') }}" class="object-cover h-[150px] w-full" alt="">
+                        </a>
+                        <a href="#">
+                            <div class="flex flex-col items-center p-3 space-y-3">
+                                <h3 class="font-bold text-center text-xl">فندق خمس نجوم بالطراز المودرن</h3>
+                                <p class="font-normal text-lg text-center text-gray-500">نقدم خدمات هندسية شاملة تشمل الاستشارات وإدارة المشاريع في مجموعة متنوعة من القطاعات.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- Add more slides as needed -->
             </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Navigation -->
+            <!-- <div class="swiper-button-next"></div> -->
+            <!-- <div class="swiper-button-prev"></div> -->
         </div>
+
     </div>
 </div>
 
@@ -165,11 +202,154 @@
 
         <div class="max-w-[1100px]">
 
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="flex items-center mb-4">
+                        <!-- <img src="{{ asset('imgs/user1.png') }}" alt="Client 1" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-400"> -->
+                        <div>
+                            <h3 class="text-lg font-bold">أحمد الخالدي</h3>
+                            <p class="text-gray-500">مدير مشروع</p>
+                            <div class="flex">
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">الشركة قدمت لنا استشارات هندسية على أعلى مستوى. بفضل رشيد العجيان، تمكنا من إتمام مشروعنا بنجاح وفي الوقت المحدد.</p>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="bg-white shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="flex items-center mb-4">
+                        <!-- <img src="{{ asset('imgs/user2.png') }}" alt="Client 2" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-400"> -->
+                        <div>
+                            <h3 class="text-lg font-bold">سارة العلي</h3>
+                            <p class="text-gray-500">مهندسة معمارية</p>
+                            <div class="flex">
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">تجربتي مع رشيد العجيان كانت ممتازة. فريق العمل محترف ومتفهم، ويقدم حلولاً مبتكرة تناسب احتياجاتنا.</p>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="bg-white shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="flex items-center mb-4">
+                        <!-- <img src="{{ asset('imgs/user3.png') }}" alt="Client 3" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-400"> -->
+                        <div>
+                            <h3 class="text-lg font-bold">محمد الفهيد</h3>
+                            <p class="text-gray-500">مدير تنفيذي</p>
+                            <div class="flex">
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">خدمات رشيد العجيان كانت متميزة. حصلنا على استشارات مهنية وفعّالة، مما ساعدنا في تحسين أداء مشاريعنا بشكل كبير.</p>
+                </div>
+                <!-- Testimonial 4 -->
+                <div class="bg-white shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="flex items-center mb-4">
+                        <!-- <img src="{{ asset('imgs/user4.png') }}" alt="Client 4" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-400"> -->
+                        <div>
+                            <h3 class="text-lg font-bold">ليلى البدر</h3>
+                            <p class="text-gray-500">رئيسة قسم التصميم</p>
+                            <div class="flex">
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">التعاون مع رشيد العجيان كان خطوة ممتازة. فريقهم يملك الخبرة والكفاءة اللازمة لتقديم استشارات قيّمة وفعّالة.</p>
+                </div>
+                <!-- Testimonial 5 -->
+                <div class="bg-white shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="flex items-center mb-4">
+                        <!-- <img src="{{ asset('imgs/user5.png') }}" alt="Client 5" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-400"> -->
+                        <div>
+                            <h3 class="text-lg font-bold">ناصر العتيبي</h3>
+                            <p class="text-gray-500">مستثمر</p>
+                            <div class="flex">
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                                <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">رشيد العجيان قدمت لنا استشارات قيمة ساهمت في نجاح مشاريعنا الاستثمارية. نوصي بهم بشدة.</p>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
 
-<x-contact/>
+<x-contact />
 
 <script async src="https://vjs.zencdn.net/8.10.0/video.min.js">
     const player = videojs('my-video');
@@ -178,7 +358,42 @@
     player.responsive(true);
 </script>
 
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        loop: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+            },
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+            },
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+            },
+        }
+    });
+</script>
 
 <!-- JSON-LD markup generated by Google Structured Data Markup Helper. -->
 <script type="application/ld+json">
