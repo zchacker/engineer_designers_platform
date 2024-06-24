@@ -12,31 +12,40 @@
     </div>
 
     <div class="relative hidden md:block ">
+        @if(app()->getLocale() == 'ar')
         <img src="{{ asset('imgs/image/yellow-bg.png') }}" alt="" class="absolute left-0 h-[400px]">
+        @else
+        <img src="{{ asset('imgs/image/yellow-bg-l.png') }}" alt="" class="absolute right-0 h-[400px]">
+        @endif
     </div>
 </section>
 
+
 <section class="p-4 md:pe-52 py-8">
-    <div class="flex md:flex-row flex-col items-center space-y-4">
-        <div class="flex flex-col items-center space-y-0">
-            <img src="{{ asset('imgs/image/mission2.jpg') }}" class="object-contain w-[340px] h-[130px]" alt="">
+    <div class="flex md:flex-row flex-col items-center gap-4">
+        <div class="flex flex-col items-center space-y-4 w-[20%]">
+            <img src="{{ asset('imgs/image/mission2.png') }}" class="object-contain w-[340px] h-[130px]" alt="">
             <h2 class="text-xl font-bold mb-4">{{__('public')['mission']}}</h2>
         </div>
-        <p class="text-gray-800 leading-7 text-justify text-xl">
-            {{__('public')['mission_details']}}
-        </p>
+        <div class="flex flex-col items-center space-y-4 w-[70%]">
+            <p class="text-gray-800 leading-7 text-justify text-xl">
+                {{__('public')['mission_details']}}
+            </p>
+        </div>
     </div>
 </section>
 
 <section class="p-4 md:pe-52 py-8">
-    <div class="flex  md:flex-row flex-col items-center space-y-4">
-        <div class="flex flex-col items-center space-y-0">
-            <img src="{{ asset('imgs/image/vision2.jpg') }}" class="object-contain w-[340px] h-[130px]" alt="">
+    <div class="flex md:flex-row flex-col items-center gap-4">
+        <div class="flex flex-col items-center space-y-4 w-[20%]">
+            <img src="{{ asset('imgs/image/vision2.png') }}" class="object-contain w-[340px] h-[130px]" alt="">
             <h2 class="text-xl font-bold mb-4">{{__('public')['vision']}}</h2>
         </div>
-        <p class="text-gray-800 leading-7 text-justify text-xl">
-            {{__('public')['vision_details']}}
-        </p>
+        <div class="flex flex-col items-center space-y-4 w-[70%]">
+            <p class="text-gray-800 leading-7 text-justify text-xl">
+                {{__('public')['vision_details']}}
+            </p>
+        </div>
     </div>
 </section>
 

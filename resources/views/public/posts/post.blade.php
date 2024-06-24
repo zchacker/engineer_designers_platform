@@ -35,6 +35,23 @@
 
     </div>
 
+    <div class="mt-16 mb-0 bg-gray-500 p-8 w-full">
+        <div class="flex flex-col space-y-5 max-w-[1100px] mx-auto">
+            <h2 class="font-bold text-3xl text-white">{{ __('related_posts') }}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                @foreach($related_posts as $related_post)
+                <div class="flex flex-col justify-between space-y-4 bg-white pb-2 rounded-3xl overflow-hidden">
+                    <img src="{{ $related_post->image->fileName ?? asset('imgs/image/post-cover.webp') }}" class="h-[170px] object-cover" alt="{{ $related_post->title }}">
+                    <a href="{{ route('blog.post', ['',$related_post->id, $related_post->slug]) }}">
+                        <h3 class="font-bold text-lg text-black mx-4">{{ $related_post->title }}</h3>
+                    </a>
+                    <a href="{{ route('blog.post', ['',$related_post->id, $related_post->slug]) }}" class="mx-4 text-blue-600 text-xl">{{ __('read') }}</a>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
 </section>
 
 @include('public.footer')

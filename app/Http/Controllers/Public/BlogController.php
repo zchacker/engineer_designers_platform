@@ -19,7 +19,7 @@ class BlogController extends Controller
             $query->where('language', 'en');
         }
         $sum        = $query->count('id');
-        $posts      = $query->paginate(20);
+        $posts      = $query->paginate(18);
         $active     = 'blog';
         return view('public.posts.list', compact('posts', 'sum', 'active'));
     }
@@ -32,10 +32,14 @@ class BlogController extends Controller
             return abort(Response::HTTP_NOT_FOUND);
         }
 
+        $related_posts = PostsModel::inRandomOrder()
+        ->limit(3)
+        ->get();
+
         $page['title'] = $post->seo_title;
         $page['description'] = $post->seo_description;
         $page = (object)$page;
 
-        return view('public.posts.post', compact('post', 'page'));
+        return view('public.posts.post', compact('post', 'related_posts', 'page'));
     }
 }

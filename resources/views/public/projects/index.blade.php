@@ -45,6 +45,11 @@
         @endforeach
     </div>
 
+    <div class="flex justify-center text-left mt-10 w-full mx-auto" dir="rtl">
+        {{-- $works->onEachSide(5)->links('pagination::tailwind') --}}
+        {{ $works->onEachSide(5)->links('components.pagination') }}
+    </div>
+
     @else
 
     <div class="flex flex-col  h-[70vh] items-center justify-center mx-8">

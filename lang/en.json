@@ -376,5 +376,7 @@
     "get_special_service": "Get Special Service Through",
     "register_your_interest": "Register Your Interest",
     "register_your_interest_msg": "Our distinguished team will directly contact you and provide free engineering consultation.",
-    "send":"send"
+    "send":"send",
+    "related_posts": "Related Posts",
+    "read":"Read"
 }

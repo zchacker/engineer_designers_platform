@@ -75,19 +75,34 @@
         <!-- Swiper -->
         <div class="swiper-container mx-auto relative">
             <div class="swiper-wrapper mb-16">
+                @foreach($works as $work)
                 <div class="swiper-slide">
-                    <div class="flex flex-col items-end justify-start rounded-3xl overflow-hidden bg-white h-[300px] p-0 shadow-xl w-full max-w-xs">
-                        <a href="#" class="object-cover w-full">
-                            <img src="{{ asset('imgs/image/gallery-5.png') }}" class="object-cover h-[150px] w-full" alt="">
+                    <div class="flex flex-col items-center justify-stretch rounded-3xl overflow-hidden bg-white h-[300px] p-0 shadow-xl w-full max-w-xs">
+                        @if(app()->getLocale() == 'ar')
+                        <a href="{{ route('projects.details' , ['',$work->id] ) }}" class="object-cover w-full">
+                            <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" class="object-cover h-[150px] w-full" alt="">
                         </a>
-                        <a href="#">
-                            <div class="flex flex-col items-center p-3 space-y-3">
-                                <h3 class="font-bold text-center text-xl">فندق خمس نجوم بالطراز المودرن</h3>
-                                <p class="font-normal text-lg text-center text-gray-500">نقدم خدمات هندسية شاملة تشمل الاستشارات وإدارة المشاريع في مجموعة متنوعة من القطاعات.</p>
+                        <a href="{{ route('projects.details' , ['',$work->id] ) }}">
+                            <div class="flex flex-col justify-center items-center p-3 space-y-3">
+                                <h3 class="font-bold text-center text-xl"> {{ $work->title }} </h3>
+                                <p class="font-normal text-lg text-center text-gray-500"> {{ $work->description }} </p>
                             </div>
                         </a>
+                        @else
+                        <a href="{{ route('projects.details' , [app()->getLocale(), $work->id] ) }}" class="object-cover w-full">
+                            <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" class="object-cover h-[150px] w-full" alt="">
+                        </a>
+                        <a href="{{ route('projects.details' , [app()->getLocale(), $work->id] ) }}">
+                            <div class="flex flex-col items-center p-3 space-y-3">
+                                <h3 class="font-bold text-center text-xl"> {{ $work->title_en }} </h3>
+                                <p class="font-normal text-lg text-center text-gray-500"> {{ $work->description_en }} </p>
+                            </div>
+                        </a>
+                        @endif 
                     </div>
                 </div>
+                @endforeach
+                {{--
                 <div class="swiper-slide">
                     <div class="flex flex-col items-end justify-start rounded-3xl overflow-hidden bg-white h-[300px] p-0 shadow-xl w-full max-w-xs">
                         <a href="#" class="object-cover w-full">
@@ -101,45 +116,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="swiper-slide">
-                    <div class="flex flex-col items-end justify-start rounded-3xl overflow-hidden bg-white h-[300px] p-0 shadow-xl w-full max-w-xs">
-                        <a href="#" class="object-cover w-full">
-                            <img src="{{ asset('imgs/image/gallery-5.png') }}" class="object-cover h-[150px] w-full" alt="">
-                        </a>
-                        <a href="#">
-                            <div class="flex flex-col items-center p-3 space-y-3">
-                                <h3 class="font-bold text-center text-xl">فندق خمس نجوم بالطراز المودرن</h3>
-                                <p class="font-normal text-lg text-center text-gray-500">نقدم خدمات هندسية شاملة تشمل الاستشارات وإدارة المشاريع في مجموعة متنوعة من القطاعات.</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="flex flex-col items-end justify-start rounded-3xl overflow-hidden bg-white h-[300px] p-0 shadow-xl w-full max-w-xs">
-                        <a href="#" class="object-cover w-full">
-                            <img src="{{ asset('imgs/image/gallery-5.png') }}" class="object-cover h-[150px] w-full" alt="">
-                        </a>
-                        <a href="#">
-                            <div class="flex flex-col items-center p-3 space-y-3">
-                                <h3 class="font-bold text-center text-xl">فندق خمس نجوم بالطراز المودرن</h3>
-                                <p class="font-normal text-lg text-center text-gray-500">نقدم خدمات هندسية شاملة تشمل الاستشارات وإدارة المشاريع في مجموعة متنوعة من القطاعات.</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="flex flex-col items-end justify-start rounded-3xl overflow-hidden bg-white h-[300px] p-0 shadow-xl w-full max-w-xs">
-                        <a href="#" class="object-cover w-full">
-                            <img src="{{ asset('imgs/image/gallery-5.png') }}" class="object-cover h-[150px] w-full" alt="">
-                        </a>
-                        <a href="#">
-                            <div class="flex flex-col items-center p-3 space-y-3">
-                                <h3 class="font-bold text-center text-xl">فندق خمس نجوم بالطراز المودرن</h3>
-                                <p class="font-normal text-lg text-center text-gray-500">نقدم خدمات هندسية شاملة تشمل الاستشارات وإدارة المشاريع في مجموعة متنوعة من القطاعات.</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                --}}
                 <!-- Add more slides as needed -->
             </div>
             <!-- Add Pagination -->
@@ -159,39 +136,34 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 gap-y-20 max-w-[1100px]">
 
+            @foreach($services as $service)
             <div class="relative flex flex-col justify-center items-center  border-2 border-white p-4 rounded-3xl h-[200px] w-full">
                 <div class="absolute -top-[50px] right-10 p-4 rounded-md border-0 border-white bg-[#333333]">
                     <img src="{{ asset('imgs/image/cert.png') }}" alt="" class="w-[60px]" />
                 </div>
                 <p class="text-white">
-                    شهادة إتمام البناء ، كل ما تحتاج معرفته للحصول عليها بسرعة وسهولة
+                    @if(app()->getLocale() == 'ar')
+                        <a href="{{ route('services.details' , ['', $service->id , $service->slug_ar ]) }}">
+                        {{ $service->name }}
+                        </a>
+                    @else                        
+                        <a href="{{ route('services.details' , [app()->getLocale(), $service->id ,  $service->slug_en ?? $service->slug_ar ]) }}">
+                        {{ $service->name_en }}
+                        </a>
+                    @endif
                 </p>
-                <a href="#" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+                @if(app()->getLocale() == 'ar')
+                <a href="{{ route('services.details' , ['', $service->id , $service->slug_ar ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+                @else
+                <a href="{{ route('services.details' , [app()->getLocale(), $service->id ,  $service->slug_en ?? $service->slug_ar ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+                @endif
             </div>
-
-            <div class="relative flex flex-col justify-center items-center  border-2 border-white p-4 rounded-3xl h-[200px] w-full">
-                <div class="absolute -top-[50px] right-10 p-4 rounded-md border-0 border-white bg-[#333333]">
-                    <img src="{{ asset('imgs/image/cert.png') }}" alt="" class="w-[60px]" />
-                </div>
-                <p class="text-white">
-                    رخصة هدم، كل ما تحتاج معرفته للحصول عليها بسرعة وسهولة
-                </p>
-                <a href="#" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
-            </div>
-
-            <div class="relative flex flex-col justify-center items-center  border-2 border-white p-4 rounded-3xl h-[200px] w-full">
-                <div class="absolute -top-[50px] right-10 p-4 rounded-md border-0 border-white bg-[#333333]">
-                    <img src="{{ asset('imgs/image/cert.png') }}" alt="" class="w-[60px]" />
-                </div>
-                <p class="text-white">
-                    تأهيل محطات الوقود، نحو تحديث البنية التحتية للطاقة المستدامة
-                </p>
-                <a href="#" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
-            </div>
-
+            @endforeach
+            
         </div>
 
         <a href="{{ route('services') }}" class="cta_button">{{ __('public')['all_services'] }}</a>
+        
     </div>
 </div>
 

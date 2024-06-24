@@ -19,8 +19,13 @@ class PagesController extends Controller
         $active = 'home';
         $currentPath = $request->path();
         $page   = PagesModel::where('path', 'like',  '%' . $currentPath . '%')->first();
-        $services = ServicesModel::orderBy('id', 'desc')->get();
+        // $services = ServicesModel::orderBy('id', 'desc')
+        // ->limit(3)
+        // ->get();
 
+        $services = ServicesModel::inRandomOrder()
+        ->limit(3)
+        ->get();
         $works = WorksModel::with('worksFiles')
             ->orderByDesc('created_at')
             ->where('publish', 1)
@@ -32,7 +37,7 @@ class PagesController extends Controller
 
     public function services(Request $request)
     {
-        $services = ServicesModel::orderBy('id', 'desc')->get(); //ServicesModel::all();
+        $services = ServicesModel::orderBy('id', 'desc')->paginate(9);//->get(); //ServicesModel::all();
         $active = 'services';
         $currentPath = $request->path();
         $page   = PagesModel::where('path', 'like',  '%' . $currentPath . '%')->first();
@@ -74,7 +79,7 @@ class PagesController extends Controller
             ->orderByDesc('created_at')
             ->where('publish', 1)
             ->limit(100)
-            ->get();
+            ->paginate(9);
 
         $active = 'projects';
 
