@@ -17,12 +17,12 @@
                     <h2 class="font-semibold text-gray-900 text-xl mb-2 text-center">{{ $post->title }}</h2>
                 </a>
                 <div class="flex items-end justify-between w-full px-4 ">
-                    <div class="w-[100px]"></div>
+                    <div class="w-[50px]"></div>
                     <div>
                         <a href="{{ route('blog.post', ['',$post->id, $post->slug]) }}" class="normal_button mt-4">إقرأ المزيد</a>
                     </div>
                     <div class="flex gap-2 px-3 py-2 m-0 bg-gray-200 rounded-full items-center">
-                        <span>125</span>
+                        <span>0</span>
                         <img src="{{ asset('imgs/image/thumbsup.png') }}" alt="" class="h-[20px]">
                     </div>
                 </div>
@@ -30,7 +30,7 @@
         </div>
         @endforeach
     </div>
-    <div class="text-left mt-10 w-[500px] mx-auto" dir="rtl">
+    <div class="text-left mt-10 flex justify-center max-w-[500px] mx-auto" dir="rtl">
         {{-- $posts->onEachSide(5)->links('pagination::tailwind') --}}
         {{ $posts->onEachSide(5)->links('components.pagination') }}
     </div>

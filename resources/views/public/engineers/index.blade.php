@@ -49,13 +49,15 @@
             </div>
             <img src="{{ $engineer->avatar->image->fileName ?? asset('imgs/user.png') }}" class="w-[100px] h-[100px] mx-auto p-2 rounded-full object-cover border-0 border-blue-300" alt="{{ $engineer->name }}">
             <div class="flex flex-col justify-start items-center">
-                <a href="{{ route('client.order.create' ,[$engineer->id] ) }}">
-                    @if(app()->getLocale() == 'ar')
-                    <h3 class="font-bold text-lg">{{ Str::limit( $engineer->name, 25 ) }}</h3>
+                @if(app()->getLocale() == 'ar')
+                    <a href="{{ route('engineers.details', ['', $engineer->id] ) }}">
+                        <h3 class="font-bold text-lg">{{ Str::limit( $engineer->name, 25 ) }}</h3>
+                    </a>
                     @else
-                    <h3 class="font-bold text-lg">{{ Str::limit( $engineer->name_en ?? $engineer->name, 25 ) }} </h3>
+                    <a href="{{ route('engineers.details', [app()->getLocale(), $engineer->id] ) }}">
+                        <h3 class="font-bold text-lg">{{ Str::limit( $engineer->name_en ?? $engineer->name, 25 ) }} </h3>
+                    </a>
                     @endif
-                </a>
                 <div class="my-2">
                     @if(app()->getLocale() == 'ar')
                     <a href="{{ route('engineers.details', ['', $engineer->id] ) }}" class="link">{{__('works_details')}}</a>
@@ -96,8 +98,8 @@
     document.addEventListener('DOMContentLoaded', function() {
         let items = document.querySelectorAll('.engineer-item');
         let loadMoreButton = document.getElementById('load-more');
-        let itemsToShow = 6;
-        let itemsIncrement = 10;
+        let itemsToShow = 8;
+        let itemsIncrement = 8;
 
         function showItems() {
             for (let i = 0; i < itemsToShow && i < items.length; i++) {

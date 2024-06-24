@@ -1,7 +1,7 @@
 @include('public.header')
 
-<section class="grid md:grid-cols-2 md:min-h-[60vh] md:pb-20">
-    <div class="p-8 md:pt-28">
+<section class="md:grid md:grid-cols-2 md:min-h-[60vh] md:pb-20">
+    <div class="p-4 md:pt-28 bg-white/60">
         <div class="flex flex-col space-y-8 justify-start items-start border-s-4 border-yellow-300 ps-4">
             <h1 class="font-bold text-5xl">{{ __('public')['about'] }}</h1>
             <p>
@@ -11,11 +11,11 @@
         </div>
     </div>
 
-    <div class="relative hidden md:block ">
+    <div class=" md:relative block md:block ">
         @if(app()->getLocale() == 'ar')
-        <img src="{{ asset('imgs/image/yellow-bg.png') }}" alt="" class="absolute left-0 h-[400px]">
+        <img src="{{ asset('imgs/image/yellow-bg.png') }}" alt="" class="absolute top-0 -z-10 left-0 h-[400px] opacity-100">
         @else
-        <img src="{{ asset('imgs/image/yellow-bg-l.png') }}" alt="" class="absolute right-0 h-[400px]">
+        <img src="{{ asset('imgs/image/yellow-bg-l.png') }}" alt="" class="absolute top-0 -z-10  right-0 h-[400px]  opacity-100">
         @endif
     </div>
 </section>
@@ -23,11 +23,11 @@
 
 <section class="p-4 md:pe-52 py-8">
     <div class="flex md:flex-row flex-col items-center gap-4">
-        <div class="flex flex-col items-center space-y-4 w-[20%]">
+        <div class="flex flex-col items-center space-y-4 md:w-[20%]">
             <img src="{{ asset('imgs/image/mission2.png') }}" class="object-contain w-[340px] h-[130px]" alt="">
             <h2 class="text-xl font-bold mb-4">{{__('public')['mission']}}</h2>
         </div>
-        <div class="flex flex-col items-center space-y-4 w-[70%]">
+        <div class="flex flex-col items-center space-y-4 md:w-[70%]">
             <p class="text-gray-800 leading-7 text-justify text-xl">
                 {{__('public')['mission_details']}}
             </p>
@@ -37,11 +37,11 @@
 
 <section class="p-4 md:pe-52 py-8">
     <div class="flex md:flex-row flex-col items-center gap-4">
-        <div class="flex flex-col items-center space-y-4 w-[20%]">
+        <div class="flex flex-col items-center space-y-4 md:w-[20%]">
             <img src="{{ asset('imgs/image/vision2.png') }}" class="object-contain w-[340px] h-[130px]" alt="">
             <h2 class="text-xl font-bold mb-4">{{__('public')['vision']}}</h2>
         </div>
-        <div class="flex flex-col items-center space-y-4 w-[70%]">
+        <div class="flex flex-col items-center space-y-4 md:w-[70%]">
             <p class="text-gray-800 leading-7 text-justify text-xl">
                 {{__('public')['vision_details']}}
             </p>
@@ -49,7 +49,7 @@
     </div>
 </section>
 
-<section style="background-image: url( {{ asset('imgs/image/right-yellow-bg.png') }} );" class="p-4 md:bg-transparent bg-contain bg-no-repeat bg-right bg-mobile " >
+<section style="background-image: url( {{ asset('imgs/image/right-yellow-bg.png') }} );" class="p-4 md:bg-transparent bg-[200px] bg-no-repeat bg-right bg-mobile2 " >
     <div class="flex flex-col items-center ">
         <h2 class="text-4xl font-bold mb-8">{{__('public')['why_us']}}</h2>
         <p class="text-xl text-gray-500">

@@ -196,31 +196,31 @@
                     @if (!auth('client')->check() && !auth('engineer')->check() && !auth('admin')->check())
                     <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
                         <!-- <a href="{{ route('login') }}" class="font-semibold bg-yellow-300 p-4 rounded-md text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">{{ __('public')['sigin'] }}</a> -->
-                        <a href="{{ route('login', app()->getLocale() ) }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                        <a href="{{ route('login', app()->getLocale() ) }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
                             {{ __('public')['sigin'] }}
                         </a>
                     </div>
                     @elseif(auth('engineer')->check())
                     <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
-                        <a href="{{ route('engineer.orders.list') }}" class="px-4 py-3 lg:block  font-semibold text-lg text-white tansition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                        <a href="{{ route('engineer.orders.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
                             <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @elseif(auth('client')->check())
                     <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
-                        <a href="{{ route('client.engineers.list') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                        <a href="{{ route('client.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
                             <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @elseif(auth('admin')->check())
                     <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
-                        <a href="{{ route('admin.engineers.list') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                        <a href="{{ route('admin.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
                             <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @elseif(auth('editor')->check())
                     <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
-                        <a href="{{ route('editor.post.list') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                        <a href="{{ route('editor.post.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
                             <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>

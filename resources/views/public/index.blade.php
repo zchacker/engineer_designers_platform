@@ -23,10 +23,10 @@
 </div>
 
 <!-- benefits  -->
-<div class="mt-[38%] md:mt-[20%]">
+<div class="mt-[42%] md:mt-[20%]">
     <div class="flex flex-col items-center justify-center space-y-8">
         <h2 class="text-black font-bold text-3xl text-center"> {{ __('why_us_best_choice') }} </h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-16">
 
             <div class="flex flex-col justify-between items-center space-y-4">
                 <div class="border-4 rounded-full p-4 border-black">
@@ -68,7 +68,7 @@
 </div>
 
 <!-- our works  -->
-<div class="mt-[5%]">
+<div class="mt-[75px]">
     <div class="flex flex-col items-center justify-center space-y-8">
         <h2 class="text-black font-bold text-3xl text-center">{{ __('works')}}</h2>
 
@@ -85,7 +85,7 @@
                         <a href="{{ route('projects.details' , ['',$work->id] ) }}">
                             <div class="flex flex-col justify-center items-center p-3 space-y-3">
                                 <h3 class="font-bold text-center text-xl"> {{ $work->title }} </h3>
-                                <p class="font-normal text-lg text-center text-gray-500"> {{ $work->description }} </p>
+                                <p class="font-normal text-lg text-center text-gray-500"> {{ strip_tags( Str::limit( $work->description , 55) ) }} </p>
                             </div>
                         </a>
                         @else
@@ -94,8 +94,8 @@
                         </a>
                         <a href="{{ route('projects.details' , [app()->getLocale(), $work->id] ) }}">
                             <div class="flex flex-col items-center p-3 space-y-3">
-                                <h3 class="font-bold text-center text-xl"> {{ $work->title_en }} </h3>
-                                <p class="font-normal text-lg text-center text-gray-500"> {{ $work->description_en }} </p>
+                                <h3 class="font-bold text-center text-xl"> {{ $work->title_en ?? $work->title }} </h3>
+                                <p class="font-normal text-lg text-center text-gray-500"> {{ strip_tags( Str::limit( $work->description_en ?? $work->description , 55) ) }} </p>
                             </div>
                         </a>
                         @endif 
@@ -130,7 +130,7 @@
 </div>
 
 <!-- our services  -->
-<div class="mt-[5%]">
+<div class="mt-[75px]">
     <div class="flex flex-col items-center justify-center space-y-20 p-8 py-16 bg-[#333333]">
         <h2 class="text-white font-bold text-3xl text-center">{{ __('public')['services'] }}</h2>
 
@@ -168,7 +168,7 @@
 </div>
 
 <!-- testmonial  -->
-<div class="mt-[5%]">
+<div class="mt-[75px]">
     <div class="flex flex-col items-center justify-center space-y-20 p-8 py-0 bg-white">
         <h2 class="text-black font-bold text-3xl text-center">{{ __('public')['testimonial'] }}</h2>
 
