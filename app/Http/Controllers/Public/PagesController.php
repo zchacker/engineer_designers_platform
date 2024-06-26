@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Public;
 use App\Http\Controllers\Controller;
 use App\Models\ContactsModel;
 use App\Models\PagesModel;
+use App\Models\PostsModel;
 use App\Models\ServicesModel;
 use App\Models\UsersModel;
 use App\Models\WorksModel;
@@ -214,5 +215,5 @@ class PagesController extends Controller
         } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->back()->withErrors($e->validator->errors())->with('scrollTo', 'contact');
         }
-    }
+    }    
 }

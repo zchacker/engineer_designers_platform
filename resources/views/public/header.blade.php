@@ -50,7 +50,8 @@
     </style>
 
     <!-- Swiper CSS -->
-    <link defer rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    {{--<link defer rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">--}}
+    <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <style>
         .swiper-container {
             width: 100%;
@@ -83,19 +84,78 @@
             <!-- <nav class="flex-wrap lg:flex items-center py-14 pb-16 xl:relative z-50 h-40" x-data="{navbarOpen:false}" :class="{'h-20':!navbarOpen,'h-[470px]':navbarOpen}"> -->
             <nav class="flex-wrap md:flex items-center justify-between py-4 z-50" x-data="{navbarOpen:false}" :class="{'block':navbarOpen}">
 
+                <!-- this for mobile only  -->
                 <div class="flex items-center justify-center mb-0 lg:mb-0">
-
+                    
                     @if(app()->getLocale() != 'ar')
                     <button class="lg:hidden w-10 h-10 mr-auto flex items-center justify-center stroke-white text-white border border-white rounded-md" @click="navbarOpen = !navbarOpen">
-                        @else
-                        <button class="lg:hidden w-10 h-10 ml-auto flex items-center justify-center stroke-white text-white border border-white rounded-md" @click="navbarOpen = !navbarOpen">
-                            @endif
-                            <i data-feather="menu"></i>
-                        </button>
+                    @else
+                    <button class="lg:hidden w-10 h-10 ml-auto flex items-center justify-center stroke-white text-white border border-white rounded-md" @click="navbarOpen = !navbarOpen">
+                    @endif
+                        <i data-feather="menu"></i>
+                    </button>                    
 
-                        <a href="{{ route('home') }}">
-                            <img src="{{asset('imgs/image/logo.png')}}" alt="Logo img" class="w-20">
-                        </a>
+                    <a href="{{ route('home') }}" class="flex items-center justify-center text-center w-[33%] md:w-full">
+                        <img src="{{asset('imgs/image/logo.png')}}" alt="Logo img" class="w-20">
+                    </a>
+
+                    <div class="flex justify-end items-center space-x-2 w-[33%]">
+
+                        <div class="relative md:hidden">
+                            <button id="searchButton" class="p-2">
+                                <img src="{{ asset('imgs/image/search.png') }}" class="h-6" alt="">
+                            </button>
+                            <div id="searchInputContainer" class="hidden absolute top-full left-0 mt-2 w-64 bg-white shadow-lg p-2 rounded z-50">
+                                <input id="searchInput" type="text" class="w-full p-2 border border-gray-300 rounded" placeholder="Search...">
+                            </div>
+                        </div>
+
+
+                        @if (!auth('client')->check() && !auth('engineer')->check() && !auth('admin')->check())
+                        <div class="relative md:hidden">
+                            <!-- <a href="{{ route('login') }}" class="font-semibold bg-yellow-300 p-4 rounded-md text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">{{ __('public')['sigin'] }}</a> -->
+                            <a href="{{ route('login', app()->getLocale() ) }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
+                                {{-- __('public')['sigin'] --}}
+                                <img src="{{ asset('imgs/image/account.png') }}" class="h-6" alt="">
+                            </a>
+                        </div>
+                        @elseif(auth('engineer')->check())
+                        <div class="relative md:hidden">
+                            <a href="{{ route('engineer.orders.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
+                                <img src="{{ asset('imgs/image/account.png') }}" class="h-6" alt="">
+                            </a>
+                        </div>
+                        @elseif(auth('client')->check())
+                        <div class="relative md:hidden">
+                            <a href="{{ route('client.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
+                                <img src="{{ asset('imgs/image/account.png') }}" class="h-6" alt="">
+                            </a>
+                        </div>
+                        @elseif(auth('admin')->check())
+                        <div class="relative md:hidden">
+                            <a href="{{ route('admin.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
+                                <img src="{{ asset('imgs/image/account.png') }}" class="h-6" alt="">
+                            </a>
+                        </div>
+                        @elseif(auth('editor')->check())
+                        <div class="relative md:hidden">
+                            <a href="{{ route('editor.post.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
+                                <img src="{{ asset('imgs/image/account.png') }}" class="h-6" alt="">
+                            </a>
+                        </div>
+                        @endif
+
+                        <div class="relative md:hidden">
+                            @if(app()->getLocale() == 'ar')
+                            <a href="{{ route(request()->route()->getName(), ['locale' => 'en'] + request()->route()->parameters()) }}" class="text-white">EN</a>
+                            <!-- <a href="{{ route('language.switch' , 'en') }}">English</a> -->
+                            @else
+                            <a href="{{ route(request()->route()->getName(), ['locale' => ''] + request()->route()->parameters()) }}" class="text-white">ع</a>
+                            <!-- <a href="{{ route('language.switch' , 'ar') }}">عربي</a> -->
+                            @endif
+                        </div>
+                    </div>
+
                 </div>
 
                 <ul class="hidden md:flex flex-col md:flex-row justify-between md:gap-8" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
@@ -183,7 +243,7 @@
 
                 <div class="flex items-center">
 
-                    <div class="relative hidden md:block" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                    <div class="relative hidden md:block">
                         <button id="searchButton" class="p-2">
                             <img src="{{ asset('imgs/image/search.png') }}" class="h-8" alt="">
                         </button>
@@ -194,39 +254,40 @@
 
 
                     @if (!auth('client')->check() && !auth('engineer')->check() && !auth('admin')->check())
-                    <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
+                    <div class="hidden md:flex gap-4 space-y-4 justify-start items-center">
                         <!-- <a href="{{ route('login') }}" class="font-semibold bg-yellow-300 p-4 rounded-md text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">{{ __('public')['sigin'] }}</a> -->
-                        <a href="{{ route('login', app()->getLocale() ) }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
-                            {{ __('public')['sigin'] }}
+                        <a href="{{ route('login', app()->getLocale() ) }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
+                            {{-- __('public')['sigin'] --}}
+                            <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @elseif(auth('engineer')->check())
-                    <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
-                        <a href="{{ route('engineer.orders.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                    <div class="hidden md:flex gap-4 space-y-4 justify-start items-center">
+                        <a href="{{ route('engineer.orders.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
                             <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @elseif(auth('client')->check())
-                    <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
-                        <a href="{{ route('client.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                    <div class="hidden md:flex gap-4 space-y-4 justify-start items-center">
+                        <a href="{{ route('client.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
                             <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @elseif(auth('admin')->check())
-                    <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
-                        <a href="{{ route('admin.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                    <div class="hidden md:flex gap-4 space-y-4 justify-start items-center">
+                        <a href="{{ route('admin.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
                             <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @elseif(auth('editor')->check())
-                    <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
-                        <a href="{{ route('editor.post.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                    <div class="hidden md:flex gap-4 space-y-4 justify-start items-center">
+                        <a href="{{ route('editor.post.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
                             <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @endif
 
-                    <div class="mx-2 md:block" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
+                    <div class="mx-2 md:block hidden">
                         @if(app()->getLocale() == 'ar')
                         <a href="{{ route(request()->route()->getName(), ['locale' => 'en'] + request()->route()->parameters()) }}" class="text-white">EN</a>
                         <!-- <a href="{{ route('language.switch' , 'en') }}">English</a> -->

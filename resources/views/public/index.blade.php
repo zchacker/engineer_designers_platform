@@ -1,15 +1,16 @@
 @include('public.header')
 
 <!-- hero section  -->
-<div class="min-h-[60vh] md:min-h-[80vh] relative flex flex-col items-center justify-top bg-cover bg-[#333333]" style="background-image: url({{ asset('imgs/image/hero-bg.jpg') }});">
+<div class="min-h-[550px] md:min-h-[600px] relative flex flex-col items-center justify-top bg-cover bg-[#333333]" style="background-image: url({{ asset('imgs/image/hero-bg.jpg') }});">
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
 
-    <div class="flex flex-col items-center justify-center z-50 mt-[100px]">
-        <h1 class="text-center font-bold text-2xl md:text-2xl lg:text-3xl leading-tight text-white mb-6">{!! __('public')['hero_msg'] !!}</h1>
-        <p class="text-center font-normal text-xl text-white leading-relaxed mb-12">{{__('public')['sub_hero']}}</p>
-        <a href="{{ route('register.user') }}" class="cta_button">{{__('public')['register_now']}}</a>
-
-        <div class="absolute -bottom-[100px] md:-bottom-[220px] w-[310px] md:w-[565px] rounded-xl border-2 overflow-hidden p-0 shadow-lg">
+    <div class="relative flex flex-col items-center justify-center z-50 mt-[100px]">
+        <div class="flex flex-col items-center justify-end">
+            <h1 class="text-center font-bold text-2xl md:text-2xl lg:text-3xl leading-tight text-white mb-6">{!! __('public')['hero_msg'] !!}</h1>
+            <p class="text-center font-normal text-xl text-white leading-relaxed mb-12">{{__('public')['sub_hero']}}</p>
+            <a href="{{ route('register.user') }}" class="cta_button">{{__('public')['register_now']}}</a>
+        </div>
+        <div class="absolute -bottom-[300px] md:-bottom-[420px] w-[310px] md:w-[565px] rounded-xl border-2 overflow-hidden p-0 shadow-lg">
             <video id="my-video" class="video-js vjs-fluid vjs-16-9" controls preload="auto" width="640" height="360" data-setup="{}">
                 <source src="https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/videos/rclol3.mp4" type="video/mp4">
                 <p class="vjs-no-js">
@@ -23,7 +24,7 @@
 </div>
 
 <!-- benefits  -->
-<div class="mt-[42%] md:mt-[20%]">
+<div class="mt-[42%] md:mt-[15%]">
     <div class="flex flex-col items-center justify-center space-y-8">
         <h2 class="text-black font-bold text-3xl text-center"> {{ __('why_us_best_choice') }} </h2>
         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-16">
@@ -331,7 +332,7 @@
 </script>
 
 <!-- Swiper JS -->
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script  src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" ></script>
 
 <script>
     var swiper = new Swiper('.swiper-container', {

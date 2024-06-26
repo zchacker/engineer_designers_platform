@@ -35,7 +35,7 @@
 
     </div>
 
-    <div class="mt-16 mb-0 bg-gray-500 p-8 w-full">
+    <div class="mt-16 mb-0 bg-[#4B4B4B] p-8 w-full">
         <div class="flex flex-col space-y-5 max-w-[1100px] mx-auto">
             <h2 class="font-bold text-3xl text-white">{{ __('related_posts') }}</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -45,7 +45,7 @@
                     <a href="{{ route('blog.post', ['',$related_post->id, $related_post->slug]) }}">
                         <h3 class="font-bold text-lg text-black mx-4">{{ $related_post->title }}</h3>
                     </a>
-                    <a href="{{ route('blog.post', ['',$related_post->id, $related_post->slug]) }}" class="mx-4 text-blue-600 text-xl">{{ __('read') }}</a>
+                    <a href="{{ route('blog.post', ['',$related_post->id, $related_post->slug]) }}" class="mx-4 text-primary text-xl">{{ __('read') }}</a>
                 </div>
                 @endforeach
             </div>

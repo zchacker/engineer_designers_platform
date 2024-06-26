@@ -1,8 +1,8 @@
 @if(app()->getLocale() == 'ar')
 <div class="fixed right-6 bottom-16 md:bottom-8  z-50">
-    @else
-    <div class="fixed left-2 bottom-16 md:bottom-8  z-50">
-        @endif
+@else
+<div class="fixed left-2 bottom-16 md:bottom-8  z-50">
+@endif
         <a href="https://wa.me/966536385896" target="_blank" class="flex gap-4 items-center">
             <img src="{{ asset('imgs/image/whatsapp.webp') }}" alt="" class="w-14 h-14">
             <p class="p-1 px-2 rounded-md bg-white text-black">

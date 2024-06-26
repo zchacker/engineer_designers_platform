@@ -66,6 +66,17 @@ Route::post('/forgotpassword/action', [\App\Http\Controllers\AuthController::cla
 Route::get('/resetpassword/{id}/{token}', [\App\Http\Controllers\AuthController::class, 'reset_password'])->name('reset.password.link');
 Route::post('/set_password', [\App\Http\Controllers\AuthController::class, 'rest_password_new'])->name('set.new.password');
 
+
+Route::get('/privacy', function () {        
+    $post = PostsModel::where('slug', 'privacy')->first();
+    return view('public.privacy', compact('post'));
+})->name('privacy');
+
+Route::get('/terms', function () {
+    $post = PostsModel::where('slug', 'terms')->first();
+    return view('public.terms', compact('post'));
+})->name('terms');
+
 Route::group(['prefix' => '{locale?}', 'where' => ['locale' => 'en|ar']], function () {
 
     App::setLocale('en');
@@ -102,8 +113,9 @@ Route::group(['prefix' => '{locale?}', 'where' => ['locale' => 'en|ar']], functi
 
     Route::get('/resetpassword/{id}/{token}', [\App\Http\Controllers\AuthController::class, 'reset_password'])->name('reset.password.link');
     Route::post('/set_password', [\App\Http\Controllers\AuthController::class, 'rest_password_new'])->name('set.new.password');
+        
 
-    Route::get('/privacy', function () {
+    Route::get('/privacy', function () {        
         $post = PostsModel::where('slug', 'privacy')->first();
         return view('public.privacy', compact('post'));
     })->name('privacy');
@@ -112,6 +124,7 @@ Route::group(['prefix' => '{locale?}', 'where' => ['locale' => 'en|ar']], functi
         $post = PostsModel::where('slug', 'terms')->first();
         return view('public.terms', compact('post'));
     })->name('terms');
+
 })->prefix('ar'); // Set the default value to 'ar';
 
 
