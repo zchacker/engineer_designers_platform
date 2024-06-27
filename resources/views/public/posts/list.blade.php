@@ -6,7 +6,7 @@
     </div>
 </section>
 
-<section class="bg-white px-10 py-10 md:py-16">
+<section class="bg-white md:px-10 py-10 md:py-16">
     @if($posts->isNotEmpty())
     <div class="grid grid-cols-1 md:grid-cols-3 px-6 gap-8">
         @foreach($posts as $post)
@@ -21,8 +21,8 @@
                     <div>
                         <a href="{{ route('blog.post', ['',$post->id, $post->slug]) }}" class="normal_button mt-4">إقرأ المزيد</a>
                     </div>
-                    <div class="flex gap-2 px-3 py-2 m-0 bg-gray-200 rounded-full items-center">
-                        <span>0</span>
+                    <div class="flex gap-2 px-3 py-2 m-0 bg-gray-50 rounded-full items-center">
+                        <span>{{ $post->likes }}</span>
                         <img src="{{ asset('imgs/image/thumbsup.png') }}" alt="" class="h-[20px]">
                     </div>
                 </div>

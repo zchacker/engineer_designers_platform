@@ -42,4 +42,31 @@ class BlogController extends Controller
 
         return view('public.posts.post', compact('post', 'related_posts', 'page'));
     }
+
+
+    public function like(Request $request, PostsModel $post)
+    {
+        $likes = $request->session()->get('liked_posts', []);
+
+        if (!in_array($post->id, $likes)) {
+            $post->increment('likes');
+            $likes[] = $post->id;
+            $request->session()->put('liked_posts', $likes);
+        }
+
+        return response()->json(['likes' => $post->likes]);
+    }
+
+    public function unlike(Request $request, PostsModel $post)
+    {
+        $likes = $request->session()->get('liked_posts', []);
+
+        if (($key = array_search($post->id, $likes)) !== false) {
+            $post->decrement('likes');
+            unset($likes[$key]);
+            $request->session()->put('liked_posts', $likes);
+        }
+
+        return response()->json(['likes' => $post->likes]);
+    }
 }

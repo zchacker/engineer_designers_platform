@@ -35,6 +35,16 @@
 
     </div>
 
+    <div class="flex justify-start w-[800px] px-4 gap-2">
+        <div class="flex gap-2">
+            <img src="{{ asset('imgs/image/thumbsup.png') }}" alt="" class="h-[20px]">
+            <button id="like-button" data-post-id="{{ $post->id }}" class="text-blue-600 hover:text-blue-500">
+                {{ __(in_array($post->id, session('liked_posts', [])) ? 'Unlike' : 'Like') }}
+            </button>
+        </div>
+        <span id="like-count" class="text-black">{{ $post->likes }}</span>
+    </div>
+
     <div class="mt-16 mb-0 bg-[#4B4B4B] p-8 w-full">
         <div class="flex flex-col space-y-5 max-w-[1100px] mx-auto">
             <h2 class="font-bold text-3xl text-white">{{ __('related_posts') }}</h2>
@@ -53,5 +63,31 @@
     </div>
 
 </section>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const likeButton = document.getElementById('like-button');
+        const likeCount = document.getElementById('like-count');
+
+        likeButton.addEventListener('click', function () {
+            const postId = this.dataset.postId;
+            const isLiked = this.innerText === `{{ __('Unlike') }}`;
+
+            fetch(`/post/${postId}/${isLiked ? 'unlike' : 'like'}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                likeCount.innerText = data.likes;
+                this.innerText = isLiked ? `{{__('Like')}}` : `{{ __('Unlike') }}`;
+            });
+        });
+    });
+</script>
 
 @include('public.footer')

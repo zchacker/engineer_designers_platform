@@ -1,6 +1,6 @@
 <!-- contact us  -->
-<div class="mt-[5%] md:p-10 md:px-16">
-    <div class="bg-[#333333] grid grid-cols-1 md:grid-cols-2 p-10 md:rounded-3xl max-w-[1100px] mx-auto gap-y-6">
+<div class="mt-[0px] md:p-10 md:px-16">
+    <div class="bg-[#333333] grid grid-cols-1 md:grid-cols-2 p-5 md:p-10 pb-16 md:rounded-3xl max-w-[1100px] mx-auto gap-y-6">
         <div class="flex flex-col items-start justify-start space-y-8">
             <h2 class="font-bold text-3xl text-white">{{ __('public')['contact_us_today'] }}</h2>
             <div class="flex flex-col space-y-4">  
