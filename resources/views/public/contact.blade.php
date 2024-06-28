@@ -13,7 +13,7 @@
     <div class="mx-auto flex flex-col gap-0">        
 
         <section class="flex flex-col justify-center items-center h-40 md:bg-transparent bg-primary">
-            <div class="w-full flex flex-col justify-center ps-8 h-full h-max-[1100px]">
+            <div class="w-full flex flex-col justify-center ps-8 h-full w-max-[1100px]">
                 <h1 class="text-black text-4xl font-bold mb-4 text-center">{{__('public')['contact']}}</h1>
             </div>
         </section>

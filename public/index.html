@@ -1,124 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voice Chat</title>
-    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+  <title>Audio Room Chat</title>
 </head>
-
 <body>
-    <h1>Voice Chat</h1>
-    <button id="joinRoom">Join Room</button>
-    <button id="requestSpeaker" disabled>Request to Speak</button>
-    <div id="audioContainer"></div>
+  <h1>Audio Room Chat</h1>
+  <button onclick="joinRoom()">Join Room</button>
+  <div id="remoteAudioContainer"></div>
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
+  <script>
+    const socket = io();
+    const roomId = 'audio_room';
+    let localStream;
+    const peers = {};
 
-    <script>
-        const socket = io('http://localhost:3000');
-        let isSpeaker = false;
-        let roomId = 'test-room';
-        let transport = null;
-        let localStream = null;
-        let rtpSender = null;
+    function joinRoom() {
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(stream => {
+          localStream = stream;
+          socket.emit('join-room', roomId);
+          socket.on('user-connected', userId => {
+            connectToNewUser(userId, stream);
+          });
 
-        document.getElementById('joinRoom').onclick = () => {
-            socket.emit('join-room', { roomId, isSpeaker }, (response) => {
-                console.log('Joined room:', response);
-                createTransport();
-            });
-        };
+          socket.on('signal', async (data) => {
+            const peer = peers[data.from];
+            if (peer) {
+              peer.signal(data.signal);
+            }
+          });
 
-        document.getElementById('requestSpeaker').onclick = () => {
-            socket.emit('request-speaker', (response) => {
-                console.log('Speaker request response:', response);
-                isSpeaker = true;
-                document.getElementById('requestSpeaker').disabled = true;
-            });
-        };
+          socket.on('user-disconnected', userId => {
+            if (peers[userId]) peers[userId].destroy();
+          });
+        });
+    }
 
-        const createTransport = () => {
-            socket.emit('create-transport', (data) => {
-                if (data.status === 'error') {
-                    console.error('Error creating transport:', data.message);
-                    return;
-                }
+    function connectToNewUser(userId, stream) {
+      const peer = new SimplePeer({
+        initiator: true,
+        trickle: false,
+        stream: stream
+      });
 
-                const { id, iceParameters, iceCandidates, dtlsParameters } = data;
-                console.log(`Created transport with ID: ${id}`);
+      peer.on('signal', signal => {
+        socket.emit('signal', { to: userId, from: socket.id, signal: signal });
+      });
 
-                transport = new RTCPeerConnection({ iceServers: [] });
+      peer.on('stream', remoteStream => {
+        const audioElement = document.createElement('audio');
+        audioElement.srcObject = remoteStream;
+        audioElement.autoplay = true;
+        document.getElementById('remoteAudioContainer').appendChild(audioElement);
+      });
 
-                transport.onicecandidate = (event) => {
-                    if (event.candidate) {
-                        socket.emit('connect-transport', { transportId: id, dtlsParameters });
-                    }
-                };
-
-                transport.ontrack = (event) => {
-                    const [remoteStream] = event.streams;
-                    const audioElement = document.createElement('audio');
-                    audioElement.srcObject = remoteStream;
-                    audioElement.play();
-                    document.getElementById('audioContainer').appendChild(audioElement);
-                };
-
-                navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
-                    localStream = stream;
-                    const [track] = localStream.getAudioTracks();
-                    rtpSender = transport.addTrack(track, localStream);
-
-                    transport.createOffer().then((offer) => {
-                        return transport.setLocalDescription(offer);
-                    }).then(() => {
-                        const rtpParameters = {
-                            codecs: [
-                                {
-                                    mimeType: 'audio/opus',
-                                    payloadType: 100,
-                                    clockRate: 48000,
-                                    channels: 2,
-                                    parameters: {},
-                                    rtcpFeedback: []
-                                }
-                            ],
-                            encodings: [{ ssrc: 1 }],
-                            headerExtensions: [],
-                            rtcp: { cname: 'cname' },
-                            mid: transport.transceivers[0].mid
-                        };
-                        console.log('Sending RTP parameters:', rtpParameters);
-
-                        socket.emit('produce-audio', { transportId: id, kind: 'audio', rtpParameters }, (response) => {
-                            if (response.status === 'error') {
-                                console.error('Error producing audio:', response.message);
-                                return;
-                            }
-
-                            console.log('Produced audio:', response);
-                            document.getElementById('requestSpeaker').disabled = false;
-                        });
-                    });
-                });
-
-                socket.on('new-consumer', (data) => {
-                    const { producerId, id, kind, rtpParameters } = data;
-                    const consumerTransport = new RTCPeerConnection({ iceServers: [] });
-
-                    consumerTransport.ontrack = (event) => {
-                        const [remoteStream] = event.streams;
-                        const audioElement = document.createElement('audio');
-                        audioElement.srcObject = remoteStream;
-                        audioElement.play();
-                        document.getElementById('audioContainer').appendChild(audioElement);
-                    };
-
-                    consumerTransport.setRemoteDescription(new RTCSessionDescription({ type: 'offer', sdp: rtpParameters.sdp }));
-                    consumerTransport.addIceCandidate(new RTCIceCandidate(rtpParameters.iceCandidates[0]));
-                });
-            });
-        };
-    </script>
+      peers[userId] = peer;
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-peer@9.11.0/simplepeer.min.js"></script>
 </body>
-
 </html>
