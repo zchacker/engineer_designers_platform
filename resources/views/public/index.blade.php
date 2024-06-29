@@ -24,7 +24,7 @@
 </div>
 
 <!-- benefits  -->
-<div class="mt-[42%] md:mt-[15%]">
+<div class="mt-[42%] md:mt-[15%] fade-element">
     <div class="flex flex-col items-center justify-center space-y-8">
         <h2 class="text-black font-bold text-3xl text-center"> {{ __('why_us_best_choice') }} </h2>
         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-16">
@@ -69,7 +69,7 @@
 </div>
 
 <!-- our works  -->
-<div class="mt-[75px]">
+<div class="mt-[75px] fade-element">
     <div class="flex flex-col items-center justify-center space-y-8">
         <h2 class="text-black font-bold text-3xl text-center">{{ __('works')}}</h2>
 
@@ -132,38 +132,129 @@
 
 <!-- our services  -->
 <div class="mt-[75px]">
-    <div class="flex flex-col items-center justify-center space-y-20 p-8 py-16 bg-[#333333]">
+    <div class="flex flex-col items-stretch justify-center space-y-20 p-8 py-16 bg-[#333333]">
         <h2 class="text-white font-bold text-3xl text-center">{{ __('public')['services'] }}</h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 gap-y-20 max-w-[1100px]">
-
-            @foreach($services as $service)
-            <div class="relative flex flex-col justify-center items-center  border-2 border-white p-4 rounded-3xl h-[200px] w-full">
-                <div class="absolute -top-[50px] right-10 p-4 rounded-md border-0 border-white bg-[#333333]">
-                    <img src="{{ asset('imgs/image/cert.png') }}" alt="" class="w-[60px]" />
-                </div>
-                <p class="text-white">
+        
+        <div class="md:w-[1200px] md:mx-auto content-center">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 gap-y-20 ">
+                
+                {{--
+                @foreach($services as $service)
+                <div class="relative flex flex-col justify-center items-center  border-2 border-white p-4 rounded-3xl h-[200px] w-full">
+                    <div class="absolute -top-[50px] right-10 p-4 rounded-md border-0 border-white bg-[#333333]">
+                        <img src="{{ asset('imgs/image/cert.png') }}" alt="" class="w-[60px]" />
+                    </div>
+                    <p class="text-white">
+                        @if(app()->getLocale() == 'ar')
+                            <a href="{{ route('services.details' , ['', $service->id , $service->slug_ar ]) }}">
+                            {{ $service->name }}
+                            </a>
+                        @else                        
+                            <a href="{{ route('services.details' , [app()->getLocale(), $service->id ,  $service->slug_en ?? $service->slug_ar ]) }}">
+                            {{ $service->name_en }}
+                            </a>
+                        @endif
+                    </p>
                     @if(app()->getLocale() == 'ar')
-                        <a href="{{ route('services.details' , ['', $service->id , $service->slug_ar ]) }}">
-                        {{ $service->name }}
-                        </a>
-                    @else                        
-                        <a href="{{ route('services.details' , [app()->getLocale(), $service->id ,  $service->slug_en ?? $service->slug_ar ]) }}">
-                        {{ $service->name_en }}
-                        </a>
+                    <a href="{{ route('services.details' , ['', $service->id , $service->slug_ar ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+                    @else
+                    <a href="{{ route('services.details' , [app()->getLocale(), $service->id ,  $service->slug_en ?? $service->slug_ar ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
                     @endif
-                </p>
-                @if(app()->getLocale() == 'ar')
-                <a href="{{ route('services.details' , ['', $service->id , $service->slug_ar ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
-                @else
-                <a href="{{ route('services.details' , [app()->getLocale(), $service->id ,  $service->slug_en ?? $service->slug_ar ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
-                @endif
-            </div>
-            @endforeach
-            
-        </div>
+                </div>
+                @endforeach
+                --}}
 
-        <a href="{{ route('services') }}" class="cta_button">{{ __('public')['all_services'] }}</a>
+                <div class="relative flex flex-col justify-center items-center  border-2 border-white p-4 rounded-3xl h-[200px] w-full">
+                    <div class="absolute -top-[50px] right-10 p-4 rounded-md border-0 border-white bg-[#333333]">
+                        <img src="{{ asset('imgs/image/cert.png') }}" alt="" class="w-[60px]" />
+                    </div>
+                    <p class="text-white">
+                        @if(app()->getLocale() == 'ar')
+                            <a href="{{ route('services.details' , ['', 1 , __('service1_slug') ]) }}">
+                            {{ __('service1') }}
+                            </a>
+                        @else                        
+                            <a href="{{ route('services.details' , [app()->getLocale(), 1 ,   __('service1_slug') ]) }}">
+                            {{ __('service1') }}
+                            </a>
+                        @endif
+                    </p>
+                    @if(app()->getLocale() == 'ar')
+                    <a href="{{ route('services.details' , ['', 1 , __('service1_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+                    @else
+                    <a href="{{ route('services.details' , [app()->getLocale(), 1 , __('service1_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+                    @endif
+                </div>
+
+                <div class="relative flex flex-col justify-center items-center  border-2 border-white p-4 rounded-3xl h-[200px] w-full">
+                    <div class="absolute -top-[50px] right-10 p-4 rounded-md border-0 border-white bg-[#333333]">
+                        <img src="{{ asset('imgs/image/cert.png') }}" alt="" class="w-[60px]" />
+                    </div>
+                    <p class="text-white">
+                        @if(app()->getLocale() == 'ar')
+                            <a href="{{ route('services.details' , ['', 21 ,  __('service2_slug') ]) }}">
+                            {{ __('service2') }}
+                            </a>
+                        @else                        
+                            <a href="{{ route('services.details' , [app()->getLocale(), 21 ,   __('service2_slug') ]) }}">
+                            {{ __('service2') }}
+                            </a>
+                        @endif
+                    </p>
+                    @if(app()->getLocale() == 'ar')
+                    <a href="{{ route('services.details' , ['', 21 ,  __('service2_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+                    @else
+                    <a href="{{ route('services.details' , [app()->getLocale(), 21 ,  __('service2_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+                    @endif
+                </div>
+
+                <div class="relative flex flex-col justify-center items-center  border-2 border-white p-4 rounded-3xl h-[200px] w-full">
+                    <div class="absolute -top-[50px] right-10 p-4 rounded-md border-0 border-white bg-[#333333]">
+                        <img src="{{ asset('imgs/image/cert.png') }}" alt="" class="w-[60px]" />
+                    </div>
+                    <p class="text-white">
+                        @if(app()->getLocale() == 'ar')
+                            <a href="{{ route('services.details' , ['', 1 ,  __('service3_slug') ]) }}">
+                            {{ __('service3') }}
+                            </a>
+                        @else                        
+                            <a href="{{ route('services.details' , [app()->getLocale(), 1 ,   __('service3_slug') ]) }}">
+                            {{ __('service3') }}
+                            </a>
+                        @endif
+                    </p>
+                    @if(app()->getLocale() == 'ar')
+                    <a href="{{ route('services.details' , ['', 1 ,  __('service3_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+                    @else
+                    <a href="{{ route('services.details' , [app()->getLocale(), 1 ,  __('service3_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+                    @endif
+                </div>
+
+                <div class="relative flex flex-col justify-center items-center  border-2 border-white p-4 rounded-3xl h-[200px] w-full">
+                    <div class="absolute -top-[50px] right-10 p-4 rounded-md border-0 border-white bg-[#333333]">
+                        <img src="{{ asset('imgs/image/cert.png') }}" alt="" class="w-[60px]" />
+                    </div>
+                    <p class="text-white">
+                        @if(app()->getLocale() == 'ar')
+                            <a href="{{ route('services.details' , ['', 8 , __('service4_slug') ]) }}">
+                            {{ __('service4') }}
+                            </a>
+                        @else                        
+                            <a href="{{ route('services.details' , [app()->getLocale(), 8 ,  __('service4_slug') ]) }}">
+                            {{ __('service4') }}
+                            </a>
+                        @endif
+                    </p>
+                    @if(app()->getLocale() == 'ar')
+                    <a href="{{ route('services.details' , ['', 8 , __('service4_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+                    @else
+                    <a href="{{ route('services.details' , [app()->getLocale(), 8 , __('service4_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+                    @endif
+                </div>
+                
+            </div>
+        </div>
+        <a href="{{ route('services') }}" class="cta_button self-center">{{ __('public')['all_services'] }}</a>
         
     </div>
 </div>
@@ -177,7 +268,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Testimonial 1 -->
-                <div class="bg-white shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
+                <div class="bg-white fade-element shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
                     <div class="flex items-center mb-4">
                         <!-- <img src="{{ asset('imgs/user1.png') }}" alt="Client 1" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-400"> -->
                         <div>
@@ -205,7 +296,7 @@
                     <p class="text-gray-700">الشركة قدمت لنا استشارات هندسية على أعلى مستوى. بفضل رشيد العجيان، تمكنا من إتمام مشروعنا بنجاح وفي الوقت المحدد.</p>
                 </div>
                 <!-- Testimonial 2 -->
-                <div class="bg-white shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
+                <div class="bg-white fade-element shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
                     <div class="flex items-center mb-4">
                         <!-- <img src="{{ asset('imgs/user2.png') }}" alt="Client 2" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-400"> -->
                         <div>
@@ -233,7 +324,7 @@
                     <p class="text-gray-700">تجربتي مع رشيد العجيان كانت ممتازة. فريق العمل محترف ومتفهم، ويقدم حلولاً مبتكرة تناسب احتياجاتنا.</p>
                 </div>
                 <!-- Testimonial 3 -->
-                <div class="bg-white shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
+                <div class="bg-white fade-element shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
                     <div class="flex items-center mb-4">
                         <!-- <img src="{{ asset('imgs/user3.png') }}" alt="Client 3" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-400"> -->
                         <div>
@@ -261,7 +352,7 @@
                     <p class="text-gray-700">خدمات رشيد العجيان كانت متميزة. حصلنا على استشارات مهنية وفعّالة، مما ساعدنا في تحسين أداء مشاريعنا بشكل كبير.</p>
                 </div>
                 <!-- Testimonial 4 -->
-                <div class="bg-white shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
+                <div class="bg-white fade-element shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
                     <div class="flex items-center mb-4">
                         <!-- <img src="{{ asset('imgs/user4.png') }}" alt="Client 4" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-400"> -->
                         <div>
@@ -289,7 +380,7 @@
                     <p class="text-gray-700">التعاون مع رشيد العجيان كان خطوة ممتازة. فريقهم يملك الخبرة والكفاءة اللازمة لتقديم استشارات قيّمة وفعّالة.</p>
                 </div>
                 <!-- Testimonial 5 -->
-                <div class="bg-white shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
+                <div class="bg-white fade-element shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
                     <div class="flex items-center mb-4">
                         <!-- <img src="{{ asset('imgs/user5.png') }}" alt="Client 5" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-400"> -->
                         <div>

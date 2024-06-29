@@ -19,6 +19,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:mx-8">
         @foreach($works as $work)
 
+        {{--
         <div class="relative p-0 shadow-sm shadow-gray-100 border rounded-3xl py-0 overflow-hidden h-[300px]">
             <div class="relative flex flex-col items-center justify-stretch h-full p-0 pb-4">
                 <div class="w-full">
@@ -40,7 +41,37 @@
                 <a href="{{ route('projects.details' , [app()->getLocale(), $work->id] ) }}" class="absolute bottom-4 cta_button mt-4">{{__('work_details')}}</a>
                 @endif
             </div>
-        </div>        
+        </div>  
+        --}}   
+        
+        <div class="flex flex-col items-center justify-stretch rounded-3xl overflow-hidden bg-white h-[340px] p-0 shadow-xl w-full  transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110  duration-300">
+            @if(app()->getLocale() == 'ar')
+            <a href="{{ route('projects.details' , ['',$work->id] ) }}" class="object-cover w-full">
+                <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" class="object-cover h-[150px] w-full" alt="">
+            </a>
+            <a href="{{ route('projects.details' , ['',$work->id] ) }}">
+                <div class="flex flex-col justify-center items-center p-3 space-y-3">
+                    <h3 class="font-bold text-center text-xl"> {{ $work->title }} </h3>
+                    <p class="font-normal text-lg text-center text-gray-500"> {{ strip_tags( Str::limit( $work->description , 55) ) }} </p>
+                </div>
+            </a>
+            @else
+            <a href="{{ route('projects.details' , [app()->getLocale(), $work->id] ) }}" class="object-cover w-full">
+                <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" class="object-cover h-[150px] w-full" alt="">
+            </a>
+            <a href="{{ route('projects.details' , [app()->getLocale(), $work->id] ) }}">
+                <div class="flex flex-col items-center p-3 space-y-3">
+                    <h3 class="font-bold text-center text-xl"> {{ $work->title_en ?? $work->title }} </h3>
+                    <p class="font-normal text-lg text-center text-gray-500"> {{ strip_tags( Str::limit( $work->description_en ?? $work->description , 55) ) }} </p>
+                </div>
+            </a>
+            @endif
+            @if(app()->getLocale() == 'ar')
+            <a href="{{ route('projects.details' , ['',$work->id] ) }}" class="mb-4 cta_button mt-4">{{__('work_details')}}</a>
+            @else
+            <a href="{{ route('projects.details' , [app()->getLocale(), $work->id] ) }}" class="mb-4 cta_button mt-4">{{__('work_details')}}</a>
+            @endif
+        </div>
 
         @endforeach
     </div>

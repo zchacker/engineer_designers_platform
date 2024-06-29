@@ -66,6 +66,8 @@ Route::post('/forgotpassword/action', [\App\Http\Controllers\AuthController::cla
 Route::get('/resetpassword/{id}/{token}', [\App\Http\Controllers\AuthController::class, 'reset_password'])->name('reset.password.link');
 Route::post('/set_password', [\App\Http\Controllers\AuthController::class, 'rest_password_new'])->name('set.new.password');
 
+Route::get('/search', [\App\Http\Controllers\Public\PagesController::class, 'search'])->name('search');
+
 Route::post('/post/{post}/like', [\App\Http\Controllers\Public\BlogController::class, 'like'])->name('post.like');
 Route::post('/post/{post}/unlike', [\App\Http\Controllers\Public\BlogController::class, 'unlike'])->name('post.unlike');
 
@@ -117,6 +119,7 @@ Route::group(['prefix' => '{locale?}', 'where' => ['locale' => 'en|ar']], functi
     Route::get('/resetpassword/{id}/{token}', [\App\Http\Controllers\AuthController::class, 'reset_password'])->name('reset.password.link');
     Route::post('/set_password', [\App\Http\Controllers\AuthController::class, 'rest_password_new'])->name('set.new.password');
         
+    Route::get('/search', [\App\Http\Controllers\Public\PagesController::class, 'search'])->name('search');
 
     Route::get('/privacy', function () {        
         $post = PostsModel::where('slug', 'privacy')->first();

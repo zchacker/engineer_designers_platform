@@ -1,9 +1,9 @@
 
 
     @if(app()->getLocale() == 'ar')
-    <div class="fixed right-6 bottom-16 md:bottom-8  z-50">
+    <div class="fixed right-6 bottom-16 md:bottom-8  z-50 animate-bounce">
     @else
-    <div class="fixed left-2 bottom-16 md:bottom-8  z-50">
+    <div class="fixed left-2 bottom-16 md:bottom-8  z-50 animate-bounce">
     @endif
         <a href="https://wa.me/966536385896" target="_blank" class="flex gap-4 items-center">
             <img src="{{ asset('imgs/image/whatsapp.webp') }}" alt="" class="w-14 h-14">
@@ -71,23 +71,23 @@
                 <ul class="flex flex-col text-start gap-1">
                     @if(app()->getLocale() == 'ar')
                     <li class="font-normal text-white transition ease-in-out duration-300 mb-2 lg:mb-0">
-                        <a href="{{ route('about') }}">{{ __('public')['about'] }}</a>
+                        <a href="{{ route('services.details' , [22 , 'مكتب-مساحة']) }}">مكتب مساحة معتمد</a>
                     </li>
                     <li class="font-normal text-white transition ease-in-out duration-300 mb-2 lg:mb-0">
-                        <a href="{{ route('services') }}">{{ __('public')['services'] }}</a>
+                        <a href="{{ route('services.details' , [21 , 'شهادة-اتمام-البناء']) }}">شهادة اتمام البناء</a>
                     </li>
                     <li class="font-normal text-white transition ease-in-out duration-300 mb-2 lg:mb-0">
-                        <a href="{{ route('projects') }}">{{ __('public')['projects'] }}</a>
+                        <a href="{{ route('services.details' , [12 , 'شهادة-امتثال']) }}">شهادة امتثال</a>
                     </li>
                     @else
                     <li class="font-normal text-white transition ease-in-out duration-300 mb-2 lg:mb-0">
-                        <a href="{{ route('about', app()->getLocale()) }}">{{ __('public')['about'] }}</a>
+                        <a href="{{ route('services.details' , [22 , 'Certified-Cadastral-Office']) }}">Certified Cadastral Office</a>
                     </li>
                     <li class="font-normal text-white transition ease-in-out duration-300 mb-2 lg:mb-0">
-                        <a href="{{ route('services', app()->getLocale()) }}">{{ __('public')['services'] }}</a>
+                        <a href="{{ route('services.details' , [21 , 'Building-Completion-Certificate']) }}">Building Completion Certificate</a>
                     </li>
                     <li class="font-normal text-white transition ease-in-out duration-300 mb-2 lg:mb-0">
-                        <a href="{{ route('projects', app()->getLocale()) }}">{{ __('public')['projects'] }}</a>
+                        <a href="{{ route('services.details' , [12 , 'compliance-certification']) }}">compliance certification</a>
                     </li>
                     @endif
                 </ul>
@@ -169,8 +169,11 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const searchButton = document.getElementById('searchButton');
+            const searchButtonMobile = document.getElementById('searchButtonMobile');
+            
             const searchInputContainer = document.getElementById('searchInputContainer');
-
+            const searchInputContainerMobile = document.getElementById('searchInputContainerMobile');
+            
             searchButton.addEventListener('click', function(event) {
                 searchInputContainer.classList.toggle('hidden');
                 searchInputContainer.querySelector('input').focus();
@@ -180,6 +183,19 @@
             document.addEventListener('click', function(event) {
                 if (!searchInputContainer.contains(event.target) && !searchButton.contains(event.target)) {
                     searchInputContainer.classList.add('hidden');
+                }
+            });
+
+
+            searchButtonMobile.addEventListener('click', function(event) {
+                searchInputContainerMobile.classList.toggle('hidden');
+                searchInputContainerMobile.querySelector('input').focus();
+                event.stopPropagation();
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!searchInputContainerMobile.contains(event.target) && !searchButtonMobile.contains(event.target)) {
+                    searchInputContainerMobile.classList.add('hidden');
                 }
             });
         });

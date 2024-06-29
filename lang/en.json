@@ -363,7 +363,7 @@
         "contact_with_more_than_engineer": "You can communicate with more than one engineer at the same time",
         "all_services": "Browse All Services"
     },
-    "copyright": "All rights reserved © 2023 Rasheed Al-Ojian Company for Engineering Studies and Consultations is a professional company",
+    "copyright": "All rights reserved © 2024 Rasheed Al-Ojian Company for Engineering Studies and Consultations is a professional company",
     "cr_no": "Commercial Registration No.: 1010877829",
     "tax_no": "Tax number: 311953897400003",
     "service_cta_button": "Get a free consultation now",
@@ -381,5 +381,16 @@
     "read":"Read",
     "Like":"Like",
     "Unlike":"Unlike",
-    "pages":"Important Pages"   
+    "pages":"Important Pages",
+    "search":"Search",
+    "search_results":"Search Results",
+    "not_found":"Not found",
+    "service1": "Sorting real estate units",
+    "service1_slug": "Sorting-Real Estate-Units",
+    "service2": "building permit",
+    "service2_slug": "Building Permit",
+    "service3": "Update Instruments",
+    "service3_slug": "update-instruments",
+    "service4": "Surveying works",
+    "service4_slug": "Cadastral-Business"
 }

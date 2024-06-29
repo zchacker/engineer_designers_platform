@@ -70,6 +70,9 @@
             /* Gold color */
         }
 
+        .fade-element {
+           opacity: 0; /* Initially hidden */
+        }
         /* .hidden { display: none; } */
     </style>
 </head>
@@ -79,6 +82,27 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KVHWK9BT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const fadeElements = document.querySelectorAll('.fade-element');
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fadeIn');
+                observer.unobserve(entry.target);
+            }
+            });
+        }, {
+            threshold: 0.1 // Adjust this value to trigger the animation earlier or later
+        });
+
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+        });
+    </script>
+
     <!-- header  -->
     <section class="bg-black z-20">
         <div class="container max-w-full mx-auto px-4">
@@ -86,7 +110,7 @@
             <nav class="flex-wrap md:flex items-center justify-between py-4 z-50" x-data="{navbarOpen:false}" :class="{'block':navbarOpen}">
 
                 <!-- this for mobile only  -->
-                <div class="flex items-center justify-center mb-0 lg:mb-0">
+                <div class="flex relative items-center justify-center mb-0 lg:mb-0">
                     
                     @if(app()->getLocale() != 'ar')
                     <button class="lg:hidden w-10 h-10 mr-auto flex items-center justify-center stroke-white text-white border border-white rounded-md" @click="navbarOpen = !navbarOpen">
@@ -102,12 +126,20 @@
 
                     <div class="flex justify-end items-center space-x-2 w-[33%]">
 
-                        <div class="relative md:hidden">
-                            <button id="searchButton" class="p-2">
+                        <div class=" md:hidden">
+                            <button id="searchButtonMobile" class="p-2">
                                 <img src="{{ asset('imgs/image/search.png') }}" class="h-6" alt="">
                             </button>
-                            <div id="searchInputContainer" class="hidden absolute top-full left-0 mt-2 w-64 bg-white shadow-lg p-2 rounded z-50">
-                                <input id="searchInput" type="text" class="w-full p-2 border border-gray-300 rounded" placeholder="Search...">
+                            <div id="searchInputContainerMobile" class="hidden absolute top-[70px] left-0 mt-2 w-full mx-auto bg-transparent shadow-lg p-0 rounded z-50">
+                                <!-- <input id="searchInput" type="text" class="w-full p-2 border border-gray-300 rounded" placeholder="Search..."> -->
+                                <form action="{{ route('search') }}" method="GET" >
+                                <div class="flex items-stretch w-full">
+                                    <input id="searchInput" type="text" name="query" class="w-full p-3 border border-gray-300 rounded-s-md" placeholder="{{__('search')}}...">
+                                    <button type="submit" class="bg-[#4b4b4b] p-2 px-4 rounded-e-md">
+                                        <img src="{{ asset('imgs/image/search.png') }}" class="w-6 " alt="">
+                                    </button>
+                                </div>
+                            </form>
                             </div>
                         </div>
 
@@ -244,12 +276,19 @@
 
                 <div class="flex items-center">
 
-                    <div class="relative hidden md:block">
+                    <div class="relative  hidden md:flex flex-row items-center justify-center">
                         <button id="searchButton" class="p-2">
-                            <img src="{{ asset('imgs/image/search.png') }}" class="h-8" alt="">
+                            <img src="{{ asset('imgs/image/search.png') }}" class="h-6" alt="">
                         </button>
-                        <div id="searchInputContainer" class="hidden absolute top-full left-0 mt-2 w-64 bg-white shadow-lg p-2 rounded z-50">
-                            <input id="searchInput" type="text" class="w-full p-2 border border-gray-300 rounded" placeholder="Search...">
+                        <div id="searchInputContainer" class="hidden top-full left-0 mt-2 w-64 bg-transparent shadow-lg p-1 rounded z-50">
+                            <form action="{{ route('search') }}" method="GET" >
+                                <div class="flex items-stretch w-full">
+                                    <input id="searchInput" type="text" name="query" class="w-full p-1 border border-gray-300 rounded-s-md" placeholder="{{__('search')}}...">
+                                    <button type="submit" class="bg-[#4b4b4b] p-2 rounded-e-md">
+                                        <img src="{{ asset('imgs/image/search.png') }}" class="w-6 " alt="">
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
 

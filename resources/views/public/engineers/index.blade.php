@@ -49,7 +49,7 @@
             </div>
             <img src="{{ $engineer->avatar->image->fileName ?? asset('imgs/user.png') }}" class="w-[100px] h-[100px] mx-auto p-2 rounded-full object-cover border-0 border-blue-300" alt="{{ $engineer->name }}">
             <div class="flex flex-col justify-start items-center">
-                @if(app()->getLocale() == 'ar')
+                    @if(app()->getLocale() == 'ar')
                     <a href="{{ route('engineers.details', ['', $engineer->id] ) }}">
                         <h3 class="font-bold text-lg">{{ Str::limit( $engineer->name, 25 ) }}</h3>
                     </a>

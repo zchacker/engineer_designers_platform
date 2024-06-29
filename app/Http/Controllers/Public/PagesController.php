@@ -216,4 +216,38 @@ class PagesController extends Controller
             return redirect()->back()->withErrors($e->validator->errors())->with('scrollTo', 'contact');
         }
     }    
+
+    public function search(Request $request)
+    {
+        
+        $posts = collect();
+        $services = collect();
+        $engineers = collect();
+
+        $query = $request->input('query');
+        if($query != null)
+        {
+            $services = ServicesModel::where('name', 'LIKE', "%{$query}%")
+            ->orWhere('name_en', 'LIKE', "%{$query}%")
+            ->get();
+            
+
+            $posts = PostsModel::where('title', 'LIKE', "%{$query}%")
+            ->orWhere('body', 'LIKE', "%{$query}%")
+            ->where('type', '!=', 'page')
+            ->get();
+
+            $engineers = UsersModel::where('name', 'LIKE', "%{$query}%")
+            ->orWhere('name_en', 'LIKE', "%{$query}%")
+            ->where('user_type' , 'engineer')
+            ->get();
+
+        }   
+
+        $page = new \stdClass();
+        $page->title = "بحث عن : $query";
+        $page->description = "نتائج البحث عن : $query";
+        
+        return view('public.search', compact('posts', 'query', 'services', 'engineers', 'page'));
+    }
 }

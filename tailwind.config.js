@@ -21,7 +21,16 @@ export default {
         'data-dash' : '#E3F2FC',
         'data-dash-items': '#F3D864',
         'normal-btn' : '#49E3D6'      
-      }
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+      },
+      animation: {
+        fadeIn: 'fadeIn 2s ease-in-out forwards',
+      },
 
     },
   },
