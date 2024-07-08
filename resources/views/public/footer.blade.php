@@ -92,19 +92,30 @@
                     @endif
                 </ul>
             </div>
-            <div class="flex flex-col justify-start items-start space-y-2">
+            <div class="flex flex-col justify-start items-start ">
                 <h4 class="text-xl font-bold">{{ __('public')['contact'] }}</h4>                
-                <div class="flex gap-4 justify-start">
+                <div class="flex gap-4 justify-start mt-4">
                     <img src="{{ asset('imgs/image/footer-call.png') }}" alt="" class="w-[30px]">
                     <a href="tel:+966536385896">0536385896</a>
                 </div>
-                <div class="flex gap-4 justify-start">
+                <div class="flex gap-4 justify-start mt-4">
                     <img src="{{ asset('imgs/image/telephone-footer.png') }}" alt="" class="w-[30px]">
                     <a href="tel:+966112666766">0112666766</a>
                 </div>
-                <div class="flex gap-4 justify-start">
+                <div class="flex gap-4 justify-start mt-4">
                     <img src="{{ asset('imgs/image/email-footer.png') }}" alt="" class="w-[30px]">
                     <a href="mailto:info@alojian.com">info@alojian.com</a>
+                </div>
+                <div class="flex gap-4 justify-start mt-8">
+                    <a href="https://www.instagram.com/rclol.alojian" target="_blank">
+                        <img src="{{ asset('imgs/image/instagram.png') }}" alt="حساب رشيد العجيان على انستغرام" >
+                    </a>
+                    <a href="https://www.youtube.com/@RusheedAlojian" target="_blank">
+                        <img src="{{ asset('imgs/image/youtube.png') }}" alt="حساب شركة رشيد العجيان على يوتيوب">
+                    </a>
+                    <a href="https://www.tiktok.com/@rusheedalojian" target="_blank">
+                        <img src="{{ asset('imgs/image/tiktok.png') }}" alt="حساب شركة رشيد العجيان على تكتوك">
+                    </a>
                 </div>
             </div>
         </div>

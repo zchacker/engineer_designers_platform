@@ -3,7 +3,7 @@
     <div class="bg-[#333333] grid grid-cols-1 md:grid-cols-2 p-5 md:p-10 pb-16 md:rounded-3xl max-w-[1100px] mx-auto gap-y-6">
         <div class="flex flex-col items-start justify-start space-y-8">
             <h2 class="font-bold text-3xl text-white">{{ __('public')['contact_us_today'] }}</h2>
-            <div class="flex flex-col space-y-4">  
+            <div class="flex flex-col space-y-6">  
                 <div>
                     <h4 class="text-white font-bold text-lg">{{ __('phone') }}</h4>
                     <a href="tel:+966536385896" class="flex space-x-4 gap-1 text-white">
@@ -26,7 +26,20 @@
                         <img src="{{ asset('imgs/image/mail.png ') }}" alt="" class="object-contain w-6">
                         <span>info@alojian.com</span>
                     </a>
-                </div>     
+                </div>  
+                
+                <div class="flex gap-4 justify-start mt-8">
+                    <a href="https://www.instagram.com/rclol.alojian" target="_blank">
+                        <img src="{{ asset('imgs/image/instagram.png') }}" alt="حساب رشيد العجيان على انستغرام" >
+                    </a>
+                    <a href="https://www.youtube.com/@RusheedAlojian" target="_blank">
+                        <img src="{{ asset('imgs/image/youtube.png') }}" alt="حساب شركة رشيد العجيان على يوتيوب">
+                    </a>
+                    <a href="https://www.tiktok.com/@rusheedalojian" target="_blank">
+                        <img src="{{ asset('imgs/image/tiktok.png') }}" alt="حساب شركة رشيد العجيان على تكتوك">
+                    </a>
+                </div>
+
             </div>
         </div>
         <div class="bg-white rounded-xl px-4">
