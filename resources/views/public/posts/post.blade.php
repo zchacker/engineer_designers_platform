@@ -35,7 +35,7 @@
 
     </div>
 
-    <div class="flex justify-start w-[800px] px-4 gap-2">
+    <div class="flex justify-start md:w-[800px] w-full px-4 gap-2 ">
         <div class="flex gap-2">
             <img src="{{ asset('imgs/image/thumbsup.png') }}" alt="" class="h-[20px]">
             <button id="like-button" data-post-id="{{ $post->id }}" class="text-blue-600 hover:text-blue-500">

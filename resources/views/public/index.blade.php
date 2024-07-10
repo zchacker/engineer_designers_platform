@@ -214,11 +214,11 @@
                     </div>
                     <p class="text-white">
                         @if(app()->getLocale() == 'ar')
-                            <a href="{{ route('services.details' , ['', 1 ,  __('service3_slug') ]) }}">
+                            <a href="{{ route('services.details' , ['', 2 ,  __('service3_slug') ]) }}">
                             {{ __('service3') }}
                             </a>
                         @else                        
-                            <a href="{{ route('services.details' , [app()->getLocale(), 1 ,   __('service3_slug') ]) }}">
+                            <a href="{{ route('services.details' , [app()->getLocale(), 2 ,   __('service3_slug') ]) }}">
                             {{ __('service3') }}
                             </a>
                         @endif
