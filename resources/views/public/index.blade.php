@@ -8,7 +8,7 @@
         <div class="flex flex-col items-center justify-end">
             <h1 class="text-center font-bold text-2xl md:text-2xl lg:text-3xl leading-tight text-white mb-6">{!! __('public')['hero_msg'] !!}</h1>
             <p class="text-center font-normal text-xl text-white leading-relaxed mb-12">{{__('public')['sub_hero']}}</p>
-            <a href="{{ route('register.user') }}" class="cta_button">{{__('public')['register_now']}}</a>
+            <a href="https://wa.me/966536385896" class="cta_button">{{__('service_cta_button')}}</a>
         </div>
         <div class="absolute -bottom-[300px] md:-bottom-[420px] w-[310px] md:w-[565px] rounded-xl border-2 overflow-hidden p-0 shadow-lg">
             <video id="my-video" class="video-js vjs-fluid vjs-16-9" controls preload="auto" width="640" height="360" data-setup="{}">
@@ -34,7 +34,7 @@
                     <img src="{{ asset('imgs/image/arch4.jpg') }}" class="w-12 h-12" alt="">
                 </div>
                 <h4 class="font-bold text-xl">
-                    الإحترافية
+                    {{ __('professionalism') }}
                 </h4>
             </div>
 
@@ -43,7 +43,7 @@
                     <img src="{{ asset('imgs/image/arch3.jpg') }}" class="w-12 h-12" alt="">
                 </div>
                 <h4 class="font-bold text-xl">
-                    الابداع
+                    {{ __('creativity') }}
                 </h4>
             </div>
 
@@ -52,7 +52,7 @@
                     <img src="{{ asset('imgs/image/arch2.jpg') }}" class="w-12 h-12" alt="">
                 </div>
                 <h4 class="font-bold text-xl">
-                    الجودة
+                    {{ __('qulity') }}
                 </h4>
             </div>
 
@@ -61,7 +61,7 @@
                     <img src="{{ asset('imgs/image/arch1.jpg') }}" class="w-12 h-12" alt="">
                 </div>
                 <h4 class="font-bold text-xl">
-                    الدقة
+                    {{ __('accuracy') }}
                 </h4>
             </div>
         </div>
@@ -272,8 +272,8 @@
                     <div class="flex items-center mb-4">
                         <!-- <img src="{{ asset('imgs/user1.png') }}" alt="Client 1" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-400"> -->
                         <div>
-                            <h3 class="text-lg font-bold">أحمد الخالدي</h3>
-                            <p class="text-gray-500">مدير مشروع</p>
+                            <h3 class="text-lg font-bold">{{ __('testimonial1_name') }}</h3>
+                            <p class="text-gray-500"> {{ __('testimonial1_position') }} </p>
                             <div class="flex">
                                 <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
@@ -293,15 +293,15 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-gray-700">الشركة قدمت لنا استشارات هندسية على أعلى مستوى. بفضل رشيد العجيان، تمكنا من إتمام مشروعنا بنجاح وفي الوقت المحدد.</p>
+                    <p class="text-gray-700">{{ __('testimonial1') }}</p>
                 </div>
                 <!-- Testimonial 2 -->
                 <div class="bg-white fade-element shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
                     <div class="flex items-center mb-4">
                         <!-- <img src="{{ asset('imgs/user2.png') }}" alt="Client 2" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-400"> -->
                         <div>
-                            <h3 class="text-lg font-bold">سارة العلي</h3>
-                            <p class="text-gray-500">مهندسة معمارية</p>
+                            <h3 class="text-lg font-bold"> {{ __('testimonial2_name') }} </h3>
+                            <p class="text-gray-500"> {{ __('testimonial2_position') }} </p>
                             <div class="flex">
                                 <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
@@ -321,15 +321,15 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-gray-700">تجربتي مع رشيد العجيان كانت ممتازة. فريق العمل محترف ومتفهم، ويقدم حلولاً مبتكرة تناسب احتياجاتنا.</p>
+                    <p class="text-gray-700">{{ __('testimonial2') }}</p>
                 </div>
                 <!-- Testimonial 3 -->
                 <div class="bg-white fade-element shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
                     <div class="flex items-center mb-4">
                         <!-- <img src="{{ asset('imgs/user3.png') }}" alt="Client 3" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-400"> -->
                         <div>
-                            <h3 class="text-lg font-bold">محمد الفهيد</h3>
-                            <p class="text-gray-500">مدير تنفيذي</p>
+                            <h3 class="text-lg font-bold"> {{ __('testimonial3_name') }}  </h3>
+                            <p class="text-gray-500"> {{ __('testimonial3_position') }}  </p>
                             <div class="flex">
                                 <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
@@ -349,15 +349,15 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-gray-700">خدمات رشيد العجيان كانت متميزة. حصلنا على استشارات مهنية وفعّالة، مما ساعدنا في تحسين أداء مشاريعنا بشكل كبير.</p>
+                    <p class="text-gray-700"> {{ __('testimonial3') }} </p>
                 </div>
                 <!-- Testimonial 4 -->
                 <div class="bg-white fade-element shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
                     <div class="flex items-center mb-4">
                         <!-- <img src="{{ asset('imgs/user4.png') }}" alt="Client 4" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-400"> -->
                         <div>
-                            <h3 class="text-lg font-bold">ليلى البدر</h3>
-                            <p class="text-gray-500">رئيسة قسم التصميم</p>
+                            <h3 class="text-lg font-bold"> {{ __('testimonial4_name') }}  </h3>
+                            <p class="text-gray-500"> {{ __('testimonial4_position') }} </p>
                             <div class="flex">
                                 <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
@@ -377,15 +377,15 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-gray-700">التعاون مع رشيد العجيان كان خطوة ممتازة. فريقهم يملك الخبرة والكفاءة اللازمة لتقديم استشارات قيّمة وفعّالة.</p>
+                    <p class="text-gray-700"> {{ __('testimonial4') }} </p>
                 </div>
                 <!-- Testimonial 5 -->
                 <div class="bg-white fade-element shadow-lg rounded-lg p-6 transform hover:-translate-y-2 transition-transform duration-300">
                     <div class="flex items-center mb-4">
                         <!-- <img src="{{ asset('imgs/user5.png') }}" alt="Client 5" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-400"> -->
                         <div>
-                            <h3 class="text-lg font-bold">ناصر العتيبي</h3>
-                            <p class="text-gray-500">مستثمر</p>
+                            <h3 class="text-lg font-bold"> {{ __('testimonial5_name') }}  </h3>
+                            <p class="text-gray-500"> {{ __('testimonial5_position') }} </p>
                             <div class="flex">
                                 <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
@@ -405,7 +405,7 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-gray-700">رشيد العجيان قدمت لنا استشارات قيمة ساهمت في نجاح مشاريعنا الاستثمارية. نوصي بهم بشدة.</p>
+                    <p class="text-gray-700">{{ __('testimonial5') }}</p>
                 </div>
             </div>
 

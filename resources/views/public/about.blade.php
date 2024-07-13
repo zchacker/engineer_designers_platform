@@ -7,7 +7,7 @@
             <p>
                 {!! __('about_message') !!}
             </p>
-            <a href="" class="cta_button">{{ __('service_cta_button') }}</a>
+            <a href="https://wa.me/966536385896" class="cta_button">{{ __('service_cta_button') }}</a>
         </div>
     </div>
 
