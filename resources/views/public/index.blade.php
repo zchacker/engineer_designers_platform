@@ -10,9 +10,9 @@
             <p class="text-center font-normal text-xl text-white leading-relaxed mb-12">{{__('public')['sub_hero']}}</p>
             <a href="https://wa.me/966536385896" class="cta_button">{{__('service_cta_button')}}</a>
         </div>
-        <div class="absolute -bottom-[300px] md:-bottom-[420px] w-[310px] md:w-[565px] rounded-xl border-2 overflow-hidden p-0 shadow-lg">
-            <video id="my-video" class="video-js vjs-fluid vjs-16-9" controls preload="auto" width="640" height="360" data-setup="{}">
-                <source src="https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/videos/rclol3.mp4" type="video/mp4">
+        <div class="absolute -bottom-[600px] md:-bottom-[720px] w-[310px] md:w-[365px] rounded-xl border-2 overflow-hidden p-0 shadow-lg">
+            <video id="my-video" class="video-js vjs-fluid vjs-9-6" controls preload="auto" width="640" height="360" data-setup="{}">
+                <source src="https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/videos/استشارات-هندسية.mp4" type="video/mp4">
                 <p class="vjs-no-js">
                     To view this video please enable JavaScript, and consider upgrading to a
                     web browser that
@@ -24,7 +24,7 @@
 </div>
 
 <!-- benefits  -->
-<div class="mt-[42%] md:mt-[15%] fade-element">
+<div class="mt-[430px] md:mt-[500px] fade-element">
     <div class="flex flex-col items-center justify-center space-y-8">
         <h2 class="text-black font-bold text-3xl text-center"> {{ __('why_us_best_choice') }} </h2>
         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-16">
@@ -99,7 +99,7 @@
                                 <p class="font-normal text-lg text-center text-gray-500"> {{ strip_tags( Str::limit( $work->description_en ?? $work->description , 55) ) }} </p>
                             </div>
                         </a>
-                        @endif 
+                        @endif
                     </div>
                 </div>
                 @endforeach
@@ -108,155 +108,155 @@
                     <div class="flex flex-col items-end justify-start rounded-3xl overflow-hidden bg-white h-[300px] p-0 shadow-xl w-full max-w-xs">
                         <a href="#" class="object-cover w-full">
                             <img src="{{ asset('imgs/image/gallery-5.png') }}" class="object-cover h-[150px] w-full" alt="">
-                        </a>
-                        <a href="#">
-                            <div class="flex flex-col items-center p-3 space-y-3">
-                                <h3 class="font-bold text-center text-xl">تصميم مودرن فله شاليه</h3>
-                                <p class="font-normal text-lg text-center text-gray-500">نقدم خدمات هندسية شاملة تشمل الاستشارات وإدارة المشاريع في مجموعة متنوعة من القطاعات.</p>
-                            </div>
-                        </a>
+                </a>
+                <a href="#">
+                    <div class="flex flex-col items-center p-3 space-y-3">
+                        <h3 class="font-bold text-center text-xl">تصميم مودرن فله شاليه</h3>
+                        <p class="font-normal text-lg text-center text-gray-500">نقدم خدمات هندسية شاملة تشمل الاستشارات وإدارة المشاريع في مجموعة متنوعة من القطاعات.</p>
                     </div>
-                </div>
-                --}}
-                <!-- Add more slides as needed -->
+                </a>
             </div>
-            <!-- Add Pagination -->
-            <div class="swiper-pagination"></div>
-            <!-- Add Navigation -->
-            <!-- <div class="swiper-button-next"></div> -->
-            <!-- <div class="swiper-button-prev"></div> -->
         </div>
-
+        --}}
+        <!-- Add more slides as needed -->
     </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+    <!-- Add Navigation -->
+    <!-- <div class="swiper-button-next"></div> -->
+    <!-- <div class="swiper-button-prev"></div> -->
+</div>
+
+</div>
 </div>
 
 <!-- our services  -->
 <div class="mt-[75px]">
     <div class="flex flex-col items-stretch justify-center space-y-20 p-8 py-16 bg-[#333333]">
         <h2 class="text-white font-bold text-3xl text-center">{{ __('public')['services'] }}</h2>
-        
+
         <div class="md:w-[1200px] md:mx-auto content-center">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 gap-y-20 ">
-                
+
                 {{--
                 @foreach($services as $service)
                 <div class="relative flex flex-col justify-center items-center  border-2 border-white p-4 rounded-3xl h-[200px] w-full">
                     <div class="absolute -top-[50px] right-10 p-4 rounded-md border-0 border-white bg-[#333333]">
                         <img src="{{ asset('imgs/image/cert.png') }}" alt="" class="w-[60px]" />
-                    </div>
-                    <p class="text-white">
-                        @if(app()->getLocale() == 'ar')
-                            <a href="{{ route('services.details' , ['', $service->id , $service->slug_ar ]) }}">
-                            {{ $service->name }}
-                            </a>
-                        @else                        
-                            <a href="{{ route('services.details' , [app()->getLocale(), $service->id ,  $service->slug_en ?? $service->slug_ar ]) }}">
-                            {{ $service->name_en }}
-                            </a>
-                        @endif
-                    </p>
-                    @if(app()->getLocale() == 'ar')
-                    <a href="{{ route('services.details' , ['', $service->id , $service->slug_ar ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
-                    @else
-                    <a href="{{ route('services.details' , [app()->getLocale(), $service->id ,  $service->slug_en ?? $service->slug_ar ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
-                    @endif
-                </div>
-                @endforeach
-                --}}
-
-                <div class="relative flex flex-col justify-center items-center  border-2 border-white p-4 rounded-3xl h-[200px] w-full">
-                    <div class="absolute -top-[50px] right-10 p-4 rounded-md border-0 border-white bg-[#333333]">
-                        <img src="{{ asset('imgs/image/cert.png') }}" alt="" class="w-[60px]" />
-                    </div>
-                    <p class="text-white">
-                        @if(app()->getLocale() == 'ar')
-                            <a href="{{ route('services.details' , ['', 1 , __('service1_slug') ]) }}">
-                            {{ __('service1') }}
-                            </a>
-                        @else                        
-                            <a href="{{ route('services.details' , [app()->getLocale(), 1 ,   __('service1_slug') ]) }}">
-                            {{ __('service1') }}
-                            </a>
-                        @endif
-                    </p>
-                    @if(app()->getLocale() == 'ar')
-                    <a href="{{ route('services.details' , ['', 1 , __('service1_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
-                    @else
-                    <a href="{{ route('services.details' , [app()->getLocale(), 1 , __('service1_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
-                    @endif
-                </div>
-
-                <div class="relative flex flex-col justify-center items-center  border-2 border-white p-4 rounded-3xl h-[200px] w-full">
-                    <div class="absolute -top-[50px] right-10 p-4 rounded-md border-0 border-white bg-[#333333]">
-                        <img src="{{ asset('imgs/image/cert.png') }}" alt="" class="w-[60px]" />
-                    </div>
-                    <p class="text-white">
-                        @if(app()->getLocale() == 'ar')
-                            <a href="{{ route('services.details' , ['', 21 ,  __('service2_slug') ]) }}">
-                            {{ __('service2') }}
-                            </a>
-                        @else                        
-                            <a href="{{ route('services.details' , [app()->getLocale(), 21 ,   __('service2_slug') ]) }}">
-                            {{ __('service2') }}
-                            </a>
-                        @endif
-                    </p>
-                    @if(app()->getLocale() == 'ar')
-                    <a href="{{ route('services.details' , ['', 21 ,  __('service2_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
-                    @else
-                    <a href="{{ route('services.details' , [app()->getLocale(), 21 ,  __('service2_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
-                    @endif
-                </div>
-
-                <div class="relative flex flex-col justify-center items-center  border-2 border-white p-4 rounded-3xl h-[200px] w-full">
-                    <div class="absolute -top-[50px] right-10 p-4 rounded-md border-0 border-white bg-[#333333]">
-                        <img src="{{ asset('imgs/image/cert.png') }}" alt="" class="w-[60px]" />
-                    </div>
-                    <p class="text-white">
-                        @if(app()->getLocale() == 'ar')
-                            <a href="{{ route('services.details' , ['', 2 ,  __('service3_slug') ]) }}">
-                            {{ __('service3') }}
-                            </a>
-                        @else                        
-                            <a href="{{ route('services.details' , [app()->getLocale(), 2 ,   __('service3_slug') ]) }}">
-                            {{ __('service3') }}
-                            </a>
-                        @endif
-                    </p>
-                    @if(app()->getLocale() == 'ar')
-                    <a href="{{ route('services.details' , ['', 1 ,  __('service3_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
-                    @else
-                    <a href="{{ route('services.details' , [app()->getLocale(), 1 ,  __('service3_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
-                    @endif
-                </div>
-
-                <div class="relative flex flex-col justify-center items-center  border-2 border-white p-4 rounded-3xl h-[200px] w-full">
-                    <div class="absolute -top-[50px] right-10 p-4 rounded-md border-0 border-white bg-[#333333]">
-                        <img src="{{ asset('imgs/image/cert.png') }}" alt="" class="w-[60px]" />
-                    </div>
-                    <p class="text-white">
-                        @if(app()->getLocale() == 'ar')
-                            <a href="{{ route('services.details' , ['', 8 , __('service4_slug') ]) }}">
-                            {{ __('service4') }}
-                            </a>
-                        @else                        
-                            <a href="{{ route('services.details' , [app()->getLocale(), 8 ,  __('service4_slug') ]) }}">
-                            {{ __('service4') }}
-                            </a>
-                        @endif
-                    </p>
-                    @if(app()->getLocale() == 'ar')
-                    <a href="{{ route('services.details' , ['', 8 , __('service4_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
-                    @else
-                    <a href="{{ route('services.details' , [app()->getLocale(), 8 , __('service4_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
-                    @endif
-                </div>
-                
             </div>
+            <p class="text-white">
+                @if(app()->getLocale() == 'ar')
+                <a href="{{ route('services.details' , ['', $service->id , $service->slug_ar ]) }}">
+                    {{ $service->name }}
+                </a>
+                @else
+                <a href="{{ route('services.details' , [app()->getLocale(), $service->id ,  $service->slug_en ?? $service->slug_ar ]) }}">
+                    {{ $service->name_en }}
+                </a>
+                @endif
+            </p>
+            @if(app()->getLocale() == 'ar')
+            <a href="{{ route('services.details' , ['', $service->id , $service->slug_ar ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+            @else
+            <a href="{{ route('services.details' , [app()->getLocale(), $service->id ,  $service->slug_en ?? $service->slug_ar ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+            @endif
         </div>
-        <a href="{{ route('services') }}" class="cta_button self-center">{{ __('public')['all_services'] }}</a>
-        
+        @endforeach
+        --}}
+
+        <div class="relative flex flex-col justify-center items-center  border-2 border-white p-4 rounded-3xl h-[200px] w-full">
+            <div class="absolute -top-[50px] right-10 p-4 rounded-md border-0 border-white bg-[#333333]">
+                <img src="{{ asset('imgs/image/cert.png') }}" alt="" class="w-[60px]" />
+            </div>
+            <p class="text-white">
+                @if(app()->getLocale() == 'ar')
+                <a href="{{ route('services.details' , ['', 1 , __('service1_slug') ]) }}">
+                    {{ __('service1') }}
+                </a>
+                @else
+                <a href="{{ route('services.details' , [app()->getLocale(), 1 ,   __('service1_slug') ]) }}">
+                    {{ __('service1') }}
+                </a>
+                @endif
+            </p>
+            @if(app()->getLocale() == 'ar')
+            <a href="{{ route('services.details' , ['', 1 , __('service1_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+            @else
+            <a href="{{ route('services.details' , [app()->getLocale(), 1 , __('service1_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+            @endif
+        </div>
+
+        <div class="relative flex flex-col justify-center items-center  border-2 border-white p-4 rounded-3xl h-[200px] w-full">
+            <div class="absolute -top-[50px] right-10 p-4 rounded-md border-0 border-white bg-[#333333]">
+                <img src="{{ asset('imgs/image/cert.png') }}" alt="" class="w-[60px]" />
+            </div>
+            <p class="text-white">
+                @if(app()->getLocale() == 'ar')
+                <a href="{{ route('services.details' , ['', 21 ,  __('service2_slug') ]) }}">
+                    {{ __('service2') }}
+                </a>
+                @else
+                <a href="{{ route('services.details' , [app()->getLocale(), 21 ,   __('service2_slug') ]) }}">
+                    {{ __('service2') }}
+                </a>
+                @endif
+            </p>
+            @if(app()->getLocale() == 'ar')
+            <a href="{{ route('services.details' , ['', 21 ,  __('service2_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+            @else
+            <a href="{{ route('services.details' , [app()->getLocale(), 21 ,  __('service2_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+            @endif
+        </div>
+
+        <div class="relative flex flex-col justify-center items-center  border-2 border-white p-4 rounded-3xl h-[200px] w-full">
+            <div class="absolute -top-[50px] right-10 p-4 rounded-md border-0 border-white bg-[#333333]">
+                <img src="{{ asset('imgs/image/cert.png') }}" alt="" class="w-[60px]" />
+            </div>
+            <p class="text-white">
+                @if(app()->getLocale() == 'ar')
+                <a href="{{ route('services.details' , ['', 2 ,  __('service3_slug') ]) }}">
+                    {{ __('service3') }}
+                </a>
+                @else
+                <a href="{{ route('services.details' , [app()->getLocale(), 2 ,   __('service3_slug') ]) }}">
+                    {{ __('service3') }}
+                </a>
+                @endif
+            </p>
+            @if(app()->getLocale() == 'ar')
+            <a href="{{ route('services.details' , ['', 2 ,  __('service3_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+            @else
+            <a href="{{ route('services.details' , [app()->getLocale(), 2 ,  __('service3_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+            @endif
+        </div>
+
+        <div class="relative flex flex-col justify-center items-center  border-2 border-white p-4 rounded-3xl h-[200px] w-full">
+            <div class="absolute -top-[50px] right-10 p-4 rounded-md border-0 border-white bg-[#333333]">
+                <img src="{{ asset('imgs/image/cert.png') }}" alt="" class="w-[60px]" />
+            </div>
+            <p class="text-white">
+                @if(app()->getLocale() == 'ar')
+                <a href="{{ route('services.details' , ['', 8 , __('service4_slug') ]) }}">
+                    {{ __('service4') }}
+                </a>
+                @else
+                <a href="{{ route('services.details' , [app()->getLocale(), 8 ,  __('service4_slug') ]) }}">
+                    {{ __('service4') }}
+                </a>
+                @endif
+            </p>
+            @if(app()->getLocale() == 'ar')
+            <a href="{{ route('services.details' , ['', 8 , __('service4_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+            @else
+            <a href="{{ route('services.details' , [app()->getLocale(), 8 , __('service4_slug') ]) }}" class="absolute -bottom-[20px] left-10 px-6 py-1 rounded-full border-2 border-white text-white  bg-[#333333]">{{ __('public')['more'] }}</a>
+            @endif
+        </div>
+
     </div>
+</div>
+<a href="{{ route('services') }}" class="cta_button self-center">{{ __('public')['all_services'] }}</a>
+
+</div>
 </div>
 
 <!-- testmonial  -->
@@ -328,8 +328,8 @@
                     <div class="flex items-center mb-4">
                         <!-- <img src="{{ asset('imgs/user3.png') }}" alt="Client 3" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-400"> -->
                         <div>
-                            <h3 class="text-lg font-bold"> {{ __('testimonial3_name') }}  </h3>
-                            <p class="text-gray-500"> {{ __('testimonial3_position') }}  </p>
+                            <h3 class="text-lg font-bold"> {{ __('testimonial3_name') }} </h3>
+                            <p class="text-gray-500"> {{ __('testimonial3_position') }} </p>
                             <div class="flex">
                                 <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 .587l3.668 7.428 8.214 1.193-5.93 5.771 1.399 8.156L12 18.897l-7.35 3.862 1.399-8.156-5.93-5.771 8.214-1.193z" />
@@ -356,7 +356,7 @@
                     <div class="flex items-center mb-4">
                         <!-- <img src="{{ asset('imgs/user4.png') }}" alt="Client 4" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-400"> -->
                         <div>
-                            <h3 class="text-lg font-bold"> {{ __('testimonial4_name') }}  </h3>
+                            <h3 class="text-lg font-bold"> {{ __('testimonial4_name') }} </h3>
                             <p class="text-gray-500"> {{ __('testimonial4_position') }} </p>
                             <div class="flex">
                                 <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
@@ -384,7 +384,7 @@
                     <div class="flex items-center mb-4">
                         <!-- <img src="{{ asset('imgs/user5.png') }}" alt="Client 5" class="w-16 h-16 rounded-full mr-4 border-2 border-yellow-400"> -->
                         <div>
-                            <h3 class="text-lg font-bold"> {{ __('testimonial5_name') }}  </h3>
+                            <h3 class="text-lg font-bold"> {{ __('testimonial5_name') }} </h3>
                             <p class="text-gray-500"> {{ __('testimonial5_position') }} </p>
                             <div class="flex">
                                 <svg class="w-5 h-5 star" fill="currentColor" viewBox="0 0 24 24">
@@ -417,13 +417,13 @@
 
 <script async src="https://vjs.zencdn.net/8.10.0/video.min.js">
     const player = videojs('my-video');
-    player.aspectRatio('16:9');
+    player.aspectRatio('4:3');
     player.fluid(true);
     player.responsive(true);
 </script>
 
 <!-- Swiper JS -->
-<script  src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
     var swiper = new Swiper('.swiper-container', {

@@ -18,8 +18,18 @@
             @endif
             <a href="{{ $service->cta_url ?? 'https://wa.me/966536385896' }}" class="cta_button" target="_blank">{{ __('service_cta_button') }}</a>
         </div>
-        <div class="p-0 hidden md:block">
-            <img class="h-full" src="{{ asset('imgs/landing/engineer-removebg-preview.png') }}" alt="{{ $service->name }}">
+        <div class="p-0 hidden2 md:block">
+            <!-- <img class="h-full" src="{{ asset('imgs/landing/engineer-removebg-preview.png') }}" alt="{{ $service->name }}"> -->
+            <div class="w-[320px] md:w-[500px] border border-yellow-400 rounded-md p-1">
+                <video id="my-video2" class="video-js vjs-fluid vjs-16-9 rounded-sm" controls preload="auto" width="640" height="500" data-setup="{}">
+                    <source src="{{ $service->video_file->fileName ??  'https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/videos/rclol3.mp4' }}" type="video/mp4">
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a
+                        web browser that
+                        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                    </p>
+                </video>
+            </div>
         </div>
     </div>
 
@@ -231,6 +241,11 @@
     player.aspectRatio('16:9');
     player.fluid(true);
     player.responsive(true);
+
+    const player2 = videojs('my-video2');
+    player2.aspectRatio('16:9');
+    player2.fluid(true);
+    player2.responsive(true);
 </script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">

@@ -8,6 +8,7 @@ use App\Models\FilesModel;
 use App\Models\PostsModel;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
+use SimpleXMLElement;
 
 class PostsController extends Controller
 {
@@ -378,4 +379,62 @@ class PostsController extends Controller
             }
         }
     }
+
+    public function exportXML(Request $request)
+    {        
+        /*         
+        $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8" ?><rss version="2.0"
+                xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+                xmlns:content="http://purl.org/rss/1.0/modules/content/"
+                xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+                xmlns:dc="http://purl.org/dc/elements/1.1/"
+                xmlns:wp="http://wordpress.org/export/1.2/"
+            ><channel></channel></rss>');
+
+        foreach($request->post as $post) 
+        {
+            // get post data 
+            $post_data = PostsModel::where('id' , $post)->first();
+
+            $postElement = $xml->addChild('post');
+        }
+        */
+
+        $postIds = $request->input('post', []);
+
+        if (empty($postIds)) {
+            return back()->withErrors(['error' => 'No posts selected.']);
+        }
+
+        $posts = PostsModel::whereIn('id', $postIds)->get();
+
+        $fileName = 'exported_posts_' . now()->format('YmdHis') . '.csv';
+
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
+        ];
+
+        $callback = function () use ($posts) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, ['ID', 'Title', 'Content' , 'Author', 'Status', 'Language', 'Updated At']);
+
+            foreach ($posts as $post) {
+                fputcsv($file, [
+                    $post->id,
+                    $post->title,
+                    $post->body,
+                    $post->auther->name ?? 'admin',
+                    $post->status,
+                    $post->language,
+                    $post->updated_at,
+                ]);
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
 }

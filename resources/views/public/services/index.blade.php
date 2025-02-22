@@ -12,9 +12,9 @@
 </section>
 
 <section class="">
-    <div class="flex flex-col items-stretch justify-center space-y-20 p-8 py-16 bg-white">        
+    <div class="flex flex-col items-stretch justify-stretch space-y-20 p-8 py-16 bg-white ">        
 
-        <div class="grid grid-cols-1 md:grid-cols-3  gap-6 gap-y-20 max-w-[1100px] mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 gap-y-20 md:w-[1100px] mx-auto">
         @foreach($services as $service)
             <div class="relative flex flex-col justify-center items-start  border-4 border-primary p-4 rounded-3xl h-[200px] w-full">
                 <div class="absolute -top-[40px] right-10 p-2 px-6 rounded-md border-4 border-primary bg-white">

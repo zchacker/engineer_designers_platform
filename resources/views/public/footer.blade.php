@@ -1,10 +1,8 @@
-
-
-    @if(app()->getLocale() == 'ar')
-    <div class="fixed right-6 bottom-16 md:bottom-8  z-50 animate-bounce">
+@if(app()->getLocale() == 'ar')
+<div class="fixed right-6 bottom-16 md:bottom-8  z-50 animate-bounce">
     @else
     <div class="fixed left-2 bottom-16 md:bottom-8  z-50 animate-bounce">
-    @endif
+        @endif
         <a href="https://wa.me/966536385896" target="_blank" class="flex gap-4 items-center">
             <img src="{{ asset('imgs/image/whatsapp.webp') }}" alt="" class="w-14 h-14">
             <p class="p-1 px-2 rounded-md bg-white text-black">
@@ -71,29 +69,29 @@
                 <ul class="flex flex-col text-start gap-1">
                     @if(app()->getLocale() == 'ar')
                     <li class="font-normal text-white transition ease-in-out duration-300 mb-2 lg:mb-0">
-                        <a href="{{ route('services.details' , [22 , 'مكتب-مساحة']) }}">مكتب مساحة معتمد</a>
+                        <a href="{{ route('services.details' , ['', 22 , 'مكتب-مساحة']) }}">مكتب مساحة معتمد</a>
                     </li>
                     <li class="font-normal text-white transition ease-in-out duration-300 mb-2 lg:mb-0">
-                        <a href="{{ route('services.details' , [21 , 'شهادة-اتمام-البناء']) }}">شهادة اتمام البناء</a>
+                        <a href="{{ route('services.details' , ['', 21 , 'شهادة-اتمام-البناء']) }}">شهادة اتمام البناء</a>
                     </li>
                     <li class="font-normal text-white transition ease-in-out duration-300 mb-2 lg:mb-0">
-                        <a href="{{ route('services.details' , [12 , 'شهادة-امتثال']) }}">شهادة امتثال</a>
+                        <a href="{{ route('services.details' , ['' , 12 , 'شهادة-امتثال']) }}">شهادة امتثال</a>
                     </li>
                     @else
                     <li class="font-normal text-white transition ease-in-out duration-300 mb-2 lg:mb-0">
-                        <a href="{{ route('services.details' , [22 , 'Certified-Cadastral-Office']) }}">Certified Cadastral Office</a>
+                        <a href="{{ route('services.details' , [app()->getLocale(), 22 , 'Certified-Cadastral-Office']) }}">Certified Cadastral Office</a>
                     </li>
                     <li class="font-normal text-white transition ease-in-out duration-300 mb-2 lg:mb-0">
-                        <a href="{{ route('services.details' , [21 , 'Building-Completion-Certificate']) }}">Building Completion Certificate</a>
+                        <a href="{{ route('services.details' , [app()->getLocale(), 21 , 'Building-Completion-Certificate']) }}">Building Completion Certificate</a>
                     </li>
                     <li class="font-normal text-white transition ease-in-out duration-300 mb-2 lg:mb-0">
-                        <a href="{{ route('services.details' , [12 , 'compliance-certification']) }}">compliance certification</a>
+                        <a href="{{ route('services.details' , [app()->getLocale(), 12 , 'compliance-certification']) }}">compliance certification</a>
                     </li>
                     @endif
                 </ul>
             </div>
             <div class="flex flex-col justify-start items-start ">
-                <h4 class="text-xl font-bold">{{ __('public')['contact'] }}</h4>                
+                <h4 class="text-xl font-bold">{{ __('public')['contact'] }}</h4>
                 <div class="flex gap-4 justify-start mt-4">
                     <img src="{{ asset('imgs/image/footer-call.png') }}" alt="" class="w-[30px]">
                     <a href="tel:+966536385896">0536385896</a>
@@ -108,7 +106,7 @@
                 </div>
                 <div class="flex gap-4 justify-start mt-8">
                     <a href="https://www.instagram.com/rclol.alojian" target="_blank">
-                        <img src="{{ asset('imgs/image/instagram.png') }}" alt="حساب رشيد العجيان على انستغرام" >
+                        <img src="{{ asset('imgs/image/instagram.png') }}" alt="حساب رشيد العجيان على انستغرام">
                     </a>
                     <a href="https://www.youtube.com/@RusheedAlojian" target="_blank">
                         <img src="{{ asset('imgs/image/youtube.png') }}" alt="حساب شركة رشيد العجيان على يوتيوب">
@@ -126,7 +124,7 @@
                 <p class="text-center mb-2"> {{ __('cr_no') }} </p>
                 <p class="text-center mb-12"> {{ __('tax_no') }} </p>
             </div>
-            <div class="flex flex-col items-center justify-center mb-0 space-y-4">                
+            <div class="flex flex-col items-center justify-center mb-0 space-y-4">
                 <div class="flex flex-row">
                     @if(app()->getLocale() != 'ar')
                     <a href="{{ route('privacy', app()->getLocale()) }}" class=" text-white hover:text-white transition duration-300 mx-2"> {{__('public')['privacy']}} </a>
@@ -143,16 +141,16 @@
                     @endif
                 </div>
                 <p class="text-sm text-gray-400 text-center mb-2">{{ __('copyright') }}</p>
-            </div>                        
+            </div>
         </div>
         <div class="flex justify-center m-0 pb-20 md:pb-10">
             <p class="mb-0 text-sm text-gray-600 " dir="ltr">Designed by
-                <a href="https://browndiamondstech.com" class="hover:text-gray-300" target="_blank">Brown Diamond Tech Ltd.</a>
+                <a href="https://browndiamondstech.com" rel="nofollow" class="hover:text-gray-300" target="_blank">Brown Diamond Tech Ltd.</a>
             </p>
         </div>
     </footer>
 
-    
+
 
 
     </body>
@@ -181,10 +179,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             const searchButton = document.getElementById('searchButton');
             const searchButtonMobile = document.getElementById('searchButtonMobile');
-            
+
             const searchInputContainer = document.getElementById('searchInputContainer');
             const searchInputContainerMobile = document.getElementById('searchInputContainerMobile');
-            
+
             searchButton.addEventListener('click', function(event) {
                 searchInputContainer.classList.toggle('hidden');
                 searchInputContainer.querySelector('input').focus();

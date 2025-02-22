@@ -295,7 +295,7 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::post('/posts/create/action/{post}', [\App\Http\Controllers\Admin\PostsController::class, 'create_action'])->name('admin.post.create.action');
     Route::get('/posts/edit/{id}', [\App\Http\Controllers\Admin\PostsController::class, 'edit'])->name('admin.post.edit');
     Route::post('/posts/edit/action/{id}', [\App\Http\Controllers\Admin\PostsController::class, 'edit_action'])->name('admin.post.edit.action');
-    Route::delete('/posts/delete/{post}', [\App\Http\Controllers\Admin\PostsController::class, 'delete'])->name('admin.post.delete');
+    Route::post('/posts/delete/{post}', [\App\Http\Controllers\Admin\PostsController::class, 'delete'])->name('admin.post.delete');
 
     // Pages
     Route::get('/pages/list', [\App\Http\Controllers\Admin\PagesController::class, 'list'])->name('admin.page.list');
@@ -433,6 +433,7 @@ Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], fu
 Route::group(['middleware' => ['auth:editor,admin'], 'prefix' => 'editor'], function () { 
 
     Route::post('/image/upload', [\App\Http\Controllers\Editor\PostsController::class, 'upload'])->name('editor.image.upload');
+    Route::post('/export/blog/post', [\App\Http\Controllers\Admin\PostsController::class, 'exportXML'])->name('export.blog.post');
 
 });
 
