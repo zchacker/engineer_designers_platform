@@ -1,27 +1,40 @@
 @include('public.header')
 
 <!-- hero section  -->
-<div class="min-h-[550px] md:min-h-[600px] relative flex flex-col items-center justify-top bg-cover bg-[#333333]" style="background-image: url({{ asset('imgs/image/hero-bg.jpg') }});">
-    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+<div class='min-h-[550px] md:min-h-[600px] relative flex flex-col items-center justify-top bg-cover bg-[#333333]' style='background-image: url({{ asset("imgs/image/hero-bg.webp") }});'>
+  <div class='absolute inset-0 bg-black bg-opacity-50'></div>
 
-    <div class="relative flex flex-col items-center justify-center z-50 mt-[100px]">
-        <div class="flex flex-col items-center justify-end">
-            <h1 class="text-center font-bold text-2xl md:text-2xl lg:text-3xl leading-tight text-white mb-6">{!! __('public')['hero_msg'] !!}</h1>
-            <p class="text-center font-normal text-xl text-white leading-relaxed mb-12">{{__('public')['sub_hero']}}</p>
-            <a href="https://wa.me/966536385896" class="cta_button">{{__('service_cta_button')}}</a>
-        </div>
-        <div class="absolute -bottom-[600px] md:-bottom-[720px] w-[310px] md:w-[365px] rounded-xl border-2 overflow-hidden p-0 shadow-lg">
-            <video id="my-video" class="video-js vjs-fluid vjs-9-6" controls preload="auto" width="640" height="360" data-setup="{}">
-                <source src="https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/videos/استشارات-هندسية.mp4" type="video/mp4">
-                <p class="vjs-no-js">
-                    To view this video please enable JavaScript, and consider upgrading to a
-                    web browser that
-                    <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-                </p>
-            </video>
-        </div>
+  <div class='relative flex flex-col items-center justify-center z-50 mt-[100px]'>
+    <div class='flex flex-col items-center justify-end'>
+      <h1 class='text-center font-bold text-2xl md:text-2xl lg:text-3xl leading-tight text-white mb-6'>
+        {!! __('public')['hero_msg'] !!}
+      </h1>
+      <p class='text-center font-normal text-xl text-white leading-relaxed mb-12'>
+        {{ __('public')['sub_hero'] }}
+      </p>
+      <a href='https://wa.me/966536385896' class='cta_button'>{{ __('service_cta_button') }}</a>
     </div>
+
+    <div class='absolute -bottom-[600px] md:-bottom-[720px] w-[310px] md:w-[365px] rounded-xl border-2 overflow-hidden p-0 shadow-lg'>
+      <video 
+        id='my-video' 
+        class='video-js vjs-fluid vjs-9-6' 
+        controls 
+        preload='auto'
+        width='640' 
+        height='360' 
+        data-setup='{}'
+      >
+        <source src='https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/videos/استشارات-هندسية.mp4' type='video/mp4'>
+        <p class='vjs-no-js'>
+          To view this video please enable JavaScript, and consider upgrading to a web browser that
+          <a href='https://videojs.com/html5-video-support/' target='_blank'>supports HTML5 video</a>
+        </p>
+      </video>
+    </div>
+  </div>
 </div>
+
 
 <!-- benefits  -->
 <div class="mt-[430px] md:mt-[500px] fade-element">
@@ -68,64 +81,67 @@
     </div>
 </div>
 
+
 <!-- our works  -->
 <div class="mt-[75px] fade-element">
     <div class="flex flex-col items-center justify-center space-y-8">
         <h2 class="text-black font-bold text-3xl text-center">{{ __('works')}}</h2>
 
-        <!-- Swiper -->
-        <div class="swiper-container mx-auto relative">
-            <div class="swiper-wrapper mb-16">
-                @foreach($works as $work)
-                <div class="swiper-slide">
-                    <div class="flex flex-col items-center justify-stretch rounded-3xl overflow-hidden bg-white h-[300px] p-0 shadow-xl w-full max-w-xs">
-                        @if(app()->getLocale() == 'ar')
-                        <a href="{{ route('projects.details' , ['',$work->id] ) }}" class="object-cover w-full">
-                            <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" class="object-cover h-[150px] w-full" alt="">
-                        </a>
-                        <a href="{{ route('projects.details' , ['',$work->id] ) }}">
-                            <div class="flex flex-col justify-center items-center p-3 space-y-3">
-                                <h3 class="font-bold text-center text-xl"> {{ $work->title }} </h3>
-                                <p class="font-normal text-lg text-center text-gray-500"> {{ strip_tags( Str::limit( $work->description , 55) ) }} </p>
-                            </div>
-                        </a>
-                        @else
-                        <a href="{{ route('projects.details' , [app()->getLocale(), $work->id] ) }}" class="object-cover w-full">
-                            <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" class="object-cover h-[150px] w-full" alt="">
-                        </a>
-                        <a href="{{ route('projects.details' , [app()->getLocale(), $work->id] ) }}">
-                            <div class="flex flex-col items-center p-3 space-y-3">
-                                <h3 class="font-bold text-center text-xl"> {{ $work->title_en ?? $work->title }} </h3>
-                                <p class="font-normal text-lg text-center text-gray-500"> {{ strip_tags( Str::limit( $work->description_en ?? $work->description , 55) ) }} </p>
-                            </div>
-                        </a>
-                        @endif
+<!-- Swiper -->
+<div class="swiper-container mx-auto relative">
+    <div class="swiper-wrapper mb-16">
+        @foreach($works as $work)
+        <div class="swiper-slide">
+            <div class="flex flex-col items-center justify-stretch rounded-3xl overflow-hidden bg-white h-[300px] p-0 shadow-xl w-full max-w-xs">
+                @if(app()->getLocale() == 'ar')
+                <a href="{{ route('projects.details' , ['',$work->id] ) }}" class="object-cover w-full" aria-label=" تفاصيل المشروع">
+                    <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" class="object-cover h-[150px] w-full" alt="" loading="lazy" />
+                </a>
+                <a href="{{ route('projects.details' , ['',$work->id] ) }}">
+                    <div class="flex flex-col justify-center items-center p-3 space-y-3">
+                        <h3 class="font-bold text-center text-xl"> {{ $work->title }} </h3>
+                        <p class="font-normal text-lg text-center text-gray-500"> {{ strip_tags( Str::limit( $work->description , 55) ) }} </p>
                     </div>
-                </div>
-                @endforeach
-                {{--
+                </a>
+                @else
+                <a href="{{ route('projects.details' , [app()->getLocale(), $work->id] ) }}" class="object-cover w-full">
+                    <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" class="object-cover h-[150px] w-full" alt="">
+                </a>
+                <a href="{{ route('projects.details' , [app()->getLocale(), $work->id] ) }}">
+                    <div class="flex flex-col items-center p-3 space-y-3">
+                        <h3 class="font-bold text-center text-xl"> {{ $work->title_en ?? $work->title }} </h3>
+                        <p class="font-normal text-lg text-center text-gray-500"> {{ strip_tags( Str::limit( $work->description_en ?? $work->description , 55) ) }} </p>
+                    </div>
+                </a>
+                @endif
+            </div>
+        </div>
+        @endforeach
+        {{--
                 <div class="swiper-slide">
                     <div class="flex flex-col items-end justify-start rounded-3xl overflow-hidden bg-white h-[300px] p-0 shadow-xl w-full max-w-xs">
                         <a href="#" class="object-cover w-full">
                             <img src="{{ asset('imgs/image/gallery-5.png') }}" class="object-cover h-[150px] w-full" alt="">
-                </a>
-                <a href="#">
-                    <div class="flex flex-col items-center p-3 space-y-3">
-                        <h3 class="font-bold text-center text-xl">تصميم مودرن فله شاليه</h3>
-                        <p class="font-normal text-lg text-center text-gray-500">نقدم خدمات هندسية شاملة تشمل الاستشارات وإدارة المشاريع في مجموعة متنوعة من القطاعات.</p>
-                    </div>
-                </a>
+        </a>
+        <a href="#">
+            <div class="flex flex-col items-center p-3 space-y-3">
+                <h3 class="font-bold text-center text-xl">تصميم مودرن فله شاليه</h3>
+                <p class="font-normal text-lg text-center text-gray-500">نقدم خدمات هندسية شاملة تشمل الاستشارات وإدارة المشاريع في مجموعة متنوعة من القطاعات.</p>
             </div>
-        </div>
-        --}}
-        <!-- Add more slides as needed -->
+        </a>
     </div>
-    <!-- Add Pagination -->
-    <div class="swiper-pagination"></div>
-    <!-- Add Navigation -->
-    <!-- <div class="swiper-button-next"></div> -->
-    <!-- <div class="swiper-button-prev"></div> -->
 </div>
+--}}
+<!-- Add more slides as needed -->
+</div>
+<!-- Add Pagination -->
+<div class="swiper-pagination"></div>
+<!-- Add Navigation -->
+<!-- <div class="swiper-button-next"></div> -->
+<!-- <div class="swiper-button-prev"></div> -->
+</div>
+
+
 
 </div>
 </div>

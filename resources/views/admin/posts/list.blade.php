@@ -44,10 +44,18 @@
                         <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
 
-                                <form action="{{ route('export.blog.post') }}" method="post" id="outerForm">
+                                <!-- <form action="{{ route('export.blog.post') }}" method="post" id="outerForm"> -->
                                     
-                                    <div class="mt-4 sm:mt-0 flex sm:flex-none justify-start">
+                                    <div class="mt-4 sm:mt-0 flex sm:flex-none gap-4 justify-start">
                                         <button type="button" onclick="submitSelectedPosts()" class="action_btn">تصدير المقالات المحددة</button>
+
+                                        <div>
+                                            <form action="{{ route('admin.post.list') }}" method="get" class="flex gap-2 items-center">
+                                                <input type="text" name="query" class="form_input !w-full" placeholder="عنوان المقالة" value="{{ app('request')->input('query')  }}" />
+                                                <button type="submit" class="cta_button">بحث</button>
+                                                <a href="{{ route('admin.post.list') }}">مسح</a>
+                                            </form>
+                                        </div>
                                     </div>
 
                                     <table class="table">
@@ -123,7 +131,7 @@
                                         </tbody>
                                     </table>
 
-                                </form>
+                                <!-- </form> -->
                             </div>
                         </div>
                     </div>

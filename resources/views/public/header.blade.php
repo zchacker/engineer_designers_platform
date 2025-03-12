@@ -31,6 +31,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $page->title ?? "شركة رشيد العجيان"}}</title>
     <link rel="icon" type="image/x-icon" href="{{asset('imgs/icon.ico')}}">
+
+    <link rel="preload" fetchpriority="high" as="image" href="{{ asset('imgs/image/hero-bg.webp') }}?v=1" type="image/webp">
+    <link rel="preload" fetchpriority="high" as="image" href="{{ asset('imgs/image/whatsapp.webp') }}?v=2" type="image/webp">
+    <!-- <link rel="preload" fetchpriority="high" as="video" href="https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/videos/استشارات-هندسية.mp4" type="video/mp4"> -->
+
     <!-- <link rel="stylesheet" href="assets/css/tailwind.css"> -->
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
@@ -113,21 +118,21 @@
                 <div class="flex relative items-center justify-center mb-0 lg:mb-0">
                     
                     @if(app()->getLocale() != 'ar')
-                    <button class="lg:hidden w-10 h-10 mr-auto flex items-center justify-center stroke-white text-white border border-white rounded-md" @click="navbarOpen = !navbarOpen">
+                    <button class="lg:hidden w-10 h-10 mr-auto flex items-center justify-center stroke-white text-white border border-white rounded-md" @click="navbarOpen = !navbarOpen" title="القائمة">
                     @else
-                    <button class="lg:hidden w-10 h-10 ml-auto flex items-center justify-center stroke-white text-white border border-white rounded-md" @click="navbarOpen = !navbarOpen">
+                    <button class="lg:hidden w-10 h-10 ml-auto flex items-center justify-center stroke-white text-white border border-white rounded-md" @click="navbarOpen = !navbarOpen" title="القائمة">
                     @endif
                         <i data-feather="menu"></i>
                     </button>                    
 
-                    <a href="{{ route('home') }}" class="flex items-center justify-center text-center w-[33%] md:w-full">
+                    <a href="{{ route('home') }}" class="flex items-center justify-center text-center w-[33%] md:w-full" aria-label="ملف شخصي" >
                         <img src="{{asset('imgs/image/logo.png')}}" alt="Logo img" class="w-20">
                     </a>
 
                     <div class="flex justify-end items-center space-x-2 w-[33%]">
 
                         <div class=" md:hidden">
-                            <button id="searchButtonMobile" class="p-2">
+                            <button id="searchButtonMobile" class="p-2" title="بحث">
                                 <img src="{{ asset('imgs/image/search.png') }}" class="h-6" alt="">
                             </button>
                             <div id="searchInputContainerMobile" class="hidden absolute top-[70px] left-0 mt-2 w-full mx-auto bg-transparent shadow-lg p-0 rounded z-50">
@@ -135,7 +140,7 @@
                                 <form action="{{ route('search') }}" method="GET" >
                                 <div class="flex items-stretch w-full">
                                     <input id="searchInput" type="text" name="query" class="w-full p-3 border border-gray-300 rounded-s-md" placeholder="{{__('search')}}...">
-                                    <button type="submit" class="bg-[#4b4b4b] p-2 px-4 rounded-e-md">
+                                    <button type="submit" class="bg-[#4b4b4b] p-2 px-4 rounded-e-md" title="بحث">
                                         <img src="{{ asset('imgs/image/search.png') }}" class="w-6 " alt="">
                                     </button>
                                 </div>
@@ -147,32 +152,32 @@
                         @if (!auth('client')->check() && !auth('engineer')->check() && !auth('admin')->check())
                         <div class="relative md:hidden">
                             <!-- <a href="{{ route('login') }}" class="font-semibold bg-yellow-300 p-4 rounded-md text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">{{ __('public')['sigin'] }}</a> -->
-                            <a href="{{ route('login', app()->getLocale() ) }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
+                            <a href="{{ route('login', app()->getLocale() ) }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي">
                                 {{-- __('public')['sigin'] --}}
                                 <img src="{{ asset('imgs/image/account.png') }}" class="h-6" alt="">
                             </a>
                         </div>
                         @elseif(auth('engineer')->check())
                         <div class="relative md:hidden">
-                            <a href="{{ route('engineer.orders.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
+                            <a href="{{ route('engineer.orders.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي" >
                                 <img src="{{ asset('imgs/image/account.png') }}" class="h-6" alt="">
                             </a>
                         </div>
                         @elseif(auth('client')->check())
                         <div class="relative md:hidden">
-                            <a href="{{ route('client.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
+                            <a href="{{ route('client.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي">
                                 <img src="{{ asset('imgs/image/account.png') }}" class="h-6" alt="">
                             </a>
                         </div>
                         @elseif(auth('admin')->check())
                         <div class="relative md:hidden">
-                            <a href="{{ route('admin.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
+                            <a href="{{ route('admin.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي">
                                 <img src="{{ asset('imgs/image/account.png') }}" class="h-6" alt="">
                             </a>
                         </div>
                         @elseif(auth('editor')->check())
                         <div class="relative md:hidden">
-                            <a href="{{ route('editor.post.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
+                            <a href="{{ route('editor.post.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي">
                                 <img src="{{ asset('imgs/image/account.png') }}" class="h-6" alt="">
                             </a>
                         </div>
@@ -277,14 +282,14 @@
                 <div class="flex items-center">
 
                     <div class="relative  hidden md:flex flex-row items-center justify-center">
-                        <button id="searchButton" class="p-2">
+                        <button id="searchButton" class="p-2" title="بحث">
                             <img src="{{ asset('imgs/image/search.png') }}" class="h-6" alt="">
                         </button>
                         <div id="searchInputContainer" class="hidden top-full left-0 mt-2 w-64 bg-transparent shadow-lg p-1 rounded z-50">
                             <form action="{{ route('search') }}" method="GET" >
                                 <div class="flex items-stretch w-full">
                                     <input id="searchInput" type="text" name="query" class="w-full p-1 border border-gray-300 rounded-s-md" placeholder="{{__('search')}}...">
-                                    <button type="submit" class="bg-[#4b4b4b] p-2 rounded-e-md">
+                                    <button type="submit" class="bg-[#4b4b4b] p-2 rounded-e-md" title="بحث">
                                         <img src="{{ asset('imgs/image/search.png') }}" class="w-6 " alt="">
                                     </button>
                                 </div>
@@ -296,32 +301,32 @@
                     @if (!auth('client')->check() && !auth('engineer')->check() && !auth('admin')->check())
                     <div class="hidden md:flex gap-4 space-y-4 justify-start items-center">
                         <!-- <a href="{{ route('login') }}" class="font-semibold bg-yellow-300 p-4 rounded-md text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">{{ __('public')['sigin'] }}</a> -->
-                        <a href="{{ route('login', app()->getLocale() ) }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
+                        <a href="{{ route('login', app()->getLocale() ) }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي">
                             {{-- __('public')['sigin'] --}}
                             <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @elseif(auth('engineer')->check())
                     <div class="hidden md:flex gap-4 space-y-4 justify-start items-center">
-                        <a href="{{ route('engineer.orders.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
+                        <a href="{{ route('engineer.orders.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي">
                             <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @elseif(auth('client')->check())
                     <div class="hidden md:flex gap-4 space-y-4 justify-start items-center">
-                        <a href="{{ route('client.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
+                        <a href="{{ route('client.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي">
                             <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @elseif(auth('admin')->check())
                     <div class="hidden md:flex gap-4 space-y-4 justify-start items-center">
-                        <a href="{{ route('admin.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
+                        <a href="{{ route('admin.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي">
                             <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @elseif(auth('editor')->check())
                     <div class="hidden md:flex gap-4 space-y-4 justify-start items-center">
-                        <a href="{{ route('editor.post.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" >
+                        <a href="{{ route('editor.post.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي">
                             <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
