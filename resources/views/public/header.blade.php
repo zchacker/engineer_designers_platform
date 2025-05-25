@@ -32,8 +32,10 @@
     <title>{{ $page->title ?? "شركة رشيد العجيان"}}</title>
     <link rel="icon" type="image/x-icon" href="{{asset('imgs/icon.ico')}}">
 
-    <link rel="preload" fetchpriority="high" as="image" href="{{ asset('imgs/image/hero-bg.webp') }}?v=1" type="image/webp">
-    <link rel="preload" fetchpriority="high" as="image" href="{{ asset('imgs/image/whatsapp.webp') }}?v=2" type="image/webp">
+    <link rel="preload" as="image" href="https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/images/hero-bg.webp" type="image/webp">
+
+    <link rel="preload" fetchpriority="high" as="image" href="{{ asset('imgs/image/hero-bg.webp') }}?v=2" type="image/webp">
+    <link rel="preload" fetchpriority="high" as="image" href="{{ asset('imgs/image/whatsapp.webp') }}?v=3" type="image/webp">
     <!-- <link rel="preload" fetchpriority="high" as="video" href="https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/videos/استشارات-هندسية.mp4" type="video/mp4"> -->
 
     <!-- <link rel="stylesheet" href="assets/css/tailwind.css"> -->
@@ -184,12 +186,20 @@
                         @endif
 
                         <div class="relative md:hidden">
+                            @php
+                                $currentRoute = request()->route();
+                            @endphp
+
                             @if(app()->getLocale() == 'ar')
-                            <a href="{{ route(request()->route()->getName(), ['locale' => 'en'] + request()->route()->parameters()) }}" class="text-white">EN</a>
-                            <!-- <a href="{{ route('language.switch' , 'en') }}">English</a> -->
+                                @if ($currentRoute && $currentRoute->getName())
+                                    <a href="{{ route( $currentRoute->getName() , ['locale' => 'en'] + $currentRoute->parameters()) }}" class="text-white">EN</a>
+                                    <!-- <a href="{{ route('language.switch' , 'en') }}">English</a> -->
+                                @endif
                             @else
-                            <a href="{{ route(request()->route()->getName(), ['locale' => ''] + request()->route()->parameters()) }}" class="text-white">ع</a>
-                            <!-- <a href="{{ route('language.switch' , 'ar') }}">عربي</a> -->
+                                @if ($currentRoute && $currentRoute->getName())
+                                    <a href="{{ route($currentRoute->getName(), ['locale' => ''] + $currentRoute->parameters()) }}" class="text-white">ع</a>
+                                    <!-- <a href="{{ route('language.switch' , 'ar') }}">عربي</a> -->
+                                @endif
                             @endif
                         </div>
                     </div>
@@ -334,11 +344,15 @@
 
                     <div class="mx-2 md:block hidden">
                         @if(app()->getLocale() == 'ar')
-                        <a href="{{ route(request()->route()->getName(), ['locale' => 'en'] + request()->route()->parameters()) }}" class="text-white">EN</a>
-                        <!-- <a href="{{ route('language.switch' , 'en') }}">English</a> -->
+                            @if ($currentRoute && $currentRoute->getName())
+                                <a href="{{ route($currentRoute->getName(), ['locale' => 'en'] + $currentRoute->parameters()) }}" class="text-white">EN</a>
+                                <!-- <a href="{{ route('language.switch' , 'en') }}">English</a> -->
+                            @endif
                         @else
-                        <a href="{{ route(request()->route()->getName(), ['locale' => ''] + request()->route()->parameters()) }}" class="text-white">ع</a>
-                        <!-- <a href="{{ route('language.switch' , 'ar') }}">عربي</a> -->
+                            @if ($currentRoute && $currentRoute->getName())
+                                <a href="{{ route($currentRoute->getName(), ['locale' => ''] + $currentRoute->parameters()) }}" class="text-white">ع</a>
+                                <!-- <a href="{{ route('language.switch' , 'ar') }}">عربي</a> -->
+                            @endif
                         @endif
                     </div>
                 </div>

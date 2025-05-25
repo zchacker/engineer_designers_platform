@@ -1,19 +1,19 @@
 @include('public.header')
 
-<section class="relative min-h-[500px] py-16 px-8 md:min-h-[599px] md:pt-32 md:px-32">
+<section class="relative h-auto min-h-[550px] py-16 px-8 md:min-h-[599px] md:pt-32 md:px-32">
 
     <!-- Background Image -->
     <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $service->hero_img->fileName ?? asset('imgs/landing/Engineering Consulting Office.jpeg')}}')"></div>
     <!-- Overlay Div -->
     <div class="absolute inset-0 bg-black opacity-60"></div>
 
-    <div class="absolute top-auto md:bottom-0 md:top-auto grid grid-cols-1 md:grid-cols-2">
+    <div class="absolute top-auto md:bottom-auto md:top-36 grid grid-cols-1 md:grid-cols-2 pb-20 gap-10">
         <div class="flex flex-col gap-8 items-start justify-center">
             @if(app()->getLocale() == 'ar')
-            <h1 class="text-white text-4xl leading-[1.7] font-bold">{{ $service->name }}</h1>
+            <h1 class="text-white text-2xl md:text-4xl leading-[1.5] font-bold">{{ $service->name }}</h1>
             <h2 class="text-gray-300">{{ $service->sub_title}}</h2>
             @else
-            <h1 class="text-white text-4xl leading-[1.7] font-bold">{{ $service->name_en }}</h1>
+            <h1 class="text-white text-2xl md:text-4xl leading-[1.7] font-bold">{{ $service->name_en }}</h1>
             <h2 class="text-gray-300">{{ $service->sub_title_en }}</h2>
             @endif
             <a href="{{ $service->cta_url ?? 'https://wa.me/966536385896' }}" class="cta_button" target="_blank">{{ __('service_cta_button') }}</a>

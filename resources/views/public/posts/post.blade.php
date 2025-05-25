@@ -31,7 +31,11 @@
         </div>';
         @endphp
         
-        {!! str_replace('[cta_btn]', $call_btn, $post->body) !!}
+        {!! str_replace(
+            ['[cta_btn]', 'h1'],
+            [$call_btn, 'h2'],
+            $post->body
+        ) !!}
 
     </div>
 

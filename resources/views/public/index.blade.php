@@ -1,7 +1,8 @@
 @include('public.header')
 
 <!-- hero section  -->
-<div class='min-h-[550px] md:min-h-[600px] relative flex flex-col items-center justify-top bg-cover bg-[#333333]' style='background-image: url({{ asset("imgs/image/hero-bg.webp") }});'>
+{{-- <div class='min-h-[550px] md:min-h-[600px] relative flex flex-col items-center justify-top bg-cover bg-[#333333]' style='background-image: url({{ asset("imgs/image/hero-bg.webp") }});'> --}}
+<div class='min-h-[550px] md:min-h-[600px] relative flex flex-col items-center justify-top bg-cover bg-[#333333]' style='background-image: url("https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/images/hero-bg.webp");'>
   <div class='absolute inset-0 bg-black bg-opacity-50'></div>
 
   <div class='relative flex flex-col items-center justify-center z-50 mt-[100px]'>
