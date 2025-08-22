@@ -66,6 +66,22 @@ Route::post('/forgotpassword/action', [\App\Http\Controllers\AuthController::cla
 Route::get('/resetpassword/{id}/{token}', [\App\Http\Controllers\AuthController::class, 'reset_password'])->name('reset.password.link');
 Route::post('/set_password', [\App\Http\Controllers\AuthController::class, 'rest_password_new'])->name('set.new.password');
 
+Route::get('/search', [\App\Http\Controllers\Public\PagesController::class, 'search'])->name('search');
+
+Route::post('/post/{post}/like', [\App\Http\Controllers\Public\BlogController::class, 'like'])->name('post.like');
+Route::post('/post/{post}/unlike', [\App\Http\Controllers\Public\BlogController::class, 'unlike'])->name('post.unlike');
+
+
+Route::get('/privacy', function () {        
+    $post = PostsModel::where('slug', 'privacy')->first();
+    return view('public.privacy', compact('post'));
+})->name('privacy');
+
+Route::get('/terms', function () {
+    $post = PostsModel::where('slug', 'terms')->first();
+    return view('public.terms', compact('post'));
+})->name('terms');
+
 Route::group(['prefix' => '{locale?}', 'where' => ['locale' => 'en|ar']], function () {
 
     App::setLocale('en');
@@ -102,8 +118,10 @@ Route::group(['prefix' => '{locale?}', 'where' => ['locale' => 'en|ar']], functi
 
     Route::get('/resetpassword/{id}/{token}', [\App\Http\Controllers\AuthController::class, 'reset_password'])->name('reset.password.link');
     Route::post('/set_password', [\App\Http\Controllers\AuthController::class, 'rest_password_new'])->name('set.new.password');
+        
+    Route::get('/search', [\App\Http\Controllers\Public\PagesController::class, 'search'])->name('search');
 
-    Route::get('/privacy', function () {
+    Route::get('/privacy', function () {        
         $post = PostsModel::where('slug', 'privacy')->first();
         return view('public.privacy', compact('post'));
     })->name('privacy');
@@ -112,6 +130,7 @@ Route::group(['prefix' => '{locale?}', 'where' => ['locale' => 'en|ar']], functi
         $post = PostsModel::where('slug', 'terms')->first();
         return view('public.terms', compact('post'));
     })->name('terms');
+
 })->prefix('ar'); // Set the default value to 'ar';
 
 
@@ -276,7 +295,7 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin'], function () 
     Route::post('/posts/create/action/{post}', [\App\Http\Controllers\Admin\PostsController::class, 'create_action'])->name('admin.post.create.action');
     Route::get('/posts/edit/{id}', [\App\Http\Controllers\Admin\PostsController::class, 'edit'])->name('admin.post.edit');
     Route::post('/posts/edit/action/{id}', [\App\Http\Controllers\Admin\PostsController::class, 'edit_action'])->name('admin.post.edit.action');
-    Route::delete('/posts/delete/{post}', [\App\Http\Controllers\Admin\PostsController::class, 'delete'])->name('admin.post.delete');
+    Route::post('/posts/delete/{post}', [\App\Http\Controllers\Admin\PostsController::class, 'delete'])->name('admin.post.delete');
 
     // Pages
     Route::get('/pages/list', [\App\Http\Controllers\Admin\PagesController::class, 'list'])->name('admin.page.list');
@@ -414,6 +433,7 @@ Route::group(['middleware' => ['auth:supervisor'], 'prefix' => 'supervisor'], fu
 Route::group(['middleware' => ['auth:editor,admin'], 'prefix' => 'editor'], function () { 
 
     Route::post('/image/upload', [\App\Http\Controllers\Editor\PostsController::class, 'upload'])->name('editor.image.upload');
+    Route::post('/export/blog/post', [\App\Http\Controllers\Admin\PostsController::class, 'exportXML'])->name('export.blog.post');
 
 });
 

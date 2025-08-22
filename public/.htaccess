@@ -7,18 +7,74 @@
     </IfModule>
 
     RewriteEngine On
+    
+    # Allow Let's Encrypt SSL verification
+    RewriteCond %{REQUEST_URI} ^/\.well-known/acme-challenge/
+    RewriteRule ^ - [L]
+    
+    # Redirect to www
+    #RewriteCond %{HTTP_HOST} !^www\. [NC]
+    #RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [L,R=301]
+
+    # Redirect HTTP to HTTPS
+    #RewriteCond %{HTTPS} off
+    #RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
+    # Redirect URLs ending with ':link'
+    RewriteCond %{THE_REQUEST} :link[\s?/] [NC]
+    RewriteRule ^(.*)/:link$ /$1 [L,R=301]
+ 
+    # Redirect URLs containing ':link'
+    RewriteCond %{REQUEST_URI} :link
+    RewriteRule ^ https://www.alojian.com/ [L,R=301]
+
+    # Redirect Arabic prefixed URLs to non-prefixed versions
+    #RewriteCond %{REQUEST_URI} ^/ar/(.*)$ [NC]
+    #RewriteRule ^ar/(.*)$ /$1 [L,R=301]
+
+    RewriteEngine On
+ 
+    # Redirect mx.alojian.com to www.alojian.com
+    RewriteCond %{HTTP_HOST} ^mx\.alojian\.com$ [NC]
+    RewriteRule ^(.*)$ https://www.alojian.com/$1 [R=301,L]
+ 
+    # Force HTTPS for www.alojian.com
+    #RewriteCond %{HTTP_HOST} ^www\.alojian\.com$ [NC]
+    #RewriteCond %{HTTPS} off
+    #RewriteRule ^(.*)$ https://www.alojian.com/$1 [R=301,L]
+
+    # Redirect /ar and any /ar/* to /
+    #RewriteCond %{HTTPS} on
+    #RewriteRule ^ar(/.*)?$ / [R=301,L]
+
     # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
+    #RewriteCond %{REQUEST_FILENAME} !-d
+    #RewriteCond %{REQUEST_URI} (.+)/$
+    #RewriteRule ^ %1 [L,R=301]
 
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+<IfModule mod_headers.c>
+Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" "expr=%{HTTPS} == 'on'"
+Header always set X-XSS-Protection "1; mode=block"
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Expect-CT "max-age=7776000, enforce"
+Header set Access-Control-Allow-Origin "null"
+Header set Access-Control-Allow-Methods "GET,PUT,POST,DELETE"
+Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+Header set X-Content-Security-Policy "img-src *; media-src * data:;"
+Header always set Content-Security-Policy "report-uri https://www.alojian.com"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Permissions-Policy "accelerometer=(), autoplay=(), camera=(), fullscreen=*, geolocation=(self), gyroscope=(), microphone=(), payment=*"
+Header set X-Permitted-Cross-Domain-Policies "none"
+</IfModule>
+

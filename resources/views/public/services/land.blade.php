@@ -1,25 +1,35 @@
 @include('public.header')
 
-<section class="relative min-h-[500px] py-16 px-8 md:min-h-[599px] md:pt-32 md:px-32">
+<section class="relative h-auto min-h-[550px] py-16 px-8 md:min-h-[599px] md:pt-32 md:px-32">
 
     <!-- Background Image -->
     <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ $service->hero_img->fileName ?? asset('imgs/landing/Engineering Consulting Office.jpeg')}}')"></div>
     <!-- Overlay Div -->
     <div class="absolute inset-0 bg-black opacity-60"></div>
 
-    <div class="absolute top-auto md:bottom-0 md:top-auto grid grid-cols-1 md:grid-cols-2">
+    <div class="absolute top-auto md:bottom-auto md:top-36 grid grid-cols-1 md:grid-cols-2 pb-20 gap-10">
         <div class="flex flex-col gap-8 items-start justify-center">
             @if(app()->getLocale() == 'ar')
-            <h1 class="text-white text-4xl leading-[1.7] font-bold">{{ $service->name }}</h1>
+            <h1 class="text-white text-2xl md:text-4xl leading-[1.5] font-bold">{{ $service->name }}</h1>
             <h2 class="text-gray-300">{{ $service->sub_title}}</h2>
             @else
-            <h1 class="text-white text-4xl leading-[1.7] font-bold">{{ $service->name_en }}</h1>
+            <h1 class="text-white text-2xl md:text-4xl leading-[1.7] font-bold">{{ $service->name_en }}</h1>
             <h2 class="text-gray-300">{{ $service->sub_title_en }}</h2>
             @endif
             <a href="{{ $service->cta_url ?? 'https://wa.me/966536385896' }}" class="cta_button" target="_blank">{{ __('service_cta_button') }}</a>
         </div>
-        <div class="p-0 hidden md:block">
-            <img class="h-full" src="{{ asset('imgs/landing/engineer-removebg-preview.png') }}" alt="{{ $service->name }}">
+        <div class="p-0 hidden2 md:block">
+            <!-- <img class="h-full" src="{{ asset('imgs/landing/engineer-removebg-preview.png') }}" alt="{{ $service->name }}"> -->
+            <div class="w-[320px] md:w-[500px] border border-yellow-400 rounded-md p-1">
+                <video id="my-video2" class="video-js vjs-fluid vjs-16-9 rounded-sm" controls preload="auto" width="640" height="500" data-setup="{}">
+                    <source src="{{ $service->video_file->fileName ??  'https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/videos/rclol3.mp4' }}" type="video/mp4">
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a
+                        web browser that
+                        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                    </p>
+                </video>
+            </div>
         </div>
     </div>
 
@@ -231,6 +241,11 @@
     player.aspectRatio('16:9');
     player.fluid(true);
     player.responsive(true);
+
+    const player2 = videojs('my-video2');
+    player2.aspectRatio('16:9');
+    player2.fluid(true);
+    player2.responsive(true);
 </script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">

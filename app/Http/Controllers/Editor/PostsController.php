@@ -16,6 +16,13 @@ class PostsController extends Controller
     public function list(Request $request)
     {
         $query      = PostsModel::orderByDesc('created_at')->where('type', 'post')->where('auther_id', $request->user()->id);
+
+        // Check if the "query" input exists
+        if ($request->filled('query')) {
+            $searchTerm = $request->input('query');            
+            $query->where('title', 'LIKE', "%{$searchTerm}%");
+        }
+
         $sum        = $query->count('id');
         $posts      = $query->paginate(100);
         return view('editor.posts.list', compact('posts', 'sum'));

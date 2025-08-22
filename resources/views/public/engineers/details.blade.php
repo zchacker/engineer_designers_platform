@@ -6,12 +6,10 @@
     });
 </script>
 
-<section class="flex md:h-40 h-52 justify-center items-center flex-col">
-    <div class="w-full h-full bg-cover bg-no-repeat md:bg-cover md:bg-center" style="background-image: url('{{asset('imgs/image/head-pages.webp')}}');">
-        <!-- <div class="w-full h-full px-8 py-8 flex justify-center items-end bg-black/5 backdrop-brightness-100"> -->
-        <div class="w-full h-full px-8 py-8 flex justify-start items-start md:items-center bg-black/5 ">
-            <h1 class="text-white text-3xl font-bold mb-4">{{__('works')}}</h1>
-        </div>
+
+<section class="flex h-52 justify-center items-center flex-col bg-primary">
+    <div class="w-full flex flex-col justify-center ps-8 h-full h-max-[1100px]">
+        <h1 class="text-black text-3xl font-bold mb-4">{{ __('works') }}</h1>
     </div>
 </section>
 
@@ -41,7 +39,7 @@
                     <img src="{{ asset('imgs/messenger.png') }}" alt="{{__('start_chat')}}" title="{{__('start_chat')}}" class="w-[30px]" />
                 </button>
             </form>
-            <a href="{{ route('client.order.create' , $engineer->id ) }}" class="normal_button">{{__('create_order')}}</a>
+            <a href="{{ route('client.order.create' , $engineer->id ) }}" class="cta_button">{{__('create_order')}}</a>
         </div>
 
     </div>
@@ -63,14 +61,14 @@
                 <div class="px-2 sm:px-4 lg:px-6">
                     <div class="mt-8 flex flex-col">
                         <div class=" overflow-x-auto sm:-mx-6 lg:-mx-8">
-                            <div class="grid grid-cols-1 md:grid-cols-3  min-w-full py-2 ">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 min-w-full py-2 ">
                                 @foreach($works as $work)
-                                <div class="flex flex-col items-center justify-center gap-2 shadow-md rounded-md shadow-gray-400 p-4 mx-2">
-                                    <div class="relative">
+                                <div class="flex flex-col items-center justify-center gap-2 shadow-md  shadow-gray-300 pb-4 mx-2 overflow-hidden rounded-3xl">
+                                    <div class="relative w-full mb-4">
                                         @if(($work->worksFiles[0]->file_type ?? '') == 'image')
-                                        <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" data-src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" loading="lazy" alt="" class="h-[300px] object-cover" />
+                                        <img src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" data-src="{{ $work->worksFiles[0]->file->fileName ?? asset('imgs/packaging.png') }}" loading="lazy" alt="" class="h-[230px] w-full object-cover" />
                                         @else
-                                        <img src="{{ asset('imgs/packaging.png') }}" data-src="{{ asset('imgs/packaging.png') }}" loading="lazy" alt="" class="h-[300px] object-cover" />
+                                        <img src="{{ asset('imgs/packaging.png') }}" data-src="{{ asset('imgs/packaging.png') }}" loading="lazy" alt="" class="h-[230px] w-full object-cover" />
                                         @endif
                                         <div class="absolute top-0 bottom-0 left-0 right-0 w-full h-full bg-transparent"></div>
                                     </div>
@@ -79,7 +77,7 @@
                                     @else
                                     <h2 class="text-center font-bold">{{ $work->title_en ?? $work->title }}</h2>
                                     @endif
-                                    <a href="{{ route('engineers.work.details' , [app()->getLocale(),$work->id ]) }}" class="normal_button !w-auto">{{__('work_details')}}</a>
+                                    <a href="{{ route('engineers.work.details' , [app()->getLocale(),$work->id ]) }}" class="cta_button !w-auto mt-4">{{__('work_details')}}</a>
                                 </div>
                                 @endforeach
                             </div>
@@ -89,7 +87,7 @@
 
                 <section class="flex items-center gap-4 py-8 px-8">
                     <div class="my-2">
-                        <a href="{{ route('client.order.create' , $engineer->id ) }}" class="normal_button">{{__('create_order')}}</a>
+                        <a href="{{ route('client.order.create' , $engineer->id ) }}" class="cta_button">{{__('create_order')}}</a>
                     </div>
                 </section>
 

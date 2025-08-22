@@ -36,7 +36,8 @@ class PostsModel extends Model
         'seo_title',
         'seo_description',
         'auther_id',
-        'status'
+        'status',
+        'likes'
     ];
 
     protected $enumLanguage = [

@@ -31,10 +31,67 @@
         </div>';
         @endphp
         
-        {!! str_replace('[cta_btn]', $call_btn, $post->body) !!}
+        {!! str_replace(
+            ['[cta_btn]', 'h1'],
+            [$call_btn, 'h2'],
+            $post->body
+        ) !!}
 
     </div>
 
+    <div class="flex justify-start md:w-[800px] w-full px-4 gap-2 ">
+        <div class="flex gap-2">
+            <img src="{{ asset('imgs/image/thumbsup.png') }}" alt="" class="h-[20px]">
+            <button id="like-button" data-post-id="{{ $post->id }}" class="text-blue-600 hover:text-blue-500">
+                {{ __(in_array($post->id, session('liked_posts', [])) ? 'Unlike' : 'Like') }}
+            </button>
+        </div>
+        <span id="like-count" class="text-black">{{ $post->likes }}</span>
+    </div>
+
+    <div class="mt-16 mb-0 bg-[#4B4B4B] p-8 w-full">
+        <div class="flex flex-col space-y-5 max-w-[1100px] mx-auto">
+            <h2 class="font-bold text-3xl text-white">{{ __('related_posts') }}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                @foreach($related_posts as $related_post)
+                <div class="flex flex-col justify-between space-y-4 bg-white pb-2 rounded-3xl overflow-hidden">
+                    <img src="{{ $related_post->image->fileName ?? asset('imgs/image/post-cover.webp') }}" class="h-[170px] object-cover" alt="{{ $related_post->title }}">
+                    <a href="{{ route('blog.post', ['',$related_post->id, $related_post->slug]) }}">
+                        <h3 class="font-bold text-lg text-black mx-4">{{ $related_post->title }}</h3>
+                    </a>
+                    <a href="{{ route('blog.post', ['',$related_post->id, $related_post->slug]) }}" class="mx-4 text-primary text-xl">{{ __('read') }}</a>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
 </section>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const likeButton = document.getElementById('like-button');
+        const likeCount = document.getElementById('like-count');
+
+        likeButton.addEventListener('click', function () {
+            const postId = this.dataset.postId;
+            const isLiked = this.innerText === `{{ __('Unlike') }}`;
+
+            fetch(`/post/${postId}/${isLiked ? 'unlike' : 'like'}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                likeCount.innerText = data.likes;
+                this.innerText = isLiked ? `{{__('Like')}}` : `{{ __('Unlike') }}`;
+            });
+        });
+    });
+</script>
 
 @include('public.footer')

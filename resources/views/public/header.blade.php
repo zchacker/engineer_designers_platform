@@ -28,8 +28,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{ $page->description ?? '' }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $page->title ?? "شركة رشيد العجيان"}}</title>
     <link rel="icon" type="image/x-icon" href="{{asset('imgs/icon.ico')}}">
+
+    <link rel="preload" as="image" href="https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/images/hero-bg.webp" type="image/webp">
+
+    <link rel="preload" fetchpriority="high" as="image" href="{{ asset('imgs/image/hero-bg.webp') }}?v=2" type="image/webp">
+    <link rel="preload" fetchpriority="high" as="image" href="{{ asset('imgs/image/whatsapp.webp') }}?v=3" type="image/webp">
+    <!-- <link rel="preload" fetchpriority="high" as="video" href="https://eu2.contabostorage.com/e4d9c3eca4674c9dbce474abbb48ddea:website/videos/استشارات-هندسية.mp4" type="video/mp4"> -->
+
     <!-- <link rel="stylesheet" href="assets/css/tailwind.css"> -->
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
@@ -48,6 +56,32 @@
             font-family: 'Cairo', sans-serif;
         }
     </style>
+
+    <!-- Swiper CSS -->
+    {{--<link defer rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">--}}
+    <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <style>
+        .swiper-container {
+            width: 100%;
+            max-width: 1100px;
+            overflow: hidden;
+        }
+
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+        }
+
+        .star {
+            color: #ffd700;
+            /* Gold color */
+        }
+
+        .fade-element {
+           opacity: 0; /* Initially hidden */
+        }
+        /* .hidden { display: none; } */
+    </style>
 </head>
 
 <body>
@@ -55,25 +89,121 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KVHWK9BT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const fadeElements = document.querySelectorAll('.fade-element');
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fadeIn');
+                observer.unobserve(entry.target);
+            }
+            });
+        }, {
+            threshold: 0.1 // Adjust this value to trigger the animation earlier or later
+        });
+
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+        });
+    </script>
+
     <!-- header  -->
     <section class="bg-black z-20">
         <div class="container max-w-full mx-auto px-4">
             <!-- <nav class="flex-wrap lg:flex items-center py-14 pb-16 xl:relative z-50 h-40" x-data="{navbarOpen:false}" :class="{'h-20':!navbarOpen,'h-[470px]':navbarOpen}"> -->
             <nav class="flex-wrap md:flex items-center justify-between py-4 z-50" x-data="{navbarOpen:false}" :class="{'block':navbarOpen}">
 
-                <div class="flex items-center justify-center mb-0 lg:mb-0">
-
+                <!-- this for mobile only  -->
+                <div class="flex relative items-center justify-center mb-0 lg:mb-0">
+                    
                     @if(app()->getLocale() != 'ar')
-                    <button class="lg:hidden w-10 h-10 mr-auto flex items-center justify-center stroke-white text-white border border-white rounded-md" @click="navbarOpen = !navbarOpen">
-                        @else
-                        <button class="lg:hidden w-10 h-10 ml-auto flex items-center justify-center stroke-white text-white border border-white rounded-md" @click="navbarOpen = !navbarOpen">
-                            @endif
-                            <i data-feather="menu"></i>
-                        </button>
+                    <button class="lg:hidden w-10 h-10 mr-auto flex items-center justify-center stroke-white text-white border border-white rounded-md" @click="navbarOpen = !navbarOpen" title="القائمة">
+                    @else
+                    <button class="lg:hidden w-10 h-10 ml-auto flex items-center justify-center stroke-white text-white border border-white rounded-md" @click="navbarOpen = !navbarOpen" title="القائمة">
+                    @endif
+                        <i data-feather="menu"></i>
+                    </button>                    
 
-                        <a href="{{ route('home') }}">
-                            <img src="{{asset('imgs/image/logo.png')}}" alt="Logo img" class="w-20">
-                        </a>
+                    <a href="{{ route('home') }}" class="flex items-center justify-center text-center w-[33%] md:w-full" aria-label="ملف شخصي" >
+                        <img src="{{asset('imgs/image/logo.png')}}" alt="Logo img" class="w-20">
+                    </a>
+
+                    <div class="flex justify-end items-center space-x-2 w-[33%]">
+
+                        <div class=" md:hidden">
+                            <button id="searchButtonMobile" class="p-2" title="بحث">
+                                <img src="{{ asset('imgs/image/search.png') }}" class="h-6" alt="">
+                            </button>
+                            <div id="searchInputContainerMobile" class="hidden absolute top-[70px] left-0 mt-2 w-full mx-auto bg-transparent shadow-lg p-0 rounded z-50">
+                                <!-- <input id="searchInput" type="text" class="w-full p-2 border border-gray-300 rounded" placeholder="Search..."> -->
+                                <form action="{{ route('search') }}" method="GET" >
+                                <div class="flex items-stretch w-full">
+                                    <input id="searchInput" type="text" name="query" class="w-full p-3 border border-gray-300 rounded-s-md" placeholder="{{__('search')}}...">
+                                    <button type="submit" class="bg-[#4b4b4b] p-2 px-4 rounded-e-md" title="بحث">
+                                        <img src="{{ asset('imgs/image/search.png') }}" class="w-6 " alt="">
+                                    </button>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+
+
+                        @if (!auth('client')->check() && !auth('engineer')->check() && !auth('admin')->check())
+                        <div class="relative md:hidden">
+                            <!-- <a href="{{ route('login') }}" class="font-semibold bg-yellow-300 p-4 rounded-md text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">{{ __('public')['sigin'] }}</a> -->
+                            <a href="{{ route('login', app()->getLocale() ) }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي">
+                                {{-- __('public')['sigin'] --}}
+                                <img src="{{ asset('imgs/image/account.png') }}" class="h-6" alt="">
+                            </a>
+                        </div>
+                        @elseif(auth('engineer')->check())
+                        <div class="relative md:hidden">
+                            <a href="{{ route('engineer.orders.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي" >
+                                <img src="{{ asset('imgs/image/account.png') }}" class="h-6" alt="">
+                            </a>
+                        </div>
+                        @elseif(auth('client')->check())
+                        <div class="relative md:hidden">
+                            <a href="{{ route('client.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي">
+                                <img src="{{ asset('imgs/image/account.png') }}" class="h-6" alt="">
+                            </a>
+                        </div>
+                        @elseif(auth('admin')->check())
+                        <div class="relative md:hidden">
+                            <a href="{{ route('admin.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي">
+                                <img src="{{ asset('imgs/image/account.png') }}" class="h-6" alt="">
+                            </a>
+                        </div>
+                        @elseif(auth('editor')->check())
+                        <div class="relative md:hidden">
+                            <a href="{{ route('editor.post.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي">
+                                <img src="{{ asset('imgs/image/account.png') }}" class="h-6" alt="">
+                            </a>
+                        </div>
+                        @endif
+
+                        <div class="relative md:hidden">
+                            @php
+                                $currentRoute = request()->route();
+                            @endphp
+
+                            @if(app()->getLocale() == 'ar')
+                                @if ($currentRoute && $currentRoute->getName())
+                                    <a href="{{ route( $currentRoute->getName() , ['locale' => 'en'] + $currentRoute->parameters()) }}" class="text-white">EN</a>
+                                    <!-- <a href="{{ route('language.switch' , 'en') }}">English</a> -->
+                                @endif
+                            @else
+                                @if ($currentRoute && $currentRoute->getName())
+                                    <a href="{{ route($currentRoute->getName(), ['locale' => ''] + $currentRoute->parameters()) }}" class="text-white">ع</a>
+                                    <!-- <a href="{{ route('language.switch' , 'ar') }}">عربي</a> -->
+                                @endif
+                            @endif
+                        </div>
+                    </div>
+
                 </div>
 
                 <ul class="hidden md:flex flex-col md:flex-row justify-between md:gap-8" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
@@ -156,52 +286,75 @@
 
                     @endif
 
-                    <li class="font-semibold text-white hover:text-yellow-300 transition ease-in-out duration-300 mb-5 lg:mb-0">
-                        @if(app()->getLocale() == 'ar')
-                        <a href="{{ route(request()->route()->getName(), ['locale' => 'en'] + request()->route()->parameters()) }}">English</a>
-                        <!-- <a href="{{ route('language.switch' , 'en') }}">English</a> -->
-                        @else
-                        <a href="{{ route(request()->route()->getName(), ['locale' => ''] + request()->route()->parameters()) }}">عربي</a>
-                        <!-- <a href="{{ route('language.switch' , 'ar') }}">عربي</a> -->
-                        @endif
-                    </li>
 
                 </ul>
 
                 <div class="flex items-center">
 
+                    <div class="relative  hidden md:flex flex-row items-center justify-center">
+                        <button id="searchButton" class="p-2" title="بحث">
+                            <img src="{{ asset('imgs/image/search.png') }}" class="h-6" alt="">
+                        </button>
+                        <div id="searchInputContainer" class="hidden top-full left-0 mt-2 w-64 bg-transparent shadow-lg p-1 rounded z-50">
+                            <form action="{{ route('search') }}" method="GET" >
+                                <div class="flex items-stretch w-full">
+                                    <input id="searchInput" type="text" name="query" class="w-full p-1 border border-gray-300 rounded-s-md" placeholder="{{__('search')}}...">
+                                    <button type="submit" class="bg-[#4b4b4b] p-2 rounded-e-md" title="بحث">
+                                        <img src="{{ asset('imgs/image/search.png') }}" class="w-6 " alt="">
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
                     @if (!auth('client')->check() && !auth('engineer')->check() && !auth('admin')->check())
-                    <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
+                    <div class="hidden md:flex gap-4 space-y-4 justify-start items-center">
                         <!-- <a href="{{ route('login') }}" class="font-semibold bg-yellow-300 p-4 rounded-md text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">{{ __('public')['sigin'] }}</a> -->
-                        <a href="{{ route('login', app()->getLocale() ) }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
-                            {{ __('public')['sigin'] }}
+                        <a href="{{ route('login', app()->getLocale() ) }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي">
+                            {{-- __('public')['sigin'] --}}
+                            <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @elseif(auth('engineer')->check())
-                    <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
-                        <a href="{{ route('engineer.orders.list') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
-                            {{__('public')['controll_panel']}}
+                    <div class="hidden md:flex gap-4 space-y-4 justify-start items-center">
+                        <a href="{{ route('engineer.orders.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي">
+                            <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @elseif(auth('client')->check())
-                    <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
-                        <a href="{{ route('client.engineers.list') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
-                            {{__('public')['controll_panel']}}
+                    <div class="hidden md:flex gap-4 space-y-4 justify-start items-center">
+                        <a href="{{ route('client.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي">
+                            <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @elseif(auth('admin')->check())
-                    <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
-                        <a href="{{ route('admin.engineers.list') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
-                            {{__('public')['controll_panel']}}
+                    <div class="hidden md:flex gap-4 space-y-4 justify-start items-center">
+                        <a href="{{ route('admin.engineers.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي">
+                            <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @elseif(auth('editor')->check())
-                    <div class="md:flex grid gap-4 space-y-4 justify-start items-center">
-                        <a href="{{ route('editor.post.list') }}" class="px-4 py-3 lg:block rounded-md border-0 border-yellow-300 font-semibold text-lg text-white bg-yellow-300 hover:bg-green-700 hover:text-white transition ease-linear duration-500" :class="{'hidden':!navbarOpen,'flex':navbarOpen}">
-                            {{__('public')['controll_panel']}}
+                    <div class="hidden md:flex gap-4 space-y-4 justify-start items-center">
+                        <a href="{{ route('editor.post.list') }}" class="px-4 py-3 lg:block font-semibold text-lg text-white tansition ease-linear duration-500" aria-label="ملف شخصي">
+                            <img src="{{ asset('imgs/image/account.png') }}" class="h-8" alt="">
                         </a>
                     </div>
                     @endif
+
+                    <div class="mx-2 md:block hidden">
+                        @if(app()->getLocale() == 'ar')
+                            @if ($currentRoute && $currentRoute->getName())
+                                <a href="{{ route($currentRoute->getName(), ['locale' => 'en'] + $currentRoute->parameters()) }}" class="text-white">EN</a>
+                                <!-- <a href="{{ route('language.switch' , 'en') }}">English</a> -->
+                            @endif
+                        @else
+                            @if ($currentRoute && $currentRoute->getName())
+                                <a href="{{ route($currentRoute->getName(), ['locale' => ''] + $currentRoute->parameters()) }}" class="text-white">ع</a>
+                                <!-- <a href="{{ route('language.switch' , 'ar') }}">عربي</a> -->
+                            @endif
+                        @endif
+                    </div>
                 </div>
             </nav>
         </div>
