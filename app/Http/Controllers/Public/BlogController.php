@@ -12,29 +12,48 @@ class BlogController extends Controller
 
     public function list(Request $requests)
     {
-        $query      = PostsModel::orderByDesc('created_at')->where('type', 'post')->where('status', 'published');
+        $query = PostsModel::orderByDesc('created_at')
+            ->where('type', 'post')
+            ->where('status', 'published');
+
         if (app()->getLocale() == 'ar') {
             $query->where('language', 'ar');
         } else {
             $query->where('language', 'en');
         }
-        $sum        = $query->count('id');
-        $posts      = $query->paginate(18);
-        $active     = 'blog';
+
+        $sum = $query->count('id');
+        $posts = $query->paginate(18);
+
+        $additionalPosts = PostsModel::withTrashed()
+            ->whereIn('id', [])
+            ->get();
+        // dd($additionalPosts);
+
+        $posts->setCollection(
+            $posts->getCollection()->merge($additionalPosts)->sortByDesc('created_at')
+        );
+
+        $active = 'blog';
         return view('public.posts.list', compact('posts', 'sum', 'active'));
     }
 
+
     public function post(Request $request)
     {
-        $post = PostsModel::with('image', 'auther')->find($request->id);
+        $post = PostsModel::with('image', 'auther')->withTrashed()->find($request->id);
 
         if ($post == null) {
             return abort(Response::HTTP_NOT_FOUND);
         }
 
+        if (app()->getLocale() != $post->language) {
+            return abort(Response::HTTP_GONE);
+        }
+
         $related_posts = PostsModel::inRandomOrder()
-        ->limit(3)
-        ->get();
+            ->limit(3)
+            ->get();
 
         $page['title'] = $post->seo_title;
         $page['description'] = $post->seo_description;

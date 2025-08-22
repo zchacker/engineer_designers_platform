@@ -11,6 +11,7 @@ use App\Models\UsersModel;
 use App\Models\WorksModel;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 
 class PagesController extends Controller
 {
@@ -25,8 +26,8 @@ class PagesController extends Controller
         // ->get();
 
         $services = ServicesModel::inRandomOrder()
-        ->limit(3)
-        ->get();
+            ->limit(3)
+            ->get();
         $works = WorksModel::with('worksFiles')
             ->orderByDesc('created_at')
             ->where('publish', 1)
@@ -36,9 +37,30 @@ class PagesController extends Controller
         return view('public.index', compact('active', 'services', 'works', 'page'));
     }
 
+    // public function services(Request $request)
+    // {
+    //     $services = ServicesModel::orderBy('id', 'desc')->paginate(9); //->get(); //ServicesModel::all();
+    //     $active = 'services';
+    //     $currentPath = $request->path();
+    //     $page   = PagesModel::where('path', 'like',  '%' . $currentPath . '%')->first();
+
+    //     return view('public.services.index', compact('active', 'services', 'page'));
+    // }
+
     public function services(Request $request)
     {
-        $services = ServicesModel::orderBy('id', 'desc')->paginate(9);//->get(); //ServicesModel::all();
+        $softDeletedServices = ServicesModel::withTrashed()
+            ->whereIn('id', [17, 6])
+            ->get();
+
+        $services = ServicesModel::orderBy('id', 'desc')->paginate(9); //->get(); //ServicesModel::all();
+
+        foreach ($softDeletedServices as $softDeletedService) {
+            if (!$services->contains('id', $softDeletedService->id)) {
+                $services->push($softDeletedService);
+            }
+        }
+
         $active = 'services';
         $currentPath = $request->path();
         $page   = PagesModel::where('path', 'like',  '%' . $currentPath . '%')->first();
@@ -48,7 +70,7 @@ class PagesController extends Controller
 
     public function services_details(Request $request)
     {
-        $service    = ServicesModel::where('id', $request->id)->first();
+        $service    = ServicesModel::withTrashed()->where('id', $request->id)->first();
 
         if ($service == NULL) {
             return abort(Response::HTTP_NOT_FOUND);
@@ -57,10 +79,6 @@ class PagesController extends Controller
         $active      = 'services';
         $currentPath = urldecode($request->path());
         $page        = PagesModel::where('path', '/' . $currentPath)->first();
-        // dd($currentPath, $page);
-        // print(urldecode($currentPath));
-        // var_dump($page);
-        // var_dump(PagesModel::where('path', 'like',  '%' . $currentPath . '%')->toSql());
 
         // return view('public.services.details', compact('active', 'service', 'page'));
         return view('public.services.land', compact('active', 'service', 'page'));
@@ -117,26 +135,44 @@ class PagesController extends Controller
 
     public function engineers(Request $request)
     {
-        $query      = UsersModel::with("avatar")
+        // ✅ Get soft-deleted engineers by specific IDs
+        $softDeletedEngineers = UsersModel::with("avatar")
+            ->withTrashed()
+            ->whereIn('id', [38, 43, 62, 236])
+            ->where('user_type', 'engineer')
+            ->get();
+
+        $query = UsersModel::with("avatar")
             ->orderByDesc('created_at')
             ->where('user_type', 'engineer');
+        // ->whereNull('deleted_at'); // ✅ Show only active ones here
 
-        $sum        = $query->count("id");
-        $engineers  = $query->paginate(200);
+        $sum = $query->count("id");
+        $engineers = $query->paginate(200);
+
+        // ✅ Append soft-deleted engineers manually if not already in the results
+        foreach ($softDeletedEngineers as $softDeletedEngineer) {
+            if (!$engineers->contains('id', $softDeletedEngineer->id)) {
+                $engineers->push($softDeletedEngineer);
+            }
+        }
 
         $active = 'engineers';
 
         $currentPath = $request->path();
-        $page        = PagesModel::where('path', 'like',  '%' . $currentPath . '%')->first();
-
+        $page = PagesModel::where('path', 'like',  '%' . $currentPath . '%')->first();
 
         return view('public.engineers.index', compact('engineers', 'active', 'page'));
     }
 
+
+
     public function details(Request $request)
     {
 
+
         $engineer = UsersModel::with("avatar")
+            ->withTrashed()
             ->where('id', $request->engineer_id)
             ->first();
 
@@ -164,6 +200,7 @@ class PagesController extends Controller
 
         $work = WorksModel::with(['worksFiles', 'engineer'])
             ->where('id', $request->project_id)
+            ->withTrashed()
             ->first();
 
         if ($work == NULL) {
@@ -215,39 +252,37 @@ class PagesController extends Controller
         } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->back()->withErrors($e->validator->errors())->with('scrollTo', 'contact');
         }
-    }    
+    }
 
     public function search(Request $request)
     {
-        
+
         $posts = collect();
         $services = collect();
         $engineers = collect();
 
         $query = $request->input('query');
-        if($query != null)
-        {
+        if ($query != null) {
             $services = ServicesModel::where('name', 'LIKE', "%{$query}%")
-            ->orWhere('name_en', 'LIKE', "%{$query}%")
-            ->get();
-            
+                ->orWhere('name_en', 'LIKE', "%{$query}%")
+                ->get();
+
 
             $posts = PostsModel::where('title', 'LIKE', "%{$query}%")
-            ->orWhere('body', 'LIKE', "%{$query}%")
-            ->where('type', '!=', 'page')
-            ->get();
+                ->orWhere('body', 'LIKE', "%{$query}%")
+                ->where('type', '!=', 'page')
+                ->get();
 
             $engineers = UsersModel::where('name', 'LIKE', "%{$query}%")
-            ->orWhere('name_en', 'LIKE', "%{$query}%")
-            ->where('user_type' , 'engineer')
-            ->get();
-
-        }   
+                ->orWhere('name_en', 'LIKE', "%{$query}%")
+                ->where('user_type', 'engineer')
+                ->get();
+        }
 
         $page = new \stdClass();
         $page->title = "بحث عن : $query";
         $page->description = "نتائج البحث عن : $query";
-        
+
         return view('public.search', compact('posts', 'query', 'services', 'engineers', 'page'));
     }
 }
