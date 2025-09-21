@@ -22,31 +22,31 @@
                         </div>
                         @endif
 
-                        
+
                         <form action="{{ route('admin.page.create.action') }}" method="post" enctype="multipart/form-data" onsubmit="return form_submit(this);" class="w-full">
                             @csrf
                             <div class="mb-4">
                                 <label for="title" class="lable_form">{{ __('title') }}</label>
-                                <input type="text" name="title" class="form_input !w-full" value="{{ old('title') }}" required/>
+                                <input type="text" name="title" class="form_input !w-full" value="{{ old('title') }}" required />
                             </div>
-                            
+
                             <div class="mb-4">
                                 <label for="description" class="lable_form">{{ __('description') }}</label>
-                                <textarea name="description" id="description" cols="30" rows="4" class="form_input !w-full"></textarea>                                
-                            </div>                            
+                                <textarea name="description" id="description" cols="30" rows="4" class="form_input !w-full"></textarea>
+                            </div>
 
                             <div class="mb-4">
                                 <label for="path" class="lable_form">{{ __('path') }}</label>
-                                <input type="text" name="path" class="form_input !w-full" value="{{ old('path') }}" required/>
+                                <input type="text" name="path" class="form_input !w-full" value="{{ old('path') }}" required />
                             </div>
 
                             <div class="mb-4">
                                 <label for="language" class="lable_form">{{ __('language') }}</label>
                                 <select name="language" id="language" class="form_input !w-full">
-                                    <option value="ar" {{ old('language') == 'ar' ? 'selected' : "" }} >{{__('ar')}}</option>
-                                    {{--<option value="en" {{ old('language') == 'en' ? 'selected' : "" }} >{{__('en')}}</option>--}}
-                                </select>                                
-                            </div>                                                       
+                                    <option value="ar" {{ old('language') == 'ar' ? 'selected' : "" }}>{{__('ar')}}</option>
+                                    <option value="en" {{ old('language') == 'en' ? 'selected' : "" }}>{{__('en')}}</option>
+                                </select>
+                            </div>
 
                             <div class="mb-4">
                                 <input type="submit" value="{{ __('save') }}" class="normal_button" />

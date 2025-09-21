@@ -44,7 +44,7 @@
                                 <label for="language" class="lable_form">{{ __('language') }}</label>
                                 <select name="language" id="language" class="form_input !w-full">
                                     <option value="ar" {{ ($page->language ?? old('language')) == 'ar' ? 'selected' : "" }} >{{__('ar')}}</option>
-                                    {{--<option value="en" {{ ($page->language ?? old('language')) == 'en' ? 'selected' : "" }} >{{__('en')}}</option>--}}
+                                    <option value="en" {{ ($page->language ?? old('language')) == 'en' ? 'selected' : "" }} >{{__('en')}}</option>
                                 </select>                                
                             </div>                                                       
 
