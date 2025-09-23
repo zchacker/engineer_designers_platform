@@ -38,7 +38,7 @@ class SitemapController extends Controller
         $posts = PostsModel::all();
         foreach ($posts as $post) {
             $urls[] = [
-                'loc' => route('blog.post', ['id' => $post->id, 'title' => $post->slug ?? '']),
+                'loc' => urldecode( route('blog.post', ['id' => $post->id, 'title' => $post->slug ?? '']) ),
                 'lastmod' => $post->updated_at ? $post->updated_at->toAtomString() : Carbon::now()->toAtomString()
             ];
         }
@@ -47,14 +47,14 @@ class SitemapController extends Controller
         $services = ServicesModel::all();
         foreach ($services as $service) {
             $urls[] = [
-                'loc' => route('services.details', ['id' => $service->id, 'name' => $service->slug_ar ?? '']),
+                'loc' => urldecode( route('services.details', ['id' => $service->id, 'name' => $service->slug_ar ?? '']) ),
                 'lastmod' => $service->updated_at ? $service->updated_at->toAtomString() : Carbon::now()->toAtomString()
             ];
         }
 
         foreach ($services as $service) {
             $urls[] = [
-                'loc' => route('services.details', ['en' , 'id' => $service->id, 'name' => $service->slug_en ?? '']),
+                'loc' => urldecode( route('services.details', ['en' , 'id' => $service->id, 'name' => $service->slug_en ?? '']) ),
                 'lastmod' => $service->updated_at ? $service->updated_at->toAtomString() : Carbon::now()->toAtomString()
             ];
         }
