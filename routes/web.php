@@ -31,6 +31,10 @@ Route::get('/sitemap.xml', function () {
     return response()->view('sitemap.pages')->header('Content-Type', 'text/xml');
 });
 
+// routes/web.php
+Route::get('/sitemap.xml', [\App\Http\Controllers\Public\SitemapController::class, 'index']);
+
+
 // Route::get('/', [\App\Http\Controllers\RegisterController::class, 'register'])->name('home');
 Route::get('/', [\App\Http\Controllers\Public\PagesController::class, 'home'])->name('home');
 

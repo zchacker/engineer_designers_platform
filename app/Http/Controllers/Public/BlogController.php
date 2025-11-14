@@ -48,7 +48,9 @@ class BlogController extends Controller
         }
 
         if (app()->getLocale() != $post->language) {
-            return abort(Response::HTTP_GONE);
+            
+            return redirect()->route('blog.post', ['', $post->id, $post->slug] , Response::HTTP_MOVED_PERMANENTLY);
+            // return abort(Response::HTTP_GONE);
         }
 
         $related_posts = PostsModel::inRandomOrder()

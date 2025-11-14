@@ -78,8 +78,33 @@ class PagesController extends Controller
 
         $active      = 'services';
         $currentPath = urldecode($request->path());
-        $page        = PagesModel::where('path', '/' . $currentPath)->first();
-
+        $path = "%services/details/$request->id";
+        if(app()->getLocale() == "en")
+        {
+            $path = "%en/services/details/$request->id";
+        }
+        
+        $page  = PagesModel::where('path', 'LIKE', '%' . $currentPath )
+               ->orWhere('path', 'LIKE',  $path)->first();
+    
+ 
+        if($page == null)
+        {
+            $page  = PagesModel::where('path', 'LIKE',  $path)->latest()->first();
+        }
+        
+        if($page == null)
+        {
+            $page = new \stdClass();
+            if(app()->getLocale() == "ar")
+            {
+                $page->title = $service->name;
+                $page->description = $service->sub_title;
+            }else{
+                $page->title = $service->name_en;
+                $page->description = $service->sub_title_en;
+            }
+        }
         // return view('public.services.details', compact('active', 'service', 'page'));
         return view('public.services.land', compact('active', 'service', 'page'));
     }
